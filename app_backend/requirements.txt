@@ -9,3 +9,14 @@ pandas
 openai
 python-dotenv
 supabase
+
+openai
+pandas
+python-dotenv
+supabase
+selenium
+webdriver-manager
+undetected-chromedriver
+setuptools
+requests
+beautifulsoup4

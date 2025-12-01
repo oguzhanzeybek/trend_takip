@@ -129,3 +129,15 @@ def main():
 
 if __name__ == "__main__":
     main()
+  
+  
+# bundan sonrasını her dosyaya ekleyebılırım?  from pathlib import Path ile berbaer
+
+# 1. Bu dosyanın (scriptin) olduğu klasörü bul
+current_dir = Path(__file__).resolve().parent
+
+# 2. Dosyayı aynı klasöre, scriptin yanına kaydet
+output_path = current_dir / "dosya_adi.csv" # Buraya o scriptin adını yaz (örn: alibaba.csv)
+
+df.to_csv(output_path, index=False)
+print(f"✅ Dosya kaydedildi: {output_path}")
