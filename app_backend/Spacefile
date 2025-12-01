@@ -1,0 +1,14 @@
+# app_backend/Spacefile
+
+v: 0
+name: AI Backend Micro
+icon: 🧠
+description: Yapay Zeka Öneri Servisi
+
+micros:
+  - name: ai-backend
+    src: .
+    engine: python3.9
+    run: uvicorn main:app --host 0.0.0.0 --port 8080
+    path: /api
+    public: true

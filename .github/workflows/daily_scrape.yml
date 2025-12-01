@@ -1,0 +1,36 @@
+name: Gunluk Trend Takipcisi
+
+on:
+  schedule:
+    # Her gün sabah 09:00 ve akşam 21:00'de çalışır (UTC saatiyle)
+    - cron: '0 6,18 * * *'
+  workflow_dispatch: # GitHub üzerinden manuel butonla çalıştırmak için
+
+jobs:
+  scrape-and-process:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Depoyu Çek (Checkout)
+      uses: actions/checkout@v3
+
+    - name: Python Kurulumu (3.11)
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Kütüphaneleri Yükle
+      run: |
+        python -m pip install --upgrade pip
+        # Scraper klasöründeki gereksinimleri yükle
+        pip install -r scraper/requirements.txt
+
+    - name: Ustabaşı Scriptini Çalıştır
+      env:
+        # Bu şifreleri GitHub ayarlarından çekecek
+        OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      run: |
+        # Main scripti çalıştır
+        python scraper/main.py

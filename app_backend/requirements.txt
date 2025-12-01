@@ -1,0 +1,11 @@
+# app_backend/requirements.txt
+
+fastapi
+uvicorn  # FastAPI'ı çalıştırmak için ASGI sunucusu
+deta     # Deta Base/Drive ile iletişim kurmak için
+pydantic # Veri doğrulama için (FastAPI'ın temel bileşeni)
+Flask
+pandas
+openai
+python-dotenv
+supabase

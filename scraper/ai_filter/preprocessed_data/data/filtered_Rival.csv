@@ -1,0 +1,79 @@
+﻿kaynak_dosya,urun_adi,fiyat,potansiyel_skoru,not
+a101.csv,Tefal Tencere Seti,,85,#ErkenTrend #MutfakVerimliliği #ÇokAmaçlı
+a101.csv,Dijitsu Su Sebili,,80,#ErkenTrend #SuVerimliliği #HORECA
+a101.csv,"Stanley Termos 0,89L",,75,#ErkenTrend #Sürdürülebilirlik #İçmeSu
+a101.csv,Buzdolabı,,75,#ErkenTrendSinyali #EnerjiVerimliliği #HORECA
+a101.csv,Bulaşık Tableti,,70,#İşletmeVerimliliği #ÇevreDostu #HORECA
+a101.csv,Pipetli Termos,,80,#Sürdürülebilirlik #MüşteriDeneyimi #HORECA
+a101.csv,Düdüklü Tencere Seti,,85,#HızlıPişirme #EnerjiVerimliliği #HORECA
+a101.csv,Çay Makinesi,,65,#HızlıServis #MüşteriMemnuniyeti #HORECA
+a101.csv,Soğuk Su Termosu,,78,#SıcakHavalardaRahatlık #MüşteriDeneyimi #HORECA
+a101.csv,"Stanley Pipetli Termos 0,60 L",0.6,85,#Ergonomik #Sürdürülebilir #İçme Kültürü
+a101.csv,Sinbo Waffle Makinesi,,80,#Yenilikçi #Tatlı Alternatif #Hızlı Servis
+a101.csv,Philips Türk Kahvesi Makinesi,,90,#Kahve Kültürü #Hızlı Hazırlık #Yüksek Talep
+a101.csv,"Stanley Pipetli Termos 1,18 L",,88,#Büyük Kapasite #Sürdürülebilir #İçme Kültürü
+a101.csv,Sinbo Otomatik Türk Kahvesi Makinesi,,82,#Kahve Kültürü #Otomasyon #Hızlı Servis
+a101.csv,Kiwi Kahve Öğütücü,,75,#Taze Kahve #Yenilikçi #Kahve Kültürü
+a101.csv,Arzum Multi Blender Seti,,85,#ErkenTrendSinyali #ÇokAmaçlı #Verimlilik
+a101.csv,Dijitsu Su Sebili,,80,#ErkenTrendSinyali #SuTüketimi #Hygiene
+a101.csv,Korkmaz Çay Makinesi,,75,#ErkenTrendSinyali #ÇayKültürü #HızlıServis
+a101.csv,Onvo Dijital Çay Makinesi,,78,#ErkenTrendSinyali #DijitalKontrol #HızlıServis
+a101.csv,Tefal Kızartma Tavası,,82,#ErkenTrendSinyali #SağlıklıPişirme #Verimlilik
+a101.csv,WMF Düdüklü Tencere,,88,#ErkenTrendSinyali #HızlıPişirme #EnerjiTasarrufu
+a101.csv,Arzum Okka Jet Kahve Mak.,,85,#ErkenTrendSinyali #KahveKültürü #HORECA
+a101.csv,Philips Çay Mak.,,80,#HızlıServis #ÇayKültürü #HORECA
+a101.csv,Korkmaz Semaver,,75,#Gelenekselİçerik #ÇayServisi #HORECA
+a101.csv,Pierre Cardin Elektrikli Cezve,,78,#ErkenTrendSinyali #KahveAlternatifi #HORECA
+a101.csv,Stanley Termos Bardak,,70,#Sürdürülebilirlik #Mobilİçme #HORECA
+a101.csv,Orcamp Portatif Ocak,,82,#DışMekanServisi #PratikÇözüm #HORECA
+a101.csv,Sinbo Otomatik Baharat Öğütücü,-,85,#ErkenTrendSinyali #MutfakVerimliliği #Otomatik
+a101.csv,"Stanley Yemek Termosu 0,35 L",-,80,#Sürdürülebilirlik #YemekTaşıma #Pratik
+a101.csv,"Stanley Pipetli Termos 0,89 L",-,78,#İçmeSu #ÇevreDostu #Pratik
+a101.csv,Philips Katı Meyve Sıkacağı,-,90,#SağlıklıYaşam #TazeSıkım #MutfakTeknolojisi
+a101.csv,Siemens Espresso Makinesi,-,88,#KahveKültürü #Otomatik #MüşteriDeneyimi
+a101.csv,"Stanley To-Go Mug 0,35 L Yeşil",0,85,#Ergonomik #Sürdürülebilir #İşletmeVerimliliği
+a101.csv,Asperox Yağ Çözücü 1 L,0,80,#Temizlik #HızlıÇözüm #İşletmeVerimliliği
+a101.csv,Banetti Noodle Garam Masala 75 G,0,75,#HızlıYemek #YenilikçiLezzet #VeganAlternatif
+a101.csv,"Wmf Düdüklü Tencere 6,5 L + 3 L",0,90,#ZamandanTasarruf #YüksekVerimlilik #Gastronomi
+a101.csv,"Stanley Termos 1,06 L Mavi",0,88,#SıcakTutma #Sürdürülebilir #MüşteriMemnuniyeti
+a101.csv,"Stanley Yemek Termosu 0,40 L Mavi",0,82,#Pratik #SıcakYemek #MüşteriMemnuniyeti
+a101.csv,Tefal Yapışmaz Tava 24 Cm,0,78,#YüksekKalite #Gastronomi #PratikKullanım
+a101.csv,"Stanley Pipetli Termos 1,18 L Gri",0,86,#Ergonomik #SıcakTutma #MüşteriMemnuniyeti
+a101.csv,"Stanley Termos 0,40 L",0.4,75,#Sıcak İçecek #Taşınabilirlik #Sürdürülebilir
+a101.csv,"Stanley Pipetli Termos 1,06 L",0.6,80,#Sıcak İçecek #Pratik Kullanım #Yenilikçi Tasarım
+a101.csv,Stanley Termos 1 L,0.6,78,#Sıcak İçecek #Uzun Süreli Isı #Sürdürülebilir
+a101.csv,Tefal Kahve Makinesi,0.4,85,#Kahve #Hızlı Hazırlık #Yenilikçi
+a101.csv,Herevin French Press 1000 cc,0.4,70,#Kahve #El Yapımı #Sürdürülebilir
+a101.csv,"Stanley Pipetli Termos 0,6 L",0.6,76,#Sıcak İçecek #Taşınabilirlik #Yenilikçi
+a101.csv,Tefal Servis Seti 4'lü,0.4,72,#Servis #Pratik Kullanım #Yenilikçi
+a101.csv,"Stanley Quencher Termos 0,89 L Siyah",0.89,85,#Ergonomik #Sürdürülebilir #İçme Kültürü
+a101.csv,"Stanley IceFlow Termos 1,06 L Yeşil",1.06,80,#Ergonomik #Sürdürülebilir #İçme Kültürü
+a101.csv,"Stanley Cafe To-Go Termos 0,35 L Siyah",0.35,75,#Pratik #Sürdürülebilir #İçme Kültürü
+carrefoursa.csv,Yerli Muz kg,69.9,70,#Yerel #Taze #Sağlıklı
+carrefoursa.csv,Avokado Yerli Adet,39.9,78,#Sağlıklı #Vegan #Yüksek Besin Değeri
+carrefoursa.csv,Yağlı Süt 1 L,32.9,65,#Süt Ürünleri #Taze #Yüksek Kalite
+carrefoursa.csv,Alpro Badem Sütü 1L,199.9,85,#Vegan #AlternatifSüt #SağlıklıYaşam
+carrefoursa.csv,Alpro Yulaf Sütü 1L,199.9,80,#Vegan #AlternatifSüt #SağlıklıYaşam
+carrefoursa.csv,Alpro Şekersiz Yulaf Sütü 1L,199.9,82,#Şekersiz #Vegan #SağlıklıYaşam
+carrefoursa.csv,Alpro Hindistan Cevizi Sütü 1L,199.9,78,#Vegan #AlternatifSüt #TropikalLezzet
+carrefoursa.csv,Alpro Fındık Sütü 1L,199.9,76,#Vegan #AlternatifSüt #FındıkLezzeti
+carrefoursa.csv,Alpro Çikolatalı Badem Sütü 1L,199.9,75,#Vegan #TatlıAlternatif #Çikolata
+carrefoursa.csv,Alpro Şekersiz Badem Sütü 1L,199.9,79,#Şekersiz #Vegan #SağlıklıYaşam
+carrefoursa.csv,Alpro Hindistan Cevizi Badem Sütü 1L,199.9,77,#Vegan #AlternatifSüt #TropikalLezzet
+carrefoursa.csv,Çipura 400-600g,349.0,70,#TazeBalık #Gurme #DenizÜrünleri
+carrefoursa.csv,Kızılay Maden Suyu 6x200ml,44.9,65,#Doğal #Hidrasyon #Sağlıklıİçecek
+carrefoursa.csv,Çubuk Kraker,9.5,65,#Atıştırmalık #HızlıServis #MüşteriMemnuniyeti
+carrefoursa.csv,Pastorize Süt,38.9,70,#TazeÜrün #SağlıklıSeçim #KahvaltıAlternatifi
+carrefoursa.csv,Bio Yumurta,129.9,80,#Organik #SağlıklıBeslenme #YüksekTalep
+carrefoursa.csv,Türk Kahvesi,83.45,75,#GelenekselLezzet #KahveKültürü #MüşteriDeneyimi
+carrefoursa.csv,Hindi Füme,22.5,60,#AlternatifProtein #HızlıAtıştırmalık #DüşükKalori
+carrefoursa.csv,Maden Suyu,59.0,68,#Doğalİçecek #Hidrasyon #SağlıklıYaşam
+carrefoursa.csv,Ayran,45.95,72,#Ferahlatıcı #YerliÜrün #KahvaltıAlternatifi
+carrefoursa.csv,Mantar 300 g,59.9,75,#Taze Malzeme #Vegan Alternatif #Menü Zenginleştirme
+carrefoursa.csv,Kokteyl Domates kg,79.9,80,#Taze Malzeme #Salata Trendi #Görsel Sunum
+carrefoursa.csv,İçim Kaşar 600 g,249.95,70,#Yüksek Kalite #Süt Ürünleri #Menü Zenginleştirme
+carrefoursa.csv,Banvit Piliç Kanat kg,189.9,85,#Et Ürünü #Hızlı Hazırlık #Menü Çeşitliliği
+carrefoursa.csv,Carrefour Ayran 1500 ml,45.0,65,#Ferahlatıcı İçecek #Yerli Ürün #Menü Tamamlayıcı
+carrefoursa.csv,Dimes Meyve Suyu 200 ml,15.0,60,#Hafif İçecek #Çocuk Menüsü #Sağlıklı Alternatif
+carrefoursa.csv,Tatlı Patates kg,69.95,78,#Sağlıklı Beslenme #Yeni Trend #Vegan Alternatif
+carrefoursa.csv,İçim Sade UHT Süt 1000 ml,48.95,72,#Süt Ürünü #Uzun Raf Ömrü #Kahvaltı Alternatifi

@@ -1,0 +1,52 @@
+{
+    "analiz_tarihi": "2025-12-01 01:47:29",
+    "analiz_kaynağı": "social_media.csv",
+    "genel_değerlendirme": "Verilere göre halkın anlık durumunu ve genel toplumsal nabzı özetleyen analiz, endişe ve belirsizlik temalarının ön planda olduğunu göstermektedir. Ekonomik kaygılar, özellikle enflasyon ve hayat pahalılığı, halkın yaşam kalitesini doğrudan etkilemekte ve bu durum sosyal medya platformlarında yoğun bir tartışma yaratmaktadır. Pozitif duygular ise sınırlı bir şekilde varlık gösterirken, sosyal hayat ve kaçış temalı içeriklere olan ilgi artış göstermektedir. Sağlık ve güvenlik konuları da halkın gündeminde önemli bir yer tutmakta, bireylerin kurumsal güven algısı üzerinde etkili olmaktadır. Genel olarak, toplumun ruh hali, ekonomik belirsizlikler ve sosyal dinamiklerle şekillenmektedir.",
+    "ana_duygular": [
+        {
+            "duygu": "Endişe",
+            "skor": 75,
+            "gerekçe": "Endişe skorunun yüksek olmasının ardındaki temel gerekçeler arasında ekonomik belirsizlikler, artan hayat pahalılığı ve işsizlik kaygıları bulunmaktadır. Halkın yaşam kalitesi üzerindeki olumsuz etkiler, bireylerin psikolojik durumunu da etkilemekte ve bu durum sosyal medya platformlarında sıkça dile getirilmektedir. Özellikle gıda fiyatları, kira artışları ve enerji maliyetleri gibi konular, endişe duygusunu pekiştiren unsurlar arasında yer almaktadır. Bu durum, toplumda genel bir huzursuzluk ve kaygı ortamı yaratmakta, bireylerin günlük yaşantılarını olumsuz yönde etkilemektedir."
+        },
+        {
+            "duygu": "Neşe/Pozitiflik",
+            "skor": 40,
+            "gerekçe": "Pozitiflik seviyesinin düşük olmasına rağmen, sosyal medya üzerinde paylaşılan eğlenceli içerikler, halkın ruh halini bir nebze olsun olumlu yönde etkilemektedir. Ancak bu pozitif duygular, genellikle geçici bir rahatlama sağlamakta ve kalıcı bir iyileşme sunmamaktadır. İnsanlar, stres yönetimi için sosyal aktiviteler, eğlenceler ve kaçış temalı içeriklere yönelmekte, bu durum ise genel endişe ile başa çıkmaya çalışmanın bir yolu olarak değerlendirilmektedir. Bununla birlikte, sosyal medya üzerindeki olumlu paylaşımlar, bireylerin morale ihtiyaç duyduğu bir dönemde önemli bir rol oynamaktadır."
+        }
+    ],
+    "baskin_gundemler": [
+        {
+            "konu": "Ekonomi ve Enflasyon",
+            "köken": "Sosyal medyada en çok paylaşılan enflasyon ve hayat pahalılığı ile ilgili veriler, halkın bu konudaki duyarlılığını ortaya koymaktadır. Gıda fiyatlarındaki artış, kira bedellerinin yükselmesi ve akaryakıt fiyatlarındaki dalgalanmalar, bireylerin yaşam standartlarını tehdit etmekte ve bu durum sosyal medya üzerinde yoğun bir tartışma yaratmaktadır. Ekonomik belirsizlikler, siyasi yansımalarıyla birlikte halkın güven duygusunu zedelemekte ve bu konudaki paylaşımlar artış göstermektedir."
+        },
+        {
+            "konu": "Sosyal Hayat ve Kaçış",
+            "köken": "Halkın stres yönetimi için yöneldiği kaçış temalı içerikler, sosyal medyada önemli bir yer tutmaktadır. Gezi, dizi ve oyun gibi içeriklere olan talep, bireylerin mevcut kaygılardan uzaklaşma arzusunu yansıtmaktadır. Bu durum, sosyal ve psikolojik nedenlerle ilişkilendirilmekte, bireylerin hayatlarındaki belirsizlikler karşısında bir tür kaçış arayışını ortaya koymaktadır. Kaçış temalı içeriklerin paylaşımlarının artması, toplumda bir boşluk hissinin varlığını da göstermektedir."
+        },
+        {
+            "konu": "Sağlık, Güvenlik ve Kurumsal Güven",
+            "köken": "Pandemi sonrası sağlık endişeleri, bireylerin güvenlik algısını etkilemekte ve sosyal medyada bu konularla ilgili paylaşımlar artmaktadır. Özellikle siber güvenlik ve bireysel güvenlik konuları, halkın gündeminde önemli bir yer tutmakta, kurumlara olan güvenin azalmasına neden olmaktadır. Sağlık endişeleri, bireylerin genel huzursuzluk hissini artırmakta ve bu durum sosyal medya üzerindeki tartışmalara yansımaktadır."
+        }
+    ],
+    "harcama_egilimi_analizi": {
+        "egilim": "Halkın harcama davranışındaki ana kaymalar, ekonomik belirsizlikler ve artan fiyatlar nedeniyle tasarruf eğiliminin artmasıdır. Özellikle düşük gelir gruplarında bu eğilim belirgin bir şekilde kendini göstermekte, bireyler ihtiyaç dışı harcamalarını kısıtlamakta ve tasarruf yapma yoluna gitmektedir. Bu durum, genel harcama alışkanlıklarını değiştirmekte ve bireylerin psikolojik durumları üzerinde etkili olmaktadır.",
+        "sektor_etkisi": "Perakende sektöründe genel bir hacim düşüşü yaşanmakta, HORECA (otel, restoran, kafe) sektöründe ise daha fazla daralma gözlemlenmektedir. Teknoloji sektöründe ise, insanların ihtiyaçlarını karşılamak için daha uygun fiyatlı alternatiflere yönelmesi, ikinci el ürünlerin talebini artırmaktadır. Özellikle lüks tüketim ürünleri ve hizmetlerinde bir azalma görülmekte, temel gıda ürünleri ise daha fazla talep görmektedir."
+    },
+    "gelecek_tahminleri": [
+        {
+            "tahmin": "Önümüzdeki 3 ayda ekonomi ve enflasyon konusundaki toplumsal tepkiler artacaktır.",
+            "risk_seviyesi": "Orta/Yüksek",
+            "neden": "Bu tahmine neden olan temel veri sinyali, sosyal medyada artan enflasyon ve hayat pahalılığı ile ilgili paylaşımlardır. Ekonomik göstergelerdeki olumsuz gelişmeler, halkın bu konudaki duyarlılığını artırmakta ve sosyal medya trendleri bu durumu desteklemektedir."
+        },
+        {
+            "tahmin": "Sosyal hayat ve kaçış temalı içeriklere yönelik ilgi, toplumsal kaçış ihtiyacından dolayı bir miktar ivme kazanacaktır. Ancak, ekonomik belirsizlikler bu ivmeyi sınırlandıracaktır.",
+            "risk_seviyesi": "Düşük/Orta",
+            "neden": "Bu tahmine neden olan temel veri sinyali, sosyal medya üzerindeki kaçış temalı içeriklerin artış göstermesidir. Özellikle genç demografik gruplarda bu ilginin daha belirgin olduğu gözlemlenmektedir."
+        },
+        {
+            "tahmin": "Kurumsal ve bireysel güvenlik talepleri sosyal medyada daha fazla gündem olacak ve bu alanda hizmet beklentisi artacaktır.",
+            "risk_seviyesi": "Orta",
+            "neden": "Bu tahmine neden olan temel veri sinyali, sağlık ve güvenlik konularındaki endişelerin artmasıdır. Bireylerin güvenlik algısındaki değişim, sosyal medya üzerindeki tartışmalara yansımakta ve bu durum hizmet beklentilerini artırmaktadır."
+        }
+    ]
+}

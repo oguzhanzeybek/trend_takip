@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Öneri Sistemi</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        #recommendations-list { list-style-type: none; padding: 0; }
+        #recommendations-list li { margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+        h2 { border-bottom: 2px solid #eee; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🌟 Yapay Zeka Tabanlı Öneri Sistemi</h1>
+    
+    <p>Bu uygulama, arka uç API'sinden (FastAPI) önceden hesaplanmış önerileri çekerek sunar.</p>
+
+    <hr>
+
+    <h2>Okunmakta Olan Makale Örneği</h2>
+    <div id="current-article">
+        <p><strong>Makale ID:</strong> <span id="article-id-display">test-article-123</span></p>
+        <p>Bu ID, API'ye gönderilerek size özel öneriler çekilecektir.</p>
+    </div>
+
+    <h2>👉 Size Özel Öneriler</h2>
+    <button id="getRecommendationsBtn">Öneri Al</button>
+    
+    <ul id="recommendations-list">
+        <li>Butona bastıktan sonra öneriler buraya yüklenecektir...</li>
+    </ul>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
