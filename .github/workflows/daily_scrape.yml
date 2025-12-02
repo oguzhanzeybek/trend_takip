@@ -22,8 +22,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip' # Pip paketlerini önbelleğe alarak sonraki çalışmayı hızlandırır
 
-      # GÜNCELLEME BURADA: Chrome için gerekli modern kütüphaneler eklendi
-      # libgconf-2-4 yerine libgbm1 ve libasound2 kullanıldı.
+      # Chrome için gerekli modern kütüphaneler
       - name: Gerekli Sistem Paketlerini Yükle (Xvfb ve Libs)
         run: |
           sudo apt-get update
@@ -44,17 +43,18 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           # Ekran varmış gibi davranarak main.py'yi çalıştır
+          # Çıktı klasörü oluştur (Script oluşturmuyorsa garanti olsun)
+          mkdir -p output
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" python scraper/main.py
 
-      - name: Hata Kayıtlarını ve Ekran Görüntülerini Yükle
-        if: always() # Hata alsa bile çalışır
+      # --- EKLENEN KISIM BAŞLANGICI ---
+      - name: Sonuçları Kaydet (Upload Artifact)
         uses: actions/upload-artifact@v4
+        if: always() # Script hata verip çökse bile çalışır (Hata ayıklama için kritik)
         with:
-          name: debug-artifacts
-          retention-days: 3 # Dosyaları 3 gün sakla (yer kaplamasın)
-          path: |
-            scraper/**/*.png
-            scraper/**/*.jpg
-            scraper/logs/*.txt
-            scraper/data/*.json
-            scraper/data/*.csv
+          name: trend-sonuclari # İndirilecek zip dosyasının adı
+          # DİKKAT: Python kodunun dosyaları kaydettiği klasör burası olmalı.
+          # Eğer scriptin 'downloads' klasörüne kaydediyorsa burayı değiştir.
+          path: output/ 
+          retention-days: 5 # Dosyalar GitHub'da 5 gün saklansın
+      # --- EKLENEN KISIM BİTİŞİ ---

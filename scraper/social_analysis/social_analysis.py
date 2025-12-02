@@ -266,7 +266,7 @@ def process_social_media_analysis():
         if batch_analysis:
             # Ara sonuçları listeye ekle (Artık daha detaylı özetler alınıyor)
             summary = (
-                f"Batch {i+1} Özeti: Ana Duygu: {batch_analysis.get('detaylı_hissedilen_duygu', 'Bilinmiyor')} "
+                f"Batch {i+1} Özeti: Ana Duygu: {batch_analysis.get('ozet_duygu', 'Bilinmiyor')} "
                 f"(Gerekçe: {batch_analysis.get('duygu_gerekcesi', 'Yok')}), "
                 f"Ana Konu: {batch_analysis.get('ozet_konu', 'Bilinmiyor')} "
                 f"(Gerekçe: {batch_analysis.get('konu_gerekcesi', 'Yok')})"
