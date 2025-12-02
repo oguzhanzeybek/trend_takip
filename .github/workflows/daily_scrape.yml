@@ -23,10 +23,11 @@ jobs:
           cache: 'pip' # Pip paketlerini önbelleğe alarak sonraki çalışmayı hızlandırır
 
       # Chrome için gerekli modern kütüphaneler
+      # GÜNCELLEME: Ubuntu 24.04 uyumluluğu için libasound2 -> libasound2t64 olarak değiştirildi.
       - name: Gerekli Sistem Paketlerini Yükle (Xvfb ve Libs)
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libnss3 libfontconfig1 libx11-xcb1 libgbm1 libasound2
+          sudo apt-get install -y xvfb libnss3 libfontconfig1 libx11-xcb1 libgbm1 libasound2t64
 
       - name: Kütüphaneleri Yükle
         run: |
@@ -54,7 +55,6 @@ jobs:
         with:
           name: trend-sonuclari # İndirilecek zip dosyasının adı
           # DİKKAT: Python kodunun dosyaları kaydettiği klasör burası olmalı.
-          # Eğer scriptin 'downloads' klasörüne kaydediyorsa burayı değiştir.
           path: output/ 
           retention-days: 5 # Dosyalar GitHub'da 5 gün saklansın
       # --- EKLENEN KISIM BİTİŞİ ---
