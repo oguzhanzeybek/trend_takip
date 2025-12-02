@@ -6,17 +6,26 @@ import os
 import random
 import concurrent.futures
 import threading # <-- KİLİT İÇİN GEREKLİ
+from pathlib import Path
+
+# --- DİNAMİK YOL AYARLARI ---
+# Scriptin çalıştığı klasörü tam yol olarak alır
+BASE_DIR = Path(__file__).resolve().parent
 
 # --- AYARLAR ---
 MAX_WORKERS = 3 
-SAVE_PATH = r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\online_shopping\alibaba"
+# Dosyaları scriptin olduğu yere kaydeder
+SAVE_PATH = BASE_DIR
 
 # Tarayıcı açılışlarını sıraya koymak için kilit (Mutex)
 driver_init_lock = threading.Lock()
 
 def get_chrome_options():
     options = uc.ChromeOptions()
+    # GitHub Actions ve Sunucu ortamları için kritik ayarlar:
     options.add_argument("--headless=new") 
+    options.add_argument("--no-sandbox") # Sandbox güvenlik katmanını aşar
+    options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-notifications")
@@ -60,7 +69,9 @@ def get_all_category_links():
     except Exception as e:
         print(f"Link toplama hatası: {e}")
     finally:
-        driver.quit()
+        try:
+            driver.quit()
+        except: pass
     
     return links_data
 
@@ -129,14 +140,14 @@ def process_batch(category_list, worker_id):
             print(f"   [Bot-{worker_id}] Hata ({cat_name}): {e}")
             continue
             
-    driver.quit()
+    try:
+        driver.quit()
+    except: pass
     print(f"🏁 Bot-{worker_id} görevini tamamladı.")
     return batch_results
 
 # --- ANA ÇALIŞTIRMA BLOKU ---
 if __name__ == "__main__":
-    # Eğer önceden kalan kilitli dosyalar varsa temizlemek gerekebilir ama
-    # Kilit mantığı bunu çözecektir.
     
     start_time = time.time()
     
@@ -167,18 +178,23 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f"Bir bot çöktü: {e}")
 
-    # 4. Kaydet
-    os.makedirs(SAVE_PATH, exist_ok=True)
-    file_path = os.path.join(SAVE_PATH, "alibaba.csv")
+    # 4. Kaydet (Dinamik Yol)
+    # Klasör zaten SAVE_PATH (BASE_DIR) olduğu için makedirs gerekmez ama güvenli olsun
+    # Eğer ayrı bir 'data' klasörü istenirse: (SAVE_PATH / "data").mkdir(parents=True, exist_ok=True)
     
-    with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Kategori", "Ürün Başlığı", "Fiyat", "Min. Sipariş", "Link"])
-        for row in all_final_data:
-            writer.writerow(row)
+    file_path = SAVE_PATH / "alibaba.csv"
+    
+    try:
+        with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Kategori", "Ürün Başlığı", "Fiyat", "Min. Sipariş", "Link"])
+            for row in all_final_data:
+                writer.writerow(row)
 
-    duration = time.time() - start_time
-    print(f"\n🚀 İŞLEM TAMAMLANDI!")
-    print(f"Süre: {int(duration)} saniye")
-    print(f"Toplam Veri: {len(all_final_data)}")
-    print(f"Dosya: {file_path}")
+        duration = time.time() - start_time
+        print(f"\n🚀 İŞLEM TAMAMLANDI!")
+        print(f"Süre: {int(duration)} saniye")
+        print(f"Toplam Veri: {len(all_final_data)}")
+        print(f"Dosya: {file_path}")
+    except Exception as e:
+        print(f"❌ Dosya kaydetme hatası: {e}")

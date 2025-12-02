@@ -15,8 +15,9 @@ MODEL_NAME = "openai/gpt-4o-mini"
 BATCH_SIZE = 50 
 WAIT_TIME = 1  # 1 saniye dinlenme (Hız için)
 
-# --- BAĞLANTI ---
+# --- BAĞLANTI VE DİNAMİK YOL ---
 BASE_DIR = Path(__file__).resolve().parent
+
 env_path = None
 search_dirs = [BASE_DIR] + list(BASE_DIR.parents)[:3]
 for d in search_dirs:
@@ -49,9 +50,9 @@ def clean_data(df):
     ⚠️ YALNIZCA FORMATLAMA VE TOKEN TASARRUFU YAPAR, SATIR ELEME İŞLEMİ AI'YA DEVREDİLDİ.
     """
     initial_len = len(df)
-    print(f"   🧹 Ön temizlik... (Giriş: {initial_len})")
+    print(f"   🧹 Ön temizlik... (Giriş: {initial_len})")
     
-    # SADECE tamamen boş satırları ve duplike satırları atar (AI eleme görevi devredildi)
+    # SADECE tamamen boş satırları ve duplike satırları atar
     df = df.dropna(how='all').drop_duplicates() 
     
     # 1. Kırpma İşlemi (SADECE 2. Sütundan itibaren)
@@ -62,11 +63,14 @@ def clean_data(df):
             lambda col: col.apply(lambda x: truncate_text(x, 1000))
         )
     
-    print(f"   ✨ Veri Hazır (AI Elemesi için): {len(df_temp)} satır")
+    print(f"   ✨ Veri Hazır (AI Elemesi için): {len(df_temp)} satır")
     return df_temp.astype(str) 
 
 def get_progress_file_path(filename):
-    return BASE_DIR / "data" / f"{filename}_progress.txt"
+    # Progress dosyaları scriptin olduğu yerdeki 'data' klasöründe tutulur
+    data_dir = BASE_DIR / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    return data_dir / f"{filename}_progress.txt"
 
 def get_last_index(filename):
     p_file = get_progress_file_path(filename)
@@ -81,6 +85,7 @@ def save_progress(filename, index):
         f.write(str(index))
 
 def append_to_csv(data, filename):
+    # Çıktı klasörü: scriptin olduğu yerdeki 'data' klasörü
     output_path = BASE_DIR / "data" / f"filtered_{filename}.csv"
     df = pd.DataFrame(data)
     if not output_path.exists():
@@ -92,7 +97,7 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
     # Kolon isimlerini prompt'a ekliyoruz ki AI neye baktığını bilsin
     column_names = ", ".join(df_columns) 
     
-    # PROMPT GÜNCELLEMESİ: HORECA Stratejisi ve Ürün Kısaltma Talimatı
+    # PROMPT (DEĞİŞTİRİLMEDEN KORUNDU)
     prompt = f"""
     Sen, **Metro Market'in HORECA (Otel, Restoran, Catering) Sektörüne odaklanmış Yüksek Seviye Stratejik Pazar Analistisin.** Senin görevin, sadece ürün seçmek değil, piyasadaki **YENİ BAŞLANGIÇ TRENDLERİNİ ERKEN TESPİT ETMEK** ve müşteri ihtiyaçlarına göre **pazarda devrim yaratacak ürün portföyünü** oluşturmaktır.
     potansiyel müşterilerin beklentileri, sektör trendleri ve yenilikçi ürün özellikleri hakkında derinlemesine bilgiye sahipsin.
@@ -140,7 +145,7 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
             sys.exit(1)
             
         if retry < 3:
-            print(f"      ⚠️ Geçici Hata. Tekrar deneniyor... ({retry+1})")
+            print(f"      ⚠️ Geçici Hata. Tekrar deneniyor... ({retry+1})")
             time.sleep(2)
             # Kolon isimlerini tekrar geçerek yeniden dene
             return analyze_paid_fast(data_chunk, category, df_columns, retry + 1)
@@ -148,25 +153,39 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
 
 # --- ANA DÖNGÜ ---
 def process_files():
-    # Dosya yollarını Windows uyumlu sabitledik
-    raw_data_dir = Path(r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\ai_filter\Raw_data")
+    # --- DİNAMİK YOL AYARLAMASI ---
+    # Kodun Yeri: .../scraper/ai_filter/preprocessed_data/preprocessed_ai.py
+    # Verinin Yeri: .../scraper/ai_filter/Raw_data
+    # Bu yüzden BASE_DIR.parent (ai_filter) -> Raw_data yapıyoruz.
+    
+    raw_data_dir = BASE_DIR.parent / "Raw_data"
+    
+    # Çıktı klasörü (data)
     output_dir = BASE_DIR / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
     
     target_files = ["Rival.csv", "online_shopping.csv", "social_media.csv"]
     
-    print(f"📂 Okunacak: {raw_data_dir}")
+    print(f"📂 Okunacak Klasör: {raw_data_dir}")
     print(f"💎 Model: {MODEL_NAME} (HAZIR)")
     print("------------------------------------------------")
 
+    if not raw_data_dir.exists():
+        print(f"❌ HATA: Raw data klasörü bulunamadı: {raw_data_dir}")
+        return
+
     for filename in target_files:
-        if not (raw_data_dir / filename).exists(): continue
+        if not (raw_data_dir / filename).exists():
+            print(f"⚠️ Dosya bulunamadı, atlanıyor: {filename}")
+            continue
 
         print(f"\n🚀 {filename} İŞLENİYOR...")
         
         try:
             df = pd.read_csv(raw_data_dir / filename, dtype=str, low_memory=False).fillna("")
-        except: continue
+        except Exception as e:
+            print(f"❌ Okuma hatası ({filename}): {e}")
+            continue
         
         df_clean = clean_data(df)
         total_rows = len(df_clean)
@@ -175,10 +194,10 @@ def process_files():
         start_index = get_last_index(file_key)
         
         if start_index >= total_rows:
-            print(f"   ✅ Zaten bitmiş.")
+            print(f"   ✅ Zaten bitmiş.")
             continue
         elif start_index > 0:
-            print(f"   ⏩ {start_index}. satırdan devam.")
+            print(f"   ⏩ {start_index}. satırdan devam.")
 
         # Kolon isimlerini bir kere al (AI'ya göndermek için)
         df_columns = df_clean.columns.tolist()
@@ -189,16 +208,16 @@ def process_files():
             # KRİTİK: header=False ile ilk satır (kolon isimleri) gönderilmez
             batch_str = batch.to_string(header=False, index=False) 
             
-            print(f"   ⏳ İşleniyor: {i} - {min(i+BATCH_SIZE, total_rows)} (Toplam: {total_rows})")
+            print(f"   ⏳ İşleniyor: {i} - {min(i+BATCH_SIZE, total_rows)} (Toplam: {total_rows})")
             
             # Kolon isimlerini analyze_paid_fast fonksiyonuna yolla
             results = analyze_paid_fast(batch_str, file_key, df_columns)
             
             if results:
                 append_to_csv(results, file_key)
-                print(f"      💾 {len(results)} veri EKLENDİ.")
+                print(f"      💾 {len(results)} veri EKLENDİ.")
             else:
-                print("      ❌ Veri yok.")
+                print("      ❌ Veri yok.")
 
             save_progress(file_key, i + BATCH_SIZE)
             time.sleep(WAIT_TIME)

@@ -3,17 +3,25 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys # ESC tuşu için
 import time
 import csv
-import os
 import random
+from pathlib import Path
+
+# --- DİNAMİK YOL AYARLARI ---
+# Scriptin çalıştığı klasörü tam yol olarak alır
+BASE_DIR = Path(__file__).resolve().parent
 
 # --- AYARLAR ---
 options = uc.ChromeOptions()
+# GitHub Actions ve Sunucu ortamları için kritik ayarlar:
+options.add_argument("--headless") # Arayüzsüz mod
+options.add_argument("--no-sandbox") # Sandbox güvenlik katmanını aşar
+options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
 options.add_argument("--start-maximized")
 options.add_argument("--disable-notifications")
 options.add_argument("--disable-popup-blocking")
 options.page_load_strategy = 'eager'
 
-print("CarrefourSA Scraper Başlatılıyor...")
+print("🚀 CarrefourSA Scraper (Headless & Dinamik) Başlatılıyor...")
 driver = uc.Chrome(options=options)
 
 try:
@@ -28,36 +36,31 @@ try:
         print(f"\n--- Gidiliyor: Sayfa {current_page + 1} ---")
         driver.get(url)
         
-        # İlk sayfa açılışında pop-up temizliği yap (Sadece 1 kere yeterli olabilir ama her sayfada denemek güvenlidir)
+        # Bekleme ve Pop-up Yönetimi
         time.sleep(6) 
 
-        # --- POP-UP TEMİZLİĞİ (GÜNCELLENDİ) ---
+        # --- POP-UP TEMİZLİĞİ ---
         if current_page == 0:
-            print("Pop-up kontrolü yapılıyor...")
+            print("  Pop-up kontrolü yapılıyor...")
             try:
-                # 1. Yöntem: ESC Tuşuna bas (Genelde tüm pop-up'ları kapatır)
                 driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
                 time.sleep(1)
             except: pass
 
             try:
-                # 2. Yöntem: Çerezleri Kabul Et
                 driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
-                print("Çerezler geçildi.")
+                print("  🍪 Çerezler geçildi.")
                 time.sleep(1)
             except: pass
 
             try:
-                # 3. Yöntem: Teslimat/Konum Pop-up'ı Kapatma Butonu (Genel Classlar)
-                # CarrefourSA'da bazen 'close' ikonlu butonlar olur
                 close_buttons = driver.find_elements(By.CSS_SELECTOR, ".close-modal, .modal-close, button[aria-label='Close']")
                 for btn in close_buttons:
                     if btn.is_displayed():
                         btn.click()
-                        print("Bir pop-up kapatıldı.")
+                        print("  Modals kapatıldı.")
             except: pass
             
-            # Sayfanın kendine gelmesi için tekrar ESC
             try: driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
             except: pass
 
@@ -70,16 +73,15 @@ try:
         products = driver.find_elements(By.CSS_SELECTOR, "li.product-listing-item")
         
         if len(products) == 0:
-            print("❌ Bu sayfada ürün bulunamadı. (Pop-up engellemiş olabilir mi?)")
-            # Pop-up yüzünden göremediyse bir şans daha verip ESC basıp tekrar dene
+            print("❌ Bu sayfada ürün bulunamadı. (Tekrar deneniyor...)")
             driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
             time.sleep(2)
             products = driver.find_elements(By.CSS_SELECTOR, "li.product-listing-item")
             if len(products) == 0:
-                print("Hala ürün yok, işlem bitiriliyor.")
+                print("❌ Hala ürün yok, işlem bitiriliyor.")
                 break
             
-        print(f"-> Bu sayfada {len(products)} ürün var.")
+        print(f"  -> Bu sayfada {len(products)} ürün var.")
 
         for p in products:
             if len(all_products) >= target_count:
@@ -102,27 +104,34 @@ try:
             except:
                 continue
         
-        print(f"-> Toplam: {len(all_products)}/{target_count}")
+        print(f"  -> Toplam: {len(all_products)}/{target_count}")
         current_page += 1
 
-    driver.quit()
-
-    # 4. KAYDET (Rival Klasörü)
-    folder_path = r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\Rival\CarrefourSA"
-    os.makedirs(folder_path, exist_ok=True)
-    file_path = os.path.join(folder_path, "carrefoursa.csv")
-
-    with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Marka", "Ürün Adı", "Fiyat", "Link"])
-        for row in all_products:
-            writer.writerow(row)
-
-    print(f"\n✅ İŞLEM TAMAMLANDI!")
-    print(f"Toplam {len(all_products)} ürün kaydedildi.")
-    print(f"Dosya: {file_path}")
-
 except Exception as e:
-    print(f"Hata: {e}")
-    try: driver.quit()
+    print(f"❌ Kritik Hata: {e}")
+
+finally:
+    # 4. KAPAT VE KAYDET
+    try:
+        driver.quit()
+        print("🛑 Tarayıcı kapatıldı.")
     except: pass
+
+    if all_products:
+        # Dosyayı scriptin olduğu yere kaydeder
+        file_path = BASE_DIR / "carrefoursa.csv"
+        
+        try:
+            with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
+                writer = csv.writer(file)
+                writer.writerow(["Marka", "Ürün Adı", "Fiyat", "Link"])
+                for row in all_products:
+                    writer.writerow(row)
+
+            print(f"\n✅ İŞLEM TAMAMLANDI!")
+            print(f"📂 Toplam {len(all_products)} ürün kaydedildi.")
+            print(f"📄 Dosya: {file_path}")
+        except Exception as e:
+            print(f"❌ Dosya yazma hatası: {e}")
+    else:
+        print("\n⚠️ Hiçbir veri çekilemedi.")

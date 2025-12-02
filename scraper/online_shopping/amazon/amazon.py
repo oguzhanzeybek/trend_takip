@@ -4,34 +4,33 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import csv
-import os
 import random
+from pathlib import Path
+
+# --- DİNAMİK YOL AYARLARI ---
+# Scriptin çalıştığı klasörü tam yol olarak alır
+BASE_DIR = Path(__file__).resolve().parent
 
 # --- AYARLAR ---
 options = uc.ChromeOptions()
 
-# 1. ARKA PLAN AYARLARI (HEADLESS)
-# "--headless=new" komutu Amazon'un bot olduğumuzu anlama ihtimalini düşürür.
+# 1. ARKA PLAN AYARLARI (HEADLESS & GITHUB ACTIONS)
 options.add_argument("--headless=new") 
-
-# 2. EKRAN BOYUTU (Çok Önemli!)
-# Arka planda olsa bile Amazon'a "Benim ekranım Full HD" demeliyiz.
-# Yoksa mobil görünüm açılır ve sol menü (kategoriler) kaybolur.
+options.add_argument("--no-sandbox") # GitHub Actions/Linux için KRİTİK
+options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
 options.add_argument("--window-size=1920,1080")
-
-# Diğer performans ayarları
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-notifications")
 options.add_argument("--disable-popup-blocking")
 options.page_load_strategy = 'eager'
 
-print("Amazon Scraper (Arka Plan Modu) Başlatılıyor...")
+print("🚀 Amazon Scraper (Headless & Dinamik) Başlatılıyor...")
 driver = uc.Chrome(options=options)
 
 try:
     # 1. Ana Sayfaya Git
     base_url = "https://www.amazon.com.tr/gp/bestsellers"
-    print(f"Gidiliyor: {base_url}")
+    print(f"🌐 Gidiliyor: {base_url}")
     driver.get(base_url)
     time.sleep(5)
 
@@ -39,12 +38,12 @@ try:
     try:
         cookie_accept = driver.find_element(By.ID, "sp-cc-accept")
         cookie_accept.click()
-        print("Çerezler geçildi.")
+        print("  🍪 Çerezler geçildi.")
     except:
         pass
 
     # 2. KATEGORİLERİ BUL
-    print("Kategoriler taranıyor (Bu işlem birkaç saniye sürebilir)...")
+    print("  📂 Kategoriler taranıyor...")
     category_links = []
     
     try:
@@ -60,16 +59,19 @@ try:
             if txt and href and "amazon.com.tr" in href:
                 category_links.append((txt, href))
         
-        print(f"✅ Toplam {len(category_links)} kategori bulundu.")
+        print(f"  ✅ Toplam {len(category_links)} kategori bulundu.")
         
     except Exception as e:
-        print(f"Kategori listesi alınamadı (Hata: {e})")
-        # Hata olursa ekran görüntüsü alıp bakalım
-        driver.save_screenshot("hata_kategori.png")
+        print(f"❌ Kategori listesi alınamadı (Hata: {e})")
+        # Hata olursa ekran görüntüsü alıp kaydedelim (Hata ayıklama için)
+        screenshot_path = BASE_DIR / "hata_kategori.png"
+        driver.save_screenshot(str(screenshot_path))
 
     # 3. KATEGORİLERİ GEZ
     all_products = []
 
+    # Test için ilk 5 kategoriyi tarayabilirsin, hepsini taramak uzun sürerse:
+    # for cat_name, cat_url in category_links[:5]: 
     for cat_name, cat_url in category_links:
         print(f"\n--- İşleniyor: {cat_name} ---")
         
@@ -95,7 +97,7 @@ try:
             if not product_cards:
                 product_cards = driver.find_elements(By.CLASS_NAME, "zg-grid-general-faceout")
 
-            print(f"-> {len(product_cards)} ürün bulundu.")
+            print(f"  -> {len(product_cards)} ürün bulundu.")
 
             for p in product_cards:
                 try:
@@ -132,27 +134,34 @@ try:
                     continue
 
         except Exception as e:
-            print(f"Hata: {e}")
+            print(f"  Hata: {e}")
             continue
 
-    driver.quit()
+except Exception as e:
+    print(f"❌ Kritik Hata: {e}")
+
+finally:
+    # Tarayıcıyı güvenli kapat
+    try:
+        driver.quit()
+        print("🛑 Tarayıcı kapatıldı.")
+    except: pass
 
     # 4. KAYDET
-    folder_path = r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\online_shopping\amazon"
-    os.makedirs(folder_path, exist_ok=True)
-    file_path = os.path.join(folder_path, "amazon.csv")
+    if all_products:
+        file_path = BASE_DIR / "amazon.csv"
+        
+        try:
+            with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
+                writer = csv.writer(file)
+                writer.writerow(["Kategori", "Sıra", "Ürün Adı", "Fiyat", "Link"])
+                for row in all_products:
+                    writer.writerow(row)
 
-    with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Kategori", "Sıra", "Ürün Adı", "Fiyat", "Link"])
-        for row in all_products:
-            writer.writerow(row)
-
-    print(f"\n✅ İŞLEM TAMAMLANDI!")
-    print(f"Toplam {len(all_products)} ürün kaydedildi.")
-    print(f"Dosya: {file_path}")
-
-except Exception as e:
-    print(f"Kritik Hata: {e}")
-    try: driver.quit()
-    except: pass
+            print(f"\n✅ İŞLEM TAMAMLANDI!")
+            print(f"📂 Toplam {len(all_products)} ürün kaydedildi.")
+            print(f"📄 Dosya: {file_path}")
+        except Exception as e:
+            print(f"❌ Kayıt hatası: {e}")
+    else:
+        print("\n⚠️ Hiçbir ürün çekilemedi.")

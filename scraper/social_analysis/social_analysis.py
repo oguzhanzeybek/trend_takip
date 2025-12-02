@@ -69,7 +69,10 @@ def clean_data(df):
     return df_temp.astype(str) 
 
 def get_output_file_path(filename):
-    return BASE_DIR / "data" / f"analyzed_{filename}.json"
+    # Data klasörü yoksa oluştur
+    output_dir = BASE_DIR / "data"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    return output_dir / f"analyzed_{filename}.json"
 
 def save_analysis_json(data, filename):
     output_path = get_output_file_path(filename)
@@ -203,8 +206,11 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
 
 # --- ANA DÖNGÜ (Batch İşleme Mantığı Korundu) ---
 def process_social_media_analysis():
-    # Dosya yolu sabit
-    raw_data_dir = Path(r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\ai_filter\Raw_data")
+    # --- DEĞİŞİKLİK BURADA: Dinamik Dosya Yolu ---
+    # Eski sabit yol yerine, scriptin olduğu yerden yola çıkarak raw_data'yı buluyoruz.
+    raw_data_dir = BASE_DIR.parent / "ai_filter" / "Raw_data"
+    
+    # Çıktı klasörü kontrolü (varsa kullan, yoksa oluştur)
     output_dir = BASE_DIR / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
     
@@ -215,7 +221,8 @@ def process_social_media_analysis():
     print("------------------------------------------------")
 
     if not (raw_data_dir / filename).exists():
-        print(f"❌ HATA: {filename} dosyası bulunamadı. Lütfen yolu kontrol edin.")
+        print(f"❌ HATA: {filename} dosyası bulunamadı. Lütfen yolu kontrol edin:")
+        print(f"   Aranan Yer: {raw_data_dir / filename}")
         return
 
     print(f"\n🚀 {filename} TOPLUMSAL NABIZ ANALİZİ BAŞLIYOR...")

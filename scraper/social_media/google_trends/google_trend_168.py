@@ -7,25 +7,33 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import csv
-import os
+import sys
+from pathlib import Path
 
 # --- AYARLAR ---
-options = Options()
-options.add_argument("--headless=new") # Arka plan modu
-options.add_argument("--window-size=1920,1080")
-options.add_argument("--disable-gpu")
-options.add_argument("--disable-notifications")
-options.add_argument("--disable-blink-features=AutomationControlled")
-options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
+def get_driver():
+    options = Options()
+    # --- KRİTİK GITHUB ACTIONS AYARLARI ---
+    options.add_argument("--headless=new") # Ekransız Mod
+    options.add_argument("--no-sandbox")   # Linux Güvenlik İzni
+    options.add_argument("--disable-dev-shm-usage") # Hafıza Optimizasyonu
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("--disable-notifications")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
+    
+    # Driver Kurulumu
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    return driver
 
-print("Google Trends tarayıcısı ARKA PLANDA başlatılıyor...")
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options)
+# --- ANA İŞLEM ---
+all_trends_data = []
 
 try:
-    # Günlük Trendler Sayfası (Bu sayfa 'Sonraki Sayfa' dedikçe geçmiş günlere gider)
+    driver = get_driver()
     url = "https://trends.google.com/trending?geo=TR&hl=tr&hours=168"
-    print(f"Siteye gidiliyor: {url}")
     driver.get(url)
 
     # 1. ÇEREZLERİ GEÇ
@@ -34,111 +42,89 @@ try:
             EC.element_to_be_clickable((By.XPATH, "//button//*[contains(text(), 'Reddet') or contains(text(), 'Reject') or contains(text(), 'Kabul') or contains(text(), 'Accept')]"))
         )
         cookie_btn.find_element(By.XPATH, "./..").click()
-        print("Çerez butonu geçildi.")
-        time.sleep(2)
+        time.sleep(1)
     except:
-        print("Çerez ekranı çıkmadı.")
+        pass # Çerez çıkmadıysa devam et
 
-    # 2. ANA DÖNGÜ
-    all_trends_data = [] # [Başlık, Hacim, Süre] saklayacağız
+    # 2. VERİ ÇEKME DÖNGÜSÜ
     page_number = 1
-
+    
     while True:
-        print(f"\n--- Sayfa {page_number} Taranıyor ---")
-        
         # Sayfanın yüklenmesini bekle
         try:
             WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, "mZ3RIc"))
             )
         except:
-            print("Veri bulunamadı, döngü bitiriliyor.")
-            break
+            break # Veri yoksa çık
 
         # Sayfayı kaydır
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(2)
 
-        # SATIRLARI OKU
+        # Satırları Oku
         rows = driver.find_elements(By.XPATH, "//tr[@role='row']")
-        
         new_count = 0
+        
         for row in rows:
             try:
-                # A) Başlık (mZ3RIc)
+                # Başlık
                 title_el = row.find_element(By.CLASS_NAME, "mZ3RIc")
                 title_text = title_el.text.strip()
 
-                # B) Hacim (lqv0Cb)
+                # Hacim
                 try:
                     volume_el = row.find_element(By.CLASS_NAME, "lqv0Cb")
                     volume_text = volume_el.text.strip().replace("\n", "") 
                 except:
                     volume_text = "Bilinmiyor"
 
-                # C) Süre / Ne Kadar Önce (vdw3Ld) <-- YENİ EKLENEN KISIM
+                # Süre
                 try:
                     time_el = row.find_element(By.CLASS_NAME, "vdw3Ld")
                     time_text = time_el.text.strip()
                 except:
                     time_text = "Bilinmiyor"
 
-                # Listeye Ekle
+                # Listeye Ekle (Duplicate Kontrolü)
                 if title_text:
                     already_exists = any(item[0] == title_text for item in all_trends_data)
-                    
                     if not already_exists:
-                        # Veriyi 3'lü olarak kaydediyoruz
                         all_trends_data.append([title_text, volume_text, time_text])
                         new_count += 1
-                        print(f"-> {title_text} | {volume_text} | {time_text}")
-
             except:
                 continue
         
-        print(f"Bu sayfadan {new_count} yeni veri eklendi.")
-
-        # SONRAKİ SAYFAYA GEÇİŞ
+        # Sonraki Sayfa Kontrolü
         try:
             next_button = driver.find_element(By.XPATH, "//*[@aria-label='Sonraki sayfaya git']")
-            
             if next_button.get_attribute("aria-disabled") == "true" or not next_button.is_enabled():
-                print("Son sayfaya gelindi.")
                 break
-            
             driver.execute_script("arguments[0].click();", next_button)
-            print("Sonraki sayfaya geçiliyor...")
-            time.sleep(3)
+            time.sleep(2)
             page_number += 1
-            
         except:
-            print("Sonraki sayfa butonu bulunamadı, işlem tamamlandı.")
             break
 
     driver.quit()
 
-    # 3. CSV KAYDI
-    folder_path = r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\social_media\google_trends"
-    os.makedirs(folder_path, exist_ok=True)
-    file_path = os.path.join(folder_path, "google_trends_168.csv")
-
-    if all_trends_data:
-        with open(file_path, "w", newline="", encoding="utf-8") as file:
-            writer = csv.writer(file)
-            # Sütun Başlıkları Güncellendi
-            writer.writerow(["Trend Başlık", "Arama Hacmi", "Ne Zaman Başladı"])
-            
-            for data in all_trends_data:
-                writer.writerow(data)
-        
-        print(f"\n✅ İŞLEM BİTTİ: Toplam {len(all_trends_data)} adet detaylı trend kaydedildi.")
-        print(f"Dosya: {file_path}")
-    else:
-        print("\n❌ Hiç veri çekilemedi.")
-
 except Exception as e:
-    print(f"Kritik Hata: {e}")
+    # Hata olsa bile sessiz kalıp kaydetmeye çalışacağız (varsa)
     try:
         driver.quit()
     except:
         pass
+
+# --- DOSYA KAYIT (STANDART BLOK) ---
+current_dir = Path(__file__).resolve().parent
+output_filename = "google_trends_168.csv"
+output_path = current_dir / output_filename
+
+if all_trends_data:
+    with open(output_path, "w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Trend Başlık", "Arama Hacmi", "Ne Zaman Başladı"])
+        writer.writerows(all_trends_data)
+    print(f"✅ Dosya kaydedildi: {output_path} (Toplam: {len(all_trends_data)})")
+else:
+    print(f"❌ Veri oluşmadığı için '{output_filename}' kaydedilemedi.")
