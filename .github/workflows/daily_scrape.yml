@@ -2,51 +2,60 @@ name: Gunluk Trend Takipcisi
 
 on:
   schedule:
-    # Her gün sabah 09:00 ve akşam 21:00'de çalışır (UTC saatiyle)
+    # UTC saatiyle 06:00 (TR 09:00) ve 18:00 (TR 21:00)
     - cron: '0 6,18 * * *'
-  workflow_dispatch: # GitHub üzerinden manuel butonla çalıştırmak için
+  workflow_dispatch: # Manuel tetikleme butonu
 
 jobs:
   scrape-and-process:
     runs-on: ubuntu-latest
+    # İşlem bir yerde takılırsa 45 dakika sonra zorla durdur (Kredi koruması)
+    timeout-minutes: 45
 
     steps:
       - name: Depoyu Çek (Checkout)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Python Kurulumu (3.11)
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip' # Pip paketlerini önbelleğe alarak sonraki çalışmayı hızlandırır
 
-      # undetected-chromedriver için sanal ekran (Xvfb) gereklidir.
-      # Chromium kurmayın, bu UC ile çakışabilir.
-      - name: Gerekli Sistem Paketlerini Yükle (Xvfb)
+      # Chrome ve Selenium için gerekli sistem kütüphaneleri
+      - name: Gerekli Sistem Paketlerini Yükle (Xvfb ve Libs)
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb
+          sudo apt-get install -y xvfb libnss3 libgconf-2-4 libfontconfig1 libx11-xcb1
 
       - name: Kütüphaneleri Yükle
         run: |
           python -m pip install --upgrade pip
-          # Scraper klasöründeki gereksinimleri yükle
           pip install -r scraper/requirements.txt
 
-      - name: Ustabaşı Scriptini Çalıştır
+      - name: Ustabaşı Scriptini Çalıştır (Main)
         env:
+          # Secret'lar burada ortam değişkenine dönüşür
           OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        # xvfb-run komutu tarayıcıya "sanki ekran varmış gibi" davranmasını sağlar
+          # Python'un çıktıyı tamponlamasını engeller (Logları anlık görmek için)
+          PYTHONUNBUFFERED: "1"
         run: |
+          # Ekran varmış gibi davranarak main.py'yi çalıştır
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" python scraper/main.py
 
-      # Girinti hatası burada düzeltildi, steps altında hizalı olmalı
-      - name: Hata Ekran Görüntülerini Yükle
-        if: always() # Başarısız olsa bile çalıştır
+      # --- KRİTİK DÜZELTME BURADA ---
+      # Alt klasörlerdeki (debug_carrefour vb.) resimleri bulması için **/*.png kullanıyoruz
+      - name: Hata Kayıtlarını ve Ekran Görüntülerini Yükle
+        if: always() # Hata alsa bile çalışır
         uses: actions/upload-artifact@v4
         with:
-          name: debug-screenshots
-          # Python kodunda dosya nereye kaydediliyorsa orayı göstermeli
-          # Eğer scraper klasörü içindeyse 'scraper/*.png' kullanın
-          path: scraper/*.png
+          name: debug-artifacts
+          retention-days: 3 # Dosyaları 3 gün sakla (yer kaplamasın)
+          path: |
+            scraper/**/*.png
+            scraper/**/*.jpg
+            scraper/logs/*.txt
+            scraper/data/*.json
+            scraper/data/*.csv
