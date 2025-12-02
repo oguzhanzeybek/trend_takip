@@ -1,5 +1,7 @@
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import time
 import csv
@@ -7,130 +9,144 @@ import random
 from pathlib import Path
 
 # --- DİNAMİK YOL AYARLARI ---
-# Scriptin çalıştığı klasörü tam yol olarak alır
 BASE_DIR = Path(__file__).resolve().parent
+SCREENSHOT_DIR = BASE_DIR / "debug_screenshots"
+SCREENSHOT_DIR.mkdir(exist_ok=True) # Klasör yoksa oluştur
 
 # --- AYARLAR ---
 options = uc.ChromeOptions()
-# GitHub Actions ve Sunucu ortamları için kritik ayarlar:
-options.add_argument("--headless") # Arayüzsüz mod
-options.add_argument("--no-sandbox") # Sandbox güvenlik katmanını aşar (Linux için gerekli)
-options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
+# ÖNEMLİ: Eski headless yerine 'new' modunu kullanmak tespiti zorlaştırır
+options.add_argument("--headless=new") 
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--start-maximized")
 options.add_argument("--disable-notifications")
 options.add_argument("--disable-popup-blocking")
-options.page_load_strategy = 'eager'
+# User-Agent maskeleme (Bazen işe yarar)
+options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
 
-print("🚀 A101 Scraper (Headless & Dinamik) Başlatılıyor...")
+options.page_load_strategy = 'normal' # 'eager' yerine 'normal' yaptık ki her şeyin yüklenmesini beklesin
 
-# Headless modda undetected_chromedriver bazen sürüm hatası verebilir,
-# bu yüzden version_main parametresi opsiyonel olarak kullanılabilir ama şimdilik standart bırakıyoruz.
+print("🚀 A101 Scraper (Gelişmiş Headless) Başlatılıyor...")
+
 driver = uc.Chrome(options=options)
+wait = WebDriverWait(driver, 20) # 20 saniyeye kadar bekleme limiti
 
 try:
     all_products = []
     page = 1
-    MAX_PAGES = 20 # İstersen artır
+    MAX_PAGES = 5 # Test için düşürdüm, çalışırsa artırırsın
 
     while page <= MAX_PAGES:
         
-        # 1. SAYFAYA GİT
         url = f"https://www.a101.com.tr/liste/haftanin-cok-satanlari/?page={page}"
         print(f"\n--- Gidiliyor: Sayfa {page} ---")
         driver.get(url)
         
-        # Bekleme süresi
-        time.sleep(random.uniform(5, 7))
+        # 1. YAVAŞLATMA: Sayfa açılınca insan gibi bekle
+        time.sleep(random.uniform(8, 12)) 
 
-        # --- POP-UP TEMİZLİĞİ ---
-        if page == 1:
-            try:
-                driver.find_element(By.ID, "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll").click()
-                print("  🍪 Çerezler kabul edildi.")
-            except: pass
-            
-            try: driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
-            except: pass
-            
-            try: driver.find_element(By.TAG_NAME, "body").click()
-            except: pass
-
-        # 2. KAYDIR (Lazy Load Resimler İçin)
-        for i in range(3):
-            driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight * {i/3});")
-            time.sleep(1.5)
-
-        # 3. ÜRÜNLERİ BUL
-        product_cards = driver.find_elements(By.CLASS_NAME, "product-container")
+        # --- POP-UP KAPATMA DENEMELERİ ---
+        try:
+            cookie_btn = driver.find_element(By.ID, "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
+            cookie_btn.click()
+        except: pass
         
-        if len(product_cards) == 0:
-            print("❌ Bu sayfada ürün bulunamadı. Liste sonuna gelinmiş olabilir.")
-            break
+        # 2. KAYDIRMA: Daha yavaş ve "insan" gibi kaydır
+        print("⬇️ Sayfa yavaşça kaydırılıyor...")
+        for i in range(1, 10):
+            driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight * {i/4});")
+            time.sleep(random.uniform(2, 4)) # Her kaydırmada bekle
 
-        print(f"  -> Bu sayfada {len(product_cards)} ürün kartı bulundu.")
+        # 3. BEKLEME: Ürün kartlarının yüklenmesini bekle (Explicit Wait)
+        try:
+            # Hem eski hem yeni olası class isimlerini bekle
+            print("⏳ Ürünlerin görünmesi bekleniyor...")
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul.list-content, .product-container, .product-card")))
+        except:
+            print("⚠️ Bekleme süresi doldu, element bulunamadı.")
+
+        # 4. ÜRÜNLERİ TOPLA (Genişletilmiş Seçiciler)
+        # A101 bazen class isimlerini değiştirir. Birkaç farklı ihtimali deniyoruz.
+        possible_selectors = [
+            "li.product-item-box",       # Yaygın yapı
+            ".product-container",        # Eski yapı
+            "div.product-card",          # Alternatif
+            "ul.list-content li",        # Liste elemanları
+            "a[class*='product-link']"   # Link içeren ürünler
+        ]
+
+        product_cards = []
+        for selector in possible_selectors:
+            found = driver.find_elements(By.CSS_SELECTOR, selector)
+            if len(found) > 0:
+                print(f"✅ Seçici çalıştı: '{selector}' -> {len(found)} adet bulundu.")
+                product_cards = found
+                break # Çalışan bir tane bulduysak diğerlerine bakmaya gerek yok
+        
+        # --- HATA AYIKLAMA (SCREENSHOT) ---
+        if len(product_cards) == 0:
+            print("❌ HATA: Ürün bulunamadı!")
+            error_shot = SCREENSHOT_DIR / f"hata_sayfa_{page}.png"
+            driver.save_screenshot(str(error_shot))
+            print(f"📸 Ekran görüntüsü alındı: {error_shot}")
+            print("💡 İPUCU: Ekran görüntüsüne bak. 'Cloudflare' veya boş beyaz sayfa mı?")
+            break
 
         for card in product_cards:
             try:
-                # 1. Başlık
-                try:
-                    title_el = card.find_element(By.TAG_NAME, "h3")
-                    title = title_el.text.strip()
-                    if not title:
-                        title = title_el.get_attribute("title")
-                except:
-                    title = "İsim Bulunamadı"
+                # Veri çekme kısmı (Hata toleranslı)
+                title, price, link = "İsim Yok", "Fiyat Yok", ""
 
-                # 2. Link
-                try:
-                    link_el = card.find_element(By.TAG_NAME, "a")
-                    link = link_el.get_attribute("href")
-                except:
-                    link = ""
+                # İsim
+                try: title = card.find_element(By.TAG_NAME, "h3").text.strip()
+                except: 
+                    try: title = card.find_element(By.CSS_SELECTOR, ".name").text.strip()
+                    except: pass
 
-                # 3. Fiyat
-                price = "Fiyat Sepette"
+                # Link
+                try: link = card.find_element(By.TAG_NAME, "a").get_attribute("href")
+                except: pass
+
+                # Fiyat (Karmaşık yapıları çözmek için tüm metne bakıyoruz)
                 try:
-                    card_text = card.text.split('\n')
-                    for line in card_text:
-                        if "TL" in line:
+                    text_content = card.text
+                    # Basit bir filtre: İçinde TL geçen satırı al
+                    lines = text_content.split('\n')
+                    for line in lines:
+                        if "TL" in line or "₺" in line:
                             price = line.strip()
                             break
                 except: pass
-
-                all_products.append([title, price, link])
                 
-            except:
+                if title != "İsim Yok":
+                    all_products.append([title, price, link])
+
+            except Exception as e:
                 continue
         
-        print(f"  -> Toplam Toplanan: {len(all_products)}")
+        print(f"  -> Toplam Toplanan: {len(all_products)}")
         page += 1
 
 except Exception as e:
     print(f"❌ Kritik Hata: {e}")
 
 finally:
-    # Hata olsa da olmasa da tarayıcıyı kapat
     try:
         driver.quit()
         print("🛑 Tarayıcı kapatıldı.")
     except: pass
 
-    # 4. KAYDET (Finally bloğunda, veri varsa kaydeder)
     if all_products:
-        # Dosyayı scriptin olduğu yere kaydeder
         file_path = BASE_DIR / "a101.csv"
-
         try:
             with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
                 writer.writerow(["Ürün Adı", "Fiyat", "Link"])
-                for row in all_products:
-                    writer.writerow(row)
-
-            print(f"\n✅ İŞLEM TAMAMLANDI!")
-            print(f"📂 Toplam {len(all_products)} ürün kaydedildi.")
+                writer.writerows(all_products)
+            print(f"\n✅ BAŞARILI! {len(all_products)} ürün kaydedildi.")
             print(f"📄 Dosya: {file_path}")
         except Exception as e:
-            print(f"❌ Kayıt hatası: {e}")
+            print(f"❌ Dosya yazma hatası: {e}")
     else:
-        print("\n⚠️ Hiçbir ürün bulunamadı, kayıt yapılmadı.")
+        print("\n⚠️ Ürün listesi boş.")

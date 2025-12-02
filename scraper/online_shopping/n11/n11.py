@@ -3,124 +3,152 @@ from selenium.webdriver.common.by import By
 import time
 import csv
 import os
+import random
 from pathlib import Path
 
 # --- DİNAMİK YOL AYARLARI ---
-# Scriptin çalıştığı klasörü tam yol olarak alır
 BASE_DIR = Path(__file__).resolve().parent
 
 # --- AYARLAR ---
 options = uc.ChromeOptions()
-# GitHub Actions ve Sunucu ortamları için kritik ayarlar:
-options.add_argument("--headless") # Arayüzsüz mod
-options.add_argument("--no-sandbox") # Sandbox güvenlik katmanını aşar
-options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
+
+# -----------------------------------------------------------
+# KRİTİK AYARLAR (GitHub Actions & Headless Tespiti Önleme)
+# -----------------------------------------------------------
+# Eski "--headless" yerine bunu kullanın. N11 eski modu hemen yakalar.
+options.add_argument("--headless=new") 
+
+# Gerçek bir Windows kullanıcısı gibi görünmek için User-Agent
+options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36")
+
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--start-maximized")
-options.add_argument("--window-size=1920,1080") # Headless modda kaydırma için ekran boyutu şart
+options.add_argument("--window-size=1920,1080")
 options.add_argument("--disable-notifications")
 options.add_argument("--disable-popup-blocking")
+options.add_argument("--disable-blink-features=AutomationControlled") # Bot bayrağını gizle
 
-print("🚀 N11 Scraper (Headless & Dinamik) Başlatılıyor...")
+print("🚀 N11 Scraper (Gelişmiş Headless) Başlatılıyor...")
+
+# version_main parametresini GitHub Actions'taki Chrome sürümüne göre gerekirse açın
+# driver = uc.Chrome(options=options, version_main=130) 
 driver = uc.Chrome(options=options)
 
 try:
     # 1. HEDEF URL
-    url = "https://www.n11.com/arama?promotions=2015431&gclsrc=aw.ds&gad_source=1&gad_campaignid=23290547517&gbraid=0AAAAADsJcV04XH0JnMioAnkrQxfXTC7RZ&gclid=Cj0KCQiA0KrJBhCOARIsAGIy9wCySQIDVeXPzxHfMY3m3J1baUwBZndSnVmnu-k50NHsMki9jYpyJrIaAmAIEALw_wcB"
-    print("🌐 Siteye gidiliyor...")
+    # Not: Reklam parametrelerini (gclid vs) temizledim, bunlar bot korumasını tetikleyebilir.
+    url = "https://www.n11.com/arama?promotions=2015431"
+    
+    print(f"🌐 Siteye gidiliyor: {url}")
     driver.get(url)
-    time.sleep(5) 
+    
+    # Sayfanın bot kontrolünü geçmesi için ilk bekleme
+    time.sleep(8) 
 
-    # Çerez/Konum kapatma
+    # Çerez/Pop-up kapatma denemeleri
     try: driver.find_element(By.CLASS_NAME, "btnLater").click() 
     except: pass
-    try: driver.find_element(By.XPATH, "//span[contains(text(), 'Kabul Et')]").click()
+    try: driver.find_element(By.ID, "myLocation-close-info").click()
     except: pass
 
-    # 2. ADIM ADIM KAYDIRMA DÖNGÜSÜ
-    print("⬇️ Satır satır aşağı iniliyor (Lazy Load)...")
-
-    # Başlangıç pozisyonu
-    current_position = 0
-    # Bir satır ürün yaklaşık 400-500 pikseldir
-    scroll_step = 400 
+    # 2. SCROLL (KAYDIRMA) İŞLEMİ
+    print("⬇️ Sayfa aşağı kaydırılıyor...")
     
-    while True:
-        # Sayfanın mevcut toplam uzunluğunu al
-        total_height = driver.execute_script("return document.body.scrollHeight")
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    scroll_count = 0
+    max_scrolls = 30 # Sonsuz döngüden kaçınmak için güvenlik limiti
+    
+    while scroll_count < max_scrolls:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(random.uniform(2, 4)) # İnsan gibi rastgele bekleme
         
-        # Eğer mevcut pozisyonumuz toplam uzunluğa geldiyse veya geçtiyse dur
-        if current_position > total_height:
-            print("  ✅ Sayfa sonuna gelindi.")
-            break
-        
-        # Kaydırma İşlemi
-        driver.execute_script(f"window.scrollTo(0, {current_position});")
-        current_position += scroll_step
-        
-        # BEKLEME (Headless modda bazen biraz daha uzun beklemek gerekebilir)
-        time.sleep(2) 
-        
-        # Kullanıcıyı bilgilendir (Her 2000px'de bir yazdıralım ki log dolmasın)
-        if current_position % 2000 == 0:
-            print(f"  Konum: {current_position}px...")
-
-        # --- SAYFA SONU KONTROLÜ ---
-        if (total_height - current_position) < 800:
-            # Sona yaklaştık, yeni ürünlerin yüklenmesi için biraz daha uzun bekle
-            time.sleep(4)
-            # Yükseklik güncellendi mi kontrol et
-            new_total_height = driver.execute_script("return document.body.scrollHeight")
-            if new_total_height == total_height:
-                print("  ⏹️ Daha fazla içerik yüklenmiyor. İşlem bitti.")
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            # Belki sayfa takılmıştır, biraz yukarı çıkıp tekrar inelim
+            driver.execute_script("window.scrollBy(0, -500);")
+            time.sleep(1)
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
+            new_height_check = driver.execute_script("return document.body.scrollHeight")
+            if new_height_check == last_height:
+                print(" ⏹️ Sayfa sonuna gelindi.")
                 break
+        
+        last_height = new_height
+        scroll_count += 1
+        if scroll_count % 5 == 0:
+            print(f"  -> Kaydırma {scroll_count} kez yapıldı...")
 
-    # 3. TÜM VERİLERİ TOPLA
-    print("\n📦 Tarama bitti, ekrandaki tüm ürünler çekiliyor...")
+    # 3. VERİLERİ ÇEKME
+    print("\n📦 Ürünler analiz ediliyor...")
+    
+    # N11 için alternatif seçiciler (Biri çalışmazsa diğeri devreye girer)
     products = driver.find_elements(By.CSS_SELECTOR, "li.column")
+    if len(products) == 0:
+        products = driver.find_elements(By.CSS_SELECTOR, ".product-item")
+    if len(products) == 0:
+        products = driver.find_elements(By.CSS_SELECTOR, ".pro")
+
+    print(f"  -> Toplam {len(products)} adet kutu bulundu.")
+
+    # --- HATA AYIKLAMA (DEBUG) ---
+    # Eğer 0 ürün bulursa ne gördüğünün fotoğrafını çeker
+    if len(products) == 0:
+        screenshot_path = BASE_DIR / "hata_goruntusu.png"
+        driver.save_screenshot(str(screenshot_path))
+        print(f"⚠️ HATA: Hiç ürün bulunamadı. Sayfanın ne gördüğü şuraya kaydedildi: {screenshot_path}")
+        print("💡 İPUCU: Ekran görüntüsünde 'Captcha' veya boş sayfa varsa IP banlanmış olabilir.")
+
     all_products = []
-
-    print(f"  -> Toplam {len(products)} adet ürün bulundu.")
-
+    
     for p in products:
         try:
-            try: title = p.find_element(By.CLASS_NAME, "productName").text.strip()
-            except: continue 
+            # Başlık
+            title = ""
+            try: title = p.find_element(By.CSS_SELECTOR, ".productName").text.strip()
+            except: 
+                try: title = p.find_element(By.TAG_NAME, "h3").text.strip()
+                except: continue
 
-            try: price = p.find_element(By.CLASS_NAME, "newPrice").text.strip().replace("\n", "")
-            except: price = "Fiyat Yok"
+            # Fiyat
+            price = "Fiyat Yok"
+            try: 
+                # İndirimli fiyat öncelikli
+                price = p.find_element(By.CSS_SELECTOR, "ins").text.strip().replace("\n", "")
+            except: 
+                try: price = p.find_element(By.CSS_SELECTOR, ".newPrice").text.strip()
+                except: pass
 
+            # Link
+            link = ""
             try: link = p.find_element(By.TAG_NAME, "a").get_attribute("href")
-            except: link = ""
+            except: pass
 
-            all_products.append([title, price, link])
+            if title: # Boş satırları ekleme
+                all_products.append([title, price, link])
         except: continue
 
 except Exception as e:
     print(f"❌ Kritik Hata: {e}")
 
 finally:
-    # Tarayıcıyı kapat
     try:
         driver.quit()
         print("🛑 Tarayıcı kapatıldı.")
     except: pass
 
-    # 4. KAYDET
+    # 4. CSV KAYDI
     if all_products:
-        # Dosyayı scriptin olduğu yere kaydeder
-        file_path = BASE_DIR / "n11.csv"
-        
+        file_path = BASE_DIR / "n11_sonuc.csv"
         try:
             with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
                 writer.writerow(["Ürün Adı", "Fiyat", "Link"])
-                for row in all_products:
-                    writer.writerow(row)
-
-            print(f"\n✅ İŞLEM TAMAMLANDI!")
-            print(f"📂 Toplam {len(all_products)} ürün kaydedildi.")
+                writer.writerows(all_products)
+            print(f"\n✅ BAŞARILI! {len(all_products)} ürün kaydedildi.")
             print(f"📄 Dosya: {file_path}")
         except Exception as e:
             print(f"❌ Dosya yazma hatası: {e}")
     else:
-        print("\n⚠️ Hiçbir ürün bulunamadı.")
+        print("\n⚠️ Veri çekilemediği için dosya oluşturulmadı.")
