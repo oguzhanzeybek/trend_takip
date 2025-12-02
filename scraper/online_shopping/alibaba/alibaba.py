@@ -13,7 +13,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 
 # --- AYARLAR ---
-MAX_WORKERS = 3 
+MAX_WORKERS = 1
 # Dosyaları scriptin olduğu yere kaydeder
 SAVE_PATH = BASE_DIR
 
@@ -172,7 +172,7 @@ if __name__ == "__main__":
                 futures.append(executor.submit(process_batch, chunk, i+1))
         
         for future in concurrent.futures.as_completed(futures):
-            try:
+            try:    
                 data = future.result()
                 all_final_data.extend(data)
             except Exception as e:
