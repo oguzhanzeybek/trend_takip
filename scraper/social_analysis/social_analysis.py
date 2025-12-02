@@ -88,59 +88,59 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
     column_names = ", ".join(df_columns) 
     current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
-    # ROL TANIMI VE TALİMATLAR, DETAY VE UZATMA ODAKLI GÜÇLENDİRİLDİ
-    role = "**Türkiye'nin en üst düzey Sosyal Medya ve Toplumsal Nabız Baş Analisti'sin. Hazırladığın rapor, siyaset ve iş dünyası için kritik bir 'Sosyal Zeka Raporu'dur. Her bir konuyu en az 4-5 cümle ile detaylandır.**"
+    # ROL TANIMI: ARTIK "GENEL UZMAN" DEĞİL, "VERİ DEDEKTİFİ"
+    role = "**Sen Türkiye'nin en obsesif Veri Madencisi ve Sosyal Medya Dedektifisin. Senin işin genellemeler yapmak değil, önüne gelen veri parçasındaki (batch) benzersiz ve spesifik parmak izlerini bulmaktır. Asla varsayımlarla konuşmazsın, sadece kanıtla konuşursun.**"
     
     if is_final_analysis:
-        # FİNAL ANALİZ PROMPT'u: ÇOK DETAYLI, UZUN VE GEREKÇELİ ANALİZ TALEP EDİLİYOR
-        prompt_goal = "Görevin, sağlanan TÜM ara analiz özetlerini okuyarak, halkın güncel duygu durumunu, temel eğilimlerini, beklentilerini ve **geleceğe yönelik tahminleri içeren BÜTÜNSEL, GEREKÇELİ ve AZAMİ DETAYDA** bir sosyal zeka raporu hazırlamaktır. **HER ALANI EN UZUN ŞEKİLDE, TÜM ANALİZ EDİLEN VERİLERİ YANSITARAK DOLDUR.**"
+        # FİNAL ANALİZ PROMPT'u
+        prompt_goal = "Görevin, sağlanan TÜM ara analiz özetlerini (batch sonuçlarını) birleştirerek, tekrar eden kalıpları değil, verilerin toplamından çıkan BÜYÜK RESMİ, çelişkileri ve nüansları raporlamaktır. **Ezbere cümleler kurma, analiz edilen binlerce satırın gerçek hikayesini anlat.**"
         data_header = "VERİ (Toplu işlerden gelen ara analiz özetleri):"
         analysis_structure = """
-    1. **Ana Duygu Durumu ve Gerekçesi:** Tüm özetlerde baskın olan nihai duygu nedir? Her bir duygu için 0-100 arası bir güç skoru ver. Bu skorların **nedenini ve toplumsal yansımasını ÇOK DETAYLI** açıkla.
-    2. **Baskın Gündemler ve Kökenleri:** En çok tekrar eden/öne çıkan 3 temel konu ne? Her bir konunun sosyal medya verilerindeki **tetikleyicisini/kökenini, alt başlıklarını ve etki alanlarını** detaylıca açıkla.
-    3. **Harcama Eğilimi ve Etkisi (Makro Analiz):** Genel ruh haline bakarak, harcama eğilimleri hakkında **ÇOK DETAYLI bir çıkarım** yap. Bu eğilimin **tüketici davranışını ve hangi sektörleri nasıl etkileyeceğini** kapsamlıca belirt.
-    4. **Gelecek Tahmini ve Riskler (3 Aylık Perspektif):** Önümüzdeki 3 ay için toplumsal tepki ve eğilimler konusunda 3-4 **somut, gerekçeli ve detaylı tahmin**de bulun. Tahminlerin doğruluk/gerçekleşme **risklerini** ve bu riskleri azaltma/yönetme önerilerini belirt.
-    5. ÇIKTI sadece ve sadece tek bir JSON nesnesi olmalıdır. Lütfen açıklama veya analiz metni YAPMA. SADECE JSON döndür.
+    1. **Ana Duygu Durumu:** Tüm parçalara baktığında halkın gerçek ruh hali nedir? (Sadece 'endişe' deyip geçme; öfke mi, bıkkınlık mı, alaycı bir neşe mi? Detaylandır).
+    2. **Baskın Gündemler:** Verilerde en çok tekrar eden 3 somut olay/konu nedir?
+    3. **Harcama Eğilimi:** İnsanlar neyden şikayet ediyor veya neye para harcıyor? Sektörel bazda (Gıda, Giyim, Teknoloji vb.) çıkarım yap.
+    4. **Gelecek Tahmini:** Bu verilere dayanarak önümüzdeki 3 ayda ne olması muhtemel?
+    5. ÇIKTI sadece ve sadece tek bir JSON nesnesi olmalıdır.
         """
         json_output_template = f"""
     "analiz_tarihi": "{current_time}",
     "analiz_kaynağı": "social_media.csv",
-    "genel_değerlendirme": "Verilere göre halkın anlık durumunu ve genel toplumsal nabzı özetleyen, **minimum 5-7 cümlelik, derinlemesine ve kapsamlı** bir paragraf. Analiz edilen tüm verilerin özeti bu paragrafta yer almalıdır.",
+    "genel_değerlendirme": "Verilerin tamamına dayalı, genellemelerden uzak, çok katmanlı ve derinlemesine bir özet paragraf.",
     "ana_duygular": [
-      {{ "duygu": "Endişe", "skor": 75, "gerekçe": "Endişe skorunun yüksek olmasının ardındaki temel 3-4 gerekçe. Halkın yaşam kalitesine etkileri, ekonomik kaygılar ve belirsizlik algısı bu bölümde ÇOK DETAYLI açıklanmalıdır." }},
-      {{ "duygu": "Neşe/Pozitiflik", "skor": 40, "gerekçe": "Pozitiflik seviyesini belirleyen unsurların kısa açıklaması. Bu duyguların geçici mi kalıcı mı olduğu, hangi sosyal aktivitelerle tetiklendiği ve genel endişeyi nasıl dengelemeye çalıştığı detaylandırılmalıdır." }}
+      {{ "duygu": "Duygu Adı 1", "skor": 0-100, "gerekçe": "Bu duygunun kaynağı olan spesifik olaylar ve veriler." }},
+      {{ "duygu": "Duygu Adı 2", "skor": 0-100, "gerekçe": "Bu duygunun kaynağı olan spesifik olaylar ve veriler." }}
     ],
     "baskin_gundemler": [
-      {{ "konu": "Ekonomi ve Enflasyon", "köken": "Sosyal medyada en çok paylaşılan enflasyon ve hayat pahalılığı ile ilgili somut veriler/tepkiler. Bu konunun alt başlıkları (gıda, kira, akaryakıt) ve siyasi yansımaları kapsamlıca açıklanmalıdır." }}, 
-      {{ "konu": "Sosyal Hayat ve Kaçış", "köken": "Halkın stres yönetimi için yöneldiği kaçış temalı içeriklerin (gezi, dizi, oyun vb.) oranı. Bu kaçışın sosyal ve psikolojik nedenleri ve bu içeriklere olan yüksek talebin ardındaki toplumsal boşluk detaylandırılmalıdır." }},
-      {{ "konu": "Sağlık, Güvenlik ve Kurumsal Güven", "köken": "Pandemi sonrası sağlık endişelerinin kalıcılığı ve güvenlik konularının (özellikle siber/bireysel güvenlik) sosyal medyada artan paylaşımları. Kurumlara olan güvenin bu konularla nasıl ilişkilendiği açıklanmalıdır." }}
+      {{ "konu": "Konu Başlığı 1", "köken": "Bu konuyu tetikleyen sosyal medya içerikleri." }}, 
+      {{ "konu": "Konu Başlığı 2", "köken": "Bu konuyu tetikleyen sosyal medya içerikleri." }}
     ],
     "harcama_egilimi_analizi": {{
-        "egilim": "Halkın harcama davranışındaki ana kaymalar ve bu kaymaların ardındaki psikoloji. Tasarruf eğiliminin hangi gelir gruplarında ve nasıl kendini gösterdiği ÇOK DETAYLI belirtilmelidir.",
-        "sektor_etkisi": "Perakende, HORECA, Teknoloji ve Temel Gıda sektörlerindeki hacim düşüşleri/artışları ve bu durumun nedenleri. Özellikle hangi alt sektörlerin (örn: lüks kahve, ikinci el ürünler) öne çıktığı detaylı analiz edilmelidir."
+        "egilim": "Tüketici davranışındaki net değişim.",
+        "sektor_etkisi": "Etkilenen sektörler ve nedenleri."
     }},
     "gelecek_tahminleri": [
-        {{ "tahmin": "Önümüzdeki 3 ayda X konusundaki toplumsal tepkiler artacaktır.", "risk_seviyesi": "Orta/Yüksek", "neden": "Bu tahmine neden olan temel veri sinyali ve sosyo-ekonomik göstergeler. Bu tahmini destekleyen spesifik sosyal medya trendleri belirtilmelidir." }},
-        {{ "tahmin": "Y sektörüne yönelik ilgi, toplumsal kaçış ihtiyacından dolayı bir miktar ivme kazanacaktır. Ancak, Z faktörü bu ivmeyi sınırlandıracaktır.", "risk_seviyesi": "Düşük/Orta", "neden": "Bu tahmine neden olan temel veri sinyali. Bu durumun hangi demografik gruplarda daha belirgin olduğu detaylandırılmalıdır." }},
-        {{ "tahmin": "Kurumsal ve bireysel güvenlik talepleri sosyal medyada daha fazla gündem olacak ve bu alanda hizmet beklentisi artacaktır.", "risk_seviyesi": "Orta", "neden": "Bu tahmine neden olan temel veri sinyali ve beklentinin kaynağı detaylıca açıklanmalıdır." }}
+        {{ "tahmin": "Tahmin 1", "risk_seviyesi": "Yüksek/Orta/Düşük", "neden": "Dayanak noktası." }},
+        {{ "tahmin": "Tahmin 2", "risk_seviyesi": "Yüksek/Orta/Düşük", "neden": "Dayanak noktası." }}
     ]
         """
     else:
-        # ARA ANALİZ (BATCH) PROMPT'u: Detaylı ve Kapsamlı Gerekçe Odaklı
-        prompt_goal = "Görevin, sağlanan sosyal medya verilerinden yola çıkarak bu küçük veri grubunun (batch) genel duygu durumunu ve eğilimlerini analiz etmektir. **Nihai Bütünsel Analiz için kullanılacak ÇOK DETAYLI ve KAPSAMLI gerekçeli bir ön-özet** üret. Halkın anlık beklentisi, ne istediği ve hangi somut olaylara tepki verdiği her açıdan değerlendirilmelidir."
-        data_header = f"VERİ (Kolon İsimleri hariçtir, yukarıdaki listeye bakınız): {data_chunk}"
+        # ARA ANALİZ (BATCH) PROMPT'u: BURASI ÇOK KRİTİK DEĞİŞTİRİLDİ
+        # Modelin kopya çekmesini engellemek için "örnek içerikleri" kaldırdık.
+        prompt_goal = "Görevin, sana verilen **bu spesifik 50 satırlık veri parçasını** incelemektir. **DİKKAT: Asla önceki bildiklerini veya genel geçer 'ekonomi kötü' ezberlerini kullanma.** Sadece bu metinlerde geçen **ÖZEL İSİMLERİ, MARKALARI, OLAYLARI ve HASHTAG'LERİ** raporla. Eğer metinlerde futbol varsa futbol yaz, dizi varsa dizi yaz. Veri ne diyorsa o.SEN BİR TOPLUM BİLİMCİSİ BİR DAHİSİN , İNSANLIĞIN KURTARICI OLARAK TANRI GIBI KUŞBAKIŞI ANALİZ ET Kİ HALKI ANLAYABİLELİM."
+        data_header = f"VERİ (Bu Batch İçin Ham Metinler): {data_chunk}"
         analysis_structure = """
-    1. **Özet Duygu:** Bu veri parçacığında baskın olan ana duygu nedir? 
-    2. **Duygu Gerekçesi:** Bu duygunun neden baskın olduğunu açıklayan **minimum 3 cümlelik, çok somut ve detaylı bir gerekçe**.
-    3. **Özet Konu:** Bu veri parçacığında en çok konuşulan ana konu nedir? 
-    4. **Konu Gerekçesi:** Bu konunun neden öne çıktığını ve halkın bu konudaki **ana beklentisini** açıklayan **minimum 3 cümlelik, çok somut ve detaylı bir gerekçe**.
+    1. **Özet Duygu:** SADECE BU 50 satırda hissedilen en baskın duygu.
+    2. **Duygu Gerekçesi:** Neden bu duygu? Metinlerin içinden **spesifik örnekler** vererek açıkla. (Örn: 'X kullanıcısı Y olayına kızdığı için' gibi).
+    3. **Özet Konu:** Bu grupta insanlar tam olarak neyden bahsediyor? (Genel 'hayat' deme. 'Zam gelen süt fiyatı' de, 'X dizisindeki karakter' de).
+    4. **Konu Gerekçesi:** Bu konuyu kanıtlayan **anahtar kelimeleri** yaz.
     5. ÇIKTI sadece ve sadece tek bir JSON nesnesi olmalıdır.
         """
+        # Şablondaki örnek değerleri sildim ki model onları kopyalamasın!
         json_output_template = """
-      "ozet_duygu": "Endişe",
-      "duygu_gerekcesi": "Verilerde sürekli olarak ekonomik zorluklar, yüksek enflasyonun bireylerin satın alma gücünü nasıl tükettiği ve fatura ödeme zorlukları gibi somut yaşam zorlukları geçmektedir. Bu, birikim yapamama ve gelecek kaygısı şeklinde kendini gösteriyor.",
-      "ozet_konu": "Hayat Pahalılığı ve Temel İhtiyaçlar",
-      "konu_gerekcesi": "Veri setindeki gönderilerin %70'inden fazlası direkt olarak gıda fiyatları, kira artışları ve akaryakıt zamlarına değinmektedir. Halkın ana beklentisi, temel yaşam maliyetlerinin kontrol altına alınması ve alım gücünün stabilize edilmesidir. Bu konunun öne çıkma nedeni, günlük yaşamı en direkt etkileyen unsur olmasıdır."
+      "ozet_duygu": "BURAYA_BU_VERİDEKİ_BASKIN_DUYGUYU_YAZ ve detaylı acıklama yap",
+      "duygu_gerekcesi": "BURAYA_METİNLERDEN_KANIT_VE_ALINTI_İÇEREN_GEREKÇEYİ_YAZ ve acıklama yap",
+      "ozet_konu": "BURAYA_BU_VERİDEKİ_SPESİFİK_KONUYU_YAZ ve acıklama yap",
+      "konu_gerekcesi": "BURAYA_KONUYU_DESTEKLEYEN_ANAHTAR_KELİMELERİ_YAZ ve acıklama yap"
         """
 
 
@@ -151,9 +151,9 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
     Sen, {role}
     {prompt_goal}
     
-    AMACIN: Bu veriyi okuyarak, toplumu anlayan bir iş zekası üretmektir.
+    AMACIN: Verideki gürültüyü değil, sinyali yakalamaktır.Halkın nabzını tutarak bir toplum bilimci gibi derinlemesine analiz yap.
     
-    GÖREV: Aşağıdaki sosyal medya verilerini **{ 'BÜTÜNSEL' if is_final_analysis else 'ARA' }** olarak analiz et.
+    GÖREV: Aşağıdaki sosyal medya verilerini **{ 'BÜTÜNSEL' if is_final_analysis else 'ARA (BATCH)' }** olarak analiz et.
     Kolon İsimleri (Sırayla): [{column_names}]
     
     {analysis_structure}
@@ -266,7 +266,7 @@ def process_social_media_analysis():
         if batch_analysis:
             # Ara sonuçları listeye ekle (Artık daha detaylı özetler alınıyor)
             summary = (
-                f"Batch {i+1} Özeti: Ana Duygu: {batch_analysis.get('ozet_duygu', 'Bilinmiyor')} "
+                f"Batch {i+1} Özeti: Ana Duygu: {batch_analysis.get('detaylı_hissedilen_duygu', 'Bilinmiyor')} "
                 f"(Gerekçe: {batch_analysis.get('duygu_gerekcesi', 'Yok')}), "
                 f"Ana Konu: {batch_analysis.get('ozet_konu', 'Bilinmiyor')} "
                 f"(Gerekçe: {batch_analysis.get('konu_gerekcesi', 'Yok')})"

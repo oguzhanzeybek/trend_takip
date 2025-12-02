@@ -22,11 +22,12 @@ jobs:
           python-version: '3.11'
           cache: 'pip' # Pip paketlerini önbelleğe alarak sonraki çalışmayı hızlandırır
 
-      # Chrome ve Selenium için gerekli sistem kütüphaneleri
+      # GÜNCELLEME BURADA: Chrome için gerekli modern kütüphaneler eklendi
+      # libgconf-2-4 yerine libgbm1 ve libasound2 kullanıldı.
       - name: Gerekli Sistem Paketlerini Yükle (Xvfb ve Libs)
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libnss3 libgconf-2-4 libfontconfig1 libx11-xcb1
+          sudo apt-get install -y xvfb libnss3 libfontconfig1 libx11-xcb1 libgbm1 libasound2
 
       - name: Kütüphaneleri Yükle
         run: |
@@ -45,8 +46,6 @@ jobs:
           # Ekran varmış gibi davranarak main.py'yi çalıştır
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" python scraper/main.py
 
-      # --- KRİTİK DÜZELTME BURADA ---
-      # Alt klasörlerdeki (debug_carrefour vb.) resimleri bulması için **/*.png kullanıyoruz
       - name: Hata Kayıtlarını ve Ekran Görüntülerini Yükle
         if: always() # Hata alsa bile çalışır
         uses: actions/upload-artifact@v4
