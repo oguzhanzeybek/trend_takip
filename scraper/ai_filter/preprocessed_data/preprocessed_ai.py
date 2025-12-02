@@ -140,15 +140,24 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
     
     except Exception as e:
         err = str(e)
+        
+        # 1. Bakiye kontrolü (Burası güzel, kalsın)
         if "402" in err or "insufficient_quota" in err:
             print("\n❌ HATA: Yetersiz Bakiye! Lütfen OpenRouter'a kredi yükleyin.")
             sys.exit(1)
             
         if retry < 3:
+            # --- DEĞİŞİKLİK BURADA ---
+            # Hatanın ne olduğunu (err) ekrana yazdırıyoruz:
+            print(f"      ⚠️ HATA DETAYI: {err}") 
             print(f"      ⚠️ Geçici Hata. Tekrar deneniyor... ({retry+1})")
             time.sleep(2)
+            
             # Kolon isimlerini tekrar geçerek yeniden dene
             return analyze_paid_fast(data_chunk, category, df_columns, retry + 1)
+        
+        # 3 deneme bitti, hala hata varsa son hatayı gösterip boş dön
+        print(f"❌ 3 deneme başarısız. Son Hata: {err}")
         return []
 
 # --- ANA DÖNGÜ ---
