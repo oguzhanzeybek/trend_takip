@@ -3,7 +3,29 @@ import sys
 import os
 import time
 import datetime
+import json
 from pathlib import Path
+
+
+try:
+    from dotenv import load_dotenv
+    # .env dosyasını zorla yükle
+    env_path = Path(__file__).resolve().parent / ".env"
+    load_dotenv(env_path)
+except ImportError:
+    print("⚠️ dotenv kütüphanesi yüklü değil, ortam değişkenleri sistemden alınacak.")
+# --- EKLENECEK KISIM SONU ---
+
+# --- YENİ EKLEME: Veritabanı Yöneticisi ---
+# Alt scriptler zaten veriyi kaydediyor ama biz sistem raporunu da kaydedelim.
+try:
+    from database_manager import DatabaseManager
+except ImportError:
+    sys.path.append(str(Path(__file__).parent))
+    try:
+        from database_manager import DatabaseManager
+    except ImportError:
+        DatabaseManager = None # Eğer dosya yoksa hata vermesin, geçsin.
 
 # --- AYARLAR ---
 BASE_DIR = Path(__file__).resolve().parent
@@ -15,6 +37,7 @@ LOG_FILE = LOG_DIR / "hata_kayitlari.txt"
 # LİSTELER (Senin listelerin aynı kalıyor)
 # ==============================================================================
 SCRAPER_SCRIPTS = [
+    "test_system.py",
     "online_shopping/alibaba/alibaba.py",
     "online_shopping/amazon/amazon.py",
     "online_shopping/n11/n11.py",
@@ -67,6 +90,10 @@ def run_script(rel_path):
     
     start_time = time.time()
     
+    # --- KRİTİK EKLEME: ENV VARS ---
+    # GitHub Actions'taki Secret'ların alt scriptlere geçmesi için ortam değişkenlerini kopyalıyoruz.
+    current_env = os.environ.copy()
+
     # Popen kullanarak işlemi başlatıyoruz, bu sayede çıktıları anlık okuyabiliriz
     try:
         process = subprocess.Popen(
@@ -76,7 +103,8 @@ def run_script(rel_path):
             stderr=subprocess.PIPE, # Hataları yakala (Loglamak için)
             text=True,              # String olarak işle
             encoding='utf-8',       # Türkçe karakter sorunu olmasın
-            errors='replace'        # Okunamayan karakter olursa patlamasın
+            errors='replace',        # Okunamayan karakter olursa patlamasın
+            env=current_env         # <-- GITHUB ACTIONS İÇİN GEREKLİ
         )
 
         # İşlemin bitmesini bekle
@@ -111,11 +139,55 @@ def run_script(rel_path):
         print(f"🔻 Detay: {str(e)}")
         log_error(script_path.name, str(e))
 
+# --- YENİ FONKSİYON: Sistem Raporunu Kaydet ---
+def save_system_report(start_time):
+    """Sistem çalışması bitince veritabanına bir özet log atar."""
+    if DatabaseManager is None:
+        return
+
+    end_time = time.time()
+    duration = end_time - start_time
+    
+    # Log dosyasını oku
+    error_content = ""
+    if LOG_FILE.exists():
+        with open(LOG_FILE, "r", encoding="utf-8") as f:
+            error_content = f.read()[-2000:] # Son 2000 karakteri al (Çok uzun olmasın)
+
+    status = "Başarılı" if not error_content else "Hatalı Tamamlandı"
+    
+    report_data = [{
+        "title": f"Sistem Çalışma Raporu - {datetime.datetime.now().strftime('%Y-%m-%d')}",
+        "price": f"{duration:.2f} sn",
+        "link": "Github Actions Log",
+        "category": "SYSTEM_LOG",
+        "ai_analysis": {
+            "status": status,
+            "errors": error_content,
+            "timestamp": datetime.datetime.now().isoformat()
+        }
+    }]
+    
+    try:
+        print("\n📝 Sistem raporu Supabase'e gönderiliyor...")
+        db = DatabaseManager()
+        db.insert_data("SYSTEM", report_data)
+    except Exception as e:
+        print(f"Rapor gönderme hatası: {e}")
+
 def main():
+    global_start = time.time()
+    
     print("\n**************************************************")
     print(" 🛠️  TREND TAKİP OTOMASYONU - BAŞLATILIYOR")
     print("**************************************************")
     
+    # Veritabanı Kontrolü (Başlangıçta)
+    if DatabaseManager:
+        print("✅ DatabaseManager yüklendi, raporlama aktif.")
+    else:
+        print("⚠️ DatabaseManager bulunamadı, sadece yerel log tutulacak.")
+
     # --- 1. Veri Toplama ---
     print("\n┌──────────────────────────────┐")
     print("│ [1/3] VERİ TOPLAMA AŞAMASI   │")
@@ -124,7 +196,7 @@ def main():
         run_script(script)
         # Sistem nefes alsın diye 1 sn bekleme
         time.sleep(1)
-  
+   
     # --- 2. Veri Birleştirme ---
     print("\n┌───────────────────────────────────┐")
     print("│ [2/3] VERİ BİRLEŞTİRME (MERGE)    │")
@@ -137,6 +209,9 @@ def main():
     print("└───────────────────────────────────┘")
     for script in AI_SCRIPTS:
         run_script(script)
+
+    # --- SON: Raporlama ---
+    save_system_report(global_start)
 
     print("\n🎉 TÜM İŞLEMLER SONA ERDİ!")
     if LOG_FILE.exists():

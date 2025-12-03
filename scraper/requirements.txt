@@ -8,3 +8,7 @@ undetected-chromedriver
 setuptools
 requests
 beautifulsoup4
+selenium
+undetected-chromedriver
+pandas
+supabase
