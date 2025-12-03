@@ -1,43 +1,62 @@
 import os
-from supabase import create_client, Client
-import json
+import sys
+from supabase import create_client
+from dotenv import load_dotenv
+from pathlib import Path
 
 class DatabaseManager:
     def __init__(self):
-        # GitHub Secrets'tan okuyacak
-        url: str = os.environ.get("SUPABASE_URL")
-        key: str = os.environ.get("SUPABASE_KEY")
+        # .env yükleme
+        self.base_dir = Path(__file__).resolve().parent
+        env_path = self.base_dir / ".env"
+        if env_path.exists():
+            load_dotenv(dotenv_path=env_path, override=True)
         
-        if not url or not key:
-            print("⚠️ Supabase anahtarları yok! DB modu pasif.")
-            self.supabase = None
+        self.url = os.getenv("SUPABASE_URL")
+        self.key = os.getenv("SUPABASE_KEY")
+
+        if not self.url or not self.key:
+            print("❌ HATA: SUPABASE_URL veya SUPABASE_KEY bulunamadı!")
+            self.client = None
         else:
-            self.supabase: Client = create_client(url, key)
+            try:
+                self.client = create_client(self.url, self.key)
+            except Exception as e:
+                print(f"❌ Supabase Bağlantı Hatası: {e}")
+                self.client = None
 
-    def insert_data(self, source, data_list):
+    def insert_data(self, table_name, data):
         """
-        source: 'N11', 'Amazon', 'Twitter' vb.
-        data_list: İçinde title, price, link, ai_data olan sözlük listesi
+        Verilen tabloya veri ekler.
+        table_name: Yazılacak tablo adı (örn: 'processed_data')
+        data: Eklenecek veri (dict veya list of dict)
         """
-        if not self.supabase:
-            return
+        if not self.client:
+            print("⚠️ Client başlatılamadığı için veri yazılamadı.")
+            return None
 
-        formatted_data = []
-        for item in data_list:
-            # Veriyi Supabase tablosuna uygun formata çeviriyoruz
-            formatted_data.append({
-                "source": source,
-                "title": item.get("title", ""),
-                "price": item.get("price", ""),
-                "link": item.get("link", ""),
-                "category": item.get("category", "Genel"),
-                # AI verisi varsa ekle, yoksa boş JSON {}
-                "ai_data": item.get("ai_analysis", {}) 
-            })
+        # Veri boşsa işlem yapma
+        if not data:
+            return None
+        
+        # Tekil veri geldiyse listeye çevir (Supabase liste sever)
+        if isinstance(data, dict):
+            data = [data]
 
         try:
-            # daily_trends tablosuna toplu ekleme
-            self.supabase.table("daily_trends").insert(formatted_data).execute()
-            print(f"✅ SUPABASE: {len(formatted_data)} adet veri '{source}' kaynağından yüklendi.")
+            # DİKKAT: Burada hardcoded 'daily_trends' YOK. 
+            # Parametre olarak gelen table_name kullanılıyor.
+            response = self.client.table(table_name).insert(data).execute()
+            
+            # Supabase-py kütüphanesinin bazı versiyonlarında hata fırlatılmaz,
+            # response içinde error dönerse kontrol edelim:
+            if hasattr(response, 'error') and response.error:
+                 raise Exception(f"Supabase API Hatası: {response.error}")
+
+            return response
+            
         except Exception as e:
-            print(f"❌ SUPABASE HATASI: {e}")
+            # Hatayı burada yakalayıp ekrana basıyoruz ama çağıran dosya 
+            # 'başarılı' sanmasın diye hatayı yukarı fırlatıyoruz (raise).
+            print(f"❌ SUPABASE HATASI ({table_name}): {e}")
+            raise e

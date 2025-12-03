@@ -6,41 +6,47 @@ import datetime
 import json
 from pathlib import Path
 
+# --- 1. ORTAM DEĞİŞKENLERİ VE AYARLAR ---
+BASE_DIR = Path(__file__).resolve().parent
 
-
-if not os.getenv("OPENROUTER_API_KEY") and os.getenv("OPENROUTER_KEY"):
-    os.environ["OPENROUTER_API_KEY"] = os.getenv("OPENROUTER_KEY")
-
-
+# .env Dosyasını Yükleme (Lokal Çalışma İçin)
 try:
     from dotenv import load_dotenv
-    # .env dosyasını zorla yükle
-    env_path = Path(__file__).resolve().parent / ".env"
-    load_dotenv(env_path)
+    ENV_PATH = BASE_DIR / ".env"
+    if ENV_PATH.exists():
+        # Override=True ile .env'deki değişikliği anında algılamasını sağlarız
+        load_dotenv(dotenv_path=ENV_PATH, override=True)
 except ImportError:
-    print("⚠️ dotenv kütüphanesi yüklü değil, ortam değişkenleri sistemden alınacak.")
-# --- EKLENECEK KISIM SONU ---
+    print("⚠️ dotenv kütüphanesi yüklü değil, sistem değişkenleri kullanılacak.")
 
-# --- YENİ EKLEME: Veritabanı Yöneticisi ---
-# Alt scriptler zaten veriyi kaydediyor ama biz sistem raporunu da kaydedelim.
+# GITHUB ACTIONS ANAHTAR UYUMU
+if not os.getenv("OPENROUTER_API_KEY") and os.getenv("OPENROUTER_KEY"):
+    os.environ["OPENROUTER_API_KEY"] = os.getenv("OPENROUTER_KEY")
+    print("✅ Github Secret Eşleşmesi Sağlandı: OPENROUTER_KEY -> OPENROUTER_API_KEY")
+
+# --- 2. MODÜLLERİN YÜKLENMESİ ---
+
+# Veritabanı Yöneticisi
 try:
+    sys.path.append(str(BASE_DIR))
     from database_manager import DatabaseManager
 except ImportError:
-    sys.path.append(str(Path(__file__).parent))
-    try:
-        from database_manager import DatabaseManager
-    except ImportError:
-        DatabaseManager = None # Eğer dosya yoksa hata vermesin, geçsin.
+    print("⚠️ DatabaseManager modülü yüklenemedi. Raporlama devre dışı.")
+    DatabaseManager = None
 
-# --- AYARLAR ---
-BASE_DIR = Path(__file__).resolve().parent
+# CSV Yükleyici
+try:
+    from upload_csvs import upload_files
+except ImportError:
+    print("⚠️ upload_csvs.py bulunamadı. CSV yükleme adımı çalışmayacak.")
+    upload_files = None
+
+# --- 3. SABİTLER VE LİSTELER ---
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / "hata_kayitlari.txt"
 
-# ==============================================================================
-# LİSTELER (Senin listelerin aynı kalıyor)
-# ==============================================================================
+# Çalıştırılacak Scriptler
 SCRAPER_SCRIPTS = [
     "test_system.py",
     "online_shopping/alibaba/alibaba.py",
@@ -64,13 +70,14 @@ AI_SCRIPTS = [
     "social_analysis/social_analysis.py"
 ]
 
+# --- 4. YARDIMCI FONKSİYONLAR ---
+
 def log_error(script_name, error_msg):
     """Hataları dosyaya kaydeder."""
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     separator = "-" * 50
     log_entry = f"\n{separator}\n[{timestamp}] ❌ HATA - {script_name}\n{separator}\n{error_msg}\n{separator}\n"
     
-    # Hata oluştuğunda ekrana kırmızımsı bir uyarı bas (ANSI renk kodları destekleniyorsa)
     print(f"\n⚠️  HATA DETAYI LOGLANDI: {LOG_FILE}")
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(log_entry)
@@ -78,7 +85,6 @@ def log_error(script_name, error_msg):
 def run_script(rel_path):
     """
     Scripti çalıştırır ve çıktıları ANLIK (CANLI) olarak ekrana basar.
-    Hata olursa stderr'i yakalayıp loglar.
     """
     script_path = BASE_DIR / rel_path
     
@@ -94,26 +100,20 @@ def run_script(rel_path):
     print("-" * 60)
     
     start_time = time.time()
-    
-    # --- KRİTİK EKLEME: ENV VARS ---
-    # GitHub Actions'taki Secret'ların alt scriptlere geçmesi için ortam değişkenlerini kopyalıyoruz.
     current_env = os.environ.copy()
 
-    # Popen kullanarak işlemi başlatıyoruz, bu sayede çıktıları anlık okuyabiliriz
     try:
         process = subprocess.Popen(
             [sys.executable, str(script_path)],
             cwd=script_path.parent,
-            stdout=sys.stdout,      # Çıktıyı direkt ana konsola ver (Canlı izleme için)
-            stderr=subprocess.PIPE, # Hataları yakala (Loglamak için)
-            text=True,              # String olarak işle
-            encoding='utf-8',       # Türkçe karakter sorunu olmasın
-            errors='replace',        # Okunamayan karakter olursa patlamasın
-            env=current_env         # <-- GITHUB ACTIONS İÇİN GEREKLİ
+            stdout=sys.stdout,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding='utf-8',
+            errors='replace',
+            env=current_env          
         )
 
-        # İşlemin bitmesini bekle
-        # stdout zaten sys.stdout'a bağlı olduğu için printler anında ekrana düşecek.
         stdout, stderr = process.communicate()
 
         if process.returncode == 0:
@@ -122,63 +122,71 @@ def run_script(rel_path):
             print(f"✅ TAMAMLANDI: {script_path.name} | Süre: {elapsed:.2f} sn")
             print("=" * 60 + "\n")
         else:
-            # Hata durumu (Exit code != 0)
             raise subprocess.CalledProcessError(process.returncode, script_path.name, output=stdout, stderr=stderr)
 
     except subprocess.CalledProcessError as e:
         print(f"\n❌ İŞLEM BAŞARISIZ: {script_path.name}")
+        error_details = f"Çıkış Kodu: {e.returncode}\n"
+        error_details += f"Hata Özeti: {e.stderr.strip().splitlines()[-1] if e.stderr else 'Yok'}"
         
-        # Hata mesajını oluştur
-        error_details = f"Çıkış Kodu (Exit Code): {e.returncode}\n\n"
-        error_details += "--- HATA DETAYI (STDERR) ---\n"
-        error_details += e.stderr if e.stderr else "Hata çıktısı yakalanamadı."
-        
-        # Ekrana hatanın son satırını bas (kullanıcı görsün)
         if e.stderr:
-            print(f"🔻 Hata Özeti: {e.stderr.strip().splitlines()[-1]}")
+            print(f"🔻 {e.stderr.strip().splitlines()[-1]}")
         
-        log_error(script_path.name, error_details)
+        log_error(script_path.name, e.stderr if e.stderr else error_details)
         
     except Exception as e:
         print(f"\n❌ KRİTİK SİSTEM HATASI: {script_path.name}")
         print(f"🔻 Detay: {str(e)}")
         log_error(script_path.name, str(e))
 
-# --- YENİ FONKSİYON: Sistem Raporunu Kaydet ---
 def save_system_report(start_time):
-    """Sistem çalışması bitince veritabanına bir özet log atar."""
+    """Sistem çalışması bitince YENİ veritabanı yapısına uygun log atar."""
     if DatabaseManager is None:
         return
 
     end_time = time.time()
     duration = end_time - start_time
     
-    # Log dosyasını oku
+    # Log dosyasını oku (Son hatalar)
     error_content = ""
     if LOG_FILE.exists():
-        with open(LOG_FILE, "r", encoding="utf-8") as f:
-            error_content = f.read()[-2000:] # Son 2000 karakteri al (Çok uzun olmasın)
+        try:
+            with open(LOG_FILE, "r", encoding="utf-8") as f:
+                content = f.read()
+                error_content = content[-2000:] if content else ""
+        except: pass
 
-    status = "Başarılı" if not error_content else "Hatalı Tamamlandı"
+    status = "SUCCESS" if not error_content else "COMPLETED_WITH_ERRORS"
     
-    report_data = [{
-        "title": f"Sistem Çalışma Raporu - {datetime.datetime.now().strftime('%Y-%m-%d')}",
-        "price": f"{duration:.2f} sn",
-        "link": "Github Actions Log",
+    # --- VERİTABANI GÜNCELLEMESİ BURADA YAPILDI ---
+    # Yeni yapı: category, data_type, source, content (JSONB)
+    report_payload = {
         "category": "SYSTEM_LOG",
-        "ai_analysis": {
+        "data_type": "AUTO_REPORT",
+        "source": "main.py",  # Yeni standartta 'source_file' yerine 'source' kullanıyoruz
+        "content": {
+            "title": f"Sistem Çalışma Raporu - {datetime.datetime.now().strftime('%Y-%m-%d')}",
+            "duration_seconds": round(duration, 2),
             "status": status,
-            "errors": error_content,
-            "timestamp": datetime.datetime.now().isoformat()
+            "error_log_snippet": error_content,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "environment": "GitHub Actions" if os.getenv("GITHUB_ACTIONS") else "Local Environment"
         }
-    }]
+    }
     
     try:
-        print("\n📝 Sistem raporu Supabase'e gönderiliyor...")
+        print("\n📝 Sistem raporu veritabanına gönderiliyor...")
         db = DatabaseManager()
-        db.insert_data("SYSTEM", report_data)
+        
+        # HEDEF TABLO GÜNCELLENDİ: 'daily_trends' yerine 'processed_data'
+        # Eğer 'logs' adında ayrı bir tablonuz varsa burayı "logs" olarak değiştirebilirsiniz.
+        db.insert_data("processed_data", [report_payload]) 
+        
+        print("✅ Rapor başarıyla processed_data tablosuna kaydedildi.")
     except Exception as e:
-        print(f"Rapor gönderme hatası: {e}")
+        print(f"⚠️ Rapor gönderme hatası: {e}")
+
+# --- 5. ANA FONKSİYON ---
 
 def main():
     global_start = time.time()
@@ -187,33 +195,40 @@ def main():
     print(" 🛠️  TREND TAKİP OTOMASYONU - BAŞLATILIYOR")
     print("**************************************************")
     
-    # Veritabanı Kontrolü (Başlangıçta)
     if DatabaseManager:
-        print("✅ DatabaseManager yüklendi, raporlama aktif.")
+        print("✅ DatabaseManager aktif.")
     else:
-        print("⚠️ DatabaseManager bulunamadı, sadece yerel log tutulacak.")
+        print("⚠️ DatabaseManager pasif (Sadece log tutulacak).")
 
     # --- 1. Veri Toplama ---
     print("\n┌──────────────────────────────┐")
-    print("│ [1/3] VERİ TOPLAMA AŞAMASI   │")
+    print("│ [1/4] VERİ TOPLAMA AŞAMASI   │")
     print("└──────────────────────────────┘")
     for script in SCRAPER_SCRIPTS:
         run_script(script)
-        # Sistem nefes alsın diye 1 sn bekleme
         time.sleep(1)
-   
+    
     # --- 2. Veri Birleştirme ---
     print("\n┌───────────────────────────────────┐")
-    print("│ [2/3] VERİ BİRLEŞTİRME (MERGE)    │")
+    print("│ [2/4] VERİ BİRLEŞTİRME (MERGE)    │")
     print("└───────────────────────────────────┘")
     run_script(MERGER_SCRIPT)
 
     # --- 3. AI Analiz ---
     print("\n┌───────────────────────────────────┐")
-    print("│ [3/3] AI ANALİZ VE FİNAL KAYIT    │")
+    print("│ [3/4] AI ANALİZ VE FİNAL KAYIT    │")
     print("└───────────────────────────────────┘")
     for script in AI_SCRIPTS:
         run_script(script)
+
+    # --- 4. CSV Yükleme (FİNAL ADIM) ---
+    print("\n┌───────────────────────────────────┐")
+    print("│ [4/4] CSV DOSYALARI YÜKLENİYOR    │")
+    print("└───────────────────────────────────┘")
+    if upload_files:
+        upload_files()
+    else:
+        print("⚠️ Yükleme modülü bulunamadığı için bu adım atlandı.")
 
     # --- SON: Raporlama ---
     save_system_report(global_start)
