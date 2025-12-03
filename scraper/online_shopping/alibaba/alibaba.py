@@ -1,48 +1,41 @@
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
+import sys
 import time
 import csv
-import os
 import random
 import concurrent.futures
 import threading
 from pathlib import Path
+from selenium.webdriver.common.by import By
 
-# --- DİNAMİK YOL AYARLARI ---
-BASE_DIR = Path(__file__).resolve().parent
-SAVE_PATH = BASE_DIR
+# --- 1. YOL AYARLARI ---
+# Dosya Konumu: scraper/online_shopping/alibaba/alibaba.py
+CURRENT_DIR = Path(__file__).resolve().parent
+# Scraper kök dizinine çık (alibaba -> online_shopping -> scraper)
+# DÜZELTME: 3 tane parent fazla geliyor, 2 tane yeterli.
+ROOT_DIR = CURRENT_DIR.parent.parent
+
+# Kök dizini sisteme ekle
+sys.path.append(str(ROOT_DIR))
+
+# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
+try:
+    from core.driver_manager import get_chrome_driver
+except ImportError:
+    # Eğer yukarıdaki yol çalışmazsa (IDE vs. farklı çalıştırırsa) bir üstü dene
+    # Ama normalde yukarıdaki ROOT_DIR doğru olmalı.
+    sys.path.append(str(ROOT_DIR.parent))
+    try:
+        from scraper.core.driver_manager import get_chrome_driver
+    except ImportError:
+        # Son çare manuel import denemesi
+        print("⚠️ Core modülü bulunamadı, yol ayarlarını kontrol edin.")
+        raise
 
 # --- AYARLAR ---
-MAX_WORKERS = 1 # UC ile çoklu işlem risklidir, 1'de kalması en sağlıklısı
-driver_init_lock = threading.Lock()
-
-def get_driver():
-    """
-    GitHub Actions ve Linux sunucular için optimize edilmiş driver ayarları.
-    """
-    options = uc.ChromeOptions()
-    
-    # --- KRİTİK SUNUCU AYARLARI ---
-    options.add_argument("--headless=new") # Yeni nesil headless mod
-    options.add_argument("--no-sandbox") # Root yetkisiyle çalışan runner'lar için şart
-    options.add_argument("--disable-dev-shm-usage") # Bellek çökmesini önler
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1920,1080")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-popup-blocking")
-    options.add_argument("--blink-settings=imagesEnabled=false") # Resimleri kapat
-    options.add_argument("--lang=tr-TR")
-
-    # --- DRIVER BAŞLATMA ---
-    # use_subprocess=False ve headless=True sunucu için çok önemlidir.
-    driver = uc.Chrome(
-        options=options,
-        headless=True, # Kütüphanenin kendi headless modu
-        use_subprocess=False, # GitHub Actions'ta kilitlenmeyi önler
-        version_main=None # Otomatik en son sürümü bulur
-    )
-    
-    return driver
+BASE_DIR = CURRENT_DIR
+SAVE_PATH = BASE_DIR
+MAX_WORKERS = 3 
+driver_init_lock = threading.Lock() # Thread güvenliği için kilit
 
 # 1. ADIM: KATEGORİ LİNKLERİNİ TOPLA
 def get_all_category_links():
@@ -52,11 +45,11 @@ def get_all_category_links():
     driver = None
     
     try:
-        # Kilidi burada kullanıyoruz
+        # Çakışmayı önlemek için driver açılışını kilitliyoruz
         with driver_init_lock:
-            driver = get_driver()
+            # MERKEZİ SİSTEMDEN DRIVER AL
+            driver = get_chrome_driver()
         
-        # Sayfa yükleme zaman aşımı ayarı (isteğe bağlı ama güvenli)
         driver.set_page_load_timeout(60)
 
         print("🌍 Alibaba Rank sayfasına gidiliyor...")
@@ -100,9 +93,11 @@ def process_batch(category_list, worker_id):
     print(f"⌛ Bot-{worker_id} tarayıcı sırası bekliyor...")
     
     driver = None
+    # Thread güvenliği için driver açarken kilit kullan
     with driver_init_lock:
         try:
-            driver = get_driver()
+            # MERKEZİ SİSTEMDEN DRIVER AL
+            driver = get_chrome_driver()
             print(f"🟢 Bot-{worker_id} tarayıcısı AÇILDI.")
             time.sleep(2)
         except Exception as e:
@@ -176,7 +171,7 @@ if __name__ == "__main__":
     
     if not all_categories:
         print("❌ Hiç kategori bulunamadı, script sonlandırılıyor.")
-        exit()
+        sys.exit()
 
     # 2. İşleri Böl
     chunk_size = len(all_categories) // MAX_WORKERS + 1
@@ -205,8 +200,7 @@ if __name__ == "__main__":
         with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
             writer = csv.writer(file)
             writer.writerow(["Kategori", "Ürün Başlığı", "Fiyat", "Min. Sipariş", "Link"])
-            for row in all_final_data:
-                writer.writerow(row)
+            writer.writerows(all_final_data)
 
         duration = time.time() - start_time
         print(f"\n🎉 ALIBABA SCRAPER TAMAMLANDI!")

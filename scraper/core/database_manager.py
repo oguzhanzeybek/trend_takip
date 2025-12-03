@@ -6,11 +6,21 @@ from pathlib import Path
 
 class DatabaseManager:
     def __init__(self):
-        # .env yükleme
-        self.base_dir = Path(__file__).resolve().parent
+        # --- PATH DÜZELTMESİ ---
+        # __file__      -> .../scraper/core/database_manager.py
+        # .parent       -> .../scraper/core/
+        # .parent.parent -> .../scraper/  (Burada .env dosyasını arıyoruz)
+        self.base_dir = Path(__file__).resolve().parent.parent
         env_path = self.base_dir / ".env"
+        
+        # .env dosyasını yükle
         if env_path.exists():
             load_dotenv(dotenv_path=env_path, override=True)
+            # Opsiyonel: Debug için print açılabilir
+            # print(f"✅ .env yüklendi: {env_path}")
+        else:
+            print(f"⚠️  UYARI: .env dosyası bulunamadı: {env_path}")
+            print("   -> Sistem ortam değişkenleri kullanılacak.")
         
         self.url = os.getenv("SUPABASE_URL")
         self.key = os.getenv("SUPABASE_KEY")
@@ -44,15 +54,13 @@ class DatabaseManager:
             data = [data]
 
         try:
-            # DİKKAT: Burada hardcoded 'daily_trends' YOK. 
-            # Parametre olarak gelen table_name kullanılıyor.
+            # table_name parametresine göre ekleme yapılıyor
             response = self.client.table(table_name).insert(data).execute()
             
-            # Supabase-py kütüphanesinin bazı versiyonlarında hata fırlatılmaz,
-            # response içinde error dönerse kontrol edelim:
-            if hasattr(response, 'error') and response.error:
-                 raise Exception(f"Supabase API Hatası: {response.error}")
-
+            # Hata kontrolü (Versiyon farklarına karşı önlem)
+            # data içinde 'error' dönme ihtimaline karşı:
+            # (Yeni supabase-py versiyonlarında hata varsa exception fırlatır, 
+            # ama eski versiyonlar için response.data kontrolü gerekebilir)
             return response
             
         except Exception as e:

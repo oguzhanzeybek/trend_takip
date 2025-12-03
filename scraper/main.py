@@ -6,66 +6,72 @@ import datetime
 from pathlib import Path
 
 # --- 1. ORTAM DEĞİŞKENLERİ VE AYARLAR ---
+# main.py dosyasının olduğu klasör (scraper/) BASE_DIR olarak kabul edilir.
 BASE_DIR = Path(__file__).resolve().parent
+
+# Yolu sisteme ekle (Şu anki klasörü ve alt klasörleri görsün)
+sys.path.append(str(BASE_DIR))
 
 # .env Dosyasını Yükleme
 try:
     from dotenv import load_dotenv
     ENV_PATH = BASE_DIR / ".env"
     if ENV_PATH.exists():
-        # Override=True ile .env'deki değişikliği anında algılamasını sağlarız
         load_dotenv(dotenv_path=ENV_PATH, override=True)
 except ImportError:
     print("⚠️ dotenv kütüphanesi yüklü değil, sistem değişkenleri kullanılacak.")
+
+# --- DÜZELTİLMİŞ IMPORTLAR ---
+# Klasör yapısı: scraper/core/database_manager.py
+# main.py scraper/ içinde olduğu için direkt core'dan import ediyoruz.
+try:
+    from core.database_manager import DatabaseManager
+except ImportError as e:
+    print(f"⚠️ DatabaseManager yüklenemedi: {e}")
+    DatabaseManager = None
 
 # GITHUB ACTIONS ANAHTAR UYUMU
 if not os.getenv("OPENROUTER_API_KEY") and os.getenv("OPENROUTER_KEY"):
     os.environ["OPENROUTER_API_KEY"] = os.getenv("OPENROUTER_KEY")
     print("✅ Github Secret Eşleşmesi Sağlandı: OPENROUTER_KEY -> OPENROUTER_API_KEY")
 
-# --- 2. MODÜLLERİN KONTROLÜ ---
-# DatabaseManager'ı sadece raporlama için import etmeye çalışıyoruz
-try:
-    sys.path.append(str(BASE_DIR))
-    sys.path.append(str(BASE_DIR / "scraper")) # Scraper klasörünü de ekle
-    from database_manager import DatabaseManager
-except ImportError:
-    print("⚠️ DatabaseManager modülü yüklenemedi. Sistem raporu veritabanına yazılamayacak.")
-    DatabaseManager = None
 
-# --- 3. SABİTLER VE LİSTELER ---
+# --- 2. SABİTLER VE LİSTELER ---
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / "hata_kayitlari.txt"
 
-# NOT: Dosyaların 'scraper/' klasörü altında olduğu varsayılmıştır.
+# DİKKAT: main.py zaten 'scraper/' klasörünün içinde.
+# Bu yüzden dosya yollarının başına 'scraper/' EKLEMİYORUZ.
+# 'scripts/' klasörüne taşınanları da güncelledik.
+
 SCRAPER_SCRIPTS = [
-    "scraper/test_system.py",
-    "scraper/online_shopping/alibaba/alibaba.py",
-    "scraper/online_shopping/amazon/amazon.py",
-    "scraper/online_shopping/n11/n11.py",
-    "scraper/online_shopping/trendyol/trendyol.py",
-    "scraper/Rival/a101/a101.py",
-    "scraper/Rival/CarrefourSA/carrefoursa.py",
-    "scraper/social_media/google_trends/google_trend.py",
-    "scraper/social_media/google_trends/google_trend_168.py",
-    "scraper/social_media/instagram/instagram.py",
-    "scraper/social_media/tiktok/tiktok.py",
-    "scraper/social_media/twitter/twitter_scrapper.py",
-    "scraper/social_media/youtube/youtube_trend.py",
+    "scripts/test_system.py",  # YENİ YERİ: scripts klasörü
+    "online_shopping/alibaba/alibaba.py",
+    "online_shopping/amazon/amazon.py",
+    "online_shopping/n11/n11.py",
+    "online_shopping/trendyol/trendyol.py",
+    "Rival/a101/a101.py",
+    "Rival/CarrefourSA/carrefoursa.py",
+    "social_media/google_trends/google_trend.py",
+    "social_media/google_trends/google_trend_168.py",
+    "social_media/instagram/instagram.py",
+    "social_media/tiktok/tiktok.py",
+    "social_media/twitter/twitter_scrapper.py",
+    "social_media/youtube/youtube_trend.py",
 ]
 
-MERGER_SCRIPT = "scraper/ai_filter/Raw_data/raw.py"
+MERGER_SCRIPT = "ai_filter/Raw_data/raw.py"
 
 AI_SCRIPTS = [
-    "scraper/ai_filter/preprocessed_data/preprocessed_ai.py",
-    "scraper/social_analysis/social_analysis.py"
+    "ai_filter/preprocessed_data/preprocessed_ai.py",
+    "social_analysis/social_analysis.py"
 ]
 
-# YENİ EKLENEN TOPLU YÜKLEME SCRİPTİ
-UPLOAD_SCRIPT = "scraper/upload_all_csvs.py"
+# YENİ YERİ: scripts/upload_all_csvs.py
+UPLOAD_SCRIPT = "scripts/upload_all_csvs.py"
 
-# --- 4. YARDIMCI FONKSİYONLAR ---
+# --- 3. YARDIMCI FONKSİYONLAR ---
 
 def log_error(script_name, error_msg):
     """Hataları dosyaya kaydeder."""
@@ -85,15 +91,10 @@ def run_script(rel_path):
     
     # Dosya yolu kontrolü
     if not script_path.exists():
-        # Belki 'scraper/' ön eki olmadan denenmeli?
-        alt_path = BASE_DIR / rel_path.replace("scraper/", "")
-        if alt_path.exists():
-            script_path = alt_path
-        else:
-            msg = f"Dosya bulunamadı: {rel_path}"
-            print(f"⚠️  {msg} (Atlanıyor...)")
-            log_error(rel_path, msg)
-            return
+        msg = f"Dosya bulunamadı: {script_path}"
+        print(f"⚠️  {msg} (Atlanıyor...)")
+        log_error(rel_path, msg)
+        return
 
     print(f"\n" + "="*60)
     print(f"🚀 BAŞLATILIYOR: {script_path.name}")
@@ -103,29 +104,29 @@ def run_script(rel_path):
     start_time = time.time()
     current_env = os.environ.copy()
 
-    # Python yolu ayarları (Modül import hatalarını önlemek için)
+    # Python yolu ayarları: Core modüllerin bulunabilmesi için kök dizini ekle
     python_path = current_env.get("PYTHONPATH", "")
-    current_env["PYTHONPATH"] = f"{BASE_DIR}{os.pathsep}{BASE_DIR}/scraper{os.pathsep}{python_path}"
+    current_env["PYTHONPATH"] = f"{BASE_DIR}{os.pathsep}{python_path}"
 
     try:
-        # Popen ile işlemi başlatıyoruz (stdout=PIPE ile çıktıyı yakalıyoruz)
+        # Popen ile işlemi başlatıyoruz
         process = subprocess.Popen(
             [sys.executable, str(script_path)],
-            cwd=script_path.parent,
+            cwd=script_path.parent,  # Scripti kendi klasöründe çalıştır
             stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT, # Hataları da aynı kanaldan al
+            stderr=subprocess.STDOUT,
             text=True,
             encoding='utf-8',
             errors='replace',
             env=current_env,
-            bufsize=1 # Satır satır bufferla
+            bufsize=1
         )
 
-        # Çıktıyı CANLI olarak okuyup ekrana basma döngüsü
+        # Çıktıyı CANLI olarak okuyup ekrana basma
         for line in process.stdout:
-            print(line, end='') # line zaten \n içerir
+            print(line, end='')
 
-        process.wait() # İşlem bitene kadar bekle
+        process.wait()
 
         if process.returncode == 0:
             elapsed = time.time() - start_time
@@ -149,14 +150,11 @@ def save_system_report(start_time):
     end_time = time.time()
     duration = end_time - start_time
     
-    # Hata var mı kontrol et
     error_content = ""
     if LOG_FILE.exists():
         try:
             with open(LOG_FILE, "r", encoding="utf-8") as f:
                 content = f.read()
-                # Eğer son çalıştırmadan kalma taze hata varsa al
-                # Basit kontrol: Dosya boş değilse hata vardır kabul ediyoruz
                 if len(content.strip()) > 0:
                       error_content = content[-2000:]
         except: pass
@@ -179,16 +177,16 @@ def save_system_report(start_time):
     
     try:
         print("\n📝 Sistem raporu veritabanına gönderiliyor...")
+        # DatabaseManager'ı core'dan import ettik, doğrudan kullanıyoruz
         db = DatabaseManager()
         db.insert_data("processed_data", [report_payload]) 
         print("✅ Rapor başarıyla processed_data tablosuna kaydedildi.")
     except Exception as e:
         print(f"⚠️ Rapor gönderme hatası: {e}")
 
-# --- 5. ANA FONKSİYON ---
+# --- 4. ANA FONKSİYON ---
 
 def main():
-    # Başlangıçta log dosyasını temizleyelim ki eski hatalar karışmasın
     if LOG_FILE.exists():
         open(LOG_FILE, 'w').close()
 
@@ -199,7 +197,7 @@ def main():
     print("**************************************************")
     
     if DatabaseManager:
-        print("✅ DatabaseManager aktif.")
+        print("✅ DatabaseManager (Core) aktif.")
     else:
         print("⚠️ DatabaseManager pasif (Sadece log tutulacak).")
 
@@ -229,7 +227,7 @@ def main():
     print("│ [4/4] CSV DOSYALARI YÜKLENİYOR    │")
     print("└───────────────────────────────────┘")
     
-    # Yeni upload_all_csvs.py scriptini çalıştırıyoruz
+    # Scripts klasöründeki upload scripti
     run_script(UPLOAD_SCRIPT)
 
     # --- SON: Raporlama ---

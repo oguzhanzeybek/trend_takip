@@ -15,12 +15,12 @@ sys.path.append(str(ROOT_DIR))
 sys.path.append(str(ROOT_DIR / "scraper"))
 
 try:
-    from database_manager import DatabaseManager
+    from scraper.core.database_manager import DatabaseManager
 except ImportError:
     # Eğer yukarıdakiler çalışmazsa manuel path eklemesi (Yedek)
     sys.path.append(os.path.join(os.getcwd(), 'scraper'))
     try:
-        from database_manager import DatabaseManager
+        from scraper.core.database_manager import DatabaseManager
     except ImportError:
         print("❌ HATA: 'database_manager.py' bulunamadı. Lütfen dosya yapısını kontrol et.")
         sys.exit(1)
