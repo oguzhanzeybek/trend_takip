@@ -3,6 +3,7 @@ import sys
 import time
 import requests
 import json
+import datetime
 from pathlib import Path
 
 # --- GÜNCELLEME: dotenv'i en başta yükleyelim ---
@@ -24,8 +25,7 @@ class Colors:
 BASE_DIR = Path(__file__).resolve().parent
 ENV_PATH = BASE_DIR / ".env"
 
-# --- KRİTİK GÜNCELLEME: .env dosyasını zorla (override) yükle ---
-# Bu sayede dosya ismini düzelttiğinde terminali kapatıp açmana gerek kalmaz.
+# .env dosyasını zorla (override) yükle
 if ENV_PATH.exists():
     load_dotenv(dotenv_path=ENV_PATH, override=True)
 
@@ -55,7 +55,7 @@ def run_test():
     # Anahtarları kontrol et
     supa_url = os.getenv("SUPABASE_URL")
     supa_key = os.getenv("SUPABASE_KEY")
-    ai_key = os.getenv("OPENROUTER_API_KEY") # Kodun aradığı doğru isim bu
+    ai_key = os.getenv("OPENROUTER_API_KEY")
 
     if supa_url and supa_key:
         print_status("Supabase Keys", "OK", "URL ve Key mevcut.")
@@ -65,9 +65,7 @@ def run_test():
     if ai_key:
         print_status("AI Key", "OK", "OpenRouter Key mevcut.")
     else:
-        print_status("AI Key", "FAIL", f"OPENROUTER_API_KEY eksik! (Mevcut olan: {os.getenv('OPENROUTER_KEY') if os.getenv('OPENROUTER_KEY') else 'Yok'})")
-        if os.getenv("OPENROUTER_KEY"):
-            print(f"      👉 {Colors.YELLOW}İPUCU: .env dosyasında 'OPENROUTER_KEY' yazıyor, lütfen onu 'OPENROUTER_API_KEY' olarak değiştirin.{Colors.RESET}")
+        print_status("AI Key", "FAIL", "OPENROUTER_API_KEY eksik!")
 
     # ---------------------------------------------------------
     # ADIM 2: OpenRouter (AI) Bağlantı Testi
@@ -75,14 +73,12 @@ def run_test():
     print(f"\n{Colors.BLUE}--- ADIM 2: AI API Testi (OpenRouter) ---{Colors.RESET}")
     if ai_key:
         try:
-            # Basit bir "Merhaba" isteği atalım
             headers = {
                 "Authorization": f"Bearer {ai_key}",
                 "Content-Type": "application/json",
-                # "HTTP-Referer": "http://localhost", # İsteğe bağlı
             }
             data = {
-                "model": "openai/gpt-3.5-turbo", # Ucuz model ile test
+                "model": "openai/gpt-3.5-turbo", 
                 "messages": [{"role": "user", "content": "Say 'Test OK'"}],
                 "max_tokens": 10
             }
@@ -99,14 +95,12 @@ def run_test():
         print_status("AI Bağlantısı", "WARN", "Key olmadığı için test atlandı.")
 
     # ---------------------------------------------------------
-    # ADIM 3: Supabase Veritabanı Yazma Testi
+    # ADIM 3: Supabase Veritabanı Yazma Testi (YENİ TABLO)
     # ---------------------------------------------------------
     print(f"\n{Colors.BLUE}--- ADIM 3: Veritabanı Yazma Testi (Supabase) ---{Colors.RESET}")
     
-    # database_manager.py dosyasını kullanmayı dene
     try:
         sys.path.append(str(BASE_DIR))
-        # Dosya var mı kontrol et
         if not (BASE_DIR / "database_manager.py").exists():
              print_status("DB Modülü", "FAIL", "'database_manager.py' dosyası klasörde yok!")
         else:
@@ -114,30 +108,36 @@ def run_test():
                 from database_manager import DatabaseManager
                 db = DatabaseManager()
                 
-                # Test verisi
-                test_payload = [{
-                    "title": "SISTEM_TEST_KAYDI",
-                    "price": "0.00",
-                    "link": "https://test.com",
-                    "category": "TEST_LOG",
-                    "ai_analysis": {"durum": "test_ok", "zaman": time.strftime("%Y-%m-%d %H:%M:%S")}
-                }]
+                # --- GÜNCELLEME: Yeni Tablo Yapısına Uygun Veri ---
+                test_payload = {
+                    "category": "SYSTEM_TEST",
+                    "data_type": "TEST_LOG",
+                    "source": "test_system.py",
+                    "content": {
+                        "title": "Sistem Bağlantı Testi",
+                        "message": "Bu kayıt test_system.py tarafından oluşturuldu.",
+                        "status": "OK",
+                        "timestamp": datetime.datetime.now().isoformat()
+                    }
+                }
                 
-                print("   ⏳ Veritabanına test verisi yazılıyor...")
+                print("   ⏳ 'processed_data' tablosuna test verisi yazılıyor...")
                 
-                # SYSTEM tablosuna yazmayı dene
+                # Hedef tablo: processed_data
                 try:
-                    result = db.insert_data("SYSTEM", test_payload)
-                    print_status("DB Yazma", "OK", "Başarıyla yazıldı! (401 hatası alınmadı).")
-                    print(f"   ℹ️  Not: 'SYSTEM' tablosuna 'SISTEM_TEST_KAYDI' adında bir satır eklendi.")
+                    result = db.insert_data("processed_data", [test_payload])
+                    print_status("DB Yazma", "OK", "Başarıyla yazıldı!")
+                    print(f"   ℹ️  Not: 'processed_data' tablosuna test kaydı eklendi.")
                     
                 except Exception as e:
                     err_msg = str(e)
-                    if "401" in err_msg or "cookie" in err_msg.lower():
-                        print_status("DB Yazma", "FAIL", "YETKİ HATASI (401)!")
-                        print(f"   👉 {Colors.YELLOW}ÇÖZÜM:{Colors.RESET} .env dosyasındaki SUPABASE_KEY 'service_role' key olmalı.")
-                    elif "404" in err_msg:
-                         print_status("DB Yazma", "FAIL", "TABLO BULUNAMADI. 'SYSTEM' tablosunun varlığından emin olun.")
+                    if "401" in err_msg:
+                        print_status("DB Yazma", "FAIL", "YETKİ HATASI (401)! Service Role Key kullandığından emin ol.")
+                    elif "relation" in err_msg and "does not exist" in err_msg:
+                        print_status("DB Yazma", "FAIL", "Tablo bulunamadı! 'processed_data' tablosunu oluşturduğundan emin ol.")
+                    elif "daily_trends" in err_msg:
+                        print_status("DB Yazma", "FAIL", "Kod hala eski tabloya (daily_trends) yazmaya çalışıyor. database_manager.py dosyasını kontrol et.")
+                        print(f"   🔻 Hata Detayı: {err_msg}")
                     else:
                         print_status("DB Yazma", "FAIL", f"Beklenmedik Hata: {err_msg}")
 
@@ -154,11 +154,10 @@ def run_test():
     print(f"{Colors.BLUE}========================================{Colors.RESET}\n")
 
 if __name__ == "__main__":
-    # Gerekli kütüphane kontrolü
     try:
         import requests
     except ImportError:
-        print("⚠️  Eksik kütüphane: 'requests'. Lütfen 'pip install requests' çalıştırın.")
+        print("⚠️  Eksik kütüphane: 'requests'.")
         sys.exit(1)
         
     run_test()
