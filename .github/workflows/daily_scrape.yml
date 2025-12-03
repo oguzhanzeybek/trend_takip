@@ -33,9 +33,11 @@ jobs:
     - name: Ustabaşı Scriptini Çalıştır
       env:
         # Bu şifreleri GitHub ayarlarından çekecek
-        OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+        
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
+        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_KEY }}
       run: |
         # Main scripti çalıştır
         python scraper/main.py
