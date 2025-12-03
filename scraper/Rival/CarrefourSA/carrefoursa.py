@@ -1,40 +1,48 @@
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
+import sys
 import time
 import csv
 import random
 from pathlib import Path
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 
-# --- DİNAMİK YOL AYARLARI ---
-BASE_DIR = Path(__file__).resolve().parent
-SCREENSHOT_DIR = BASE_DIR / "debug_carrefour"
-SCREENSHOT_DIR.mkdir(exist_ok=True)
+# --- 1. YOL AYARLARI ---
+# Dosya Konumu: scraper/online_shopping/carrefoursa/carrefoursa.py
+CURRENT_DIR = Path(__file__).resolve().parent
+# Scraper kök dizinine çık (carrefoursa -> online_shopping -> scraper)
+ROOT_DIR = CURRENT_DIR.parent.parent
+sys.path.append(str(ROOT_DIR))
+
+# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
+try:
+    from core.driver_manager import get_chrome_driver
+except ImportError:
+    # Yedek yol denemesi
+    sys.path.append(str(ROOT_DIR.parent))
+    from scraper.core.driver_manager import get_chrome_driver
 
 # --- AYARLAR ---
-options = uc.ChromeOptions()
-# CarrefourSA için kritik güncelleme: --headless=new
-options.add_argument("--headless=new") 
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--start-maximized")
-options.add_argument("--window-size=1920,1080") # Headless modda boyutu sabitlemek önemlidir
-options.add_argument("--disable-notifications")
-options.add_argument("--disable-popup-blocking")
-# Gerçekçi User-Agent
-options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+BASE_DIR = CURRENT_DIR
+SCREENSHOT_DIR = BASE_DIR / "debug_carrefour"
+SCREENSHOT_DIR.mkdir(exist_ok=True) # Klasör yoksa oluştur
 
-print("🚀 CarrefourSA Scraper (Gelişmiş Mod) Başlatılıyor...")
-driver = uc.Chrome(options=options)
-wait = WebDriverWait(driver, 15)
+print("🚀 CarrefourSA Scraper (Merkezi Sistem & Gelişmiş Mod) Başlatılıyor...")
+
+# Merkezi driver'ı başlat
+try:
+    driver = get_chrome_driver()
+    wait = WebDriverWait(driver, 15)
+except Exception as e:
+    print(f"❌ Driver başlatılamadı: {e}")
+    sys.exit(1)
 
 try:
     all_products = []
-    target_count = 500
+    target_count = 500 # Hedef ürün sayısı
     current_page = 0
-    MAX_RETRY = 3 # Aynı sayfayı kaç kez denesin
+    MAX_RETRY = 3 
 
     while len(all_products) < target_count:
         
@@ -42,10 +50,10 @@ try:
         print(f"\n--- Gidiliyor: Sayfa {current_page + 1} ---")
         driver.get(url)
         
-        # Sayfa yüklenmesi için dinamik bekleme
+        # Sayfa yüklenmesi için dinamik bekleme (İnsan taklidi)
         time.sleep(random.uniform(5, 8))
 
-        # --- ÇEREZ GEÇME ---
+        # --- ÇEREZ / POPUP GEÇME ---
         try:
             # En yaygın buton ID'leri
             buttons = ["onetrust-accept-btn-handler", "btn-accept-all", "close-modal"]
@@ -64,7 +72,6 @@ try:
             time.sleep(1)
 
         # --- ÜRÜNLERİ BUL (ÇOKLU SEÇİCİ) ---
-        # CarrefourSA bazen yapıyı değiştirir, bu liste en yaygın kapsayıcıları içerir
         possible_selectors = [
             "li.product-listing-item",       # Klasik yapı
             ".product_list_item",            # Alternatif
@@ -74,14 +81,12 @@ try:
         ]
 
         products = []
-        used_selector = ""
         
         print("🔍 Ürünler aranıyor...")
         for selector in possible_selectors:
             found = driver.find_elements(By.CSS_SELECTOR, selector)
             if len(found) > 0:
                 products = found
-                used_selector = selector
                 print(f"✅ Seçici çalıştı: '{selector}' -> {len(found)} adet bulundu.")
                 break
         
@@ -94,7 +99,7 @@ try:
             driver.save_screenshot(str(shot_path))
             print(f"📸 Hata görüntüsü kaydedildi: {shot_path}")
             
-            # Eğer kaynak kodda "robot" veya "captcha" geçiyorsa
+            # Bot Koruması Kontrolü
             page_source = driver.page_source.lower()
             if "verify you are human" in page_source or "captcha" in page_source:
                 print("⚠️ KRİTİK: Bot korumasına (Cloudflare/WAF) takıldık.")
@@ -123,20 +128,19 @@ try:
                 
                 if not title: continue # İsimsiz ürünü geç
 
-                # Fiyat (Karmaşık yapıdan temizleme)
+                # Fiyat
                 price = "Fiyat Yok"
                 try: 
-                    # Carrefour fiyatları bazen parça parça span'larda olur, tüm metni alıp temizleyelim
                     raw_price = p.find_element(By.CSS_SELECTOR, ".item-price").text
                     price = raw_price.replace("\n", "").strip()
                 except: pass
 
                 # Link
                 link = ""
-                try: link = p.find_element(By.CSS_SELECTOR, "a").get_attribute("href")
+                try: link = p.find_element(By.TAG_NAME, "a").get_attribute("href")
                 except: pass
 
-                # Marka (Varsa)
+                # Marka
                 brand = "-"
                 try: brand = p.find_element(By.CSS_SELECTOR, ".item-brand").text.strip()
                 except: pass
@@ -147,8 +151,8 @@ try:
             except Exception as e:
                 continue
         
-        print(f"  -> Sayfadan eklenen: {added_on_this_page}")
-        print(f"  -> Toplam: {len(all_products)}/{target_count}")
+        print(f"  -> Sayfadan eklenen: {added_on_this_page}")
+        print(f"  -> Toplam: {len(all_products)}/{target_count}")
         
         current_page += 1
 

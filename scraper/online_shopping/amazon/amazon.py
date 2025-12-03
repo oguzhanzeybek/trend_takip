@@ -1,31 +1,40 @@
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import sys
 import time
 import csv
 import random
 from pathlib import Path
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# --- DİNAMİK YOL AYARLARI ---
-# Scriptin çalıştığı klasörü tam yol olarak alır
-BASE_DIR = Path(__file__).resolve().parent
+# --- 1. YOL AYARLARI ---
+# Dosya Konumu: scraper/online_shopping/amazon/amazon.py
+CURRENT_DIR = Path(__file__).resolve().parent
+# Scraper kök dizinine çık (amazon -> online_shopping -> scraper)
+ROOT_DIR = CURRENT_DIR.parent.parent
+
+# Kök dizini sisteme ekle
+sys.path.append(str(ROOT_DIR))
+
+# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
+try:
+    from core.driver_manager import get_chrome_driver
+except ImportError:
+    # Yedek yol denemesi
+    sys.path.append(str(ROOT_DIR.parent))
+    from scraper.core.driver_manager import get_chrome_driver
 
 # --- AYARLAR ---
-options = uc.ChromeOptions()
+BASE_DIR = CURRENT_DIR
 
-# 1. ARKA PLAN AYARLARI (HEADLESS & GITHUB ACTIONS)
-options.add_argument("--headless=new") 
-options.add_argument("--no-sandbox") # GitHub Actions/Linux için KRİTİK
-options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
-options.add_argument("--window-size=1920,1080")
-options.add_argument("--disable-gpu")
-options.add_argument("--disable-notifications")
-options.add_argument("--disable-popup-blocking")
-options.page_load_strategy = 'eager'
+print("🚀 Amazon Scraper (Merkezi Sistem) Başlatılıyor...")
 
-print("🚀 Amazon Scraper (Headless & Dinamik) Başlatılıyor...")
-driver = uc.Chrome(options=options)
+# Merkezi yöneticiden driver al
+try:
+    driver = get_chrome_driver()
+except Exception as e:
+    print(f"❌ Driver başlatılamadı: {e}")
+    sys.exit(1)
 
 try:
     # 1. Ana Sayfaya Git
@@ -63,15 +72,14 @@ try:
         
     except Exception as e:
         print(f"❌ Kategori listesi alınamadı (Hata: {e})")
-        # Hata olursa ekran görüntüsü alıp kaydedelim (Hata ayıklama için)
+        # Hata olursa ekran görüntüsü alıp kaydedelim
         screenshot_path = BASE_DIR / "hata_kategori.png"
         driver.save_screenshot(str(screenshot_path))
 
     # 3. KATEGORİLERİ GEZ
     all_products = []
 
-    # Test için ilk 5 kategoriyi tarayabilirsin, hepsini taramak uzun sürerse:
-    # for cat_name, cat_url in category_links[:5]: 
+    # Şimdilik hepsini tara
     for cat_name, cat_url in category_links:
         print(f"\n--- İşleniyor: {cat_name} ---")
         

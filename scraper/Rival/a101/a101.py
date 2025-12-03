@@ -1,41 +1,46 @@
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
+import sys
 import time
 import csv
 import random
 from pathlib import Path
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# --- DİNAMİK YOL AYARLARI ---
-BASE_DIR = Path(__file__).resolve().parent
+# --- 1. YOL AYARLARI ---
+# Dosya Konumu: scraper/online_shopping/a101/a101.py
+CURRENT_DIR = Path(__file__).resolve().parent
+# Scraper kök dizinine çık (a101 -> online_shopping -> scraper)
+ROOT_DIR = CURRENT_DIR.parent.parent
+sys.path.append(str(ROOT_DIR))
+
+# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
+try:
+    from core.driver_manager import get_chrome_driver
+except ImportError:
+    # Yedek yol denemesi
+    sys.path.append(str(ROOT_DIR.parent))
+    from scraper.core.driver_manager import get_chrome_driver
+
+# --- AYARLAR ---
+BASE_DIR = CURRENT_DIR
 SCREENSHOT_DIR = BASE_DIR / "debug_screenshots"
 SCREENSHOT_DIR.mkdir(exist_ok=True) # Klasör yoksa oluştur
 
-# --- AYARLAR ---
-options = uc.ChromeOptions()
-# ÖNEMLİ: Eski headless yerine 'new' modunu kullanmak tespiti zorlaştırır
-options.add_argument("--headless=new") 
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--start-maximized")
-options.add_argument("--disable-notifications")
-options.add_argument("--disable-popup-blocking")
-# User-Agent maskeleme (Bazen işe yarar)
-options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+print("🚀 A101 Scraper (Merkezi Sistem & Gelişmiş Mantık) Başlatılıyor...")
 
-options.page_load_strategy = 'normal' # 'eager' yerine 'normal' yaptık ki her şeyin yüklenmesini beklesin
-
-print("🚀 A101 Scraper (Gelişmiş Headless) Başlatılıyor...")
-
-driver = uc.Chrome(options=options)
-wait = WebDriverWait(driver, 20) # 20 saniyeye kadar bekleme limiti
+# Merkezi driver'ı başlat
+try:
+    driver = get_chrome_driver()
+    wait = WebDriverWait(driver, 20) # 20 saniye bekleme limiti
+except Exception as e:
+    print(f"❌ Driver başlatılamadı: {e}")
+    sys.exit(1)
 
 try:
     all_products = []
     page = 1
-    MAX_PAGES = 5 # Test için düşürdüm, çalışırsa artırırsın
+    MAX_PAGES = 5 # İstersen artırabilirsin
 
     while page <= MAX_PAGES:
         
@@ -43,8 +48,8 @@ try:
         print(f"\n--- Gidiliyor: Sayfa {page} ---")
         driver.get(url)
         
-        # 1. YAVAŞLATMA: Sayfa açılınca insan gibi bekle
-        time.sleep(random.uniform(8, 12)) 
+        # 1. YAVAŞLATMA: İnsan taklidi
+        time.sleep(random.uniform(5, 8)) 
 
         # --- POP-UP KAPATMA DENEMELERİ ---
         try:
@@ -52,22 +57,20 @@ try:
             cookie_btn.click()
         except: pass
         
-        # 2. KAYDIRMA: Daha yavaş ve "insan" gibi kaydır
+        # 2. KAYDIRMA: Yavaşça aşağı in
         print("⬇️ Sayfa yavaşça kaydırılıyor...")
-        for i in range(1, 10):
-            driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight * {i/4});")
-            time.sleep(random.uniform(2, 4)) # Her kaydırmada bekle
+        for i in range(1, 6): # Çok abartmadan 5 adımda inelim
+            driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight * {i/5});")
+            time.sleep(random.uniform(1, 2))
 
-        # 3. BEKLEME: Ürün kartlarının yüklenmesini bekle (Explicit Wait)
+        # 3. BEKLEME: Ürünlerin yüklenmesini bekle
         try:
-            # Hem eski hem yeni olası class isimlerini bekle
             print("⏳ Ürünlerin görünmesi bekleniyor...")
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul.list-content, .product-container, .product-card")))
         except:
-            print("⚠️ Bekleme süresi doldu, element bulunamadı.")
+            print("⚠️ Bekleme süresi doldu, yine de devam ediliyor.")
 
-        # 4. ÜRÜNLERİ TOPLA (Genişletilmiş Seçiciler)
-        # A101 bazen class isimlerini değiştirir. Birkaç farklı ihtimali deniyoruz.
+        # 4. ÜRÜNLERİ TOPLA (Senin Gelişmiş Seçici Listen)
         possible_selectors = [
             "li.product-item-box",       # Yaygın yapı
             ".product-container",        # Eski yapı
@@ -82,17 +85,16 @@ try:
             if len(found) > 0:
                 print(f"✅ Seçici çalıştı: '{selector}' -> {len(found)} adet bulundu.")
                 product_cards = found
-                break # Çalışan bir tane bulduysak diğerlerine bakmaya gerek yok
+                break 
         
         # --- HATA AYIKLAMA (SCREENSHOT) ---
         if len(product_cards) == 0:
-            print("❌ HATA: Ürün bulunamadı!")
+            print(f"⚠️ UYARI: Sayfa {page} boş geldi.")
             error_shot = SCREENSHOT_DIR / f"hata_sayfa_{page}.png"
             driver.save_screenshot(str(error_shot))
             print(f"📸 Ekran görüntüsü alındı: {error_shot}")
-            print("💡 İPUCU: Ekran görüntüsüne bak. 'Cloudflare' veya boş beyaz sayfa mı?")
-            break
-
+            # Eğer üst üste boş gelirse döngüyü kırmak mantıklı olabilir, şimdilik devam etsin.
+            
         for card in product_cards:
             try:
                 # Veri çekme kısmı (Hata toleranslı)
@@ -108,10 +110,9 @@ try:
                 try: link = card.find_element(By.TAG_NAME, "a").get_attribute("href")
                 except: pass
 
-                # Fiyat (Karmaşık yapıları çözmek için tüm metne bakıyoruz)
+                # Fiyat (Metin Analizi)
                 try:
                     text_content = card.text
-                    # Basit bir filtre: İçinde TL geçen satırı al
                     lines = text_content.split('\n')
                     for line in lines:
                         if "TL" in line or "₺" in line:
@@ -125,7 +126,7 @@ try:
             except Exception as e:
                 continue
         
-        print(f"  -> Toplam Toplanan: {len(all_products)}")
+        print(f"  -> Toplam Toplanan: {len(all_products)}")
         page += 1
 
 except Exception as e:

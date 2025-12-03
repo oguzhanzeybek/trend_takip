@@ -1,30 +1,40 @@
-import undetected_chromedriver as uc
+import sys
+import time
+import csv
+import random
+from pathlib import Path
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import csv
-import os
-from pathlib import Path
 
-# --- DİNAMİK YOL AYARLARI ---
-# Scriptin çalıştığı klasörü tam yol olarak alır
-BASE_DIR = Path(__file__).resolve().parent
+# --- 1. YOL AYARLARI (AMAZON İLE AYNI) ---
+# Dosya Konumu: scraper/online_shopping/trendyol/trendyol.py
+CURRENT_DIR = Path(__file__).resolve().parent
+# Scraper kök dizinine çık (trendyol -> online_shopping -> scraper)
+ROOT_DIR = CURRENT_DIR.parent.parent
+
+# Kök dizini sisteme ekle
+sys.path.append(str(ROOT_DIR))
+
+# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
+try:
+    from core.driver_manager import get_chrome_driver
+except ImportError:
+    # Yedek yol denemesi
+    sys.path.append(str(ROOT_DIR.parent))
+    from scraper.core.driver_manager import get_chrome_driver
 
 # --- AYARLAR ---
-options = uc.ChromeOptions()
-# GitHub Actions ve Sunucu ortamları için kritik ayarlar:
-options.add_argument("--headless=new") # Trendyol için 'new' headless modu daha iyidir
-options.add_argument("--no-sandbox") # Sandbox güvenlik katmanını aşar
-options.add_argument("--disable-dev-shm-usage") # Bellek hatalarını önler
-options.add_argument("--start-maximized")
-options.add_argument("--window-size=1920,1080") # Elemanların görünür olması için şart
-options.add_argument("--disable-notifications")
-options.add_argument("--disable-popup-blocking")
-options.page_load_strategy = 'eager'
+BASE_DIR = CURRENT_DIR
 
-print("🚀 Trendyol Scraper (Headless & Dinamik) Başlatılıyor...")
-driver = uc.Chrome(options=options)
+print("🚀 Trendyol Scraper (Merkezi Sistem) Başlatılıyor...")
+
+# Merkezi yöneticiden driver al
+try:
+    driver = get_chrome_driver()
+except Exception as e:
+    print(f"❌ Driver başlatılamadı: {e}")
+    sys.exit(1)
 
 try:
     # Hedef Ana URL
@@ -72,11 +82,12 @@ try:
         
         try:
             # KRİTİK NOKTA: Her kategori öncesi sayfayı resetle (Ana sayfaya git)
+            # Bu, Trendyol'un dinamik yapısında elementlerin kaybolmasını önler.
             if target_cat_name != "Popüler Ürünler":
                 driver.get(base_url)
                 time.sleep(3) # Sayfanın oturmasını bekle
 
-                # Butonu tekrar bul
+                # Butonu tekrar bul (Sayfa yenilendiği için eski elementler öldü)
                 current_buttons = driver.find_elements(By.CSS_SELECTOR, "button.category-pill")
                 button_found = False
 
@@ -135,14 +146,13 @@ finally:
     # 4. DOSYA KAYDETME
     if all_products:
         # Dosyayı scriptin olduğu yere kaydeder
-        file_path = BASE_DIR / "trendyol_kategorili_urunler.csv"
+        file_path = BASE_DIR / "trendyol.csv" # Dosya ismini standartlaştırdım
         
         try:
             with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
                 writer.writerow(["Kategori", "Marka", "Ürün Adı", "Fiyat", "Link"])
-                for row in all_products:
-                    writer.writerow(row)
+                writer.writerows(all_products)
 
             print(f"\n✅ İŞLEM TAMAMLANDI!")
             print(f"📂 Toplam {len(all_products)} ürün kaydedildi.")

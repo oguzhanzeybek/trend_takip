@@ -1,43 +1,42 @@
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
+import sys
 import time
 import csv
-import os
 import random
 from pathlib import Path
+from selenium.webdriver.common.by import By
 
-# --- DİNAMİK YOL AYARLARI ---
-BASE_DIR = Path(__file__).resolve().parent
+# --- 1. YOL AYARLARI (AMAZON İLE AYNI) ---
+# Dosya Konumu: scraper/online_shopping/n11/n11.py
+CURRENT_DIR = Path(__file__).resolve().parent
+# Scraper kök dizinine çık (n11 -> online_shopping -> scraper)
+ROOT_DIR = CURRENT_DIR.parent.parent
+
+# Kök dizini sisteme ekle (Böylece 'core' modülü bulunabilir)
+sys.path.append(str(ROOT_DIR))
+
+# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
+try:
+    # Önce doğrudan scraper klasörü içindeymişiz gibi dene
+    from core.driver_manager import get_chrome_driver
+except ImportError:
+    # Olmazsa bir üst dizini (proje ana dizini) ekle ve oradan dene
+    sys.path.append(str(ROOT_DIR.parent))
+    from scraper.core.driver_manager import get_chrome_driver
 
 # --- AYARLAR ---
-options = uc.ChromeOptions()
+BASE_DIR = CURRENT_DIR
 
-# -----------------------------------------------------------
-# KRİTİK AYARLAR (GitHub Actions & Headless Tespiti Önleme)
-# -----------------------------------------------------------
-# Eski "--headless" yerine bunu kullanın. N11 eski modu hemen yakalar.
-options.add_argument("--headless=new") 
+print("🚀 N11 Scraper (Merkezi Sistem) Başlatılıyor...")
 
-# Gerçek bir Windows kullanıcısı gibi görünmek için User-Agent
-options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36")
-
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--start-maximized")
-options.add_argument("--window-size=1920,1080")
-options.add_argument("--disable-notifications")
-options.add_argument("--disable-popup-blocking")
-options.add_argument("--disable-blink-features=AutomationControlled") # Bot bayrağını gizle
-
-print("🚀 N11 Scraper (Gelişmiş Headless) Başlatılıyor...")
-
-# version_main parametresini GitHub Actions'taki Chrome sürümüne göre gerekirse açın
-# driver = uc.Chrome(options=options, version_main=130) 
-driver = uc.Chrome(options=options)
+# Merkezi yöneticiden driver al
+try:
+    driver = get_chrome_driver()
+except Exception as e:
+    print(f"❌ Driver başlatılamadı: {e}")
+    sys.exit(1)
 
 try:
     # 1. HEDEF URL
-    # Not: Reklam parametrelerini (gclid vs) temizledim, bunlar bot korumasını tetikleyebilir.
     url = "https://www.n11.com/arama?promotions=2015431"
     
     print(f"🌐 Siteye gidiliyor: {url}")
@@ -83,22 +82,20 @@ try:
     # 3. VERİLERİ ÇEKME
     print("\n📦 Ürünler analiz ediliyor...")
     
-    # N11 için alternatif seçiciler (Biri çalışmazsa diğeri devreye girer)
+    # N11 için alternatif seçiciler
     products = driver.find_elements(By.CSS_SELECTOR, "li.column")
     if len(products) == 0:
         products = driver.find_elements(By.CSS_SELECTOR, ".product-item")
     if len(products) == 0:
         products = driver.find_elements(By.CSS_SELECTOR, ".pro")
 
-    print(f"  -> Toplam {len(products)} adet kutu bulundu.")
+    print(f"  -> Toplam {len(products)} adet kutu bulundu.")
 
     # --- HATA AYIKLAMA (DEBUG) ---
-    # Eğer 0 ürün bulursa ne gördüğünün fotoğrafını çeker
     if len(products) == 0:
         screenshot_path = BASE_DIR / "hata_goruntusu.png"
         driver.save_screenshot(str(screenshot_path))
-        print(f"⚠️ HATA: Hiç ürün bulunamadı. Sayfanın ne gördüğü şuraya kaydedildi: {screenshot_path}")
-        print("💡 İPUCU: Ekran görüntüsünde 'Captcha' veya boş sayfa varsa IP banlanmış olabilir.")
+        print(f"⚠️ HATA: Hiç ürün bulunamadı. Görüntü kaydedildi: {screenshot_path}")
 
     all_products = []
     
@@ -140,7 +137,7 @@ finally:
 
     # 4. CSV KAYDI
     if all_products:
-        file_path = BASE_DIR / "n11_sonuc.csv"
+        file_path = BASE_DIR / "n11.csv" # Dosya ismini n11.csv yaptım
         try:
             with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
