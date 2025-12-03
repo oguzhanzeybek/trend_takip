@@ -7,6 +7,11 @@ import json
 from pathlib import Path
 
 
+
+if not os.getenv("OPENROUTER_API_KEY") and os.getenv("OPENROUTER_KEY"):
+    os.environ["OPENROUTER_API_KEY"] = os.getenv("OPENROUTER_KEY")
+
+
 try:
     from dotenv import load_dotenv
     # .env dosyasını zorla yükle
