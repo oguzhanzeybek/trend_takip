@@ -34,7 +34,7 @@ except ImportError:
 # --- AYARLAR ---
 BASE_DIR = CURRENT_DIR
 SAVE_PATH = BASE_DIR
-MAX_WORKERS = 3
+MAX_WORKERS = 1
 driver_init_lock = threading.Lock() # Thread güvenliği için kilit
 
 # 1. ADIM: KATEGORİ LİNKLERİNİ TOPLA
