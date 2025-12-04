@@ -5,15 +5,11 @@ import json # JSON işlemleri için eklendi
 from datetime import datetime
 from pathlib import Path
 
-# --- YOL AYARLARI (KESİN ÇÖZÜM) ---
 
-# Scriptin bulunduğu konumu al: C:\...\trend_takip\scraper\scripts
 CURRENT_DIR = Path(__file__).resolve().parent
 
-# Projenin ana kök dizinini (trend_takip) hesapla.
 PROJECT_ROOT = CURRENT_DIR.parent.parent 
 
-# 'scraper' paketinin bulunduğu dizin (C:\...\trend_takip) 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.append(str(PROJECT_ROOT))
 
@@ -25,9 +21,7 @@ except ImportError as e:
     print(f"Detaylı Hata: {e}")
     sys.exit(1)
 
-# --- YÜKLENECEK DOSYALARIN LİSTESİ ---
 TARGET_FILES = [
-    # Mevcut CSV dosyaları
     "scraper/ai_filter/preprocessed_data/data/filtered_online_shopping.csv",
     "scraper/ai_filter/preprocessed_data/data/filtered_Rival.csv",
     "scraper/ai_filter/preprocessed_data/data/filtered_social_media.csv",
@@ -35,7 +29,6 @@ TARGET_FILES = [
     "scraper/ai_filter/Raw_data/Rival.csv",
     "scraper/ai_filter/Raw_data/social_media.csv",
     
-    # Yeni JSON dosyası eklendi
     "scraper/social_analysis/data/analyzed_social_media_ultra_detailed_sentiment.json"
 ]
 
@@ -72,7 +65,6 @@ def upload_single_file(db, file_path):
     
     try:
         if full_path.suffix == '.csv':
-            # --- CSV OKUMA ---
             df = pd.read_csv(full_path, encoding="utf-8-sig")
             if df.empty:
                 print("⚠️ Dosya boş, atlanıyor.")
@@ -83,17 +75,14 @@ def upload_single_file(db, file_path):
                 formatted_data.append(row_dict)
 
         elif full_path.suffix == '.json':
-            # --- JSON OKUMA (UYARILAR KALDIRILDI) ---
             with open(full_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 
             json_list = []
             
             if isinstance(data, list):
-                # Durum 1: JSON doğrudan bir liste ise
                 json_list = data
             elif isinstance(data, dict):
-                # Durum 2: JSON bir sözlük ise (Liste bir anahtar altında olabilir)
                 
                 potential_keys = ['analyzed_records', 'results', 'data', 'content']
                 found = False
@@ -104,7 +93,6 @@ def upload_single_file(db, file_path):
                         break
                 
                 if not found:
-                    # Liste bulunamazsa, tüm sözlüğü tek bir kayıt olarak kabul et
                     json_list = [data] 
             else:
                 print("⚠️ JSON içeriği ne liste ne de sözlük formatında, atlanıyor.")
@@ -120,14 +108,12 @@ def upload_single_file(db, file_path):
             print(f"❌ Desteklenmeyen dosya formatı: {full_path.suffix}. Atlanıyor.")
             return
 
-        # Okunan kayıt sayısını yine de gösteriyoruz
         print(f"   📊 Okunan Kayıt Sayısı: {len(formatted_data)}")
     
     except Exception as e:
         print(f"❌ Okuma Hatası ({full_path.name}): {e}")
         return
         
-    # --- VERİ HAZIRLAMA VE YÜKLEME ---
     
     category, data_type = get_file_info(full_path.name)
     simdiki_zaman = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -144,7 +130,6 @@ def upload_single_file(db, file_path):
         }
         payloads_for_db.append(payload)
 
-    # Veritabanına Yükle
     try:
         batch_size = 1000
         total_inserted = 0
@@ -168,8 +153,6 @@ def main():
         if not db.client:
             raise Exception("Supabase bağlantısı yok.")
     except Exception as e:
-        # .env uyarısı DatabaseManager içinden geldiği için burayı değiştirmedik.
-        # Çıktıdaki uyarı DatabaseManager'a aittir ve burada kontrol edilemez.
         print(f"❌ Veritabanı bağlantı hatası: {e}")
         return
 

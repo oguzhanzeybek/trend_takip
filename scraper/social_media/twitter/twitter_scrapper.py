@@ -5,18 +5,13 @@ import os
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-# --- 1. YOL AYARLARI ---
-# Dosya Konumu: scraper/social_media/twitter/twitter_scrapper.py
 CURRENT_DIR = Path(__file__).resolve().parent
-# Scraper kök dizinine çık (twitter -> social_media -> scraper)
 ROOT_DIR = CURRENT_DIR.parent.parent 
 sys.path.append(str(ROOT_DIR))
 
-# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
 try:
     from core.driver_manager import get_chrome_driver
 except ImportError:
-    # Yedek yol denemesi (Proje Root)
     sys.path.append(str(ROOT_DIR.parent))
     from scraper.core.driver_manager import get_chrome_driver
 
@@ -29,7 +24,6 @@ def scrape_twitter_trends():
     driver = None
 
     try:
-        # Merkezi driver'ı başlat
         driver = get_chrome_driver()
         
         url = "https://trends24.in/turkey/"
@@ -37,10 +31,8 @@ def scrape_twitter_trends():
         driver.get(url)
         time.sleep(5) # Sayfanın oturması için bekle
 
-        # BeautifulSoup ile hızlı çekim
         soup = BeautifulSoup(driver.page_source, "html.parser")
         
-        # Trendleri seç
         trend_elements = soup.select(".trend-card__list a")
         
         for t in trend_elements:
@@ -56,12 +48,10 @@ def scrape_twitter_trends():
             driver.quit()
             print("🛑 Tarayıcı kapatıldı.")
 
-    # --- VERİ İŞLEME VE TAGLEME (Senin Özel Mantığın Korundu) ---
     processed_rows = []
     header = ["Trend", "Tag"]
 
     for i, trend in enumerate(trends_list):
-        # Kullanıcının özel tag mantığı (i = index)
         if i < 50: tag = 0
         elif i < 200: tag = 1 
         elif i < 250: tag = 2
@@ -83,9 +73,7 @@ def scrape_twitter_trends():
         
         processed_rows.append([trend, tag])
 
-    # --- DOSYA KAYIT (STANDART BLOK) ---
     if trends_list:
-        # 1. Ham Dosya
         file_path_raw = BASE_DIR / "twitter_trends.csv"
         try:
             with open(file_path_raw, "w", newline="", encoding="utf-8-sig") as file:
@@ -97,7 +85,6 @@ def scrape_twitter_trends():
         except Exception as e:
             print(f"❌ Ham Dosya yazma hatası: {e}")
 
-    # 2. Taglenmiş Dosya
     if processed_rows:
         file_path_tagged = BASE_DIR / "twitter_trends_tagged.csv"
         try:

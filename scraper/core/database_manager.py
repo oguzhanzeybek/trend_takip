@@ -6,18 +6,11 @@ from pathlib import Path
 
 class DatabaseManager:
     def __init__(self):
-        # --- PATH DÜZELTMESİ ---
-        # __file__      -> .../scraper/core/database_manager.py
-        # .parent       -> .../scraper/core/
-        # .parent.parent -> .../scraper/  (Burada .env dosyasını arıyoruz)
         self.base_dir = Path(__file__).resolve().parent.parent
         env_path = self.base_dir / ".env"
         
-        # .env dosyasını yükle
         if env_path.exists():
             load_dotenv(dotenv_path=env_path, override=True)
-            # Opsiyonel: Debug için print açılabilir
-            # print(f"✅ .env yüklendi: {env_path}")
         else:
             print(f"⚠️  UYARI: .env dosyası bulunamadı: {env_path}")
             print("   -> Sistem ortam değişkenleri kullanılacak.")
@@ -45,26 +38,17 @@ class DatabaseManager:
             print("⚠️ Client başlatılamadığı için veri yazılamadı.")
             return None
 
-        # Veri boşsa işlem yapma
         if not data:
             return None
         
-        # Tekil veri geldiyse listeye çevir (Supabase liste sever)
         if isinstance(data, dict):
             data = [data]
 
         try:
-            # table_name parametresine göre ekleme yapılıyor
             response = self.client.table(table_name).insert(data).execute()
             
-            # Hata kontrolü (Versiyon farklarına karşı önlem)
-            # data içinde 'error' dönme ihtimaline karşı:
-            # (Yeni supabase-py versiyonlarında hata varsa exception fırlatır, 
-            # ama eski versiyonlar için response.data kontrolü gerekebilir)
             return response
             
         except Exception as e:
-            # Hatayı burada yakalayıp ekrana basıyoruz ama çağıran dosya 
-            # 'başarılı' sanmasın diye hatayı yukarı fırlatıyoruz (raise).
             print(f"❌ SUPABASE HATASI ({table_name}): {e}")
             raise e

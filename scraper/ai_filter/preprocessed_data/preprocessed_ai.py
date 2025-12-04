@@ -11,12 +11,10 @@ import sys
 
 import os
 
-# Scriptin başına ekle
 api_key = os.getenv("OPENROUTER_API_KEY")
 if not api_key:
     print("❌ HATA: OPENROUTER_API_KEY bulunamadı! .env dosyasını kontrol et.")
 else:
-    # OpenRouter ayarı
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=api_key, 
@@ -25,15 +23,11 @@ else:
 
 
 
-# --- AYARLAR (ÇALIŞAN FİNAL MOD) ---
-# En stabil, en hızlı ve maliyeti en düşük model: GPT-4o-mini
 MODEL_NAME = "openai/gpt-4o-mini"
 
-# Stabil ve hızlı işlem için ideal ayarlar
 BATCH_SIZE = 50 
 WAIT_TIME = 1  # 1 saniye dinlenme (Hız için)
 
-# --- BAĞLANTI VE DİNAMİK YOL ---
 BASE_DIR = Path(__file__).resolve().parent
 
 env_path = None
@@ -54,7 +48,6 @@ client = OpenAI(
     api_key=api_key,
 )
 
-# --- YARDIMCI FONKSİYONLAR ---
 
 def truncate_text(text, max_chars=1000):
     """Token maliyetini düşürmek için metni kısaltır."""
@@ -70,13 +63,10 @@ def clean_data(df):
     initial_len = len(df)
     print(f"   🧹 Ön temizlik... (Giriş: {initial_len})")
     
-    # SADECE tamamen boş satırları ve duplike satırları atar
     df = df.dropna(how='all').drop_duplicates() 
     
-    # 1. Kırpma İşlemi (SADECE 2. Sütundan itibaren)
     df_temp = df.copy()
     if df_temp.shape[1] > 1:
-        # İndeks 1'den (ikinci sütun) sonrası kırpılır.
         df_temp.iloc[:, 1:] = df_temp.iloc[:, 1:].astype(str).apply(
             lambda col: col.apply(lambda x: truncate_text(x, 1000))
         )
@@ -85,7 +75,6 @@ def clean_data(df):
     return df_temp.astype(str) 
 
 def get_progress_file_path(filename):
-    # Progress dosyaları scriptin olduğu yerdeki 'data' klasöründe tutulur
     data_dir = BASE_DIR / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
     return data_dir / f"{filename}_progress.txt"
@@ -103,7 +92,6 @@ def save_progress(filename, index):
         f.write(str(index))
 
 def append_to_csv(data, filename):
-    # Çıktı klasörü: scriptin olduğu yerdeki 'data' klasörü
     output_path = BASE_DIR / "data" / f"filtered_{filename}.csv"
     df = pd.DataFrame(data)
     if not output_path.exists():
@@ -112,10 +100,8 @@ def append_to_csv(data, filename):
         df.to_csv(output_path, index=False, encoding='utf-8-sig', mode='a', header=False)
 
 def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
-    # Kolon isimlerini prompt'a ekliyoruz ki AI neye baktığını bilsin
     column_names = ", ".join(df_columns) 
     
-    # PROMPT (DEĞİŞTİRİLMEDEN KORUNDU)
     prompt = f"""
     Sen, **Metro Market'in HORECA (Otel, Restoran, Catering) Sektörüne odaklanmış Yüksek Seviye Stratejik Pazar Analistisin.** Senin görevin, sadece ürün seçmek değil, piyasadaki **YENİ BAŞLANGIÇ TRENDLERİNİ ERKEN TESPİT ETMEK** ve müşteri ihtiyaçlarına göre **pazarda devrim yaratacak ürün portföyünü** oluşturmaktır.
     potansiyel müşterilerin beklentileri, sektör trendleri ve yenilikçi ürün özellikleri hakkında derinlemesine bilgiye sahipsin.
@@ -159,35 +145,24 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
     except Exception as e:
         err = str(e)
         
-        # 1. Bakiye kontrolü (Burası güzel, kalsın)
         if "402" in err or "insufficient_quota" in err:
             print("\n❌ HATA: Yetersiz Bakiye! Lütfen OpenRouter'a kredi yükleyin.")
             sys.exit(1)
             
         if retry < 3:
-            # --- DEĞİŞİKLİK BURADA ---
-            # Hatanın ne olduğunu (err) ekrana yazdırıyoruz:
             print(f"      ⚠️ HATA DETAYI: {err}") 
             print(f"      ⚠️ Geçici Hata. Tekrar deneniyor... ({retry+1})")
             time.sleep(2)
             
-            # Kolon isimlerini tekrar geçerek yeniden dene
             return analyze_paid_fast(data_chunk, category, df_columns, retry + 1)
         
-        # 3 deneme bitti, hala hata varsa son hatayı gösterip boş dön
         print(f"❌ 3 deneme başarısız. Son Hata: {err}")
         return []
 
-# --- ANA DÖNGÜ ---
 def process_files():
-    # --- DİNAMİK YOL AYARLAMASI ---
-    # Kodun Yeri: .../scraper/ai_filter/preprocessed_data/preprocessed_ai.py
-    # Verinin Yeri: .../scraper/ai_filter/Raw_data
-    # Bu yüzden BASE_DIR.parent (ai_filter) -> Raw_data yapıyoruz.
     
     raw_data_dir = BASE_DIR.parent / "Raw_data"
     
-    # Çıktı klasörü (data)
     output_dir = BASE_DIR / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
     
@@ -226,18 +201,15 @@ def process_files():
         elif start_index > 0:
             print(f"   ⏩ {start_index}. satırdan devam.")
 
-        # Kolon isimlerini bir kere al (AI'ya göndermek için)
         df_columns = df_clean.columns.tolist()
 
         for i in range(start_index, total_rows, BATCH_SIZE):
             batch = df_clean.iloc[i : i + BATCH_SIZE]
             
-            # KRİTİK: header=False ile ilk satır (kolon isimleri) gönderilmez
             batch_str = batch.to_string(header=False, index=False) 
             
             print(f"   ⏳ İşleniyor: {i} - {min(i+BATCH_SIZE, total_rows)} (Toplam: {total_rows})")
             
-            # Kolon isimlerini analyze_paid_fast fonksiyonuna yolla
             results = analyze_paid_fast(batch_str, file_key, df_columns)
             
             if results:

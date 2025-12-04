@@ -5,7 +5,6 @@ import time
 from pathlib import Path
 from datetime import datetime  # <-- 1. Tarih kütüphanesini ekledik
 
-# --- 1. KÜTÜPHANE KONTROLÜ (Pandas) ---
 try:
     import pandas as pd
 except ImportError:
@@ -13,16 +12,13 @@ except ImportError:
     print("💡 ÇÖZÜM: Terminale şunu yazıp enter'a bas: pip install pandas")
     sys.exit(1)
 
-# --- 2. DOSYA YOLU AYARLARI (DatabaseManager Bulma) ---
 current_file_path = Path(__file__).resolve()
 parent_dir = current_file_path.parent
 grandparent_dir = current_file_path.parent.parent
 
-# Standart üst dizinleri ekle
 sys.path.append(str(parent_dir))
 sys.path.append(str(grandparent_dir))
 
-# ÖZEL EKLEME: 'scraper' klasörü yolları
 possible_paths = [
     grandparent_dir / "scraper",
     parent_dir / "scraper",
@@ -33,7 +29,6 @@ for path in possible_paths:
     if path.exists():
         sys.path.append(str(path))
 
-# --- 3. DATABASE MANAGER IMPORT ---
 try:
     from database_manager import DatabaseManager
 except ImportError:
@@ -43,7 +38,6 @@ except ImportError:
 def upload_csv_to_db(csv_path):
     print(f"\n🚀 CSV Yükleme İşlemi Başlatılıyor: {csv_path}")
     
-    # 1. Database Manager'ı başlat
     try:
         db = DatabaseManager()
     except Exception as e:
@@ -54,7 +48,6 @@ def upload_csv_to_db(csv_path):
         print("❌ Veritabanı bağlantısı kurulamadı (.env veya API Key hatası).")
         return
 
-    # 2. CSV dosyasını oku
     try:
         df = pd.read_csv(csv_path, encoding="utf-8-sig")
         print(f"📊 Toplam {len(df)} satır veri okundu.")
@@ -62,15 +55,12 @@ def upload_csv_to_db(csv_path):
         print(f"❌ CSV okuma hatası: {e}")
         return
 
-    # 3. Veriyi 'processed_data' formatına dönüştür
     formatted_data = []
     
-    # Şu anki zamanı alıyoruz
     simdiki_zaman = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     try:
         for index, row in df.iterrows():
-            # Pandas NaN değerlerini None/Null yapar
             row_dict = row.where(pd.notnull(row), None).to_dict()
             
             payload = {
@@ -85,10 +75,8 @@ def upload_csv_to_db(csv_path):
         print(f"❌ Veri dönüştürme hatası: {e}")
         return
 
-    # 4. Veritabanına gönder
     print("⏳ Veriler veritabanına gönderiliyor...")
     try:
-        # Toplu yükleme (Batch insert)
         db.insert_data("processed_data", formatted_data)
         print(f"✅ BAŞARILI: {len(formatted_data)} adet kayıt 'processed_data' tablosuna yüklendi.")
         print(f"🕒 Kayıt Tarihi Etiketi: {simdiki_zaman}")
@@ -97,12 +85,9 @@ def upload_csv_to_db(csv_path):
         if "relation" in str(e) and "does not exist" in str(e):
              print("💡 İPUCU: 'processed_data' tablosu yok. Supabase'de tabloyu oluşturman gerek.")
 
-# --- ANA ÇALIŞTIRMA BLOĞU ---
 if __name__ == "__main__":
-    # Yüklemek istediğin dosyanın tam yolu
     target_csv_path = r"C:\Users\darks\OneDrive\Masaüstü\trend_takip\scraper\social_media\youtube\youtube_trends_tag.csv"
     
-    # Dosya var mı kontrol edelim
     if os.path.exists(target_csv_path):
         print(f"📂 Hedef dosya bulundu: {target_csv_path}")
         try:

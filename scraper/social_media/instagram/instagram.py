@@ -4,18 +4,13 @@ import csv
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-# --- 1. YOL AYARLARI ---
-# Dosya Konumu: scraper/social_media/instagram/instagram.py
 CURRENT_DIR = Path(__file__).resolve().parent
-# Scraper kök dizinine çık (instagram -> social_media -> scraper)
 ROOT_DIR = CURRENT_DIR.parent.parent 
 sys.path.append(str(ROOT_DIR))
 
-# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
 try:
     from core.driver_manager import get_chrome_driver
 except ImportError:
-    # Yedek yol denemesi
     sys.path.append(str(ROOT_DIR.parent))
     from scraper.core.driver_manager import get_chrome_driver
 
@@ -33,23 +28,19 @@ def scrape_instagram_hashtags():
     all_data = []
 
     try:
-        # 0'dan 8'e kadar sayfaları gez (Toplam 9 sayfa)
         for page_num in range(0, 9):
             url = f"https://best-hashtags.com/new-hashtags.php?pageNum_tag={page_num}&totalRows_tag=1000"
             print(f"🌐 Taranıyor: Sayfa {page_num}...")
             
             try:
                 driver.get(url)
-                # HTML'in oturması için kısa bekleme
                 time.sleep(3) 
             except Exception as e:
                 print(f"  ⚠️ Sayfa yüklenemedi, geçiliyor: {e}")
                 continue 
 
-            # BeautifulSoup ile Parse Etme
             soup = BeautifulSoup(driver.page_source, "html.parser")
 
-            # Tablo içindeki satırları seç
             rows = soup.select("table.table.table-striped tbody tr")
             
             page_count = 0
@@ -78,7 +69,6 @@ def scrape_instagram_hashtags():
             print("🛑 Tarayıcı kapatıldı.")
         except: pass
 
-        # --- DOSYA KAYIT ---
         output_filename = "instagram.csv"
         output_path = BASE_DIR / output_filename
 

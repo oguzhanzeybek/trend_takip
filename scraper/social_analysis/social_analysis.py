@@ -10,18 +10,13 @@ import re
 import datetime
 import math 
 
-# --- AYARLAR ---
-# En stabil, en hızlı ve maliyeti en düşük model: GPT-4o-mini
 MODEL_NAME = "openai/gpt-4o-mini" 
 
-# Stabil ve hızlı işlem için ideal ayarlar
 BATCH_SIZE = 50 # Her bir AI isteği için 50 satır veri
 WAIT_TIME = 1 # 1 saniye dinlenme
 
-# --- BAĞLANTI ---
 BASE_DIR = Path(__file__).resolve().parent
 
-# .env dosyasını bulma ve yükleme
 env_path = None
 search_dirs = [BASE_DIR] + list(BASE_DIR.parents)[:3]
 for d in search_dirs:
@@ -40,7 +35,6 @@ client = OpenAI(
     api_key=api_key,
 )
 
-# --- YARDIMCI FONKSİYONLAR ---
 
 def truncate_text(text, max_chars=1000):
     """Token maliyetini düşürmek için metni kısaltır."""
@@ -55,12 +49,10 @@ def clean_data(df):
     initial_len = len(df)
     print(f"  🧹 Ön temizlik... (Giriş: {initial_len})")
     
-    # SADECE tamamen boş satırları ve duplike satırları atar
     df = df.dropna(how='all').drop_duplicates() 
     
     df_temp = df.copy()
     if df_temp.shape[1] > 1:
-        # İndeks 1'den (ikinci sütun) sonrası kırpılır.
         df_temp.iloc[:, 1:] = df_temp.iloc[:, 1:].astype(str).apply(
             lambda col: col.apply(lambda x: truncate_text(x, 1000))
         )
@@ -69,7 +61,6 @@ def clean_data(df):
     return df_temp.astype(str) 
 
 def get_output_file_path(filename):
-    # Data klasörü yoksa oluştur
     output_dir = BASE_DIR / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
     return output_dir / f"analyzed_{filename}.json"
@@ -77,22 +68,18 @@ def get_output_file_path(filename):
 def save_analysis_json(data, filename):
     output_path = get_output_file_path(filename)
     
-    # JSON dosyasını oluşturup kaydet
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
     print(f"  💾 Analiz Sonucu Kaydedildi: {output_path.name}")
 
 
-# 🚨 GÜNCEL VE ULTRA DETAYLI ANALİZ FONKSİYONU 🚨
 def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=0):
     column_names = ", ".join(df_columns) 
     current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
-    # ROL TANIMI: ARTIK "GENEL UZMAN" DEĞİL, "VERİ DEDEKTİFİ"
     role = "**Sen Türkiye'nin en obsesif Veri Madencisi ve Sosyal Medya Dedektifisin. Senin işin genellemeler yapmak değil, önüne gelen veri parçasındaki (batch) benzersiz ve spesifik parmak izlerini bulmaktır. Asla varsayımlarla konuşmazsın, sadece kanıtla konuşursun.**"
     
     if is_final_analysis:
-        # FİNAL ANALİZ PROMPT'u
         prompt_goal = "Görevin, sağlanan TÜM ara analiz özetlerini (batch sonuçlarını) birleştirerek, tekrar eden kalıpları değil, verilerin toplamından çıkan BÜYÜK RESMİ, çelişkileri ve nüansları raporlamaktır. **Ezbere cümleler kurma, analiz edilen binlerce satırın gerçek hikayesini anlat.**"
         data_header = "VERİ (Toplu işlerden gelen ara analiz özetleri):"
         analysis_structure = """
@@ -124,8 +111,6 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
     ]
         """
     else:
-        # ARA ANALİZ (BATCH) PROMPT'u: BURASI ÇOK KRİTİK DEĞİŞTİRİLDİ
-        # Modelin kopya çekmesini engellemek için "örnek içerikleri" kaldırdık.
         prompt_goal = "Görevin, sana verilen **bu spesifik 50 satırlık veri parçasını** incelemektir. **DİKKAT: Asla önceki bildiklerini veya genel geçer 'ekonomi kötü' ezberlerini kullanma.** Sadece bu metinlerde geçen **ÖZEL İSİMLERİ, MARKALARI, OLAYLARI ve HASHTAG'LERİ** raporla. Eğer metinlerde futbol varsa futbol yaz, dizi varsa dizi yaz. Veri ne diyorsa o.SEN BİR TOPLUM BİLİMCİSİ BİR DAHİSİN , İNSANLIĞIN KURTARICI OLARAK TANRI GIBI KUŞBAKIŞI ANALİZ ET Kİ HALKI ANLAYABİLELİM."
         data_header = f"VERİ (Bu Batch İçin Ham Metinler): {data_chunk}"
         analysis_structure = """
@@ -135,7 +120,6 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
     4. **Konu Gerekçesi:** Bu konuyu kanıtlayan **anahtar kelimeleri** yaz.
     5. ÇIKTI sadece ve sadece tek bir JSON nesnesi olmalıdır.
         """
-        # Şablondaki örnek değerleri sildim ki model onları kopyalamasın!
         json_output_template = """
       "ozet_duygu": "BURAYA_BU_VERİDEKİ_BASKIN_DUYGUYU_YAZ ve detaylı acıklama yap",
       "duygu_gerekcesi": "BURAYA_METİNLERDEN_KANIT_VE_ALINTI_İÇEREN_GEREKÇEYİ_YAZ ve acıklama yap",
@@ -144,7 +128,6 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
         """
 
 
-    # PROMPT Yapısı
     prompt = f"""
     SEN KRİTİK BİR ROLÜ ÜSTLENİYORSUN. SADECE İSTENEN JSON ÇIKTISINI ÜRET. BAŞKA HİÇBİR AÇIKLAMA VEYA GİRİŞ METNİ KULLANMA.
     
@@ -178,7 +161,6 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
         
         resp = completion.choices[0].message.content
         
-        # JSON Temizleme (Mevcut koddan korundu)
         if "```" in resp:
             match = re.search(r"```json\s*(.*?)\s*```", resp, re.DOTALL)
             if match:
@@ -204,13 +186,9 @@ def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=
         print(f"\n❌ Kritik Hata. AI'dan analiz alınamadı. Hata: {err}")
         return None
 
-# --- ANA DÖNGÜ (Batch İşleme Mantığı Korundu) ---
 def process_social_media_analysis():
-    # --- DEĞİŞİKLİK BURADA: Dinamik Dosya Yolu ---
-    # Eski sabit yol yerine, scriptin olduğu yerden yola çıkarak raw_data'yı buluyoruz.
     raw_data_dir = BASE_DIR.parent / "ai_filter" / "Raw_data"
     
-    # Çıktı klasörü kontrolü (varsa kullan, yoksa oluştur)
     output_dir = BASE_DIR / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
     
@@ -228,13 +206,11 @@ def process_social_media_analysis():
     print(f"\n🚀 {filename} TOPLUMSAL NABIZ ANALİZİ BAŞLIYOR...")
     
     try:
-        # Tüm veriyi oku
         df = pd.read_csv(raw_data_dir / filename, dtype=str, low_memory=False).fillna("")
     except Exception as e:
         print(f"❌ Dosya okuma hatası: {e}")
         return
     
-    # Veriyi temizle ve kırp
     df_clean = clean_data(df)
     total_rows = len(df_clean)
     
@@ -242,7 +218,6 @@ def process_social_media_analysis():
         print("❌ Temizlenecek veri bulunamadı. Analiz yapılamıyor.")
         return
     
-    # --- BATCH İŞLEME MANTIĞI ---
     
     num_batches = math.ceil(total_rows / BATCH_SIZE)
     intermediate_summaries = []
@@ -250,7 +225,6 @@ def process_social_media_analysis():
 
     print(f"  📝 Toplam {total_rows} satır, {num_batches} toplu iş (batch) halinde işlenecek.")
     
-    # Parçaları döngüde işleme
     for i in range(num_batches):
         start_index = i * BATCH_SIZE
         end_index = min((i + 1) * BATCH_SIZE, total_rows)
@@ -260,11 +234,9 @@ def process_social_media_analysis():
         
         print(f"\n--- Batch {i+1}/{num_batches} (Satır {start_index} - {end_index-1}) ---")
         
-        # Ara analizi yap
         batch_analysis = analyze_data_with_ai(batch_data_chunk, df_columns, is_final_analysis=False)
         
         if batch_analysis:
-            # Ara sonuçları listeye ekle (Artık daha detaylı özetler alınıyor)
             summary = (
                 f"Batch {i+1} Özeti: Ana Duygu: {batch_analysis.get('ozet_duygu', 'Bilinmiyor')} "
                 f"(Gerekçe: {batch_analysis.get('duygu_gerekcesi', 'Yok')}), "
@@ -282,13 +254,11 @@ def process_social_media_analysis():
         print("\n❌ Hiçbir batch analiz edilemedi. Nihai analiz yapılamıyor.")
         return
 
-    # --- NİHAİ ANALİZ ---
     final_input_data = "\n".join(intermediate_summaries)
     print("\n================================================")
     print("🧠 ARA ANALİZLER BİRLEŞTİRİLİYOR: NIHAI ÇOK DETAYLI ANALİZ BAŞLIYOR...")
     print("================================================")
     
-    # Ara özetleri kullanarak nihai bütünsel analizi yap
     final_analysis_result = analyze_data_with_ai(
         data_chunk=final_input_data, 
         df_columns=["ozet_duygu", "duygu_gerekcesi", "ozet_konu", "konu_gerekcesi"], 
@@ -296,7 +266,6 @@ def process_social_media_analysis():
     )
     
     if final_analysis_result:
-        # Sonucu JSON dosyasına kaydet
         save_analysis_json(final_analysis_result, filename.split('.')[0] + "_ultra_detailed_sentiment")
         print("\n🎉 TOPLUMSAL NABIZ ANALİZİ BAŞARIYLA TAMAMLANDI!")
     else:

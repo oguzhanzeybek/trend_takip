@@ -1,16 +1,30 @@
-# app_backend/main.py
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from . import model # model.py dosyasını import et
+from pydantic import BaseModel
+from typing import List, Optional
+from dotenv import load_dotenv
 
-# --- FastAPI Uygulamasını Başlatma ---
-app = FastAPI(title="AI Recommendation Microservice")
+import model  # model.py dosyası (Yanında duran dosya)
 
-# --- CORS Ayarları ---
-# Flask ön yüz uygulamasının API'ye erişebilmesi için gerekli.
-# Deta Space'te geliştirme aşamasında tüm kaynaklara izin vermek için '*' kullanıyoruz.
-origins = ["*"] 
+load_dotenv()
+
+app = FastAPI(title="Trend Takip AI Analiz Servisi")
+
+class ChatRequest(BaseModel):
+    message: str
+
+class AnalyzeRequest(BaseModel):
+    message: str
+    categories: Optional[List[str]] = []
+
+class TrendSaveRequest(BaseModel):
+    content: str
+
+origins = [
+    "*", 
+    "http://localhost:3000",
+    "http://localhost:5173", # Vite Frontend Portu
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,34 +36,118 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    """Basit bir sağlık kontrolü endpoint'i."""
-    return {"message": "AI Recommendation Microservice çalışıyor!"}
+    return {"message": "Trend Takip AI Analiz Servisi (GPT-4o) aktif 🚀"}
 
-# --- Öneri API Uç Noktası ---
 
-@app.get("/recommendations")
-def get_recommendations_endpoint(article_id: str, count: int = 5):
-    """
-    Belirtilen makale ID'sine (key) göre önceden hesaplanmış önerileri döndürür.
-    """
-    if not article_id:
-        raise HTTPException(status_code=400, detail="article_id parametresi gereklidir.")
-    
+@app.post("/api/save-trend")
+async def save_trend_endpoint(request: TrendSaveRequest):
+    if not request.content:
+        raise HTTPException(status_code=400, detail="content alanı boş olamaz")
+
+    result = await model.save_trend(request.content)
+    return {"status": "success", "saved": result}
+
+
+@app.get("/api/get-trends")
+async def get_trends_endpoint(limit: int = 20):
     try:
-        # model.py'deki fonksiyonu çağır
-        recommendations = model.get_precalculated_recommendations(article_id, count)
-        
-        if not recommendations:
-            # Öneri bulunamadığında 404 döndür.
-            raise HTTPException(status_code=404, detail="Bu makale için öneri bulunamadı.")
-
-        return recommendations
-    
-    except HTTPException:
-        # 400 ve 404 gibi FastAPI tarafından tetiklenen hataları yakala
-        raise
+        trends = await model.get_trends(limit)
+        return {"status": "success", "trends": trends}
     except Exception as e:
-        # Diğer tüm hataları 500 olarak döndür
-        print(f"Öneri hesaplanırken beklenmedik hata oluştu: {e}")
-        # Güvenlik nedeniyle detayı gösterme, sadece genel bir hata mesajı ver.
-        raise HTTPException(status_code=500, detail="Öneri sistemi bir iç hata ile karşılaştı. Lütfen Base bağlantısını kontrol edin.")
+        print(f"❌ Trend listeleme hatası: {e}")
+        raise HTTPException(status_code=500, detail="Trendler alınamadı.")
+
+
+@app.get("/api/products")
+async def get_products_endpoint():
+    try:
+        products = await model.get_products()
+        return {"status": "success", "products": products}
+    except Exception as e:
+        print(f"❌ Ürün listeleme hatası: {e}")
+        raise HTTPException(status_code=500, detail="Ürünler alınamadı.")
+
+
+@app.get("/api/stats")
+async def get_stats_endpoint():
+    try:
+        stats = await model.get_stats()
+        return {"status": "success", "stats": stats}
+    except Exception as e:
+        print(f"❌ İstatistik listeleme hatası: {e}")
+        raise HTTPException(status_code=500, detail="İstatistikler alınamadı.")
+
+
+@app.get("/api/raw-data")
+async def get_raw_data_endpoint(
+    category: Optional[List[str]] = Query(default=None),
+    limit: int = 40
+):
+    """
+    Örnek: /api/raw-data?category=social_media&limit=20
+    """
+    try:
+        items = await model.get_filtered_raw_data(category or [], limit)
+        return {"status": "success", "raw_data": items}
+    except Exception as e:
+        print(f"❌ Raw data hatası: {e}")
+        raise HTTPException(status_code=500, detail="Raw data alınamadı.")
+
+
+@app.post("/api/analyze")
+async def analyze_custom_endpoint(request: AnalyzeRequest):
+    """
+    JSON Body:
+    { "message": "...", "categories": ["social_media"] }
+    """
+    try:
+        if not request.message:
+            raise HTTPException(status_code=400, detail="message gerekli")
+
+        analysis = await model.chat_with_ai(request.message)
+
+        return {
+            "status": "success",
+            "analysis": analysis,
+            "categories": request.categories
+        }
+    except Exception as e:
+        print(f"❌ Analyze endpoint hatası: {e}")
+        raise HTTPException(status_code=500, detail="Analiz hatası oluştu.")
+
+
+@app.get("/api/analyze-trends")
+async def analyze_trends_endpoint():
+    try:
+        latest = await model.get_latest_trend_data()
+        if not latest:
+            raise HTTPException(status_code=404, detail="Veri yok.")
+
+        text = f"Bu trendi analiz et: {latest['content']}"
+        analysis = await model.chat_with_ai(text)
+
+        return {
+            "status": "success",
+            "analysis": analysis,
+            "latest_trend": latest
+        }
+    except Exception as e:
+        print(f"❌ Analyze-trends hata: {e}")
+        raise HTTPException(status_code=500, detail="AI analiz hatası.")
+
+
+@app.post("/api/chat")
+async def chat_endpoint(request: ChatRequest):
+    """
+    JSON Body: { "message": "Merhaba" }
+    """
+    try:
+        if not request.message:
+            raise HTTPException(status_code=400, detail="message alanı gerekli")
+
+        response = await model.process_user_input(request.message)
+        
+        return {"reply": response} 
+    except Exception as e:
+        print(f"❌ Chat endpoint hatası: {e}")
+        raise HTTPException(status_code=500, detail="AI sohbet hatası.")

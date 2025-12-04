@@ -6,28 +6,21 @@ import json
 import datetime
 from pathlib import Path
 
-# --- YOL VE MODÜL AYARLAMALARI ---
-# Bu dosya konumu: scraper/scripts/test_system.py
 CURRENT_DIR = Path(__file__).resolve().parent # .../scraper/scripts
 ROOT_DIR = CURRENT_DIR.parent             # .../scraper (Proje Kök Dizini)
 
-# Kök dizini sys.path'e ekle (core modülünü bulabilmek için)
 sys.path.append(str(ROOT_DIR))
 
-# .env Dosyası Yolu
 ENV_PATH = ROOT_DIR / ".env"
 
-# --- GÜNCELLEME: dotenv'i en başta yükleyelim ---
 try:
     from dotenv import load_dotenv
-    # .env dosyasını zorla (override) yükle
     if ENV_PATH.exists():
         load_dotenv(dotenv_path=ENV_PATH, override=True)
 except ImportError:
     print("⚠️  HATA: 'python-dotenv' kütüphanesi eksik. Lütfen 'pip install python-dotenv' çalıştırın.")
     sys.exit(1)
 
-# Renk kodları (Çıktının okunabilir olması için)
 class Colors:
     GREEN = '\033[92m'
     RED = '\033[91m'
@@ -48,9 +41,6 @@ def run_test():
     print(f"{Colors.BLUE}   SİSTEM BAĞLANTI VE SAĞLIK TESTİ    {Colors.RESET}")
     print(f"{Colors.BLUE}========================================{Colors.RESET}\n")
 
-    # ---------------------------------------------------------
-    # ADIM 1: .env Kontrolü
-    # ---------------------------------------------------------
     print(f"{Colors.BLUE}--- ADIM 1: Ortam Değişkenleri (.env) ---{Colors.RESET}")
     
     if ENV_PATH.exists():
@@ -58,7 +48,6 @@ def run_test():
     else:
         print_status(".env Dosyası", "WARN", "Dosya bulunamadı! Sistem ortam değişkenlerini kullanacak.")
 
-    # Anahtarları kontrol et
     supa_url = os.getenv("SUPABASE_URL")
     supa_key = os.getenv("SUPABASE_KEY")
     ai_key = os.getenv("OPENROUTER_API_KEY")
@@ -73,9 +62,6 @@ def run_test():
     else:
         print_status("AI Key", "FAIL", "OPENROUTER_API_KEY eksik!")
 
-    # ---------------------------------------------------------
-    # ADIM 2: OpenRouter (AI) Bağlantı Testi
-    # ---------------------------------------------------------
     print(f"\n{Colors.BLUE}--- ADIM 2: AI API Testi (OpenRouter) ---{Colors.RESET}")
     if ai_key:
         try:
@@ -88,7 +74,6 @@ def run_test():
                 "messages": [{"role": "user", "content": "Say 'Test OK'"}],
                 "max_tokens": 10
             }
-            # Timeout ekledik ki sonsuza kadar beklemesin
             response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=data, timeout=10)
             
             if response.status_code == 200:
@@ -104,24 +89,18 @@ def run_test():
     else:
         print_status("AI Bağlantısı", "WARN", "Key olmadığı için test atlandı.")
 
-    # ---------------------------------------------------------
-    # ADIM 3: Supabase Veritabanı Yazma Testi (YENİ TABLO)
-    # ---------------------------------------------------------
     print(f"\n{Colors.BLUE}--- ADIM 3: Veritabanı Yazma Testi (Supabase) ---{Colors.RESET}")
     
     try:
-        # Dosya varlık kontrolü (Core klasörüne bakıyoruz)
         db_file_path = ROOT_DIR / "core" / "database_manager.py"
         
         if not db_file_path.exists():
              print_status("DB Modülü", "FAIL", f"'core/database_manager.py' dosyası bulunamadı! Yol: {db_file_path}")
         else:
             try:
-                # Import yolunu düzelttik: scraper.core -> core
                 from core.database_manager import DatabaseManager
                 db = DatabaseManager()
                 
-                # --- GÜNCELLEME: Yeni Tablo Yapısına Uygun Veri ---
                 test_payload = {
                     "category": "SYSTEM_TEST",
                     "data_type": "TEST_LOG",
@@ -136,7 +115,6 @@ def run_test():
                 
                 print("   ⏳ 'processed_data' tablosuna test verisi yazılıyor...")
                 
-                # Hedef tablo: processed_data
                 try:
                     result = db.insert_data("processed_data", [test_payload])
                     print_status("DB Yazma", "OK", "Başarıyla yazıldı!")

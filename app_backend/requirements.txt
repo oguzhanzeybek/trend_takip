@@ -19,4 +19,9 @@ webdriver-manager
 undetected-chromedriver
 setuptools
 requests
-beautifulsoup4
+beautifulsoup4fastapi             # API framework
+uvicorn             # FastAPI'yi çalıştırmak için sunucu
+python-dotenv       # Çevre değişkenlerini (.env) okumak için
+supabase-py         # Supabase ile iletişim kurmak için kütüphane
+pydantic            # Veri doğrulama ve veri yapıları için
+google-genai

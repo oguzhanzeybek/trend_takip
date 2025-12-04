@@ -7,29 +7,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# --- 1. YOL AYARLARI (AMAZON İLE AYNI) ---
-# Dosya Konumu: scraper/online_shopping/trendyol/trendyol.py
 CURRENT_DIR = Path(__file__).resolve().parent
-# Scraper kök dizinine çık (trendyol -> online_shopping -> scraper)
 ROOT_DIR = CURRENT_DIR.parent.parent
 
-# Kök dizini sisteme ekle
 sys.path.append(str(ROOT_DIR))
 
-# --- 2. MERKEZİ DRIVER ÇAĞRISI ---
 try:
     from core.driver_manager import get_chrome_driver
 except ImportError:
-    # Yedek yol denemesi
     sys.path.append(str(ROOT_DIR.parent))
     from scraper.core.driver_manager import get_chrome_driver
 
-# --- AYARLAR ---
 BASE_DIR = CURRENT_DIR
 
 print("🚀 Trendyol Scraper (Merkezi Sistem) Başlatılıyor...")
 
-# Merkezi yöneticiden driver al
 try:
     driver = get_chrome_driver()
 except Exception as e:
@@ -37,15 +29,12 @@ except Exception as e:
     sys.exit(1)
 
 try:
-    # Hedef Ana URL
     base_url = "https://www.trendyol.com/cok-satanlar?type=popular"
     
-    # 1. İlk açılış ve Kategori İsimlerini Hafızaya Alma
     print(f"🌐 Ana sayfaya gidiliyor: {base_url}")
     driver.get(base_url)
     time.sleep(5)
 
-    # Pop-up kapatma
     try:
         close_btn = driver.find_element(By.CLASS_NAME, "fancybox-close-small")
         close_btn.click()
@@ -64,7 +53,6 @@ try:
         
         for btn in buttons:
             txt = btn.text.strip()
-            # "Popüler Ürünler" zaten ana sayfa, onu da alabilir veya hariç tutabilirsin.
             if txt and txt not in category_names:
                 category_names.append(txt)
         
@@ -74,26 +62,21 @@ try:
         print("  ⚠️ Kategoriler alınamadı, sadece ana sayfa taranacak.")
         category_names = ["Popüler Ürünler"]
 
-    # 3. KATEGORİLERİ GEZ (HER SEFERİNDE ANA SAYFAYA DÖNEREK)
     all_products = []
 
     for target_cat_name in category_names:
         print(f"\n--- Sıradaki Hedef: {target_cat_name} ---")
         
         try:
-            # KRİTİK NOKTA: Her kategori öncesi sayfayı resetle (Ana sayfaya git)
-            # Bu, Trendyol'un dinamik yapısında elementlerin kaybolmasını önler.
             if target_cat_name != "Popüler Ürünler":
                 driver.get(base_url)
                 time.sleep(3) # Sayfanın oturmasını bekle
 
-                # Butonu tekrar bul (Sayfa yenilendiği için eski elementler öldü)
                 current_buttons = driver.find_elements(By.CSS_SELECTOR, "button.category-pill")
                 button_found = False
 
                 for btn in current_buttons:
                     if btn.text.strip() == target_cat_name:
-                        # Butonu bulduk, tıkla
                         driver.execute_script("arguments[0].click();", btn)
                         button_found = True
                         print(f"  🖱️ '{target_cat_name}' butonuna tıklandı.")
@@ -105,13 +88,11 @@ try:
 
                 time.sleep(3) # Ürünlerin yüklenmesi için bekle
             
-            # Kaydırma (Scroll)
             SCROLL_COUNT = 4 
             for i in range(SCROLL_COUNT):
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(1.5)
 
-            # Ürünleri Topla
             product_cards = driver.find_elements(By.CLASS_NAME, "product-card-link")
             print(f"  -> {len(product_cards)} ürün bulundu.")
 
@@ -137,15 +118,12 @@ except Exception as e:
     print(f"❌ Genel Hata: {e}")
 
 finally:
-    # Tarayıcıyı kapat
     try:
         driver.quit()
         print("🛑 Tarayıcı kapatıldı.")
     except: pass
 
-    # 4. DOSYA KAYDETME
     if all_products:
-        # Dosyayı scriptin olduğu yere kaydeder
         file_path = BASE_DIR / "trendyol.csv" # Dosya ismini standartlaştırdım
         
         try:

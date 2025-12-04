@@ -5,14 +5,10 @@ import time
 import datetime
 from pathlib import Path
 
-# --- 1. ORTAM DEĞİŞKENLERİ VE AYARLAR ---
-# main.py dosyasının olduğu klasör (scraper/) BASE_DIR olarak kabul edilir.
 BASE_DIR = Path(__file__).resolve().parent
 
-# Yolu sisteme ekle (Şu anki klasörü ve alt klasörleri görsün)
 sys.path.append(str(BASE_DIR))
 
-# .env Dosyasını Yükleme
 try:
     from dotenv import load_dotenv
     ENV_PATH = BASE_DIR / ".env"
@@ -21,29 +17,21 @@ try:
 except ImportError:
     print("⚠️ dotenv kütüphanesi yüklü değil, sistem değişkenleri kullanılacak.")
 
-# --- DÜZELTİLMİŞ IMPORTLAR ---
-# Klasör yapısı: scraper/core/database_manager.py
-# main.py scraper/ içinde olduğu için direkt core'dan import ediyoruz.
 try:
     from core.database_manager import DatabaseManager
 except ImportError as e:
     print(f"⚠️ DatabaseManager yüklenemedi: {e}")
     DatabaseManager = None
 
-# GITHUB ACTIONS ANAHTAR UYUMU
 if not os.getenv("OPENROUTER_API_KEY") and os.getenv("OPENROUTER_KEY"):
     os.environ["OPENROUTER_API_KEY"] = os.getenv("OPENROUTER_KEY")
     print("✅ Github Secret Eşleşmesi Sağlandı: OPENROUTER_KEY -> OPENROUTER_API_KEY")
 
 
-# --- 2. SABİTLER VE LİSTELER ---
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / "hata_kayitlari.txt"
 
-# DİKKAT: main.py zaten 'scraper/' klasörünün içinde.
-# Bu yüzden dosya yollarının başına 'scraper/' EKLEMİYORUZ.
-# 'scripts/' klasörüne taşınanları da güncelledik.
 
 SCRAPER_SCRIPTS = [
     "scripts/test_system.py",  # YENİ YERİ: scripts klasörü
@@ -68,10 +56,8 @@ AI_SCRIPTS = [
     "social_analysis/social_analysis.py"
 ]
 
-# YENİ YERİ: scripts/upload_all_csvs.py
 UPLOAD_SCRIPT = "scripts/upload_all_csvs.py"
 
-# --- 3. YARDIMCI FONKSİYONLAR ---
 
 def log_error(script_name, error_msg):
     """Hataları dosyaya kaydeder."""
@@ -89,7 +75,6 @@ def run_script(rel_path):
     """
     script_path = BASE_DIR / rel_path
     
-    # Dosya yolu kontrolü
     if not script_path.exists():
         msg = f"Dosya bulunamadı: {script_path}"
         print(f"⚠️  {msg} (Atlanıyor...)")
@@ -104,12 +89,10 @@ def run_script(rel_path):
     start_time = time.time()
     current_env = os.environ.copy()
 
-    # Python yolu ayarları: Core modüllerin bulunabilmesi için kök dizini ekle
     python_path = current_env.get("PYTHONPATH", "")
     current_env["PYTHONPATH"] = f"{BASE_DIR}{os.pathsep}{python_path}"
 
     try:
-        # Popen ile işlemi başlatıyoruz
         process = subprocess.Popen(
             [sys.executable, str(script_path)],
             cwd=script_path.parent,  # Scripti kendi klasöründe çalıştır
@@ -122,7 +105,6 @@ def run_script(rel_path):
             bufsize=1
         )
 
-        # Çıktıyı CANLI olarak okuyup ekrana basma
         for line in process.stdout:
             print(line, end='')
 
@@ -177,14 +159,12 @@ def save_system_report(start_time):
     
     try:
         print("\n📝 Sistem raporu veritabanına gönderiliyor...")
-        # DatabaseManager'ı core'dan import ettik, doğrudan kullanıyoruz
         db = DatabaseManager()
         db.insert_data("processed_data", [report_payload]) 
         print("✅ Rapor başarıyla processed_data tablosuna kaydedildi.")
     except Exception as e:
         print(f"⚠️ Rapor gönderme hatası: {e}")
 
-# --- 4. ANA FONKSİYON ---
 
 def main():
     if LOG_FILE.exists():
@@ -201,7 +181,6 @@ def main():
     else:
         print("⚠️ DatabaseManager pasif (Sadece log tutulacak).")
 
-    # --- 1. Veri Toplama ---
     print("\n┌──────────────────────────────┐")
     print("│ [1/4] VERİ TOPLAMA AŞAMASI   │")
     print("└──────────────────────────────┘")
@@ -209,28 +188,23 @@ def main():
         run_script(script)
         time.sleep(1)
     
-    # --- 2. Veri Birleştirme ---
     print("\n┌───────────────────────────────────┐")
     print("│ [2/4] VERİ BİRLEŞTİRME (MERGE)    │")
     print("└───────────────────────────────────┘")
     run_script(MERGER_SCRIPT)
 
-    # --- 3. AI Analiz ---
     print("\n┌───────────────────────────────────┐")
     print("│ [3/4] AI ANALİZ VE FİNAL KAYIT    │")
     print("└───────────────────────────────────┘")
     for script in AI_SCRIPTS:
         run_script(script)
 
-    # --- 4. CSV Yükleme (FİNAL ADIM) ---
     print("\n┌───────────────────────────────────┐")
     print("│ [4/4] CSV DOSYALARI YÜKLENİYOR    │")
     print("└───────────────────────────────────┘")
     
-    # Scripts klasöründeki upload scripti
     run_script(UPLOAD_SCRIPT)
 
-    # --- SON: Raporlama ---
     save_system_report(global_start)
 
     print("\n🎉 TÜM İŞLEMLER SONA ERDİ!")

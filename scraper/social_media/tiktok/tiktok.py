@@ -7,12 +7,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# --- YOL AYARLARI (Korundu) ---
 CURRENT_DIR = Path(__file__).resolve().parent
 ROOT_DIR = CURRENT_DIR.parent.parent 
 sys.path.append(str(ROOT_DIR))
 
-# --- MERKEZİ DRIVER ÇAĞRISI (Korundu) ---
 try:
     from core.driver_manager import get_chrome_driver
 except ImportError:
@@ -21,7 +19,6 @@ except ImportError:
 
 BASE_DIR = CURRENT_DIR
 
-# 🚨 DEBUG KLASÖRÜ TANIMI
 DEBUG_DIR = BASE_DIR / "debug_tiktok_live"
 DEBUG_DIR.mkdir(exist_ok=True)
 
@@ -36,8 +33,6 @@ def scrape_tiktok_trends():
         driver = get_chrome_driver()
         wait = WebDriverWait(driver, 60)
         
-        # -------------------------------------------------------------------------
-        # KONUM TAKLİDİ (Korundu)
         print("🌍 Konum taklidi (İstanbul) uygulanıyor.")
         driver.execute_cdp_cmd(
             "Emulation.setGeolocationOverride",
@@ -47,23 +42,17 @@ def scrape_tiktok_trends():
                 "accuracy": 100,
             }
         )
-        # -------------------------------------------------------------------------
 
         url = "https://www.tiktok.com/tag/trend?lang=tr"
         print(f"🌐 Gidiliyor: {url}")
         driver.get(url)
         time.sleep(random.uniform(3, 5)) 
         
-        # -------------------------------------------------------------------------
-        # 📸 KRİTİK DEBUG ADIMI: İLK SAYFA YÜKLEMESİNDE EKRAN GÖRÜNTÜSÜ
-        # -------------------------------------------------------------------------
         screenshot_path_initial = DEBUG_DIR / f"01_initial_load.png"
         driver.save_screenshot(str(screenshot_path_initial))
         print(f"📸 DEBUG: İlk sayfa görüntüsü alındı: {screenshot_path_initial}")
 
 
-        # 1. ÇEREZLERİ GEÇ
-        # ... (Çerez kodları korundu)
         try:
             print("  🍪 Çerezler bekleniyor...")
             cookie_btn = wait.until(
@@ -75,7 +64,6 @@ def scrape_tiktok_trends():
         except:
             pass
 
-        # 2. HATA EKRANI KONTROLÜ (Sayfa yenileme)
         try:
             error_message = driver.find_elements(By.XPATH, "//*[contains(text(), 'Bir şeyler ters gitti') or contains(text(), 'Something went wrong')]")
             if len(error_message) > 0:
@@ -85,18 +73,13 @@ def scrape_tiktok_trends():
         except:
             pass
         
-        # -------------------------------------------------------------------------
-        # 📸 KRİTİK DEBUG ADIMI: HATA SONRASI YENİLEME GÖRÜNTÜSÜ
-        # -------------------------------------------------------------------------
         screenshot_path_after_refresh = DEBUG_DIR / f"02_after_refresh.png"
         driver.save_screenshot(str(screenshot_path_after_refresh))
         print(f"📸 DEBUG: Yenileme sonrası görüntü alındı: {screenshot_path_after_refresh}")
 
 
-        # 3. İÇERİK BEKLEME VE KAYDIRMA
         TARGET_SELECTOR = "[data-e2e='challenge-item-desc']"
 
-        # ... (İçerik bekleme ve kaydırma kodları korundu)
         try:
             print("  ⏳ İlk içerik yüklenmesi bekleniyor...")
             wait.until(
@@ -107,7 +90,6 @@ def scrape_tiktok_trends():
             print("  ⚠️ İçerik yüklenmesi zaman aşımına uğradı. Kaydırmaya geçiliyor.")
             pass 
 
-        # Kaydırma Ayarları
         TARGET_SCROLL_COUNT = 40
         SCROLL_PAUSE_TIME_RANGE = (2.5, 4.5)
         
@@ -131,12 +113,10 @@ def scrape_tiktok_trends():
             if (i + 1) % 10 == 0:
                 print(f"  -> {i + 1}. kaydırma tamamlandı.")
 
-        # 4. VERİ TOPLAMA
         print("📦 Hashtag'ler toplanıyor...")
         desc_elements = driver.find_elements(By.CSS_SELECTOR, TARGET_SELECTOR)
         print(f"  -> Toplam {len(desc_elements)} potansiyel açıklama bulundu.")
 
-        # ... (Hashtag toplama kodları korundu)
         for el in desc_elements:
             try:
                 full_text = el.text 
@@ -165,7 +145,6 @@ def scrape_tiktok_trends():
             driver.quit()
             print("🛑 Tarayıcı kapatıldı.")
 
-        # --- DOSYA KAYIT (STANDART BLOK) ---
         output_filename = "tiktok_trends.csv"
         output_path = BASE_DIR / output_filename
 
