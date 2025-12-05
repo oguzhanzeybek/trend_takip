@@ -2,13 +2,16 @@ name: Gunluk Trend Takipcisi
 
 on:
   schedule:
-    # Her gün sabah 09:00 ve akşam 21:00'de çalışır (UTC saatiyle)
-    - cron: '0 6,18 * * *'
-  workflow_dispatch: # GitHub üzerinden manuel butonla çalıştırmak için
+    - cron: '0 6,18 * * *' # Sabah 09:00 ve Akşam 21:00
+  workflow_dispatch:
+
+permissions:
+  contents: write # Dosyayı repoya kaydetmek için gerekli izin
 
 jobs:
   scrape-and-process:
     runs-on: ubuntu-latest
+    timeout-minutes: 15 # 15 dk sonra otomatik durdur (Takılmayı önler)
 
     steps:
     - name: Depoyu Çek (Checkout)
@@ -23,31 +26,38 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y chromium-browser chromium-chromedriver
-        which chromium-browser
-        which chromedriver
+    
     - name: Kütüphaneleri Yükle
       run: |
         python -m pip install --upgrade pip
-        # Scraper klasöründeki gereksinimleri yükle
         pip install -r scraper/requirements.txt
+
     - name: Ustabaşı Scriptini Çalıştır
       env:
-        # Bu şifreleri GitHub ayarlarından çekecek
-        
+        PYTHONUNBUFFERED: "1" # Logları anlık gösterir
         SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
         SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         OPENROUTER_KEY: ${{ secrets.OPENROUTER_KEY }}
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_KEY }}
       run: |
-        # Main scripti çalıştır
         python scraper/main.py
 
-
-        # --- DOSYA KAYDETME BÖLÜMÜ ---
-    - name: Sonuçları Yükle (Artifact Upload)
-      if: always() # Hata alsa bile eğer dosya oluşmuşsa yüklemeyi dener
-      uses: actions/upload-artifact@v4
-      with:
-        name: n11-sonuclari
-        path: scraper/n11_sonuc.csv
-        retention-days: 5 # Dosya 5 gün boyunca indirilebilir kalır
+    # --- KAYIT BÖLÜMÜ ---
+    - name: CSV'yi Repoya Kaydet (Commit & Push)
+      run: |
+        git config --global user.name 'Trend Botu'
+        git config --global user.email 'bot@github.com'
+        
+        # SİGORTA ADIMI:
+        # Eğer Python hala eski ismi (n11_sonuc) üretiyorsa, ismini trend_takip yapalım:
+        if [ -f scraper/n11_sonuc.csv ]; then
+          mv scraper/n11_sonuc.csv scraper/trend_takip.csv
+          echo "Dosya ismi n11_sonuc -> trend_takip olarak değiştirildi."
+        fi
+        
+        # Dosyayı ekle (Dosya yoksa hata verme, loga yaz)
+        git add scraper/trend_takip.csv || echo "⚠️ Kaydedilecek dosya bulunamadı!"
+        
+        # Değişiklik varsa commit at ve gönder
+        git commit -m "📈 Trend Takip Verisi: $(date +'%Y-%m-%d %H:%M')" || echo "Değişiklik yok."
+        git push
