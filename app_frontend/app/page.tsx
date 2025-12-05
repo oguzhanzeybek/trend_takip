@@ -1,77 +1,120 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Send, Bot, User, MoreVertical, AlertCircle, RefreshCw } from "lucide-react";
-import ReactMarkdown from "react-markdown"; // AI cevaplarını güzel göstermek için
+import ReactMarkdown from "react-markdown";
+import { 
+  Bot, 
+  Trash2,
+  ArrowUp,
+  Cpu,
+  Activity,
+  Sparkles,
+  Zap,
+  Globe,
+  BarChart3,
+  RefreshCcw,
+  Search,
+  TrendingUp
+} from "lucide-react";
 
-// API URL Ayarı
-// Eğer Backend'i Render'a yüklediysen buraya Render URL'ini yaz.
-// Local test için: "http://127.0.0.1:8000"
+// API URL
 const API_BASE_URL = "http://127.0.0.1:8000";
 
 type ChatMessage = { 
   role: "user" | "bot" | "error"; 
-  content: string 
+  content: string;
 };
+
+const LOADING_TEXTS = [
+  "Veri setleri taranıyor...",
+  "Trend analizleri yapılıyor...",
+  "İstatistikler işleniyor...",
+  "Yanıt hazırlanıyor..."
+];
+
+const SUGGESTIONS = [
+  { icon: <Globe size={20} className="text-cyan-400"/>, title: "Global Trendler", prompt: "Dünya genelinde şu an yükselen teknoloji trendleri neler?" },
+  { icon: <BarChart3 size={20} className="text-violet-400"/>, title: "Pazar Analizi", prompt: "Türkiye'deki e-ticaret pazarında son 1 ayda neler değişti?" },
+  { icon: <Zap size={20} className="text-yellow-400"/>, title: "Viral Ürünler", prompt: "TikTok'ta viral olan son 3 ürünü listele ve analiz et." },
+  { icon: <Sparkles size={20} className="text-pink-400"/>, title: "İçerik Fikri", prompt: "Moda sektörü için YouTube Shorts video fikirleri üret." },
+];
 
 export default function ChatPage() {
   const [chatInput, setChatInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0); 
+  const [isFocused, setIsFocused] = useState(false);
+  
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // --- AUTO-FOCUS ---
+  useEffect(() => {
+    if (!loading && textareaRef.current) {
+      setTimeout(() => textareaRef.current?.focus(), 10);
+    }
+  }, [loading]);
 
   // Otomatik kaydırma
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  const handleSendMessage = async () => {
-    if (!chatInput.trim() || loading) return;
+  // Loading Text Döngüsü
+  useEffect(() => {
+    if (!loading) {
+      setLoadingStep(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setLoadingStep((prev) => (prev + 1) % LOADING_TEXTS.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [loading]);
 
-    const userMessageText = chatInput;
-    setChatInput(""); // Inputu hemen temizle
+  // Textarea Yükseklik
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`;
+    }
+  }, [chatInput]);
 
-    // 1. Kullanıcı mesajını ekrana bas
-    setMessages((prev) => [...prev, { role: "user", content: userMessageText }]);
+  const handleSendMessage = async (textOverride?: string) => {
+    const textToSend = textOverride || chatInput;
+    if (!textToSend.trim() || loading) return;
+
+    setChatInput(""); 
+    if (textareaRef.current) textareaRef.current.style.height = "auto"; 
+
+    setMessages((prev) => [...prev, { role: "user", content: textToSend }]);
     setLoading(true);
 
     try {
-      // 2. Backend'e İstek At (POST /api/chat)
       const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // Backend'deki Pydantic modeli: class ChatRequest(BaseModel): message: str
-        body: JSON.stringify({ message: userMessageText }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: textToSend }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Sunucu Hatası: ${response.status}`);
-      }
-
+      if (!response.ok) throw new Error(`Hata: ${response.status}`);
       const data = await response.json();
 
-      // 3. Backend'den gelen cevabı ekle ({ "reply": "..." })
       if (data.reply) {
         setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
       } else {
-        throw new Error("Boş cevap döndü.");
+        throw new Error("Boş cevap.");
       }
 
     } catch (err) {
-      console.error("Chat Hatası:", err);
-      setMessages((prev) => [
-        ...prev,
-        { role: "error", content: "Sunucuya ulaşılamadı. Lütfen internet bağlantınızı veya Backend servisini kontrol edin." }
-      ]);
+      setMessages((prev) => [...prev, { role: "error", content: "Bağlantı hatası oluştu." }]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Enter tuşu kontrolü (Shift+Enter alt satıra geçer)
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -79,114 +122,209 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex flex-col h-screen max-h-screen bg-zinc-950 text-white font-sans">
+    <div className="flex flex-col h-full bg-[#030304] text-white font-sans relative overflow-hidden selection:bg-cyan-500/30">
       
-      {/* HEADER */}
-      <header className="h-16 border-b border-zinc-900 flex items-center justify-between px-6 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-20">
+      {/* --- AMBİYANS IŞIKLARI --- */}
+      <div className="fixed top-[-20%] left-1/4 w-[600px] h-[600px] bg-indigo-900/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-20%] right-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+      {/* --- HEADER --- */}
+      <header className="h-16 flex items-center justify-between px-6 sticky top-0 z-20 bg-[#030304]/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className={`w-2.5 h-2.5 rounded-full ${loading ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'} shadow-[0_0_10px_currentColor]`}></div>
-              {loading && <div className="absolute inset-0 w-2.5 h-2.5 bg-yellow-500 rounded-full animate-ping opacity-75"></div>}
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 flex items-center justify-center shadow-[0_0_15px_-3px_rgba(99,102,241,0.4)] border border-white/10">
+              <Bot size={18} className="text-white" />
             </div>
             <div>
-                <h2 className="font-semibold text-sm tracking-wide">TrendAI Asistan</h2>
-                <p className="text-[10px] text-zinc-500 font-medium">
-                  {loading ? "Yazıyor..." : "Çevrimiçi • v1.0"}
-                </p>
-            </div>
-        </div>
-        <button className="text-zinc-500 hover:text-white transition-colors" title="Ayarlar">
-          <MoreVertical className="w-5 h-5"/>
-        </button>
-      </header>
-
-      {/* MESAJ ALANI */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
-        
-        {messages.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center text-center opacity-60 select-none animate-in fade-in zoom-in duration-500">
-                <div className="w-24 h-24 bg-zinc-900 rounded-full flex items-center justify-center mb-6 shadow-2xl shadow-blue-900/20 border border-zinc-800">
-                  <Bot className="w-10 h-10 text-blue-500" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  Nasıl yardımcı olabilirim?
-                </h3>
-                <p className="text-sm text-zinc-400 max-w-xs mx-auto leading-relaxed">
-                  "TikTok trendlerini analiz et", "Altın fiyatları ne durumda?" veya "Son dakika haberleri" diyebilirsiniz.
-                </p>
-            </div>
-        )}
-
-        {messages.map((msg, i) => (
-            <div key={i} className={`flex w-full ${msg.role === "user" ? "justify-end" : "justify-start"} animate-in slide-in-from-bottom-2 duration-300`}>
-              <div className={`flex max-w-[90%] md:max-w-[75%] gap-3 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                
-                {/* Avatar */}
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 shadow-lg ${
-                  msg.role === "user" ? "bg-zinc-800 border border-zinc-700" : 
-                  msg.role === "error" ? "bg-red-900/20 border border-red-500/30" : "bg-gradient-to-br from-blue-600 to-indigo-600 border border-blue-500/30"
-                }`}>
-                  {msg.role === "user" ? <User className="w-4 h-4 text-zinc-400"/> : 
-                   msg.role === "error" ? <AlertCircle className="w-4 h-4 text-red-500"/> : <Bot className="w-4 h-4 text-white"/>}
-                </div>
-
-                {/* Balon */}
-                <div className={`px-5 py-3.5 rounded-2xl text-[15px] leading-relaxed shadow-md ${
-                  msg.role === "user" 
-                    ? "bg-zinc-800 text-white rounded-tr-sm border border-zinc-700" 
-                    : msg.role === "error" 
-                    ? "bg-red-950/30 border border-red-900 text-red-400 rounded-tl-sm"
-                    : "bg-zinc-900/80 border border-zinc-800/80 text-gray-200 rounded-tl-sm backdrop-blur-sm"
-                }`}>
-                  {msg.role === "bot" ? (
-                    // Markdown Render Edici (Bold, Liste vb. için)
-                    <div className="prose prose-invert prose-sm max-w-none">
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
-                    </div>
-                  ) : (
-                    msg.content
-                  )}
-                </div>
+              <h2 className="font-bold text-lg tracking-tight text-white">
+                TrendAI
+              </h2>
+              <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                  <span className="text-[10px] text-zinc-400 font-medium tracking-wide">SYSTEM ONLINE</span>
               </div>
             </div>
-        ))}
+        </div>
+        <div>
+            {messages.length > 0 && (
+                <button 
+                    onClick={() => setMessages([])} 
+                    className="p-2 text-zinc-500 hover:text-red-400 hover:bg-white/5 rounded-lg transition-all"
+                    title="Sohbeti Temizle"
+                >
+                    <Trash2 size={18}/>
+                </button>
+            )}
+        </div>
+      </header>
 
-        {loading && (
-             <div className="flex w-full justify-start animate-fade-in pl-11">
-                <div className="bg-zinc-900 border border-zinc-800 px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1.5 shadow-sm">
-                   <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></span>
-                   <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-75"></span>
-                   <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-150"></span>
+      {/* --- SOHBET ALANI --- */}
+      <div className="flex-1 overflow-y-auto relative z-10 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+        <div className="max-w-3xl mx-auto px-4 py-8 min-h-full flex flex-col justify-end">
+            
+            {/* HOŞGELDİN EKRANI (MODERN KUTUCUKLAR) */}
+            {messages.length === 0 && (
+                <div className="flex flex-col items-center justify-center h-full pb-20 animate-in fade-in zoom-in duration-700">
+                    
+                    {/* İkon & Başlık */}
+                    <div className="mb-6 relative">
+                        <div className="absolute inset-0 bg-cyan-500/30 blur-2xl rounded-full"></div>
+                        <div className="relative bg-zinc-900 p-4 rounded-2xl border border-white/10 shadow-xl">
+                            <TrendingUp size={36} className="text-cyan-400" />
+                        </div>
+                    </div>
+
+                    <h1 className="text-4xl font-bold mb-2 text-center tracking-tight">
+                        <span className="bg-gradient-to-r from-white via-cyan-100 to-zinc-400 bg-clip-text text-transparent">
+                            Merhaba, TrendAI'a Hoş Geldin
+                        </span>
+                    </h1>
+                    <p className="text-zinc-500 text-center mb-10 max-w-md">
+                        Pazar verilerini analiz etmeye hazırım. Aşağıdaki konulardan birini seçerek başlayabilirsin.
+                    </p>
+                    
+                    {/* Modern Kartlar */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-2xl">
+                        {SUGGESTIONS.map((s, i) => (
+                            <button 
+                                key={i}
+                                onClick={() => handleSendMessage(s.prompt)}
+                                className="group relative p-4 bg-zinc-900/40 hover:bg-zinc-800/80 border border-white/5 hover:border-cyan-500/20 rounded-2xl text-left transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden"
+                            >
+                                {/* Hover Gradient Efekti */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-transparent to-transparent group-hover:from-cyan-500/5 transition-all duration-500"></div>
+                                
+                                <div className="relative z-10 flex items-start gap-4">
+                                    <div className="p-2.5 rounded-xl bg-zinc-900 border border-white/5 group-hover:bg-zinc-800 group-hover:scale-110 transition-all duration-300">
+                                        {s.icon}
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="font-semibold text-zinc-200 text-sm mb-1 group-hover:text-white transition-colors">
+                                            {s.title}
+                                        </h3>
+                                        <p className="text-xs text-zinc-500 leading-relaxed group-hover:text-zinc-400">
+                                            {s.prompt}
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
                 </div>
-             </div>
-        )}
-        <div ref={chatEndRef} className="h-4" />
+            )}
+
+            {/* MESAJ AKIŞI */}
+            <div className="space-y-8">
+                {messages.map((msg, i) => (
+                    <div key={i} className={`flex gap-4 animate-in fade-in slide-in-from-bottom-2 duration-300 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        
+                        {/* Bot Avatar */}
+                        {msg.role !== 'user' && (
+                            <div className="w-8 h-8 mt-1 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-indigo-500/20">
+                                {msg.role === 'error' ? <Zap size={16} className="text-white"/> : <Sparkles size={16} className="text-white"/>}
+                            </div>
+                        )}
+
+                        {/* --- SOHBET YAPISI --- */}
+                        <div className={`
+                          relative max-w-[85%]
+                          ${msg.role === 'user' 
+                            // USER: Şık, hafif neonlu balon.
+                            ? 'bg-[#1e1e2e] border border-white/10 text-white px-5 py-3 rounded-2xl rounded-tr-sm shadow-md' 
+                            
+                            // BOT: SADECE METİN (Balon yok, şeffaf)
+                            : 'bg-transparent text-zinc-300 px-0 py-1'
+                          }
+                        `}>
+                             {/* Bot İsmi */}
+                             {msg.role === 'bot' && (
+                                <div className="text-[10px] font-bold text-cyan-500 mb-1 opacity-80 uppercase tracking-widest">TrendAI</div>
+                             )}
+
+                             {msg.role === 'bot' ? (
+                                <div className="prose prose-invert prose-p:text-zinc-300 prose-headings:text-cyan-100 prose-strong:text-white max-w-none text-[15px] leading-relaxed">
+                                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                                </div>
+                             ) : (
+                                <p className="whitespace-pre-wrap leading-relaxed text-[15px] font-normal">{msg.content}</p>
+                             )}
+                        </div>
+                    </div>
+                ))}
+
+                {/* --- YÜKLENİYOR İNDİKATÖRÜ --- */}
+                {loading && (
+                    <div className="flex gap-4 animate-in fade-in duration-300 justify-start pl-1">
+                         <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center flex-shrink-0">
+                            <Activity size={16} className="text-cyan-500 animate-pulse"/>
+                        </div>
+                        <div className="flex flex-col justify-center gap-1.5 min-w-[200px]">
+                            <span className="text-xs font-mono text-cyan-400 font-medium tracking-wide animate-pulse">
+                                {LOADING_TEXTS[loadingStep]}
+                            </span>
+                            <div className="h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
+                                <div className="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 w-1/3 rounded-full animate-[shimmer_1s_infinite]"></div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                
+                <div ref={chatEndRef} className="h-4" />
+            </div>
+        </div>
       </div>
 
-      {/* INPUT ALANI */}
-      <div className="p-4 md:p-6 bg-zinc-950 border-t border-zinc-900/80">
-        <div className="relative flex items-center max-w-4xl mx-auto w-full group">
-            <input 
-              type="text" 
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Merak ettiğin bir trendi sor..."
-              disabled={loading}
-              className="w-full bg-zinc-900/50 border border-zinc-800 rounded-2xl pl-6 pr-14 py-4 text-white focus:outline-none focus:border-blue-600/50 focus:ring-1 focus:ring-blue-600/50 transition-all placeholder:text-zinc-600 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-            />
-            <button 
-              onClick={handleSendMessage}
-              disabled={!chatInput.trim() || loading}
-              className="absolute right-3 p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl disabled:opacity-50 disabled:bg-zinc-800 disabled:text-zinc-500 transition-all duration-200 shadow-lg hover:shadow-blue-600/20 active:scale-95"
+      {/* --- INPUT ALANI (DAHA PARLAK & NET) --- */}
+      <div className="p-4 relative z-30">
+        <div className="max-w-2xl mx-auto">
+            <div 
+              className={`
+                relative rounded-[26px] transition-all duration-300 ease-out flex items-end
+                ${isFocused 
+                  ? "bg-[#18181b] border border-white/90 shadow-[0_0_30px_0px_rgba(255,255,255,0.3)]" // Focus: Daha aydınlık + Cyan glow
+                  : "bg-[#18181b] border border-white/30 shadow-lg" // Default: Rengi açtık (#18181b) ve border'ı belirginleştirdik
+                }
+              `}
             >
-              {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-            </button>
-        </div>
-        <div className="text-center mt-3">
-          <p className="text-[11px] text-zinc-600">AI yanıtları hatalı olabilir. Önemli kararlar için verileri doğrulayın.</p>
+                <textarea
+                    ref={textareaRef}
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    autoFocus
+                    placeholder="Merak ettiğin bir trend var mı?"
+                    rows={1}
+                    className="w-full bg-transparent text-white pl-6 py-4 rounded-[26px] focus:outline-none resize-none max-h-[150px] overflow-y-auto scrollbar-hide placeholder:text-zinc-500 font-normal text-[15px] z-10"
+                />
+                
+                <button 
+                    onClick={() => handleSendMessage()}
+                    disabled={!chatInput.trim() || loading}
+                    className={`
+                        m-2 p-2.5 rounded-full transition-all duration-300 flex items-center justify-center flex-shrink-0 z-10
+                        ${chatInput.trim() && !loading
+                            ? "bg-white text-black hover:bg-zinc-200 hover:scale-105 shadow-md" 
+                            : "bg-zinc-700/50 text-zinc-500 cursor-not-allowed"}
+                    `}
+                >
+                    {loading ? <RefreshCcw size={18} className="animate-spin"/> : <ArrowUp size={20} strokeWidth={2.5} />}
+                </button>
+            </div>
+            
+            <p className="text-center mt-3 text-[10px] text-zinc-600 font-medium">
+                TrendAI, pazar verilerini anlık analiz eder.
+            </p>
         </div>
       </div>
+      
+      <style jsx global>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(300%); }
+        }
+      `}</style>
+
     </div>
   );
 }
