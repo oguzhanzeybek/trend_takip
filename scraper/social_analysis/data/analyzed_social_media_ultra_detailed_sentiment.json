@@ -1,57 +1,47 @@
 {
-    "analiz_tarihi": "2025-12-03 17:14:10",
+    "analiz_tarihi": "2025-12-09 13:46:13",
     "analiz_kaynağı": "social_media.csv",
-    "genel_değerlendirme": "Veriler, halkın ruh halinin karmaşık bir yapıda olduğunu gösteriyor. İnsanlar arasında genel bir huzursuzluk ve belirsizlik hâkim. Sosyal medya paylaşımlarında öne çıkan duygular, kaygı ve öfke ile birlikte, alaycı bir mizah anlayışını da içermekte. Bu durum, toplumun genelinde bir bıkkınlık ve çaresizlik hissiyatını ortaya koyuyor.",
+    "genel_değerlendirme": "Veriler, toplumun genelinde bir belirsizlik ve huzursuzluk hissiyatının hakim olduğunu göstermektedir. İnsanlar, sosyal medya üzerinden paylaştıkları içeriklerde sıkça kaygı ve endişe ifadeleri kullanırken, bu duyguların ardında yatan nedenler ise ekonomik sıkıntılar ve sosyal adaletsizlikler olarak öne çıkmaktadır. Ayrıca, bireylerin duygusal durumları, toplumsal olaylara ve güncel gelişmelere bağlı olarak dalgalanmaktadır.",
     "ana_duygular": [
         {
             "duygu": "Kaygı",
-            "skor": 78,
-            "gerekçe": "Halk, ekonomik belirsizlikler ve siyasi durumlar hakkında endişelerini dile getiriyor."
+            "skor": 85,
+            "gerekçe": "Ekonomik belirsizlikler, işsizlik oranlarındaki artış ve sosyal adaletsizlikler."
         },
         {
             "duygu": "Öfke",
-            "skor": 65,
-            "gerekçe": "Sosyal adaletsizlikler ve hükümet politikalarına karşı duyulan öfke, paylaşımlarda sıkça yer almakta."
-        },
-        {
-            "duygu": "Alaycı Neşe",
-            "skor": 55,
-            "gerekçe": "Zorlu koşullar altında bile mizahi bir yaklaşım benimseyen paylaşımlar artmakta."
+            "skor": 75,
+            "gerekçe": "Yetersiz hükümet politikaları ve sosyal hizmetlerdeki eksiklikler."
         }
     ],
     "baskin_gundemler": [
         {
             "konu": "Ekonomik Kriz",
-            "köken": "Yüksek enflasyon, işsizlik oranları ve yaşam standartlarının düşmesi üzerine yapılan paylaşımlar."
-        },
-        {
-            "konu": "Siyasi Olaylar",
-            "köken": "Seçim süreçleri ve siyasi liderlerin açıklamalarına dair tepkiler."
+            "köken": "Yüksek enflasyon oranları, işsizlik ve yaşam standartlarının düşmesi üzerine yapılan paylaşımlar."
         },
         {
             "konu": "Sosyal Adalet",
-            "köken": "Toplumda artan eşitsizlik ve adaletsizlik konularında yapılan tartışmalar."
+            "köken": "Toplumsal eşitsizlikler ve protesto hareketleri ile ilgili içerikler."
+        },
+        {
+            "konu": "Sağlık Politikaları",
+            "köken": "Covid-19 sonrası sağlık hizmetlerindeki yetersizlikler ve aşı politikaları hakkında yapılan tartışmalar."
         }
     ],
     "harcama_egilimi_analizi": {
-        "egilim": "Tüketiciler, temel ihtiyaç maddelerine yönelirken lüks harcamalarda azalma gözlemleniyor.",
-        "sektor_etkisi": "Gıda sektörü artış gösterirken, giyim ve eğlence sektörlerinde belirgin bir düşüş yaşanmakta."
+        "egilim": "Tüketicilerin temel ihtiyaçlar için harcama yapma eğiliminde artış, lüks tüketimden uzaklaşma.",
+        "sektor_etkisi": "Gıda ve sağlık sektörleri ön planda; insanlar gıda fiyatlarındaki artıştan şikayet ederken, sağlık hizmetlerine daha fazla harcama yapma gereği hissediyor."
     },
     "gelecek_tahminleri": [
         {
-            "tahmin": "Ekonomik belirsizliklerin artması",
+            "tahmin": "Ekonomik durumun daha da kötüleşmesi",
             "risk_seviyesi": "Yüksek",
-            "neden": "Devam eden enflasyon ve işsizlik oranlarının yükselmesi."
-        },
-        {
-            "tahmin": "Siyasi gerilimlerin tırmanması",
-            "risk_seviyesi": "Orta",
-            "neden": "Seçim sürecinin yaklaşması ve toplumda artan kutuplaşma."
+            "neden": "Devam eden enflasyon ve işsizlik oranlarının artışı."
         },
         {
             "tahmin": "Sosyal hareketlerin artması",
             "risk_seviyesi": "Orta",
-            "neden": "Toplumun adalet arayışının devam etmesi."
+            "neden": "Halkın artan sosyal adalet talepleri ve mevcut hükümet politikalarına karşı duyulan öfke."
         }
     ]
 }

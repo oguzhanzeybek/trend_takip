@@ -122,8 +122,8 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
       "kaynak_dosya": "Ham verinin ilk sütunundaki değer,markası veya benzersiz kimliği.",
       "urun_adi": "Ürün Adı (Mutlaka KISALTILMIŞ ama ürün belirlenebilir olacak şekilde.)", 
       "fiyat": "sayısal değer olarak fiyat ve para birimi(varsa). Yoksa "-" işareti.", 
-      "potansiyel_skoru": "0-100 arası tamsayı .Potansiyel Skorunu pazara ve kendi verilerine ve marketlere göre belirle ve bana gerçeğe en yakın skoru ver.",
-      "not": "Kısa açıklama/etiket (Örn: Erken Trend Sinyali, Vegan Alternatif, İşletme Verimliliği gibi ürünle alakalı kendi mantığınla ürettiğin  3 kısa etiket oluştur ürünle alakalı.etiketleri # ile başlat.)"
+      "potansiyel_skoru": "0-100 arası tamsayı üret ürünün potansiyel tutulma skoruyla alakalı .Potansiyel Skorunu pazara ve kendi verilerine ve marketlere göre belirle ve bana gerçeğe en yakın skoru ver.",
+      "not": "Kısa açıklama/etiket (Örn: Erken Trend Sinyali, Vegan Alternatif, İşletme Verimliliği gibi ürünle alakalı kendi mantığınla ürettiğin  10 kısa etiket oluştur ürünle alakali olsunlar , ürünü yansitsinlar.etiketleri # ile başlat.)"
     }}]
     """
     
