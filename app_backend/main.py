@@ -151,3 +151,82 @@ async def chat_endpoint(request: ChatRequest):
     except Exception as e:
         print(f"❌ Chat endpoint hatası: {e}")
         raise HTTPException(status_code=500, detail="AI sohbet hatası.")
+    
+    
+    from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional
+from dotenv import load_dotenv
+
+# Doğru import (Yanındaki model.py dosyasını çağırır)
+import model  
+
+load_dotenv()
+
+app = FastAPI(title="Trend Takip AI Analiz Servisi")
+
+# --- MODEL TANIMLARI ---
+class ChatRequest(BaseModel):
+    message: str
+
+class AnalyzeRequest(BaseModel):
+    message: str
+    categories: Optional[List[str]] = []
+
+class TrendSaveRequest(BaseModel):
+    content: str
+
+# --- CORS AYARLARI ---
+origins = ["*"] # Tüm kaynaklara izin ver (Test için)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- ENDPOINTLER ---
+
+@app.get("/")
+def read_root():
+    return {"message": "Trend Takip AI Analiz Servisi Aktif 🚀"}
+
+# 1. Dashboard İstatistikleri (DÜZELTİLDİ)
+@app.get("/api/stats")
+async def dashboard_stats_endpoint(time_range: str = "24h"):
+    try:
+        # model.py içindeki fonksiyonu çağırıyoruz
+        stats = await model.get_dashboard_stats(time_range)
+        
+        if stats:
+            return stats
+            
+        # Hata durumunda boş şablon dön
+        return {
+            "period_count": 0, "total_archive": 0,
+            "sources": {"google": 0, "ecommerce": 0, "social": 0, "news": 0},
+            "chart_data": [], "recent_activities": [],
+            "ai_insight": "Veri yok.", "system_status": "Veri Bekleniyor"
+        }
+    except Exception as e:
+        print(f"❌ İstatistik hatası: {e}")
+        raise HTTPException(status_code=500, detail="İstatistikler alınamadı.")
+
+# 2. Chat
+@app.post("/api/chat")
+async def chat_endpoint(request: ChatRequest):
+    try:
+        response = await model.process_user_input(request.message)
+        return {"reply": response} 
+    except Exception as e:
+        print(f"Chat error: {e}")
+        return {"reply": "Hata oluştu."}
+
+# 3. Ham Veri
+@app.get("/api/raw-data")
+async def get_raw_data_endpoint(limit: int = 40):
+    items = await model.get_filtered_raw_data([], limit)
+    return {"status": "success", "raw_data": items}

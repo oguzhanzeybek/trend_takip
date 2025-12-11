@@ -1,47 +1,47 @@
 {
-    "analiz_tarihi": "2025-12-09 13:46:13",
+    "analiz_tarihi": "2025-12-10 14:30:21",
     "analiz_kaynağı": "social_media.csv",
-    "genel_değerlendirme": "Veriler, toplumun genelinde bir belirsizlik ve huzursuzluk hissiyatının hakim olduğunu göstermektedir. İnsanlar, sosyal medya üzerinden paylaştıkları içeriklerde sıkça kaygı ve endişe ifadeleri kullanırken, bu duyguların ardında yatan nedenler ise ekonomik sıkıntılar ve sosyal adaletsizlikler olarak öne çıkmaktadır. Ayrıca, bireylerin duygusal durumları, toplumsal olaylara ve güncel gelişmelere bağlı olarak dalgalanmaktadır.",
+    "genel_değerlendirme": "Veriler, toplumun genel ruh halinin karmaşık bir tablo sunduğunu gösteriyor. İnsanlar arasında artan bir kaygı ve belirsizlik hissi var; bu durum, sosyal ve ekonomik belirsizliklerden kaynaklanıyor. Öfke ve bıkkınlık, özellikle siyasal konularda belirgin. Ancak, bazı kullanıcılar alaycı bir neşe ile bu durumu ele alıyor, bu da toplumun stresle başa çıkma mekanizmasını yansıtıyor.",
     "ana_duygular": [
         {
             "duygu": "Kaygı",
             "skor": 85,
-            "gerekçe": "Ekonomik belirsizlikler, işsizlik oranlarındaki artış ve sosyal adaletsizlikler."
+            "gerekçe": "Ekonomik belirsizlikler, işsizlik oranları ve sosyal adaletsizlik konularındaki endişeler."
         },
         {
             "duygu": "Öfke",
             "skor": 75,
-            "gerekçe": "Yetersiz hükümet politikaları ve sosyal hizmetlerdeki eksiklikler."
+            "gerekçe": "Siyasal olaylar, hükümet politikaları ve sosyal medyada yayılan yanlış bilgiler üzerine tepkiler."
         }
     ],
     "baskin_gundemler": [
         {
-            "konu": "Ekonomik Kriz",
-            "köken": "Yüksek enflasyon oranları, işsizlik ve yaşam standartlarının düşmesi üzerine yapılan paylaşımlar."
+            "konu": "Ekonomik Belirsizlik",
+            "köken": "Yüksek enflasyon, işsizlik ve yaşam standartlarındaki düşüşle ilgili paylaşımlar."
+        },
+        {
+            "konu": "Siyasal Olaylar",
+            "köken": "Son seçim sonuçları, hükümetin aldığı kararlar ve protestolar üzerine yapılan yorumlar."
         },
         {
             "konu": "Sosyal Adalet",
-            "köken": "Toplumsal eşitsizlikler ve protesto hareketleri ile ilgili içerikler."
-        },
-        {
-            "konu": "Sağlık Politikaları",
-            "köken": "Covid-19 sonrası sağlık hizmetlerindeki yetersizlikler ve aşı politikaları hakkında yapılan tartışmalar."
+            "köken": "Toplumda eşitsizlik, ayrımcılık ve insan hakları ihlalleri ile ilgili tartışmalar."
         }
     ],
     "harcama_egilimi_analizi": {
-        "egilim": "Tüketicilerin temel ihtiyaçlar için harcama yapma eğiliminde artış, lüks tüketimden uzaklaşma.",
-        "sektor_etkisi": "Gıda ve sağlık sektörleri ön planda; insanlar gıda fiyatlarındaki artıştan şikayet ederken, sağlık hizmetlerine daha fazla harcama yapma gereği hissediyor."
+        "egilim": "Tüketicilerin temel ihtiyaçlara yönelmesi.",
+        "sektor_etkisi": "Gıda ve temel ihtiyaç ürünlerinde artan harcamalar, lüks tüketim ürünlerinde ise düşüş."
     },
     "gelecek_tahminleri": [
         {
-            "tahmin": "Ekonomik durumun daha da kötüleşmesi",
+            "tahmin": "Sosyal huzursuzluk artabilir.",
             "risk_seviyesi": "Yüksek",
-            "neden": "Devam eden enflasyon ve işsizlik oranlarının artışı."
+            "neden": "Devam eden ekonomik sorunlar ve siyasal belirsizlikler."
         },
         {
-            "tahmin": "Sosyal hareketlerin artması",
+            "tahmin": "Temel ihtiyaç ürünlerine talep artacak.",
             "risk_seviyesi": "Orta",
-            "neden": "Halkın artan sosyal adalet talepleri ve mevcut hükümet politikalarına karşı duyulan öfke."
+            "neden": "Tüketicilerin harcama alışkanlıklarını değiştirerek, güvenli liman arayışında olmaları."
         }
     ]
 }

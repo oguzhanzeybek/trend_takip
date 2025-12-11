@@ -109,7 +109,7 @@ def analyze_paid_fast(data_chunk, category, df_columns, retry=0):
     GÖREV: Aşağıdaki '{category}' verilerini analiz et.
     Kolon İsimleri (Sırayla): [{column_names}]
     
-    1. Sadece **Metro HORECA müşterilerinin (restoran, kafe vb.) menüsüne veya operasyonuna DEVRİM YARATACAK** ve **yeni trend sinyali** taşıyan ürünleri seç.
+    1. Sadeceçok ""tutulan ürünleri"" ve **yeni trend sinyali** taşıyan ürünleri seç. Potansıyel gordugunu alabilirsin analizini kendin yap.
     2. Çöpleri kesinlikle at. **Uzun ürün ismini, ürünün temel niteliği belli olacak şekilde KISALT.**
     3. Her ürün için **Potansiyel Skoru** (0-100) ver. Bu skor, ürünün *piyasada trend olma hızı* ve *HORECA sektörüne katacağı yenilik değeri* baz alınarak belirlenmelidir.
     4. ÇIKTI JSON'unda **gönderilen ham verinin ilk sütunundaki bilgiyi** "kaynak_dosya" alanına aktar.
@@ -225,3 +225,35 @@ def process_files():
 
 if __name__ == "__main__":
     process_files()
+    
+    
+    
+    
+    
+    
+    
+    
+    # ... (Yukarıdaki işlemler bittikten sonra, fonksiyonun en altına ekle) ...
+
+    # =========================================================
+    # 🧹 TEMİZLİK BÖLÜMÜ: İŞLEM BİTİNCE TXT DOSYALARINI SİL
+    # =========================================================
+    print("\n🧹 Tüm işlemler bitti, geçici progress dosyaları temizleniyor...")
+    
+    # HATA ÇÖZÜMÜ: Listeyi burada tekrar tanımlıyoruz ki "bulunamadı" uyarısı vermesin.
+    files_to_clean = ["Rival.csv", "online_shopping.csv", "social_media.csv"]
+    
+    for filename in files_to_clean:
+        file_key = filename.split('.')[0]
+        progress_path = get_progress_file_path(file_key)
+        
+        if progress_path.exists():
+            try:
+                progress_path.unlink()  # Dosyayı fiziksel olarak siler
+                print(f"   🗑️  SİLİNDİ: {progress_path.name}")
+            except Exception as e:
+                print(f"   ⚠️ SİLİNEMEDİ: {progress_path.name} -> {e}")
+        else:
+            print(f"   ℹ️  Zaten yok: {progress_path.name}")
+
+    print("🏁 PROGRAM SONLANDI.")

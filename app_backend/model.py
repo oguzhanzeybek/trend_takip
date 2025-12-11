@@ -1,5 +1,6 @@
 import os
 import json
+import random
 import re
 from datetime import datetime, timedelta
 from typing import Optional, List, Dict, Any, Tuple, Union
@@ -114,57 +115,90 @@ def safe_json_parse(content: Any) -> Any:
     return {}
 
 def extract_date_range_from_query(text: str) -> Tuple[datetime, datetime]:
-    """Sorgudan tarih ARALIĞI çeker."""
+    """
+    Sorgudan tarih ARALIĞI çeker.
+    GÜNCELLENDİ: 'son üç gün', 'son gün', '9 aralık' gibi karmaşık yapıları anlar.
+    """
     text = text.lower()
     now = datetime.now()
     
-    # 1. "Son X Gün" Mantığı
-    match_days = re.search(r"son (\d+) gün", text)
-    if match_days:
-        days = int(match_days.group(1))
+    # Yazı ile yazılan sayıların sözlüğü
+    text_numbers = {
+        "bir": 1, "iki": 2, "üç": 3, "dört": 4, "beş": 5, 
+        "altı": 6, "yedi": 7, "sekiz": 8, "dokuz": 9, "on": 10
+    }
+
+    # 1. "Son X Gün" (Rakamla: "son 5 gün")
+    match_digits = re.search(r"son (\d+) gün", text)
+    if match_digits:
+        days = int(match_digits.group(1))
         start_date = now - timedelta(days=days)
         return start_date, now
+
+    # 2. "Son X Gün" (Yazıyla: "son üç gün")
+    match_words = re.search(r"son (\w+) gün", text)
+    if match_words:
+        word = match_words.group(1)
+        if word in text_numbers:
+            days = text_numbers[word]
+            return now - timedelta(days=days), now
+
+    # 3. "Son Gün" veya "Dün"
+    if "son gün" in text or "dün" in text:
+        # Eğer "dün ve bugün" denmişse
+        if "bugün" in text: 
+             return now - timedelta(days=1), now
+        
+        # Sadece "son gün" veya "dün"
+        start = now - timedelta(days=1)
+        # Bitiş de start olsun ki sadece o günü arasın veya aralığı geniş tutalım
+        return start, now 
+
+    # --- SAAT FARKI DÜZELTMESİ EKLENDİ ---
+    if "bugün" in text:
+        # UTC farkı yüzünden "bugün" denince dünü de kapsıyoruz.
+        print("💡 Saat farkı önlemi: Arama aralığı 24 saat geriye çekildi.")
+        return now - timedelta(days=1), now
 
     if "son hafta" in text or "bir hafta" in text:
         return now - timedelta(days=7), now
 
-    # 2. Göreli Tarihler (ÖNCELİK SIRASI DÜZELTİLDİ)
-    # Önce "dün ve bugün" kontrolü yapılmalı
-    if "dün" in text and "bugün" in text:
-        start = now - timedelta(days=1)
-        return start, now 
-
-    if "dün" in text:
-        start = now - timedelta(days=1)
-        return start, start 
-    
-    if "bugün" in text:
-        return now, now
-    
-    # 3. Ay İsimli Tarihler
+    # 4. Spesifik Tarih (Ay isimli: "9 Aralık", "10 Aralık")
     months = {
         "ocak": 1, "şubat": 2, "mart": 3, "nisan": 4, "mayıs": 5, "haziran": 6,
         "temmuz": 7, "ağustos": 8, "eylül": 9, "ekim": 10, "kasım": 11, "aralık": 12
     }
+    
+    # Döngüyle ay ismini metinde ara
     for month_name, month_num in months.items():
         if month_name in text:
-            match = re.search(r"(\d+)\s+" + month_name, text)
+            # "9 aralık", "09 aralık" formatını yakala
+            match = re.search(r"(\d{1,2})\s*" + month_name, text)
             if match:
                 day = int(match.group(1))
                 try:
-                    dt = datetime(now.year, month_num, day)
-                    if dt > now + timedelta(days=1):
-                        dt = datetime(now.year - 1, month_num, day)
-                    return dt, dt
-                except:
+                    target_date = datetime(now.year, month_num, day)
+                    
+                    # Eğer bugün 11 Aralık ise ve kullanıcı "12 Aralık" dediyse, 
+                    # muhtemelen geçen seneyi kastediyordur (geleceği tahmin edemeyeceğimiz için).
+                    if target_date > now:
+                        target_date = datetime(now.year - 1, month_num, day)
+                    
+                    # Başlangıç ve bitiş aynı gün (tam gün araması)
+                    # Veritabanında saat farkı olabileceği için bitişi gün sonuna kadar esnetmek fetch içinde yapılıyor zaten
+                    return target_date, target_date
+                except ValueError:
+                    # Geçersiz tarih (örn: 35 Şubat)
                     pass
     
-    return now, now
+    # Hiçbiri yoksa varsayılan olarak SON 3 GÜNÜ dön (Verisiz kalmamak için)
+    print("💡 Tarih belirtilmedi, varsayılan olarak son 3 gün taranıyor...")
+    return now - timedelta(days=3), now
 
 def clean_search_term(text: Union[str, List[str]]) -> str:
     """
     Sorgudan gereksiz dolgu kelimelerini temizler.
-    HATA DÜZELTME: Gelen veri liste ise stringe çevirir (Test 49 Hatası Çözümü).
+    HATA DÜZELTME: Gelen veri liste ise stringe çevirir.
     """
     # Eğer liste gelirse stringe çevir
     if isinstance(text, list):
@@ -185,7 +219,8 @@ def clean_search_term(text: Union[str, List[str]]) -> str:
         "tarihinde", "günü", "fiyatları", "fiyatı", "verileri", "getir", "göster", "ve", "veya", 
         "en", "ucuz", "pahalı", "hangisi", "peki", "bunların", "şunların", "onların", "içinde", 
         "arasında", "olan", "kadar", "daha", "çok", "az", "yüksek", "düşük", "şu", "bu", "o",
-        "özellikleri", "tarafında", "öne", "çıkan", "başlıklar", "konuşuldu", "listele", "hepsini", "tümünü"
+        "özellikleri", "tarafında", "öne", "çıkan", "başlıklar", "konuşuldu", "listele", "hepsini", "tümünü",
+        "formatında", "cevap", "ver", "json", "yap", "yaz"  # <--- BURAYA YENİ KELİMELER EKLENDİ
     ]
     for word in stopwords:
         text = re.sub(r'\b' + word + r'\b', '', text)
@@ -238,36 +273,58 @@ async def fetch_data_in_range(start_date: datetime, end_date: datetime) -> List[
         return []
 
 # ---------------------------------------------------------------------------
-# AI NİYET ANALİZİ
+# AI NİYET ANALİZİ (GÜNCELLENDİ: BUTONLARA ÖZEL INTENTLER)
 # ---------------------------------------------------------------------------
 
-def get_search_intent_via_ai(user_prompt: str) -> dict:
+def get_search_intent_via_ai(user_prompt: str, history: List[dict] = []) -> dict:
     if not ai_client: return {"intent": "search", "value": user_prompt}
 
-    # SOHBET MODU EKLENDİ
-    system_prompt = """
-    Kullanıcı mesajını analiz et ve JSON döndür.
+    # Geçmişten son 2 mesajı alarak bağlam oluştur
+    history_context = ""
+    if history:
+        last_turns = history[-2:]
+        for msg in last_turns:
+            role = "Kullanıcı" if msg['role'] == 'user' else "Asistan"
+            history_context += f"{role}: {msg['content']}\n"
+
+    # SİSTEM PROMPTU (BUTONLARA GÖRE GÜNCELLENDİ):
+    system_prompt = f"""
+    GÖREV: Kullanıcı mesajını ve sohbet geçmişini analiz et. JSON döndür.
     
-    1. SOHBET (Chat): "Selam", "Nasılsın", "Kimsin", "Teşekkürler", "Ne haber" -> {"intent": "chat", "value": "chat"}
-    2. Sentiment: "Halk ne hissediyor?", "Duygu", "Kaygı" -> {"intent": "sentiment", "value": "sentiment"}
-    3. Kategori: "Sosyal medya", "Alışveriş" -> {"intent": "category", "value": "social_media"} (veya online_shopping)
-    4. Platform: "Trendyol", "Twitter" -> {"intent": "platform", "value": "trendyol"}
-    5. Erken Trend: "Erken trend", "Yeni çıkan" -> {"intent": "early_trend", "value": "true"}
-    6. Genel Arama: "iPhone", "Beşiktaş", "Termos" -> {"intent": "search", "value": "aranan_kelime"}
+    GEÇMİŞ SOHBET:
+    {history_context}
+
+    ANALİZ KURALLARI (BUTONLARA GÖRE):
+    1. **SOHBET (Chat/Advice):** "Selam", "Nasılsın", "Sence bu iş tutar mı?" -> {{"intent": "chat", "value": "chat"}}
+    2. **GENEL ARAMA (Search):** "Kahve makinesi", "iPhone fiyatları" -> {{"intent": "search", "value": "anahtar_kelime"}}
+    
+    3. **FİYAT/İNDİRİM (Buton):** "Fiyat fırsatları", "İndirimler", "En ucuz", "Kampanya" -> {{"intent": "price_analysis", "value": "genel"}}
+    4. **PLATFORM ANALİZİ (Buton):** "Trendyol vs Amazon", "Platform karşılaştırması", "Hangi sitede" -> {{"intent": "platform_comparison", "value": "trendyol amazon"}}
+    5. **DUYGU/YORUM (Buton):** "Müşteri şikayetleri", "Duygu analizi", "Yorumlar", "Memnuniyet" -> {{"intent": "sentiment_analysis", "value": "genel"}}
+    6. **TRENDLER (Buton):** "Yükselen trendler", "Popüler ürünler", "Çok satanlar" -> {{"intent": "trend_analysis", "value": "genel"}}
+    
+    7. **DEVAM SORUSU (Follow-up):** "Peki ya diğeri?", "Detay ver" -> {{"intent": "search", "value": "context_ref", "is_follow_up": true}}
+    8. **MİKTAR:** "5 tane getir", "ilk 10 sonuç" -> {{"quantity": 5}} eklenecek.
+    9. **FORMAT:** "JSON ver" -> {{"output_format": "json"}}
+    
+    ÖRNEK: {{"intent": "price_analysis", "value": "iphone", "quantity": 5}}
     """
     try:
         completion = ai_client.chat.completions.create(
             model=MODEL_NAME, 
             messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
-            temperature=0, max_tokens=60
+            temperature=0, max_tokens=150
         )
         clean_json = completion.choices[0].message.content.replace("```json", "").replace("```", "").strip()
-        return json.loads(clean_json)
+        parsed = json.loads(clean_json)
+        # Debugging: Niyet analiz sonucunu görelim
+        print(f"🧠 AI Niyet Algılandı: {parsed}")
+        return parsed
     except:
         return {"intent": "search", "value": user_prompt}
 
 # ---------------------------------------------------------------------------
-# AKILLI FİLTRELEME
+# AKILLI FİLTRELEME (GÜNCELLENDİ: ÖZEL MODLARA GÖRE FİLTRELEME)
 # ---------------------------------------------------------------------------
 
 async def fetch_smart_filtered_data(user_query: str, intent_data: dict) -> Tuple[List[Dict], str]:
@@ -275,46 +332,43 @@ async def fetch_smart_filtered_data(user_query: str, intent_data: dict) -> Tuple
 
     start_date, end_date = extract_date_range_from_query(user_query)
     
+    # Eğer özel bir analiz butonu tıklandıysa ve tarih yoksa, son 1 haftayı al (Verisiz kalmamak için)
+    intent_type = intent_data.get("intent", "search")
+    if intent_type in ["price_analysis", "platform_comparison", "sentiment_analysis", "trend_analysis"]:
+        if "bugün" not in user_query.lower() and "dün" not in user_query.lower():
+            print("💡 Özel analiz modu: Tarih aralığı otomatik olarak son 7 güne genişletildi.")
+            start_date = datetime.now() - timedelta(days=7)
+
     if start_date.date() == end_date.date():
         date_info = start_date.strftime('%d %B %Y')
     else:
         date_info = f"{start_date.strftime('%d %B')} - {end_date.strftime('%d %B %Y')}"
 
-    intent_type = intent_data.get("intent", "search")
+    is_follow_up = intent_data.get("is_follow_up", False)
+
+    # 1. Chat ve Garbage Durumları (ERKEN ÇIKIŞ)
     if intent_type == "chat": return [], date_info
+    if intent_type == "garbage": return [], date_info 
 
     raw_value = intent_data.get("value", user_query)
     
-    # HATA DÜZELTME: raw_value burada liste gelse bile clean_search_term onu stringe çevirir.
-    cleaned_value = clean_search_term(raw_value) if intent_type == "search" else str(raw_value).lower().strip().replace("#", "")
-    search_keywords = cleaned_value.split() if cleaned_value else []
-
-    # Hafıza kontrolü için boş arama
-    if intent_type == "search" and not search_keywords:
-        if "aralık" in user_query.lower() or "dün" in user_query.lower() or "bugün" in user_query.lower() or "gün" in user_query.lower():
-             pass
-        else:
-             print("💡 Arama terimi bulunamadı (Devam sorusu), hafıza kullanılacak...")
-             return [], date_info
+    # Eğer "Peki ya diğeri?" gibi bir durumsa ve history yoksa, raw_value 'context_ref' gelir.
+    if is_follow_up or raw_value == "context_ref":
+        print("💡 Bağlam/Devam sorusu algılandı. Hafıza kontrol edilecek.")
+        return [], date_info
 
     # TÜM VERİYİ ÇEK (Limitsiz)
     raw_rows = await fetch_data_in_range(start_date, end_date)
     if not raw_rows: return [], date_info
 
-    print(f"🕵️ Filtreleme: Niyet='{intent_type}', Kelimeler={search_keywords}")
-    
-    # Sadece tarih sorulduysa tümünü dön
-    if intent_type == "search" and not search_keywords:
-        print("💡 Sadece tarih/zaman soruldu, tüm veriler analiz edilecek...")
-        return raw_rows, date_info
-
+    print(f"🕵️ Filtreleme Başlıyor: Mod='{intent_type}'")
     filtered_results = []
 
     for row in raw_rows:
-        category = str(row.get('category', '')).lower()
-        source_col = str(row.get('source', '')).lower()
-        data_type = str(row.get('data_type', '')).lower()
         content = safe_json_parse(row.get('content'))
+        json_str = str(content).lower()
+        source = str(row.get('source', '')).lower()
+        category = str(row.get('category', '')).lower()
         
         json_kaynak = str(content.get('kaynak', '')).lower()
         json_not = str(content.get('not', '')).lower()
@@ -322,39 +376,49 @@ async def fetch_smart_filtered_data(user_query: str, intent_data: dict) -> Tuple
 
         match = False
 
-        if intent_type == "sentiment":
-            if "analyzed" in data_type or "sentiment" in category or "kaygı" in json_full_text:
+        # --- A) FİYAT FIRSATLARI MODU ---
+        if intent_type == "price_analysis":
+            keywords = ["fiyat", "tl", "indirim", "%", "ucuz", "pahalı", "kampanya", "zam"]
+            if any(k in json_str for k in keywords):
                 match = True
 
-        elif intent_type == "category":
-            if cleaned_value in category or cleaned_value in source_col:
+        # --- B) PLATFORM ANALİZİ MODU ---
+        elif intent_type == "platform_comparison":
+            platforms = ["trendyol", "amazon", "n11", "hepsiburada", "getir", "yemeksepeti"]
+            if any(p in source for p in platforms) or any(p in json_str for p in platforms):
                 match = True
 
-        elif intent_type == "platform":
-            if cleaned_value in source_col or cleaned_value in json_kaynak or cleaned_value in category:
-                match = True
-            if cleaned_value == "trendyol" and "online_shopping" in source_col:
-                match = True 
-
-        elif intent_type == "early_trend":
-            if "erkentrend" in json_not or "erken" in json_full_text:
+        # --- C) MÜŞTERİ DUYGUSU MODU ---
+        elif intent_type == "sentiment_analysis":
+            sentiment_keys = ["yorum", "şikayet", "memnun", "kötü", "iyi", "duygu", "sentiment", "kaygı"]
+            if any(k in json_str for k in sentiment_keys) or "filtered" in str(row.get('data_type')).lower():
                 match = True
 
+        # --- D) TREND ANALİZİ MODU ---
+        elif intent_type == "trend_analysis":
+            if "google" in source or "twitter" in source or "trend" in json_str or "best seller" in json_str:
+                match = True
+        
+        # --- E) NORMAL ARAMA (Eski Kök Bulucu ile) ---
         else:
-            found_keyword = False
-            for word in search_keywords:
-                if len(word) > 2:
-                    stemmed_word = simple_turkish_stemmer(word)
-                    if (word in json_full_text or stemmed_word in json_full_text or 
-                        word in source_col or 
-                        word in category or 
-                        word in json_not or
-                        word in json_kaynak):
-                        found_keyword = True
-                        break
-            if found_keyword:
-                match = True
+            cleaned_value = clean_search_term(raw_value)
+            search_keywords = cleaned_value.split() if cleaned_value else []
 
+            if not search_keywords:
+                # Sadece tarih sorulduysa hepsini al
+                match = True
+            else:
+                for word in search_keywords:
+                    if len(word) > 2:
+                        stemmed_word = simple_turkish_stemmer(word)
+                        if (word in json_full_text or stemmed_word in json_full_text or 
+                            word in source or 
+                            word in category or 
+                            word in json_not or
+                            word in json_kaynak):
+                            match = True
+                            break
+        
         if match:
             filtered_results.append(row)
 
@@ -362,7 +426,7 @@ async def fetch_smart_filtered_data(user_query: str, intent_data: dict) -> Tuple
     return filtered_results, date_info
 
 # ---------------------------------------------------------------------------
-# CHAT MOTORU
+# CHAT MOTORU (GÜNCELLENDİ: KATI FİLTRELEME PROMPTU)
 # ---------------------------------------------------------------------------
 
 async def chat_with_ai(user_message: str) -> str:
@@ -370,21 +434,22 @@ async def chat_with_ai(user_message: str) -> str:
     
     if not ai_client: return "⚠️ AI sistemi bağlı değil."
 
-    intent_data = get_search_intent_via_ai(user_message)
+    # Intent analizi
+    intent_data = get_search_intent_via_ai(user_message, conversation_history)
     intent_type = intent_data.get("intent", "search")
+    output_format = intent_data.get("output_format", "text") 
+    is_follow_up = intent_data.get("is_follow_up", False)
+    quantity_limit = intent_data.get("quantity")
 
     # 1. SOHBET MODU
     if intent_type == "chat":
         chat_system_prompt = """
-        Sen TrendAI, yardımcı ve arkadaş canlısı bir veri asistanısın.
-        
-        GÖREVİN:
-        1. Kullanıcının selamına veya sohbetine nazikçe ve profesyonelce karşılık ver.
-        2. Kendini tanıt: "Ben TrendAI, sosyal medya, e-ticaret ve trendleri analiz eden yapay zeka asistanıyım."
-        3. Kullanıcıya ne aramak istediğini sor.
-        4. Kısa, samimi ve Markdown formatında (bold, italik, liste) düzenli cevaplar ver.
+        Sen TrendAI, hem güçlü bir veri analisti hem de yardımsever, zeki bir danışmansın.
+        GÖREVLERİN:
+        1. **Genel Sohbet:** Kullanıcı ile samimi ve profesyonel bir dille sohbet et.
+        2. **Akıl Danışma:** Kullanıcı veritabanında olmayan genel bir soru sorarsa kendi genel bilginle cevap ver.
+        TON: Yardımsever, Profesyonel, Samimi.
         """
-        
         messages = [{"role": "system", "content": chat_system_prompt}]
         messages.extend(conversation_history[-4:])
         messages.append({"role": "user", "content": user_message})
@@ -396,35 +461,41 @@ async def chat_with_ai(user_message: str) -> str:
             conversation_history.append({"role": "assistant", "content": ai_response})
             return ai_response
         except:
-            return "Merhaba! Şu an sohbet sistemimde bir yoğunluk var, ama verileri sorgulayabilirim."
+            return "Sistem yoğun, lütfen tekrar dene."
 
     # 2. VERİ ÇEKME
     db_data, date_info = await fetch_smart_filtered_data(user_message, intent_data)
     
     # Hafıza Kontrolü
     used_cached_data = False
-    if not db_data and last_successful_data:
+    if (not db_data or is_follow_up) and last_successful_data:
         print("🔄 Hafızadaki veri kullanılıyor...")
         db_data = last_successful_data
         date_info = last_date_info
         used_cached_data = True
     
-    count_found = len(db_data)
-
     if not db_data:
-        response_msg = f"🔍 **{date_info}** tarih aralığında uygun veri bulamadım."
+        if intent_type == "garbage":
+            resp = "Tam olarak ne aradığını anlayamadım."
+        else:
+            resp = f"🔍 **{date_info}** tarih aralığında, **{intent_type}** kriterine uygun veri bulamadım."
+            
         conversation_history.append({"role": "user", "content": user_message})
-        conversation_history.append({"role": "assistant", "content": response_msg})
-        return response_msg
+        conversation_history.append({"role": "assistant", "content": resp})
+        return resp
 
     if not used_cached_data:
         last_successful_data = db_data
         last_date_info = date_info
 
     # 3. Context Hazırlama
+    final_limit = 50
+    if quantity_limit and isinstance(quantity_limit, int) and quantity_limit > 0:
+        final_limit = quantity_limit
+        print(f"✂️ Veri Seti Kullanıcı İsteği Üzerine Kesiliyor: {final_limit} adet")
+    
     clean_context = []
-    # Token limiti için en güncel 200 veriyi analiz et
-    for row in db_data[:200]: 
+    for row in db_data[:final_limit]: 
         content = safe_json_parse(row.get('content'))
         src = row.get('source', '').replace('.csv', '').replace('filtered_', '')
         if isinstance(content, dict) and content.get('kaynak'):
@@ -433,54 +504,59 @@ async def chat_with_ai(user_message: str) -> str:
 
     context_str = json.dumps(clean_context, ensure_ascii=False)
 
-    # 4. Veri Analiz Prompt'u (FORMAT GÜNCELLEMESİ)
-    # 4. Veri Analiz Prompt'u (TABLO FORMATI GÜNCELLEMESİ)
-    system_prompt = f"""
-    Sen TrendAI, verilerin derinliklerini gören, **Üst Düzey Pazar Araştırmacısı ve Trend Stratejistisin.** 🧐
-    Kullanıcıya ham veri değil, **işlenebilir içgörüler** ve **stratejik analizler** sunmalısın.
-    
-    **ZORUNLU GİRİŞ FORMATI:**
-    
-    > 📋 **Sorgu Raporu**
-    > * **Tarih:** {date_info}
-    
-    
-    
-    **GÖRSEL VE ANALİZ KURALLARI (KESİN UY):**
-    
-    1. **BAŞLIK:** `## 🚀 {date_info} Stratejik Trend Raporu`
-       Altına italik bir özet: *"Toplam **{count_found}** veri noktası tarandı ve piyasa hareketleri analiz edildi."*
+    # 4. Veri Analiz Prompt'u (DİNAMİK SEÇİM)
+    if output_format == "json":
+        system_prompt = """GÖREV: Sadece saf JSON döndür. Markdown yok."""
+    else:
+        limit_instruction = f"Eğer kullanıcı belirli bir sayıda veri istediyse ({final_limit} tane), sadece onlara odaklan." if quantity_limit else ""
 
-    2. **PLATFORM GRUPLAMASI:** Verileri platformlarına göre ayır (Örn: `### 🛍️ Trendyol Analizi`).
+        system_prompt = f"""
+        Sen TrendAI, verilerin derinliklerini gören, **Üst Düzey Pazar Araştırmacısı ve Trend Stratejistisin.** 🧐
+        
+        GÖREVİN: Ham verileri analiz edip **TİCARİ** ve **STRATEJİK** içgörüler sunmak.
 
-    3. **HİYERARŞİK LİSTE FORMATI (ZORUNLU):**
-       Her ürünü bir ana madde, özelliklerini ise girintili (indented) alt maddeler olarak yaz. 
-       Veri içindeki etiketlerden (hashtag) yola çıkarak kısa bir "Uzman Yorumu" ekle.
-       
-       **Şu formatı birebir uygula:**
-       
-       - 📦 **Ürün:[Ürün Adı]**
-         - 💰 **Fiyat:** [Fiyat] 
-         - 📈 **Trend Skoru:** [Skor] / 100
-         - 🏷️ **Etiketler:** [Not/Hashtagler]
-         - 🧠 **Uzman Yorumu:** [Buraya ürünün neden trend olduğuna dair 1 cümlelik keskin bir analiz yaz.] [.Yeni ürüne geçmeden önce 1 boş satır bırak. ve  bir satır boyunca yatay çizgi koy ve tekrar bir satır boşluk bırak]
-         
+        {limit_instruction}
+        
+        🚨 **ÇOK KATI FİLTRELEME KURALLARI (BUNLARA UY):**
+        1. **ÇÖP VERİYİ YOK SAY:** "Maç kaç kaç", "Hava nasıl", "Selam", "Günaydın" gibi günlük sohbetleri veya genel bilgi sorularını **ASLA** rapora dahil etme. Bunları sessizce ele.
+        2. **SADECE TİCARİ ODAK:** Sadece şunları analiz et:
+           - 🛒 Ürünler ve Markalar (Örn: Airfryer, iPhone, Kedi Maması)
+           - 📉 Fiyat ve Ekonomi (Örn: İndirim, pahalılık, zam)
+           - 🛍️ Tüketici İsteği (Örn: "Şunu arıyorum", "Bunu tavsiye edin")
+        3. **SOSYAL MEDYA İÇERİĞİ:** "Komik kedi videosu" gibi içerikleri, eğer bir **ürün satışı** veya **marka işbirliği** içermiyorsa ELEYEBİLİRSİN.
+        4. Eğer analiz edilecek **HİÇBİR** ticari veri kalmazsa, dürüstçe "Ticari değer taşıyan veri bulunamadı" de.
 
-    4. cevabın okunabılır olsun.
-    
+        **RAPOR FORMATI:**
+        > 📋 **Sorgu Raporu**
+        > * **Tarih:** {date_info}
+        
+        ## 🚀 {date_info} Stratejik Trend Raporu
+        *İncelenen Veri Sayısı: **{{analiz_edilen_veri_sayisi}}** (Gürültülü veriler elendi)*
 
-    5. **TON:** Profesyonel, kendinden emin ama anlaşılır. Teknik terim (JSON vb.) yasak.
-    
-    6. **KAPANIŞ:** "Hangi ürünün pazar analizini derinleştirelim?" gibi stratejik bir soru sor.
-    """
+        ### 🔎 Öne Çıkan Ticari Trendler:
+
+        - 📦 **[Ürün/Konu Başlığı]**
+          - 💰 **Fiyat:** [Varsa Fiyat / Yoksa "Belirtilmedi"] 
+          - 📈 **Trend Skoru:** [0-100 Arası Tahmini Skor]
+          - 🏷️ **Etiketler:** [#Etiket1 #Etiket2]
+          - 🧠 **Uzman Yorumu:** [Bu verinin pazarlama veya satış için anlamı ne?]
+        
+        KAPANIŞ: Stratejik bir soru sor.
+        """
 
     messages = [{"role": "system", "content": system_prompt}]
-    messages.extend(conversation_history[-4:]) 
+    if output_format != "json":
+        messages.extend(conversation_history[-4:]) 
+        
     messages.append({"role": "user", "content": f"VERİ SETİ:\n{context_str}\n\nSORU: {user_message}"})
 
     try:
         response = ai_client.chat.completions.create(model=MODEL_NAME, messages=messages, temperature=0.7)
         ai_response = response.choices[0].message.content
+        
+        if output_format == "json":
+            ai_response = ai_response.replace("```json", "").replace("```", "").strip()
+            
         conversation_history.append({"role": "user", "content": user_message})
         conversation_history.append({"role": "assistant", "content": ai_response})
         return ai_response
@@ -490,6 +566,7 @@ async def chat_with_ai(user_message: str) -> str:
 async def process_user_input(text: str) -> str:
     return await chat_with_ai(text)
 
+# Hata almamak için boş placeholder fonksiyonlar
 async def fetch_large_recent_dataset(limit: int = 50): return []
 async def save_trend(content: Any): return None
 async def get_filtered_raw_data(categories, limit): return []
@@ -497,3 +574,179 @@ async def get_trends(limit=20): return []
 async def get_products(): return []
 async def get_stats(): return []
 async def get_latest_trend_data(): return None
+
+
+
+
+
+
+
+
+
+
+import os
+import json
+from datetime import datetime, timedelta
+from typing import Optional, List, Dict, Any
+from dotenv import load_dotenv
+
+from supabase import create_client, Client
+from openai import OpenAI
+
+load_dotenv()
+
+# AYARLAR
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+MODEL_NAME = "openai/gpt-4o-mini" 
+
+supabase: Optional[Client] = None
+ai_client: Optional[OpenAI] = None
+
+# BAĞLANTILAR
+if SUPABASE_URL and SUPABASE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        print("✅ Supabase: AKTİF")
+    except Exception as e:
+        print(f"❌ Supabase Hatası: {e}")
+
+if OPENROUTER_API_KEY:
+    try:
+        ai_client = OpenAI(api_key=OPENROUTER_API_KEY, base_url=OPENROUTER_BASE_URL)
+        print("✅ AI: AKTİF")
+    except Exception as e:
+        print(f"❌ AI Hatası: {e}")
+
+def safe_json_parse(content: Any) -> Any:
+    if isinstance(content, dict): return content
+    if isinstance(content, str):
+        try: return json.loads(content)
+        except: return {}
+    return {}
+
+# ---------------------------------------------------------------------------
+# DASHBOARD ENGINE (ASLA BOŞ KALMAYAN AI ANALİZİ)
+# ---------------------------------------------------------------------------
+async def get_dashboard_stats(time_range: str = "24h"):
+    if not supabase: return None
+
+    # Saati SQL'e göndermek için hesapla
+    hours = 24
+    if time_range == "7d": hours = 168
+    if time_range == "30d": hours = 720
+
+    try:
+        # 1. SQL FONKSİYONUNU ÇAĞIR (Sayılar ve Grafikler)
+        response = supabase.rpc('get_trend_dashboard_stats', {'lookback_hours': hours}).execute()
+        data = response.data 
+        if not data: return None
+
+        # 2. AI İÇGÖRÜSÜ (GARANTİLİ DOLULUK)
+        ai_insight = "Veriler analiz ediliyor..."
+        
+        if ai_client:
+            # ADIM A: Önce seçili tarih aralığındaki verileri çek
+            start_date_iso = (datetime.now() - timedelta(hours=hours)).isoformat()
+            
+            rows_query = supabase.table("processed_data")\
+                .select("content, source")\
+                .filter("created_at", "gte", start_date_iso)\
+                .order("created_at", desc=True)\
+                .limit(200)\
+                .execute()
+            
+            raw_rows = rows_query.data or []
+
+            # ADIM B: Eğer tarih aralığında hiç veri yoksa, TARİH SINIRINI KALDIR ve son 50 veriyi çek (Fallback)
+            if not raw_rows:
+                print("⚠️ Seçili aralıkta veri yok, son verilere bakılıyor...")
+                rows_query = supabase.table("processed_data")\
+                    .select("content, source")\
+                    .order("created_at", desc=True)\
+                    .limit(50)\
+                    .execute()
+                raw_rows = rows_query.data or []
+
+            # E-Ticaret Anahtar Kelimeleri
+            ecommerce_keys = ["trendyol", "amazon", "n11", "alibaba", "a101", "carrefour", "migros", "getir", "online_shopping", "market", "fiyat"]
+            
+            shopping_pool = []
+            general_pool = []
+            
+            for r in raw_rows:
+                c = safe_json_parse(r.get('content'))
+                
+                # Kaynak ismini belirle
+                src_raw = str(r.get('source', '')).lower()
+                if isinstance(c, dict) and c.get('kaynak'):
+                    src_raw = str(c.get('kaynak')).lower()
+                
+                # Veriyi okunabilir hale getir
+                info = ""
+                if isinstance(c, dict):
+                    # Ürün/Fiyat/Başlık yakalamaya çalış
+                    p_name = str(c.get('urun_adi', c.get('product_name', c.get('title', c.get('baslik', '')))))
+                    price = str(c.get('fiyat', c.get('price', '')))
+                    
+                    if len(p_name) > 2:
+                        info = f"{p_name} ({price})" if len(price) > 1 else p_name
+                    else:
+                        info = str(c.get('not', ''))[:100] # Yedek
+                
+                if len(info) > 5:
+                    clean_src = src_raw.upper().replace('.CSV','').replace('FILTERED_','')
+                    entry = f"[{clean_src}] {info}"
+                    
+                    # Havuzlara dağıt
+                    general_pool.append(entry)
+                    if any(k in src_raw for k in ecommerce_keys):
+                        shopping_pool.append(entry)
+
+            # ADIM C: Hangi havuzu kullanacağız?
+            # Öncelik E-Ticaret, yoksa Genel Havuz
+            final_pool = shopping_pool if shopping_pool else general_pool
+            is_shopping_focus = len(shopping_pool) > 0
+
+            if final_pool:
+                # Rastgele 20 tanesini seç
+                selected_items = random.sample(final_pool, min(len(final_pool), 20))
+                summary_text = "\n".join(selected_items)
+                
+                period_name = "son 24 saat" if time_range == "24h" else "bu hafta" if time_range == "7d" else "bu ay"
+                focus_role = "E-Ticaret Analistisin" if is_shopping_focus else "Pazar Analistisin"
+
+                prompt = f"""
+                Sen Kıdemli {focus_role}. Aşağıda {period_name} içinde veritabanına giren 
+                gerçek verilerden rastgele seçilmiş bir numune var.
+                
+                VERİLER:
+                {summary_text}
+                
+                GÖREV:
+                Bu verilere bakarak Yöneticiler için 2-3 cümlelik, ÇARPICI bir "Pazar Özeti" yaz.
+                - Hangi ürünlerde/konularda hareketlilik var?
+                - Fiyat veya müşteri şikayeti trendi ne yönde?
+                
+                Sayı verme ("5 ürün var" deme), genel trendi yorumla. Asla sistem mesajlarından bahsetme.
+                """
+                try:
+                    completion = ai_client.chat.completions.create(
+                        model=MODEL_NAME, messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7, max_tokens=250
+                    )
+                    ai_insight = completion.choices[0].message.content.replace('"', '').strip()
+                except: 
+                    ai_insight = "AI servisine ulaşılamadı."
+            else:
+                ai_insight = "Veritabanında analiz edilecek anlamlı veri bulunamadı."
+
+        data['ai_insight'] = ai_insight
+        data['system_status'] = "Stabil"
+        return data
+
+    except Exception as e:
+        print(f"Stats Error: {e}")
+        return None

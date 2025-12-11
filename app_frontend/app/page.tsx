@@ -6,15 +6,15 @@ import {
   Bot, 
   Trash2,
   ArrowUp,
-  Cpu,
   Activity,
   Sparkles,
   Zap,
-  Globe,
   BarChart3,
   RefreshCcw,
-  Search,
-  TrendingUp
+  TrendingUp,
+  ShoppingBag,
+  MessageCircle,
+  Tag
 } from "lucide-react";
 
 // API URL
@@ -27,16 +27,33 @@ type ChatMessage = {
 
 const LOADING_TEXTS = [
   "Veri setleri taranıyor...",
-  "Trend analizleri yapılıyor...",
-  "İstatistikler işleniyor...",
-  "Yanıt hazırlanıyor..."
+  "Fiyat ve stok analizleri yapılıyor...",
+  "Ticari içgörüler çıkarılıyor...",
+  "Rapor hazırlanıyor..."
 ];
 
+// --- GÜNCELLENMİŞ VE BACKEND İLE UYUMLU SORGU KARTLARI ---
 const SUGGESTIONS = [
-  { icon: <Globe size={20} className="text-cyan-400"/>, title: "Global Trendler", prompt: "Dünya genelinde şu an yükselen teknoloji trendleri neler?" },
-  { icon: <BarChart3 size={20} className="text-violet-400"/>, title: "Pazar Analizi", prompt: "Türkiye'deki e-ticaret pazarında son 1 ayda neler değişti?" },
-  { icon: <Zap size={20} className="text-yellow-400"/>, title: "Viral Ürünler", prompt: "TikTok'ta viral olan son 3 ürünü listele ve analiz et." },
-  { icon: <Sparkles size={20} className="text-pink-400"/>, title: "İçerik Fikri", prompt: "Moda sektörü için YouTube Shorts video fikirleri üret." },
+  { 
+    icon: <TrendingUp size={20} className="text-cyan-400"/>, 
+    title: "Yükselen Trendler", 
+    prompt: "Son 1 haftada arama hacmi ve popülaritesi en çok artan ürünleri analiz et." 
+  },
+  { 
+    icon: <ShoppingBag size={20} className="text-violet-400"/>, 
+    title: "Platform Analizi", 
+    prompt: "Trendyol ve Amazon üzerindeki en çok satan ürünleri ve kullanıcı yorumlarını karşılaştır." 
+  },
+  { 
+    icon: <MessageCircle size={20} className="text-yellow-400"/>, 
+    title: "Müşteri Duygusu", 
+    prompt: "Kullanıcıların ürünler hakkında en çok şikayet ettiği veya övdüğü konuları özetle." 
+  },
+  { 
+    icon: <Tag size={20} className="text-pink-400"/>, 
+    title: "Fiyat Fırsatları", 
+    prompt: "Fiyatı düşen, indirime giren veya fiyat/performans oranı yüksek ürünleri listele." 
+  },
 ];
 
 export default function ChatPage() {
@@ -108,7 +125,7 @@ export default function ChatPage() {
       }
 
     } catch (err) {
-      setMessages((prev) => [...prev, { role: "error", content: "Bağlantı hatası oluştu." }]);
+      setMessages((prev) => [...prev, { role: "error", content: "Sunucu ile bağlantı kurulamadı. Backend çalışıyor mu?" }]);
     } finally {
       setLoading(false);
     }
@@ -122,14 +139,15 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#030304] text-white font-sans relative overflow-hidden selection:bg-cyan-500/30">
+    // --- GÜNCELLEME: Arka plan rengi #030304 -> #0a0a0c yapıldı ---
+    <div className="flex flex-col h-full bg-[#0a0a0c] text-white font-sans relative overflow-hidden selection:bg-cyan-500/30">
       
-      {/* --- AMBİYANS IŞIKLARI --- */}
-      <div className="fixed top-[-20%] left-1/4 w-[600px] h-[600px] bg-indigo-900/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      {/* --- AMBİYANS IŞIKLARI (Biraz daha soft) --- */}
+      <div className="fixed top-[-20%] left-1/4 w-[600px] h-[600px] bg-indigo-900/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
       <div className="fixed bottom-[-20%] right-1/4 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
       {/* --- HEADER --- */}
-      <header className="h-16 flex items-center justify-between px-6 sticky top-0 z-20 bg-[#030304]/80 backdrop-blur-xl border-b border-white/5">
+      <header className="h-16 flex items-center justify-between px-6 sticky top-0 z-20 bg-[#0a0a0c]/80 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 flex items-center justify-center shadow-[0_0_15px_-3px_rgba(99,102,241,0.4)] border border-white/10">
               <Bot size={18} className="text-white" />
@@ -139,8 +157,8 @@ export default function ChatPage() {
                 TrendAI
               </h2>
               <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                  <span className="text-[10px] text-zinc-400 font-medium tracking-wide">SYSTEM ONLINE</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="text-[10px] text-zinc-400 font-medium tracking-wide">PAZAR ANALİSTİ</span>
               </div>
             </div>
         </div>
@@ -161,25 +179,25 @@ export default function ChatPage() {
       <div className="flex-1 overflow-y-auto relative z-10 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
         <div className="max-w-3xl mx-auto px-4 py-8 min-h-full flex flex-col justify-end">
             
-            {/* HOŞGELDİN EKRANI (MODERN KUTUCUKLAR) */}
+            {/* HOŞGELDİN EKRANI */}
             {messages.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-full pb-20 animate-in fade-in zoom-in duration-700">
                     
                     {/* İkon & Başlık */}
                     <div className="mb-6 relative">
-                        <div className="absolute inset-0 bg-cyan-500/30 blur-2xl rounded-full"></div>
-                        <div className="relative bg-zinc-900 p-4 rounded-2xl border border-white/10 shadow-xl">
-                            <TrendingUp size={36} className="text-cyan-400" />
+                        <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full"></div>
+                        <div className="relative bg-zinc-900/80 p-5 rounded-2xl border border-white/10 shadow-2xl">
+                            <TrendingUp size={40} className="text-cyan-400" />
                         </div>
                     </div>
 
-                    <h1 className="text-4xl font-bold mb-2 text-center tracking-tight">
+                    <h1 className="text-4xl font-bold mb-3 text-center tracking-tight">
                         <span className="bg-gradient-to-r from-white via-cyan-100 to-zinc-400 bg-clip-text text-transparent">
-                            Merhaba, TrendAI'a Hoş Geldin
+                            Pazarı Analiz Etmeye Hazırım
                         </span>
                     </h1>
-                    <p className="text-zinc-500 text-center mb-10 max-w-md">
-                        Pazar verilerini analiz etmeye hazırım. Aşağıdaki konulardan birini seçerek başlayabilirsin.
+                    <p className="text-zinc-500 text-center mb-10 max-w-md text-sm leading-relaxed">
+                        Milyonlarca veriyi tarayarak ticari fırsatları, fiyat değişimlerini ve tüketici eğilimlerini senin için raporlayabilirim.
                     </p>
                     
                     {/* Modern Kartlar */}
@@ -228,10 +246,10 @@ export default function ChatPage() {
                         <div className={`
                           relative max-w-[85%]
                           ${msg.role === 'user' 
-                            // USER: Şık, hafif neonlu balon.
-                            ? 'bg-[#1e1e2e] border border-white/10 text-white px-5 py-3 rounded-2xl rounded-tr-sm shadow-md' 
+                            // USER: Daha modern bir gri/mavi ton
+                            ? 'bg-[#27272a] border border-white/5 text-white px-5 py-3 rounded-2xl rounded-tr-sm shadow-md' 
                             
-                            // BOT: SADECE METİN (Balon yok, şeffaf)
+                            // BOT: SADECE METİN
                             : 'bg-transparent text-zinc-300 px-0 py-1'
                           }
                         `}>
@@ -273,15 +291,15 @@ export default function ChatPage() {
         </div>
       </div>
 
-      {/* --- INPUT ALANI (DAHA PARLAK & NET) --- */}
+      {/* --- INPUT ALANI --- */}
       <div className="p-4 relative z-30">
         <div className="max-w-2xl mx-auto">
             <div 
               className={`
                 relative rounded-[26px] transition-all duration-300 ease-out flex items-end
                 ${isFocused 
-                  ? "bg-[#18181b] border border-white/90 shadow-[0_0_30px_0px_rgba(255,255,255,0.3)]" // Focus: Daha aydınlık + Cyan glow
-                  : "bg-[#18181b] border border-white/30 shadow-lg" // Default: Rengi açtık (#18181b) ve border'ı belirginleştirdik
+                  ? "bg-[#18181b] border border-white/90 shadow-[0_0_30px_0px_rgba(255,255,255,0.15)]" 
+                  : "bg-[#18181b] border border-white/10 shadow-lg" 
                 }
               `}
             >
@@ -293,7 +311,7 @@ export default function ChatPage() {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     autoFocus
-                    placeholder="Merak ettiğin bir trend var mı?"
+                    placeholder="Merak ettiğin bir ürün veya trend var mı?"
                     rows={1}
                     className="w-full bg-transparent text-white pl-6 py-4 rounded-[26px] focus:outline-none resize-none max-h-[150px] overflow-y-auto scrollbar-hide placeholder:text-zinc-500 font-normal text-[15px] z-10"
                 />
@@ -305,7 +323,7 @@ export default function ChatPage() {
                         m-2 p-2.5 rounded-full transition-all duration-300 flex items-center justify-center flex-shrink-0 z-10
                         ${chatInput.trim() && !loading
                             ? "bg-white text-black hover:bg-zinc-200 hover:scale-105 shadow-md" 
-                            : "bg-zinc-700/50 text-zinc-500 cursor-not-allowed"}
+                            : "bg-zinc-800 text-zinc-600 cursor-not-allowed"}
                     `}
                 >
                     {loading ? <RefreshCcw size={18} className="animate-spin"/> : <ArrowUp size={20} strokeWidth={2.5} />}
@@ -313,7 +331,7 @@ export default function ChatPage() {
             </div>
             
             <p className="text-center mt-3 text-[10px] text-zinc-600 font-medium">
-                TrendAI, pazar verilerini anlık analiz eder.
+                TrendAI, e-ticaret ve sosyal medya verilerini anlık analiz eder.
             </p>
         </div>
       </div>
