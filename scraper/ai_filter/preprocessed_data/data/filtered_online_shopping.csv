@@ -464,3 +464,571 @@ trendyol_kategorili_urunler.csv,Kendin Yap Kiraz Desenli Kupa,"125,00 TL",85,#E�
 trendyol_kategorili_urunler.csv,Mood Eğlenceli Sticker Defteri,"250,00 TL",80,#Eğlenceli #Sticker #Yaratıcılık #Kafe #Restoran #MüşteriDeneyimi #Dekorasyon #Hediye #KendiYap #Sanat
 trendyol_kategorili_urunler.csv,Seramik Hamuru Başlangıç Seti,"276,23 TL",75,#Sanat #Hobi #Eğlenceli #Yaratıcılık #Restoran #Kafe #Atölye #Eğitim #Çocuklar #KendiYap
 trendyol_kategorili_urunler.csv,2026 Haftalık Cep Ajandası,"369,00 TL",70,#Planlama #Organizasyon #Ajanda #Restoran #Kafe #İşletmeVerimliliği #MüşteriDeneyimi #Yenilikçi #Sürdürülebilir #2026
+alibaba.csv,Freshgo 3 Ton Lens,"0,95-2,25",85,#Ücretsiz Örnek #Renkli Lens #Yıllık Kullanım #HORECA #Göz Teması #Yumuşak Lens #Cosplay #Toptan #Müşteri İhtiyacı #Yeni Trend
+alibaba.csv,HID Renk Lens,"1,32-1,95",80,#Yıllık Kullanım #Cosplay #Parti #Göz Makyajı #HORECA #Yumuşak Lens #Renkli Lens #Müşteri İhtiyacı #Yeni Trend #Kısa Süreli
+alibaba.csv,Magister Lens,"1,30-1,95",75,#Reçete Lens #Konforlu #HORECA #En Çok Satan #Yumuşak Lens #Göz Teması #Müşteri İhtiyacı #Yeni Trend #Toptan #Uygun Fiyat
+alibaba.csv,Natural Lens,"1,70-3",78,#Doğal #Büyütme #HORECA #Yumuşak Lens #Müşteri İhtiyacı #Yeni Trend #Toptan #Göz Teması #Konfor #Uzun Süreli
+alibaba.csv,Freshgo Renk Lens,"1,58-4",82,#Ücretsiz Kargo #Renkli Lens #Yıllık Kullanım #HORECA #Yumuşak Lens #Müşteri İhtiyacı #Yeni Trend #Toptan #Göz Teması #Doğal
+alibaba.csv,16oz PP İçecek Şişesi,"$0,18-0,19",75,#ErkenTrendSinyali #ÖzelLogo #YüksekSıcaklık #HORECA #İçecekAmbalajı #Sürdürülebilir #PratikKullanım #MüşteriTalepleri #GıdaSınıfı #ŞişeTasarımı
+alibaba.csv,Degrade PET Losyon Şişesi,"$0,32",80,#LüksAmbalaj #Kozmetik #YüksekKalite #HORECA #CiltBakımı #EstetikTasarım #Sürdürülebilir #MüşteriTalepleri #AmbalajTrendleri #ŞişeTasarımı
+alibaba.csv,12oz Yuvarlak Meyve Suyu Şişesi,"$0,11-0,15",70,#ErkenTrendSinyali #MeyveSuyu #HORECA #PratikKullanım #TekKullanımlık #Sürdürülebilir #AmbalajTrendleri #MüşteriTalepleri #ŞişeTasarımı #İçecekAmbalajı
+alibaba.csv,Gıda Sınıfı PET Kutular,"$0,08-0,17",65,#GıdaSınıfı #HORECA #PratikKullanım #TekKullanımlık #AmbalajTrendleri #MüşteriTalepleri #ŞişeTasarımı #Sürdürülebilir #ÇerezAmbalajı #İçecekAmbalajı
+alibaba.csv,PET Şişe Seti,"$0,40-0,54",85,#KozmetikAmbalaj #HORECA #YüksekKalite #Sürdürülebilir #MüşteriTalepleri #AmbalajTrendleri #CiltBakımı #EstetikTasarım #ŞişeTasarımı #ErkenTrendSinyali
+alibaba.csv,Özelleştirilebilir PET Şişe,"$0,11-0,13",78,#ErkenTrendSinyali #Özelleştirilebilir #HORECA #Sürdürülebilir #MüşteriTalepleri #AmbalajTrendleri #İçecekAmbalajı #PratikKullanım #ŞişeTasarımı #GıdaSınıfı
+alibaba.csv,Şampuan ve Saç Kremi Şişesi,"$0,38-0,47",82,#Kozmetik #HORECA #YüksekKalite #Sürdürülebilir #MüşteriTalepleri #AmbalajTrendleri #CiltBakımı #EstetikTasarım #ŞişeTasarımı #ErkenTrendSinyali
+alibaba.csv,2025 Lüks PET Şampuan Şişesi,"$0,38-0,47",75,#ErkenTrend #Şampuan #LüksAmbalaj #PETŞişe #HORECA #Kozmetik #Sürdürülebilir #ÖzelTasarım #YüksekKalite #Ambalaj
+alibaba.csv,Özel Logo 500ml İçecek Şişesi,"$0,15-0,18",70,#ErkenTrend #İçecek #ÖzelLogo #Sürdürülebilir #HORECA #YüksekSıcaklık #PlastikŞişe #Ambalaj #MüşteriDeneyimi #Marka
+alibaba.csv,200ml Mini Gıda Sınıfı Kavanoz,"$0,09-0,15",65,#ErkenTrend #GıdaAmbalajı #MiniKavanoz #HORECA #ŞekerSuyu #PET #Sürdürülebilir #PratikKullanım #Ambalaj #Yenilik
+alibaba.csv,Hızlı Yayın Cihazı Android TV Kutusu,"$19,90-30,99",80,#ErkenTrend #AndroidTV #Streaming #HORECA #Teknoloji #MedyaOynatıcı #YüksekÇözünürlük #Eğlence #AkıllıEv #İnovasyon
+alibaba.csv,Yeni 2025 IPTV A68R Akıllı TV,$55,85,#ErkenTrend #IPTV #AkıllıTV #HORECA #YüksekDepolama #Eğlence #Teknoloji #YüksekÇözünürlük #MedyaOynatıcı #İnovasyon
+alibaba.csv,H96 Max TV Kutusu,12.50$,75,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #WiFi6 #AkıllıTV #Teknoloji #Eğlence
+alibaba.csv,Sgreat Android TV Kutusu,16-29$,70,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #AkıllıTV #Teknoloji #Eğlence #UHD
+alibaba.csv,B1 Android TV Kutusu,10.50$,68,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #ÇokluDil #Verimlilik
+alibaba.csv,Hızlı Yayın Cihazı,19.90-30.99$,80,#ErkenTrend #8K #Android #Streaming #HORECA #MedyaOynatıcı #WiFi6 #Teknoloji #Eğlence #NoelHediyesi
+alibaba.csv,ATV 4K Ultra HD,5.40-12$,65,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #MiniPC #ÇiftWiFi
+alibaba.csv,H96 MAX TV Kutusu,5-9.80$,72,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #SetTopBox #UHD
+alibaba.csv,U16 Akıllı TV Box,5.40-13$,60,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #HazırStok #Verimlilik
+alibaba.csv,IPTV A68R Akıllı TV,55$,85,#ErkenTrend #IPTV #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #Premium #HDR10
+alibaba.csv,Android 14 STB IPTV,16$,78,#ErkenTrend #IPTV #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #60fps #Garanti
+alibaba.csv,Mortal Akıllı TV Kutusu,6.84-10.50$,66,#ErkenTrend #4K #Android #Streaming #HORECA #MedyaOynatıcı #Teknoloji #Eğlence #WiFi6 #SesAsistanı
+alibaba.csv,400 Yumurta Kuluçka Makinesi,120-128,85,#YeniTrend #Otomatik #YumurtaKuluçkası #Verimlilik #TarımTeknolojisi #YüksekKapasiteli #KuluçkaMakinesi #GıdaÜretimi #Sürdürülebilirlik #ÇiftlikEkipmanı
+alibaba.csv,340 Yumurta Kuluçka Makinesi,70-75,80,#Otomatik #YumurtaKuluçkası #ÇiftlikKullanımı #GüneşEnerjisi #Verimlilik #Sürdürülebilirlik #TarımTeknolojisi #YüksekKapasiteli #KuluçkaMakinesi #GıdaÜretimi
+alibaba.csv,500 Yumurta Kuluçka Makinesi,99,90,#Otomatik #YumurtaKuluçkası #YüksekKapasiteli #Verimlilik #TarımTeknolojisi #KuluçkaMakinesi #GıdaÜretimi #Sürdürülebilirlik #ÇiftlikEkipmanı #İnovasyon
+alibaba.csv,500 Yumurta Rulo Kuluçka,120,88,#Otomatik #YumurtaKuluçkası #RuloTipi #Verimlilik #TarımTeknolojisi #YüksekKapasiteli #KuluçkaMakinesi #GıdaÜretimi #Sürdürülebilirlik #ÇiftlikEkipmanı
+alibaba.csv,Tam Otomatik 500 Yum. Kuluçka,99$,85,"#YüksekKap., #Otomatik, #Kuluçka, #Verimlilik, #Yenilikçi, #HORECA, #Tavuk, #Güvercin, #EnerjiVerimliliği, #Yumurta"
+alibaba.csv,Çift Güç Yum. Kuluçka,15-20$,75,"#DüşükMaliyet, #Otomatik, #Kuluçka, #EvKullanımı, #YüksekVerim, #HORECA, #Kanatlı, #Yumurta, #Yenilikçi, #Pratik"
+alibaba.csv,Yüksek Kuluçka Oranı 24-500,99$,80,"#YüksekKap., #Otomatik, #Kuluçka, #Verimlilik, #HORECA, #Yumurta, #Tavuk, #Güvercin, #Yenilikçi, #EnerjiVerimliliği"
+alibaba.csv,Otomatik Güneş Enerjili Kuluçka,95-100$,90,"#GüneşEnerjisi, #Otomatik, #Kuluçka, #Sürdürülebilir, #HORECA, #Yenilikçi, #EnerjiVerimliliği, #Tavuk, #Yumurta, #Ekolojik"
+alibaba.csv,Tam Otomatik 288 Yum. Kuluçka,"45,60-46,20$",78,"#YüksekKap., #Otomatik, #Kuluçka, #Verimlilik, #HORECA, #Yumurta, #Tavuk, #Yenilikçi, #Pratik, #EvKullanımı"
+alibaba.csv,Sıcak Satış Kuluçka Makinesi,"30,50-35$",70,"#Otomatik, #Kuluçka, #Verimlilik, #HORECA, #Yumurta, #Tavuk, #Yenilikçi, #Pratik, #EvKullanımı, #Popüler"
+alibaba.csv,Lüks Parfüm Şişesi,"$0,18-0,65",85,#Lüks #Parfüm #Şişe #Özel #Ambalaj #Estetik #HORECA #Toptan #YüksekKalite #YeniTrend
+alibaba.csv,Yuvarlak Parfüm Şişesi,"$0,50-1,99",80,#Lüks #Parfüm #Şişe #Toptan #Estetik #HORECA #YüksekKalite #YeniVarış #Ambalaj #Şık
+alibaba.csv,Düzensiz Parfüm Şişesi,"$0,25-0,85",75,#Yenilikçi #Parfüm #Şişe #Estetik #HORECA #Toptan #Ambalaj #Özel #Dizayn #YeniTrend
+alibaba.csv,Mini Parfüm Seti,"$0,59-1,89",90,#Küçük #Parfüm #Set #HORECA #Lüks #Ambalaj #Özel #Toptan #YeniVarış #Estetik
+alibaba.csv,Lüks Parfüm Şişesi,"$0,70-0,95",85,#Lüks #Parfüm #Şişe #Cam #ÖzelTasarım #HORECA #Ambalaj #Estetik #Sürdürülebilir #YüksekKalite
+alibaba.csv,Kare Parfüm Şişesi,"$0,65-0,95",80,#Kare #Parfüm #Şişe #Lüks #Cam #HORECA #ÖzelTasarım #Ambalaj #Estetik #YüksekKalite
+alibaba.csv,Temizle Cam Parfüm Şişesi,"$0,30-0,95",75,#Temizle #Cam #Parfüm #Şişe #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #MatFinish
+alibaba.csv,Özel Tasarım Parfüm Şişesi,"$0,19-0,93",78,#ÖzelTasarım #Parfüm #Şişe #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #Şeffaf #Premium
+alibaba.csv,Lüks Kozmetik Ambalaj,"$0,15-0,88",82,#Kozmetik #Ambalaj #Lüks #HORECA #Estetik #Serum #Cam #YüksekKalite #Sürdürülebilir #Fonksiyonel
+alibaba.csv,Doldurulabilir Parfüm Şişesi,"$0,38-0,55",76,#Doldurulabilir #Parfüm #Şişe #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #Kullanışlı #Pratik
+alibaba.csv,Altın Kapaklı Parfüm Şişesi,"$0,25-0,58",79,#AltınKapak #Parfüm #Şişe #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #Şeffaf #Premium
+alibaba.csv,Özel Logo Parfüm Şişesi,"$0,20-0,38",74,#ÖzelLogo #Parfüm #Şişe #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #Kişiselleştirme #Sürdürülebilir
+alibaba.csv,Mini Parfüm Yağı Seti,"$0,59-1,89",77,#Mini #Parfüm #Yağı #Seti #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #Seyahat #Pratik
+alibaba.csv,Düzensiz Parfüm Şişesi,"$0,25-0,85",81,#Düzensiz #Parfüm #Şişe #Lüks #HORECA #Ambalaj #Estetik #YüksekKalite #Yenilikçi #Farklı
+alibaba.csv,6ml-20ml Boş Cam Parfüm Şişesi,0.15-0.20 USD,75,#Vegan #Seyahat #Kozmetik #Doldurulabilir #ÇevreDostu #HORECA #Parfüm #Şişe #YüksekKalite #Minimalist
+alibaba.csv,5ml-50ml Damlalık Şişesi,0.12-0.46 USD,70,#Kozmetik #CiltBakımı #Vegan #Damlalık #HORECA #ÖzelMarka #Şişe #YüksekKalite #Minimalist #Seyahat
+alibaba.csv,30ml-100ml Kare Parfüm Şişesi,0.18-0.29 USD,80,#Parfüm #Seyahat #Kozmetik #Doldurulabilir #HORECA #Şişe #YüksekKalite #Minimalist #ÇevreDostu #Lüks
+alibaba.csv,Lüks Boş Şeffaf Parfüm Şişesi,0.36-0.41 USD,85,#Lüks #Parfüm #HORECA #Şişe #ÖzelTasarım #Minimalist #Doldurulabilir #ÇevreDostu #Kozmetik #YüksekKalite
+alibaba.csv,Çevre Dostu Parfüm Şişesi,0.25-0.38 USD,90,#ÇevreDostu #Parfüm #HORECA #Seyahat #Lüks #Minimalist #Kozmetik #Doldurulabilir #ÖzelTasarım #Sürdürülebilir
+alibaba.csv,Bakire İnsan Saç Dantel Peruk,15.99-69.99 USD,65,#İnsanSaçı #Peruk #HORECA #Kadın #Doğal #Bakire #Dantel #YüksekKalite #Trendy #Güzellik
+alibaba.csv,HD Dantel Frontal Peruk,5.90-18 USD,60,#Peruk #HD #HORECA #Kadın #Doğal #Bakire #Dantel #YüksekKalite #Trendy #Güzellik
+alibaba.csv,Ombre HD Dantel Peruk,150-256 USD,75,#Ombre #Peruk #HORECA #Kadın #Doğal #Bakire #Dantel #YüksekKalite #Trendy #Güzellik
+alibaba.csv,Trendy Kabarık Dalgalı Peruk,9.88-18.77 USD,70,#Peruk #Kabarık #HORECA #Kadın #Doğal #Bakire #Dantel #YüksekKalite #Trendy #Güzellik
+alibaba.csv,Ombre Dantel Peruk,150-256 $,75,#Trend #Kadın #Peruk #Dantel #Ombre #Doğal #Vietnam #Kıvırcık #YüksekKalite #HORECA
+alibaba.csv,HD Dantel Peruk,"6,90-19,90 $",80,#Trend #Kadın #Peruk #HD #Dantel #BakireSaç #Vietnam #HORECA #UygunFiyat #YüksekTalep
+alibaba.csv,Kıvırcık Bob Peruk,"18,60-65,60 $",70,#Trend #Kadın #Bob #Peruk #Kıvırcık #HORECA #YüksekKalite #BakireSaç #Dantel #Toptan
+alibaba.csv,UV Jel Oje Seti,"0,48-0,58 $",85,#Trend #TırnakSanatı #UVJel #Salon #ÖzelEtiket #Manikür #YüksekKalite #HORECA #Toptan #RenkSeçenekleri
+alibaba.csv,Akrilik Tırnak Kiti,"3,04-3,06 $",78,#Trend #Akrilik #Tırnak #Kiti #YeniBaşlayanlar #Manikür #HORECA #UygunFiyat #Renkli #YüksekTalep
+alibaba.csv,135 Renk UV Jel,85-116 $,90,#Trend #UVJel #TırnakSanatı #RenkSeçenekleri #Salon #YüksekKalite #HORECA #Toptan #ÖzelEtiket #Yenilikçi
+alibaba.csv,CANNI 168 Renk UV Jel,"1,05-1,50 $",85,#YeniTrend #YüksekKalite #NailArt #UVJel #Hediyelik #RenkSeçenekleri #TPOÜcretsiz #HemaÜcretsiz #SalonKullanımı #Kampanya
+alibaba.csv,Profesyonel 15ml UV Jel Seti,"0,80-1 $",80,#Profesyonel #UVJel #NeonGlitter #SalonKullanımı #HemaÜcretsiz #YüksekKalite #Manikür #Kampanya #Toptan #GelişmişFormül
+alibaba.csv,Kore Tarzı 368 Renk UV Jel,100-1.000 $,90,#KoreStili #RenkSeçenekleri #UVJel #SalonKullanımı #YüksekKalite #Toptan #Hediyelik #YeniTrend #UzunÖmürlü #GelişmişFormül
+alibaba.csv,RONIKI 1000 Renk UV Jel,1-2 $,75,#Vegan #Kokusuz #UVJel #Toptan #HemaÜcretsiz #RenkSeçenekleri #SalonKullanımı #YüksekKalite #Hediyelik #YeniTrend
+alibaba.csv,ZRKGEL 288 Renk UV Jel,"0,45-1,09 $",82,#YeniTrend #RenkSeçenekleri #UVJel #HemaÜcretsiz #TPOÜcretsiz #SalonKullanımı #Kampanya #YüksekKalite #Kokusuz #Hediyelik
+alibaba.csv,XEIJAYI Lüks UV Jel,"1-1,60 $",78,#Lüks #UVJel #YüksekKalite #UzunÖmürlü #SalonKullanımı #Hediyelik #Kampanya #GelişmişFormül #Pigmentli #Toptan
+alibaba.csv,CANNI 9ml UV Jel Seti,"7,65-9,90 $",88,#YeniTrend #UVJel #Hediyelik #Set #Kampanya #YüksekKalite #SalonKullanımı #HemaÜcretsiz #TPOÜcretsiz #RenkSeçenekleri
+alibaba.csv,Bling Rhinestone Isı Transferi,3.98-4.98,75,#ErkenTrend #HORECA #Özelleştirilebilir #Moda #Dekorasyon #Rhinestone #T-shirt #Üniforma #YüksekTalep #Kreatif
+alibaba.csv,Rhinestone Kırpma Tekniği,1.88-4.60,70,#HORECA #Dekorasyon #Düğün #YüksekTalep #Özelleştirilebilir #Rhinestone #Kreatif #Moda #DikişTekniği #YeniTrend
+alibaba.csv,Bling Bling Tel Halat,0.45-0.60,65,#HORECA #Dekorasyon #Kreatif #Rhinestone #Giyim #Aksesuar #YüksekTalep #DIY #Özelleştirilebilir #YeniTrend
+alibaba.csv,Özel Motifler Transfer,0.68-2.08,80,#HORECA #Özelleştirilebilir #Rhinestone #Moda #YüksekTalep #Kreatif #Giyim #Dekorasyon #YeniTrend #Tasarım
+alibaba.csv,Sıcak Düzeltme Rhinestones,0.14-1.19,60,#HORECA #Rhinestone #Dekorasyon #Giyim #YüksekTalep #Kreatif #Özelleştirilebilir #YeniTrend #DüşükMaliyet #DIY
+alibaba.csv,Glitter Halat Ayakkabı,0.45-0.65,68,#HORECA #Ayakkabı #Dekorasyon #Kreatif #Rhinestone #Özelleştirilebilir #YeniTrend #Sürdürülebilir #Moda #DIY
+alibaba.csv,3D Tel Flora Aplike,1.25-7.45,72,#HORECA #Aplike #Kreatif #Rhinestone #Moda #YüksekTalep #Özelleştirilebilir #YeniTrend #Dekorasyon #Giyim
+alibaba.csv,Sıcak Basın Rhinestone Çıkartmalar,0.57-0.99,74,#HORECA #Rhinestone #Dekorasyon #Giyim #YüksekTalep #Kreatif #Özelleştirilebilir #YeniTrend #DIY #Tasarım
+alibaba.csv,Kristal AB Rhinestones,1.76,78,#HORECA #Rhinestone #Dekorasyon #Giyim #YüksekTalep #Kreatif #Özelleştirilebilir #YeniTrend #Tasarım #Moda
+alibaba.csv,Düz Arka Cam Rhinestones,0.45-2.58,66,#HORECA #Rhinestone #Dekorasyon #Giyim #YüksekTalep #Kreatif #Özelleştirilebilir #YeniTrend #DüşükMaliyet #DIY
+alibaba.csv,Özel 3D Puf Logo Yamalar,0.12-0.39,71,#HORECA #Yama #Kreatif #Rhinestone #Özelleştirilebilir #YeniTrend #Moda #Giyim #DüşükMaliyet #DIY
+alibaba.csv,Silikon PVC Yama,"$0,03-0,05",70,#ErkenTrend #Silikon #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #PVC
+alibaba.csv,Isı Basın Yama,"$0,58-1,30",75,#ErkenTrend #IsıBasın #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #Kadife
+alibaba.csv,Kauçuk Yama,"$0,30",65,#ErkenTrend #Kauçuk #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #PVC
+alibaba.csv,Kabartmalı Silikon Yama,"$0,10-0,60",80,#ErkenTrend #Kabartmalı #Silikon #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep
+alibaba.csv,Özel Nakış Yama,"$0,50-1,65",72,#ErkenTrend #Nakış #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #Şönil
+alibaba.csv,3D Kauçuk Yama,"$0,30",68,#ErkenTrend #3D #Kauçuk #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep
+alibaba.csv,Düşük MOQ Yama,"$0,10-2,50",60,#ErkenTrend #DüşükMOQ #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #Dokuma
+alibaba.csv,Özel 3D Yama,"$0,12-0,39",78,#ErkenTrend #3D #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #İşlemeli
+alibaba.csv,Sıcak Satış Yama,"$0,10-0,50",74,#ErkenTrend #SıcakSatış #Yama #Özelleştirilebilir #Moda #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #İşlemeli
+alibaba.csv,Amerikan Futbolu Yaması,"$0,52-0,84",66,#ErkenTrend #Futbol #Yama #Özelleştirilebilir #Spor #Giyim #Aksesuar #DüşükFiyat #YüksekTalep #ElYapımı
+alibaba.csv,Yüzen Yemi Üretim Mak.,50-60,75,#YüksekKalite #Hayvancılık #YüzenYem #Verimlilik #YeniTrend #Sürdürülebilir #Küçükİşletmeler #HORECA #GıdaÜretimi #HayvanBesleme
+alibaba.csv,Hayvan Yemi Pelet Mak.,268-288,80,#Peletleme #Hayvancılık #Verimlilik #YüksekKapasiteli #HORECA #Gıdaİşleme #Sürdürülebilir #HayvanBesleme #YeniTeknoloji #İşletmeVerimliliği
+alibaba.csv,Mini Pelet Makinesi,159-189,70,#Küçükİşletmeler #HayvanYemi #Peletleme #Verimlilik #HORECA #Sürdürülebilir #Yenilikçi #GıdaÜretimi #KüçükKapasiteli #ErkenTrend
+alibaba.csv,Sıcak Satış Pelet Mak.,160-260,78,#SıcakSatış #Peletleme #Hayvancılık #KüçükÖlçek #Verimlilik #HORECA #Yenilikçi #Gıdaİşleme #HayvanBesleme #YeniTrend
+alibaba.csv,Paslanmaz Karıştırıcı,130-140,72,#Paslanmaz #Karıştırıcı #HayvanYemi #Verimlilik #HORECA #Gıdaİşleme #Sürdürülebilir #Yenilikçi #Küçükİşletmeler #ErkenTrend
+alibaba.csv,Hayvan Yem Pelet Mak.,160-260 $,75,#Yem #Hayvancılık #Peletleme #Verimlilik #Küçük Ölçek #HORECA #Sıcak Satış #Yenilikçi #Gıda Güvenliği #Sürdürülebilir
+alibaba.csv,Paslanmaz Yem Mikseri,130-140 $,70,#Mikser #Hayvan Yemi #Paslanmaz #Verimlilik #HORECA #Yenilikçi #Gıda İşleme #Sürdürülebilir #Küçük Ölçek #Yüksek Kalite
+alibaba.csv,Hayvan Yemi Granülatör,50-60 $,65,#Granülatör #Hayvancılık #Yem Üretimi #Verimlilik #HORECA #Yenilikçi #Sürdürülebilir #Küçük Ölçek #Gıda Güvenliği #Ekonomik
+alibaba.csv,Çim Öğütücü,170-190 $,80,#Öğütücü #Hayvan Yemi #Verimlilik #HORECA #Yenilikçi #Sürdürülebilir #Küçük Ölçek #Gıda İşleme #Çim #Hayvancılık
+alibaba.csv,Yüzen Yem Üretim Mak.,165-170 $,78,#Yüzen Yem #Hayvancılık #HORECA #Yenilikçi #Sürdürülebilir #Gıda Güvenliği #Verimlilik #Küçük Ölçek #Yem Üretimi #Hayvan Besleme
+alibaba.csv,Yem Pelet Yapma Mak.,99-139 $,72,#Peletleme #Hayvancılık #Yem Üretimi #HORECA #Yenilikçi #Sürdürülebilir #Küçük Ölçek #Verimlilik #Gıda Güvenliği #Ekonomik
+alibaba.csv,Kend. Yapışkanlı Holografik Etiket,"$0,03-0,10",75,#ErkenTrend #Holografik #KendindenYapışkanlı #SuGeçirmez #ÖzelLogo #Vinil #Yaratıcı #Ambalaj #Etiket #Küçükİşletmeler
+alibaba.csv,Şirket Tasarım Etiketi,"$0,01-0,30",70,#ErkenTrend #SuGeçirmez #Holografik #ÖzelTasarım #Vinil #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı #Logo
+alibaba.csv,Özel Su Geçirmez Sticker,"$0,01-0,05",65,#ErkenTrend #SuGeçirmez #ÖzelTasarım #Vinil #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı #Logo #Kampanya
+alibaba.csv,Kend. Yapışkanlı Vinil Sticker,"$0,01-0,08",68,#ErkenTrend #KendindenYapışkanlı #Vinil #SuGeçirmez #ÖzelTasarım #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı #Logo
+alibaba.csv,3D Lüks Etiket,"$0,01-0,40",72,#ErkenTrend #3D #Lüks #ÖzelTasarım #Vinil #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı #Logo
+alibaba.csv,Kişiselleştirilmiş Logo Sticker,"$0,02-0,10",74,#ErkenTrend #Kişiselleştirilmiş #Vinil #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı #Logo #ÖzelTasarım #Kampanya
+alibaba.csv,Kozmetik Ürün Etiketi,"$0,01-0,05",66,#ErkenTrend #Kozmetik #SuGeçirmez #ÖzelTasarım #Vinil #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı #Logo
+alibaba.csv,Holografik Void Etiket,"$0,04-0,05",78,#ErkenTrend #Holografik #Güvenlik #AntiSabotaj #ÖzelTasarım #Vinil #Ambalaj #Etiket #Küçükİşletmeler #Yaratıcı
+alibaba.csv,Şeffaf Logo Sticker,0.02-0.08,75,#ErkenTrend #ŞeffafSticker #LogoYapıştırma #HORECA #Kişiselleştirme #Ambalaj #MüşteriDeneyimi #Yenilikçi #DüşükMaliyet #HızlıÜretim
+alibaba.csv,Die Kesim Sticker,0.02-0.30,70,#ErkenTrend #DieKesim #SuGeçirmez #HORECA #Kişiselleştirme #Ambalaj #Yenilikçi #MüşteriDeneyimi #DüşükMaliyet #HızlıÜretim
+alibaba.csv,Lüks Altın Folyo Etiket,0.02-0.19,80,#ErkenTrend #LüksAmbalaj #AltınFolyo #HORECA #Kişiselleştirme #GıdaKozmetik #Yenilikçi #MüşteriDeneyimi #DüşükMaliyet #HızlıÜretim
+alibaba.csv,Holografik Sticker,0.03-0.10,85,#ErkenTrend #Holografik #Yenilikçi #HORECA #Kişiselleştirme #Ambalaj #MüşteriDeneyimi #DüşükMaliyet #Etkileyici #Görsel
+alibaba.csv,Kişiselleştirilmiş Logo Sticker,0.02-0.10,78,#ErkenTrend #Kişiselleştirme #LogoSticker #HORECA #MüşteriDeneyimi #DüşükMaliyet #HızlıÜretim #Ambalaj #Yenilikçi #Etkileyici
+alibaba.csv,UV Su Geçirmez Sticker,0.01-0.05,72,#ErkenTrend #UVKoruma #SuGeçirmez #HORECA #Kişiselleştirme #Ambalaj #MüşteriDeneyimi #DüşükMaliyet #HızlıÜretim #Yenilikçi
+alibaba.csv,Kozmetik Ürün Etiketi,0.01-0.05,76,#ErkenTrend #Kozmetik #Ambalaj #HORECA #Kişiselleştirme #MüşteriDeneyimi #DüşükMaliyet #Yenilikçi #Etkileyici #Görsel
+alibaba.csv,Holografik Void Etiket,0.04-0.05,82,#ErkenTrend #Holografik #Güvenlik #HORECA #Kişiselleştirme #MüşteriDeneyimi #DüşükMaliyet #Yenilikçi #Etkileyici #Ambalaj
+alibaba.csv,Kişisel Logo Şapka Rozeti,0.10-0.29,75,#Özel #Kişiselleştirilmiş #Moda #HORECA #Promosyon #YakaRozeti #Metal #Emaye #Toptan #Etkileşim
+alibaba.csv,Yüksek Kalite Hatıra Rozeti,0.10-0.30,80,#Hatıra #ÖzelLogo #Moda #Dekoratif #HORECA #YakaPins #Metal #Emaye #Toptan #Kalite
+alibaba.csv,LED Işıklı Tükenmez Kalem,0.25-0.47,85,#Promosyon #LED #TükenmezKalem #HORECA #Yenilikçi #Kişiselleştirilmiş #Ofis #Kalite #Etkileşim #Teknoloji
+alibaba.csv,Bambu Kalem,0.08-0.11,70,#ÇevreDostu #Bambu #Promosyon #HORECA #Sürdürülebilir #Yazım #Kalite #Yenilik #Ofis #Hediye
+alibaba.csv,Çok Fonksiyonlu Tükenmez Kalem,0.12-0.14,78,#ÇokFonksiyonlu #TükenmezKalem #HORECA #Yenilikçi #Kişiselleştirilmiş #Ofis #Teknoloji #Etkileşim #Hediye #Pratik
+alibaba.csv,Kablosuz Mikrofon 3-in-1,3.50,85,#ErkenTrend #Kablosuz #Mikrofon #Vlog #VideoKayıt #YakaMikrofonu #Taşınabilir #Kompakt #DüşükGecikme #Podcast
+alibaba.csv,Kondenser Mikrofon Seti,10-13,90,#Podcast #Karaoke #CanlıKayıt #MikrofonSeti #SesKartı #YüksekKalite #EvStüdyosu #KullanımKolaylığı #Profesyonel #Yaratıcılık
+alibaba.csv,DJI MIC 3 Kablosuz,13-492,95,#Kablosuz #Mikrofon #Taşınabilir #UzunPilÖmrü #GenişUyumluluk #YüksekKalite #VideoProdüksiyon #Vlog #KullanımKolaylığı #Profesyonel
+alibaba.csv,K9 Kablosuz Mikrofon,"$0,90-3,70",85,#ErkenTrend #Kablosuz #Mikrofon #Konferans #Vlog #HORECA #UygunFiyat #YüksekPerformans #KullanımKolaylığı #Taşınabilir
+alibaba.csv,BM 800 Mikrofon Seti,"$4,50-10,95",80,#Karaoke #Podcast #Stüdyo #Mikrofon #YüksekKalite #HORECA #CanlıAkış #KullanımKolaylığı #UygunFiyat #Profesyonel
+alibaba.csv,Hollyland Lark M2,$83-90,90,#Kablosuz #Mikrofon #Vlog #Gürültüİptali #YüksekPerformans #HORECA #UzunPilÖmrü #Taşınabilir #KullanımKolaylığı #ErkenTrend
+alibaba.csv,DJI MIC 3,$13-492,88,#Kablosuz #Mikrofon #Taşınabilir #YüksekUyumluluk #UzunPilÖmrü #HORECA #Vlog #KullanımKolaylığı #ErkenTrend #Profesyonel
+alibaba.csv,Popüler SM7B Mikrofon,$45-50,92,#Stüdyo #Mikrofon #YüksekKalite #Vokal #HORECA #Profesyonel #CanlıYayın #ErkenTrend #Dinamik #KullanımKolaylığı
+alibaba.csv,2025 Mikrofon Kiti,"$1,43",75,#Kablosuz #Mikrofon #CanlıAkış #UygunFiyat #HORECA #Taşınabilir #KullanımKolaylığı #ErkenTrend #GürültüAzaltma #Eğitim
+alibaba.csv,Otomatik Pizza Otomat,1.500-8.100 USD,85,#ErkenTrend #Otomatik #GıdaTeknolojisi #HORECA #Pizza #DijitalOtomat #TazeGıda #İşletmeVerimliliği #AkıllıSistem #YüksekTalep
+alibaba.csv,İnsansız Market Otomat,1.583-1.750 USD,80,#ErkenTrend #Otomatik #İnsansızMarket #HORECA #Gıda #İşletmeVerimliliği #Teknoloji #YüksekTalep #Convenience #SelfService
+alibaba.csv,Süt Satış Otomatı,1.254-1.298 USD,75,#ErkenTrend #Otomatik #Süt #HORECA #Gıda #RekabetAvantajı #TazeÜrün #İşletmeVerimliliği #YüksekTalep #SağlıklıSeçim
+alibaba.csv,Mini Parfüm Otomat,650-998 USD,70,#ErkenTrend #Otomatik #Parfüm #HORECA #KendiKendineServis #Yenilikçi #Küçükİşletmeler #MüşteriDeneyimi #Özelleştirme #YüksekTalep
+alibaba.csv,Kask Temizleme Otomatı,1.580-2.030 USD,78,#ErkenTrend #Otomatik #Temizlik #HORECA #Motosiklet #Hijyen #Yenilikçi #MüşteriDeneyimi #Teknoloji #YüksekTalep
+alibaba.csv,Akıllı Otomat,1.150-1.350 USD,82,#ErkenTrend #Otomatik #AkıllıSistem #HORECA #Gıda #Teknoloji #YüksekTalep #İşletmeVerimliliği #Dijital #Convenience
+alibaba.csv,Buzdolaplı Otomat,971-1.000 USD,76,#ErkenTrend #Otomatik #Buzdolabı #HORECA #Gıda #Soğutma #YüksekTalep #İşletmeVerimliliği #Dijital #Convenience
+alibaba.csv,Çiçek Otomatı,3.880 USD,65,#ErkenTrend #Otomatik #Çiçek #HORECA #KendiKendineServis #Yenilikçi #MüşteriDeneyimi #Özelleştirme #YüksekTalep #Estetik
+alibaba.csv,QR Kod Self Servis Otomat,$1.075-1.145,85,#SelfServis #Otomat #Aperatif #İçecek #Teknoloji #HORECA #Yenilik #MüşteriDeneyimi #Otomasyon #HızlıServis
+alibaba.csv,Dokunmatik Ekran Otomat,$971-1.000,80,#Dokunmatik #Otomat #Aperatif #İnovasyon #HORECA #MüşteriDeneyimi #Teknoloji #HızlıServis #KullanımKolaylığı #Otomasyon
+alibaba.csv,24 Saat Gıda Otomatı,$1.100-1.150,90,#24Saat #Otomat #Gıda #HORECA #MüşteriDeneyimi #HızlıServis #Yenilik #Otomasyon #Verimlilik #Teknoloji
+alibaba.csv,Protein Shake Otomat,$2.400-3.100,75,#Protein #Otomat #Spor #HORECA #SağlıklıYaşam #Yenilik #MüşteriDeneyimi #HızlıServis #İnovasyon #Fitness
+alibaba.csv,Çiçek Otomatı,$3.880,70,#Çiçek #Otomat #HORECA #Yenilik #MüşteriDeneyimi #Otomasyon #Estetik #HızlıServis #Farklılık #Taze
+alibaba.csv,Akıllı Otomat,$1.150-1.350,88,#Akıllı #Otomat #HORECA #Yenilik #MüşteriDeneyimi #Teknoloji #Otomasyon #HızlıServis #Verimlilik #İnovasyon
+alibaba.csv,Buzdolaplı Otomat,$971-1.000,82,#Buzdolabı #Otomat #HORECA #İçecek #Yenilik #MüşteriDeneyimi #Otomasyon #HızlıServis #Verimlilik #Teknoloji
+alibaba.csv,Aperatif Otomat,$1.583-1.750,78,#Aperatif #Otomat #HORECA #Yenilik #MüşteriDeneyimi #HızlıServis #Otomasyon #Verimlilik #Teknoloji #Popüler
+alibaba.csv,48V Elektrikli Scooter,120-165,75,#Hareketlilik #Elektrikli #Sürdürülebilir #Yenilikçi #Şehir İçi #Ulaşım #Yaşlılar #Enerji Verimliliği #Kullanıcı Dostu #HORECA
+alibaba.csv,500W Elektrikli Üç Tekerlekli,245-365,80,#Hareketlilik #Elektrikli #Aile #Ulaşım #Yenilikçi #HORECA #Kullanıcı Dostu #Enerji Verimliliği #Konfor #Güvenli
+alibaba.csv,1000W Elektrikli Üç Tekerlekli,60-80,70,#Hareketlilik #Elektrikli #Ulaşım #Yenilikçi #HORECA #Kullanıcı Dostu #Ekonomik #Enerji Verimliliği #Aile #Güvenli
+alibaba.csv,2000W Yüksek Hızlı Üç Tekerlekli,500-550,85,#Hareketlilik #Yüksek Hız #Elektrikli #Yenilikçi #HORECA #Ulaşım #Güvenli #Enerji Verimliliği #Konfor #Şehir İçi
+alibaba.csv,Yeni Tip Yaşlı Üç Tekerlekli,260-299,78,#Hareketlilik #Yaşlılar #Elektrikli #Yenilikçi #HORECA #Konfor #Enerji Verimliliği #Kullanıcı Dostu #Ulaşım #Sürdürülebilir
+alibaba.csv,3 Wheeler Elektrikli Bisiklet,80-100,72,#Hareketlilik #Elektrikli #Ulaşım #Yenilikçi #HORECA #Yaşlılar #Enerji Verimliliği #Kullanıcı Dostu #Ekonomik #Şehir İçi
+alibaba.csv,Mini Elektrikli Araç,600-620,88,#Hareketlilik #Elektrikli #Yenilikçi #HORECA #Ulaşım #Sürdürülebilir #Şehir İçi #Enerji Verimliliği #Konfor #Güvenli
+alibaba.csv,Kapalı Üç Tekerlekli Araç,600-620,82,#Hareketlilik #Kapalı Araç #Elektrikli #Yenilikçi #HORECA #Ulaşım #Güvenli #Enerji Verimliliği #Konfor #Şehir İçi
+alibaba.csv,Kişisel Logo Hatıra Sikke,"$0,45-1,20",75,#Kişiselleştirme #Hatıra #ÖzelÜrün #HORECA #Promosyon #DüşükMaliyet #YüksekTalep #Eşsiz #Toptan #Yenilikçi
+alibaba.csv,Özelleştirilmiş Ucuz Paralar,"$0,41-0,99",70,#Kişiselleştirme #Hediye #DüşükMaliyet #HORECA #Promosyon #YüksekTalep #Eşsiz #Toptan #Yenilikçi #Hatıra
+alibaba.csv,Kavisli Lüks Kirpik Yatak,$200-220,80,#Lüks #Spa #Güzellik #HORECA #Yenilikçi #Konfor #Modern #Estetik #YüksekTalep #Toptan
+alibaba.csv,Yeni Kirpik Yatak,$280-320,85,#Yenilikçi #Güzellik #Spa #HORECA #Lüks #Konfor #Modern #YüksekTalep #Toptan #Estetik
+alibaba.csv,Elektrikli Yüz Yatak,$60-490,78,#Elektrikli #Güzellik #HORECA #Konfor #Modern #YüksekTalep #Spa #Yenilikçi #Estetik #Toptan
+alibaba.csv,Lüks Elektrikli Hidroterapi Yatak,$351-513,90,#Hidroterapi #Lüks #Spa #HORECA #Yenilikçi #Konfor #Modern #YüksekTalep #Toptan #Estetik
+alibaba.csv,Estetik Yatak,$80-499,85,#ErkenTrend #Estetik #Lüks #Spa #Güzellik #Masaj #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Kirpik Yatak,$90-500,80,#ErkenTrend #Kirpik #Lüks #Spa #Güzellik #Masaj #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Hidrolik Estetik Yatak,$150-990,90,#ErkenTrend #Hidrolik #Estetik #Lüks #Spa #Güzellik #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Kavisli Kirpik Yatak,$200-220,75,#ErkenTrend #Kavisli #Kirpik #Lüks #Spa #Güzellik #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Pembe Kirpik Yatak,$86-280,70,#ErkenTrend #Pembe #Kirpik #Lüks #Spa #Güzellik #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Yeni Kirpik Yatak,$280-320,88,#ErkenTrend #Yeni #Kirpik #Lüks #Spa #Güzellik #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Elektrikli Yüz Yatak,$60-490,82,#ErkenTrend #Elektrikli #Yüz #Lüks #Spa #Güzellik #Yatak #HORECA #Salon #Konfor
+alibaba.csv,Hidroterapi Yatak,$351-513,92,#ErkenTrend #Hidroterapi #Lüks #Spa #Güzellik #Yatak #HORECA #Salon #Konfor #Masaj
+alibaba.csv,"85"" Akıllı LED TV","$740,13",85,#ErkenTrend #AkıllıTV #4K #OtelKullanımı #Özelleştirilebilir #YüksekÇözünürlük #GelişmişTeknoloji #HORECA #MüşteriDeneyimi #Lüks
+alibaba.csv,TLC 4K LED TV,$250,80,#ErkenTrend #AkıllıTV #4K #UHD #OtelKullanımı #GelişmişTeknoloji #MüşteriDeneyimi #HORECA #Eğlence #YüksekKalite
+alibaba.csv,"70"" VSTI Akıllı TV",$276-305,78,#ErkenTrend #AkıllıTV #4K #OtelKullanımı #GelişmişTeknoloji #MüşteriDeneyimi #HORECA #Eğlence #YüksekÇözünürlük #İnteraktif
+alibaba.csv,Çerçevesiz LED TV,$36-56,75,#ErkenTrend #AkıllıTV #Çerçevesiz #ModernTasarım #OtelKullanımı #GelişmişTeknoloji #HORECA #Minimalist #Eğlence #YüksekKalite
+alibaba.csv,Kavisli LED TV,"$138,59-160,63",70,#ErkenTrend #KavisliTV #4K #OtelKullanımı #GelişmişTeknoloji #MüşteriDeneyimi #HORECA #Eğlence #YüksekÇözünürlük #Tasarım
+alibaba.csv,"Akıllı TV 24-65""",$40-45,75,#ErkenTrend #AkıllıTV #HORECA #Eğlence #MutfakTeknolojisi #YüksekKalite #DüşükFiyat #ÇokluEkran #Android #WiFi
+alibaba.csv,"Büyük Ekran TV 75-110""","$36,90-68,30",80,#ErkenTrend #BüyükEkran #HORECA #Eğlence #MutfakTeknolojisi #YüksekKalite #DüşükFiyat #ÇokluEkran #QLED #AkıllıTV
+alibaba.csv,"TCL 4K LED TV 43-98""",$200-210,70,#ErkenTrend #4K #HORECA #Eğlence #MutfakTeknolojisi #YüksekKalite #DüşükFiyat #UHD #AkıllıTV #TCL
+alibaba.csv,"WIFI Bluetooth Akıllı TV 19-32""",$36-40,65,#ErkenTrend #AkıllıTV #HORECA #Eğlence #MutfakTeknolojisi #DüşükFiyat #Bluetooth #WIFI #KüçükEkran #ÇokluKullanım
+alibaba.csv,"Samsungs QLED TV 55-85""",$430-450,85,#ErkenTrend #QLED #HORECA #Eğlence #MutfakTeknolojisi #YüksekKalite #Premium #AkıllıTV #UHD #Samsungs
+alibaba.csv,Özel Altın Gümüş Madalya,"$0,50-1",75,#HORECA #ÖzelTasarım #Madalya #SporEtkinlikleri #Yarışlar #Kişiselleştirme #Hediye #YüksekTalep #Sürdürülebilir #Yenilikçi
+alibaba.csv,Kendi Hatıra Sikke,"$0,14",70,#HORECA #Kişiselleştirme #Hatıra #ÖzelTasarım #Sürdürülebilir #YüksekTalep #Hediye #Yenilikçi #Etkinlikler #Spor
+alibaba.csv,Kendi Logo Emaye Pin,"$0,10-0,30",80,#HORECA #Kişiselleştirme #EmayePin #MarkaTanıtımı #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Tasarım Metal Rozet,"$0,10-0,29",72,#HORECA #Kişiselleştirme #MetalRozet #MarkaTanıtımı #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Logo Metal Badge,"$0,10-0,29",78,#HORECA #Kişiselleştirme #MetalBadge #MarkaTanıtımı #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Tasarım 3D Sikke,"$0,10-0,80",76,#HORECA #Kişiselleştirme #3DSikke #ÖzelTasarım #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Tasarım Emaye Pin,"$0,10-0,30",74,#HORECA #Kişiselleştirme #EmayePin #MarkaTanıtımı #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Tasarım Metal Kaplama,"$0,10-0,80",73,#HORECA #Kişiselleştirme #MetalKaplama #ÖzelTasarım #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Tasarım Hediye Sikke,"$0,10-0,80",71,#HORECA #Kişiselleştirme #HediyeSikke #ÖzelTasarım #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,Kendi Tasarım 3D Metal Sikke,"$0,10-0,80",75,#HORECA #Kişiselleştirme #3DMetalSikke #ÖzelTasarım #YüksekTalep #Sürdürülebilir #Yenilikçi #Hediye #Etkinlikler #Spor
+alibaba.csv,UVR99 Isı Yalıtım Filmi,18-21,85,#ErkenTrend #IsıYalıtımı #UVKoruma #Otomotiv #Sürdürülebilir #Yenilikçi #GüneşFilmi #NanoTeknoloji #Müşteriİhtiyacı #HORECA
+alibaba.csv,Nano Seramik Pencere Filmi,15-20,80,#ErkenTrend #UVKoruma #Yalıtım #Otomotiv #Sürdürülebilir #GüneşFilmi #Yenilikçi #Müşteriİhtiyacı #HORECA #NanoTeknoloji
+alibaba.csv,Akıllı PDLC Gizlilik Filmi,119-219,90,#ErkenTrend #Gizlilik #AkıllıTeknoloji #Otomotiv #Yenilikçi #Müşteriİhtiyacı #HORECA #Elektrokromik #Otomasyon #Lüks
+alibaba.csv,Krom Mat Metalik Vinil,55-70,75,#ErkenTrend #Otomotiv #VinilKaplama #Estetik #Yenilikçi #Müşteriİhtiyacı #HORECA #Toptan #Farklılık #Kişiselleştirme
+alibaba.csv,Kendinden Şifa TPU PPF,29-49,88,#ErkenTrend #KendindenŞifa #Otomotiv #Koruma #Yenilikçi #Müşteriİhtiyacı #HORECA #TPU #Dayanıklılık #Sürdürülebilir
+alibaba.csv,HD Dantel Ön Peruk,"21,99",70,#ErkenTrend #Güzellik #Peruk #DoğalGörünüm #Müşteriİhtiyacı #HORECA #Kadın #Estetik #Yenilikçi #Kişiselleştirme
+alibaba.csv,"40"" 13x6 HD Dantel Peruk",5.90-18,75,#ErkenTrend #DoğalSaç #HORECA #Peruk #KadınGiyimi #YüksekKalite #Toptan #BakireSaç #DantelPeruk #HızlıTeslimat
+alibaba.csv,13x6 Toptan HD Dantel Peruk,28-32,80,#ErkenTrend #BakireSaç #HORECA #Peruk #KadınGiyimi #YüksekKalite #Toptan #DantelPeruk #ManikürHizalı #İşlenmemiş
+alibaba.csv,Ham Vietnamca 13x6 HD Peruk,18-35,78,#ErkenTrend #DoğalSaç #HORECA #Peruk #KadınGiyimi #YüksekKalite #Toptan #DantelPeruk #ManikürHizalı #İşlenmemiş
+alibaba.csv,5X5 HD Dantel Peruk,19.90-29.90,70,#ErkenTrend #HORECA #Peruk #KadınGiyimi #YüksekKalite #DantelPeruk #ManikürHizalı #İşlenmemiş #BakireSaç #ÇeşitliModeller
+alibaba.csv,Ombre 13*4 HD Dantel Peruk,150-256,85,#ErkenTrend #Ombre #HORECA #Peruk #KadınGiyimi #YüksekKalite #DantelPeruk #DoğalGörünüm #ÇeşitliModeller #Lüks
+alibaba.csv,Kadın Ombre Derin Dalga Peruk,70-198,82,#ErkenTrend #Ombre #HORECA #Peruk #KadınGiyimi #YüksekKalite #DantelPeruk #DoğalGörünüm #ÇeşitliModeller #Lüks
+alibaba.csv,"30-32"" HD Dantel Peruk",6.90-19.90,76,#ErkenTrend #HORECA #Peruk #KadınGiyimi #YüksekKalite #DantelPeruk #DoğalGörünüm #Toptan #BakireSaç #ÇeşitliModeller
+alibaba.csv,KEMY Kabarık Bob Peruk,20-72,74,#ErkenTrend #HORECA #Peruk #KadınGiyimi #YüksekKalite #DantelPeruk #KısaSaç #BakireSaç #ÇeşitliModeller #Toptan
+alibaba.csv,Kabarık Bukleler Dantel Peruk,44.66-78.99,79,#ErkenTrend #HORECA #Peruk #KadınGiyimi #YüksekKalite #DantelPeruk #DoğalGörünüm #ÇeşitliModeller #Lüks #BakireSaç
+alibaba.csv,Akıllı TV 55 inç,36-50,88,#ErkenTrend #AkıllıTV #HORECA #Eğlence #YüksekÇözünürlük #Toptan #GelişmişTeknoloji #OtelEkipmanları #ÇeşitliBoyutlar #WiFi
+alibaba.csv,"İnteraktif 90"" Akıllı TV",$730-750,85,#ErkenTrend #İnteraktif #OtelTeknolojisi #Eğitim #Toplantı #UHD #OLED #QLED #YüksekÇözünürlük #AkıllıEğlence
+alibaba.csv,"OEM Kırılmaz 65"" TV","$184,20-208,20",80,#Güvenlik #Kırılmaz #OtelTeknolojisi #4K #AkıllıTV #BüyükEkran #ÖzelLogo #YüksekKalite #MüşteriDeneyimi #Eğlence
+alibaba.csv,WiFi & Bluetooth LED TV,$66-78,75,#Bağlantı #AkıllıTV #OtelTeknolojisi #4K #Çerçevesiz #YüksekÇözünürlük #Eğlence #MüşteriDeneyimi #Verimlilik #Modern
+alibaba.csv,"Ekonomik 70"" QLED TV",$36-50,70,#Ekonomik #QLED #OtelTeknolojisi #SinemaDeneyimi #4K #AkıllıTV #BüyükEkran #MüşteriDeneyimi #Eğlence #Verimlilik
+alibaba.csv,"65"" Android Akıllı TV",$36-49,65,#Android #AkıllıTV #OtelTeknolojisi #UygulamaDesteği #BüyükEkran #Verimlilik #Eğlence #MüşteriDeneyimi #Modern #Erişim
+alibaba.csv,Anti-Spy Ekran Koruyucu,"$0,06-0,22",75,#ErkenTrend #Gizlilik #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #AntiCasus #TemperedGlass #İnovasyon #Güvenlik
+alibaba.csv,HD Antistatik Ekran Koruyucu,"$0,23-0,28",70,#ErkenTrend #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #Antistatik #TemperedGlass #İnovasyon #Güvenlik #FabrikaToptan
+alibaba.csv,9H Tam Kapak Ekran Koruyucu,"$0,07-0,19",68,#ErkenTrend #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #TamKapak #TemperedGlass #İnovasyon #Güvenlik #ESD
+alibaba.csv,Metal Lens Koruyucu,"$1,20-1,50",80,#ErkenTrend #LensKoruma #HORECA #MobilAksesuar #YüksekTalep #MetalKoruma #İnovasyon #Güvenlik #KameraAksesuar #Premium
+alibaba.csv,2025 Anti-Spy Ekran Koruyucu,"$0,12-0,17",72,#ErkenTrend #Gizlilik #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #AntiCasus #TemperedGlass #İnovasyon #Güvenlik
+alibaba.csv,Gizlilik İpek Ekran Koruyucu,"$0,13-0,16",74,#ErkenTrend #Gizlilik #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #İpek #TemperedGlass #İnovasyon #Güvenlik
+alibaba.csv,AIKICE Kırılmaz Cam Koruyucu,"$0,69-0,88",78,#ErkenTrend #Kırılmaz #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #TemperedGlass #İnovasyon #Güvenlik #Premium
+alibaba.csv,9D Seramik Ekran Koruyucu,"$0,06-0,10",65,#ErkenTrend #EkranKoruma #HORECA #MobilAksesuar #YüksekTalep #Seramik #TemperedGlass #İnovasyon #Güvenlik #FabrikaToptan
+alibaba.csv,21L Mini İçecek Buzdolabı,$65-220,85,#MiniBuzdolabı #Enerjiİçecekleri #BarEkipmanı #HORECA #Soğutma #Yenilikçi #Kompakt #Ticari #Ekran #EnerjiVerimliliği
+alibaba.csv,Cola Buzdolabı,$85-115,80,#Cola #Bira #VitrinBuzdolabı #HORECA #Soğutma #Ticari #Ekran #Yenilikçi #İçecek #MüşteriDeneyimi
+alibaba.csv,152L-1000L Açık Buzdolabı,$126-140,75,#BüyükKapasite #AçıkBuzdolabı #HORECA #Soğutma #Ticari #Yenilikçi #EnerjiVerimliliği #İçecek #MüşteriDeneyimi #GıdaSaklama
+alibaba.csv,Dik Dondurucu,$120-160,78,#Dondurucu #HORECA #Ticari #Soğutma #Yenilikçi #EnerjiVerimliliği #GıdaSaklama #MüşteriDeneyimi #Dondurma #İçecek
+alibaba.csv,300L Cam Kapı Dondurucu,90-110,85,#ErkenTrend #İçecekSoğutucu #CamKapı #Dondurucu #HORECA #EnerjiVerimliliği #YüksekKapasite #OtelKullanımı #Restoran #Catering
+alibaba.csv,21L LED Soğuk İçecek Buzdolabı,60-100,80,#ErkenTrend #MiniBar #LED #Soğutucu #HORECA #İçecekSergileme #EnerjiVerimliliği #OtelKullanımı #Restoran #Catering
+alibaba.csv,Dondurucu Chiller,87-240,78,#ErkenTrend #Endüstriyel #Dondurucu #HORECA #İçecekSoğutucu #CamKapı #YüksekKapasite #Restoran #Catering #Market
+alibaba.csv,No Frost İçecek Soğutucu,115-145,82,#ErkenTrend #NoFrost #Soğutucu #HORECA #İçecekSoğutucu #EnerjiVerimliliği #OtelKullanımı #Restoran #Catering #Market
+alibaba.csv,Tek Sıcaklık Pizza Hazırlık Masası,569-605,75,#HORECA #PizzaHazırlama #Soğutucu #Restoran #Catering #MutfakEkipmanları #Verimlilik #EnerjiVerimliliği #GıdaHazırlama #OtelKullanımı
+alibaba.csv,Yüksek Kalite İçecek Ekran Soğutucu,95-235,84,#ErkenTrend #EkranSoğutucu #HORECA #İçecekSergileme #EnerjiVerimliliği #OtelKullanımı #Restoran #Catering #Market #CamKapı
+alibaba.csv,Ticari Dondurucu Combo,"84,90-310",77,#HORECA #Dondurucu #Combo #İçecekSoğutucu #EnerjiVerimliliği #OtelKullanımı #Restoran #Catering #Market #CamKapı
+alibaba.csv,Paslanmaz Çelik Cam Et Buzdolabı,543-650,88,#ErkenTrend #EtBuzdolabı #HORECA #PaslanmazÇelik #GıdaSaklama #Restoran #Catering #OtelKullanımı #YüksekKalite #CamKapı
+alibaba.csv,300cc Quad ATV,400$,65,#Nadir #OffRoad #YüksekPerformans #ATV #AraziAracı #HORECA #Eğlence #Yetişkin #YeniTrend #Manuel
+alibaba.csv,250cc ATV,625-645$,70,#YeniModel #OffRoad #ATV #Eğlence #HORECA #YüksekPerformans #4x4 #AraziAracı #Motosiklet #Trend
+alibaba.csv,200cc ATV,808-828$,60,#Otomatik #ÇiftlikKullanımı #ATV #HORECA #YeniTrend #AraziAracı #UygunFiyat #Eğlence #Motosiklet #Yetişkin
+alibaba.csv,4 Wheeler ATV,2850-3150$,75,#Yarış #Yetişkin #4WD #HORECA #Eğlence #YeniModel #YüksekPerformans #AraziAracı #ATV #Trend
+alibaba.csv,250cc UTV,1490-1680$,68,#YeniModel #UTV #HORECA #Eğlence #4x4 #AraziAracı #YüksekPerformans #Yetişkin #Trend #Otomatik
+alibaba.csv,125cc ATV,255-299$,55,#Elektrikli #Çocuklar #HORECA #Eğlence #Otomatik #ATV #YeniTrend #UygunFiyat #Güç #Yetişkin
+alibaba.csv,150cc ATV,519-549$,62,#HORECA #Çocuklar #Otomatik #ATV #YeniTrend #UygunFiyat #Eğlence #Güç #Yetişkin #VeganAlternatif
+alibaba.csv,250cc ATV,320-329$,58,#Otomatik #HORECA #Eğlence #ATV #YeniTrend #AraziAracı #UygunFiyat #Yetişkin #Güç #Performans
+alibaba.csv,250cc ATV,650-800$,66,#YüksekPerformans #HORECA #Eğlence #ATV #YeniModel #AraziAracı #Yetişkin #4WD #Trend #Otomatik
+alibaba.csv,18K Altın Kaplama Bilezik,0.96-1.57 $,75,#Moda #Takı #Bilezik #AltınKaplama #Kadın #Şıklık #HORECA #YazTrendi #ErkenTrend #Toptan
+alibaba.csv,PVD 18K Altın Bileklik,0.90-1.62 $,80,#SuGeçirmez #Takı #Bileklik #Kadın #HORECA #YüksekKalite #ErkenTrend #Zirkon #Moda #Toptan
+alibaba.csv,Tıknaz Kare Bilezik,1.05-1.16 $,85,#Akrilik #Bilezik #Kadın #YazTrendi #ErkenTrend #Renkli #HORECA #Aksesuar #Trendy #Toptan
+alibaba.csv,Yeni Punk Bilezik,0.49-1.29 $,70,#Punk #Bilezik #Kadın #HORECA #YeniVarış #ErkenTrend #Toptan #Trendy #Aksesuar #Şıklık
+alibaba.csv,Geniş Kenarlı Bilezik,0.78-1.26 $,78,#Geometrik #Bilezik #Kadın #HORECA #YazTrendi #ErkenTrend #Akrilik #Büyük #Toptan #Şıklık
+alibaba.csv,Vintage Bilezik,0.81-0.95 $,76,#Vintage #Bilezik #Kadın #HORECA #ErkenTrend #Akrilik #Şıklık #Toptan #Charm #Düzensiz
+alibaba.csv,Doğal Taş Bilezik,0.31-2.74 $,65,#DoğalTaş #Bilezik #Kadın #HORECA #Şifa #ErkenTrend #Toptan #Aksesuar #Moda #Trendy
+alibaba.csv,Dubai Altın Bileklik,1.30-1.80 $,82,#Lüks #Bileklik #HORECA #ErkenTrend #Altın #Kadın #Toptan #Şıklık #Karışık #Paslanmaz
+alibaba.csv,Moissanite Bilezik,1.21-2.48 $,77,#Moissanite #Bilezik #Kadın #HORECA #ErkenTrend #Şıklık #Toptan #Paslanmaz #Aksesuar #Moda
+alibaba.csv,Yeni Tasarım Bilezik,0.99-1.39 $,74,#Abartılı #Bilezik #Kadın #HORECA #ErkenTrend #Geometrik #Toptan #Şıklık #Moda #Aksesuar
+alibaba.csv,Hint Dubai Bilezik,1.77-1.94 $,83,#Lüks #Bilezik #HORECA #ErkenTrend #AltınKaplama #Gelin #Toptan #Şıklık #Çiçek #Totem
+alibaba.csv,Özelleştirilmiş Pin,"$0,20-0,27",75,#Kişiselleştirme #HORECA #Promosyon #Yaka İğnesi #Masonik #Metal #Yumuşak Emaye #Özel Tasarım #Hediyelik #Erken Trend
+alibaba.csv,Özel Logo Hatıra Parası,"$0,45-1,20",70,#Kişiselleştirme #HORECA #Hatıra #Metal #Yumuşak Emaye #Özel Tasarım #Promosyon #Hediyelik #Erken Trend #Toptan
+alibaba.csv,Eğlenceli Metal Madalya,"$0,35-0,55",80,#Madalya #HORECA #Yarış #Özel Tasarım #Eğlenceli #Metal #Promosyon #Hediyelik #Erken Trend #Maraton
+alibaba.csv,Kendi Tasarım Medalya,"$0,10-0,80",85,#Kişiselleştirme #HORECA #Madalya #Özel Tasarım #Spor #Yarış #Hediyelik #Erken Trend #Promosyon #Metal
+alibaba.csv,Özel Yaka İğneleri,"$0,11-0,15",65,#Kişiselleştirme #HORECA #Yaka İğnesi #Metal #Özel Tasarım #Promosyon #Hediyelik #Erken Trend #Toptan #Yumuşak Emaye
+alibaba.csv,Özel Metal Zanaat Pimleri,"$0,12-0,30",60,#Kişiselleştirme #HORECA #Promosyon #Metal #Zanaat #Hediyelik #Erken Trend #Toptan #Emaye #Özel Tasarım
+alibaba.csv,XL Derin İçbükey Jant,165-225,75,#YeniTrend #DövmeJant #BMW #M3 #M4 #Otomotiv #Lüks #ÖzelTasarım #YüksekPerformans #HORECA
+alibaba.csv,FORGIATO Krom Jant,400-699,80,#YeniTrend #DövmeJant #Krom #Lüks #Otomotiv #YüksekPerformans #HORECA #ÖzelTasarım #GMC #YolcuAracı
+alibaba.csv,RCSR Yeni Tasarım Jant,230-350,70,#YeniTrend #DövmeJant #Alüminyum #BMW #Mercedes #HORECA #Otomotiv #YüksekPerformans #ÖzelTasarım #Lüks
+alibaba.csv,Hiper Siyah Jant,79-119,65,#YeniTrend #DökümJant #HiperSiyah #BMW #AUDI #HORECA #Otomotiv #Alüminyum #YüksekPerformans #Estetik
+alibaba.csv,XINLAI Karbon Fiber Jant,399-500,85,#YeniTrend #KarbonFiber #Lüks #DövmeJant #Otomotiv #HORECA #YüksekPerformans #ÖzelTasarım #Alüminyum #Inovasyon
+alibaba.csv,BJXL Özelleştirilmiş Jant,199-256,72,#YeniTrend #DövmeJant #Özelleştirme #BMW #Tesla #HORECA #Otomotiv #Lüks #YüksekPerformans #Alüminyum
+alibaba.csv,Özel Klasik Jant,399-1189,78,#YeniTrend #Klasik #DövmeJant #Lüks #HORECA #Otomotiv #ÖzelTasarım #YüksekPerformans #Estetik #Alüminyum
+alibaba.csv,"JDM Tarzı Jant 16-20""",70-99,75,#YeniTrend #JDM #Alüminyum #Otomotiv #Estetik #Hafif #Performans #Tasarım #Modifikasyon #Spor
+alibaba.csv,Özel Siyah Jant 2 Parça,255-365,80,#ÖzelTasarım #Siyah #Otomotiv #Performans #Estetik #YüksekKalite #Modifikasyon #Spor #Dövme #Hafif
+alibaba.csv,Yüksek Kalite Rüzgarlık Ceket,13-25,70,#KışModası #RüzgarGeçirmez #Erkek #Şık #Fonksiyonel #YüksekKalite #Spor #DışGiyim #Günlük #Konfor
+alibaba.csv,Polar Rüzgarlık Ceket,11-14,68,#KışModası #Termal #Erkek #RüzgarGeçirmez #Konfor #Sıcak #DışGiyim #Günlük #Spor #YüksekKalite
+alibaba.csv,Kış Rüzgar Geçirmez Ceket,12-15,72,#KışModası #RüzgarGeçirmez #Erkek #Konfor #DışGiyim #YüksekKalite #Sıcak #Günlük #Spor #Şık
+alibaba.csv,Beyzbol Ceketi,6-19.99,65,#Spor #Beyzbol #Erkek #Günlük #Modası #ÖzelLogo #Tasarım #Rahat #Streetwear #Vintage
+alibaba.csv,Kış Polar Ceket,4-10,60,#KışModası #Polar #Erkek #Rahat #DışGiyim #Sıcak #Günlük #Streetwear #ÖzelLogo #Konfor
+alibaba.csv,Su Geçirmez Moto Ceket,10-12,78,#Moto #SuGeçirmez #RüzgarGeçirmez #Erkek #Kış #Biker #Fonksiyonel #YüksekKalite #DışGiyim #Spor
+alibaba.csv,Kış Rüzgar Geçirmez Ceket,12-15 USD,75,#KışModası #RüzgarGeçirmez #Unisex #YüksekKalite #ÖzelLogo #HORECA #SıcakTutma #Konfor #DışGiyim #Toptan
+alibaba.csv,Beyzbol Ceketi,"6-19,99 USD",70,#SporModası #Beyzbol #ÖzelLogo #Toptan #HORECA #GençTarzı #YazKış #Rahat #DışGiyim #EkipKıyafeti
+alibaba.csv,Kış Parka Ceket,"58,99-59,98 USD",80,#KışModası #Parka #YüksekKalite #SıcakTutma #HORECA #DışGiyim #Konfor #Şık #Toptan #KışAktivitesi
+alibaba.csv,Hip Hop Beyzbol Ceketi,"8,14-8,99 USD",65,#HipHop #SokakModası #Beyzbol #Özelİşlemeli #Rahat #Toptan #HORECA #GençTarzı #DışGiyim #EkipKıyafeti
+alibaba.csv,Balon Ceket,"19,99-45,99 USD",85,#KışModası #BalonCeket #YüksekKalite #HORECA #SıcakTutma #Unisex #Toptan #Şık #DışGiyim #Trend
+alibaba.csv,Özel Logo Ceket,25-35 USD,78,#ÖzelLogo #YüksekKalite #Unisex #HORECA #Toptan #DışGiyim #SıcakTutma #Konfor #Şık #KışModası
+alibaba.csv,Rüzgar Geçirmez Moto Ceket,10-12 USD,72,#Moto #RüzgarGeçirmez #HORECA #KışModası #DışGiyim #Konfor #SıcakTutma #Toptan #Erkek #Şık
+alibaba.csv,Slim Biker Ceket,"11,97-13,58 USD",68,#Biker #SlimFit #HORECA #DışGiyim #Rahat #Şık #KışModası #Toptan #Erkek #Trend
+alibaba.csv,Kolej Ceketi,"16,89-23,68 USD",74,#Kolej #Vintage #HORECA #DışGiyim #Toptan #Rahat #GençTarzı #EkipKıyafeti #KışModası #Şık
+alibaba.csv,Özel Metal Rozet,"0,10-0,30 USD",60,#ÖzelLogo #MetalRozet #HORECA #Promosyon #Toptan #Hediyelik #Koleksiyon #DışGiyim #Dekoratif #EkipKıyafeti
+alibaba.csv,50000mAh Powerbank,"$7,10-9,92",85,#HızlıŞarj #YüksekKapasite #Taşınabilir #MobilŞarj #GüçBankası #Kamp #LEDGörüntü #ÇiftUSB #TipC #ErkenTrend
+alibaba.csv,80000mAh Powerbank,"$6,80-16,70",80,#YüksekKapasite #GüneşEnerjili #Taşınabilir #HızlıŞarj #LEDGörüntü #Kamp #ÇokluUSB #Polymer #ErkenTrend #Sürdürülebilir
+alibaba.csv,100000mAh Powerbank,"$9,99-19,80",90,#Kamp #YüksekKapasite #HızlıŞarj #LEDGörüntü #ÇiftUSB #TipC #Taşınabilir #DahiliKablo #ErkenTrend #Seyahat
+alibaba.csv,Ultra İnce Powerbank,"$9,99-11,11",75,#Ultraİnce #KablosuzŞarj #HızlıŞarj #Taşınabilir #LEDGörüntü #MobilCihazlar #ErkenTrend #ŞıkTasarım #Kompakt #Yenilikçi
+alibaba.csv,50000mAh OEM Powerbank,"$6,26-7,50",70,#OEM #YüksekKapasite #Taşınabilir #HızlıŞarj #MobilŞarj #GüçBankası #ErkenTrend #Kamp #ÇiftUSB #FarklıMarkalar
+alibaba.csv,100000mAh Powerbank,"$9,99-19,80",85,#YüksekKapasiteli #HızlıŞarj #MobilEnerji #Kamp #LEDGörüntü #ÇiftUSB #TipC #Taşınabilir #Seyahat #EnerjiVerimliliği
+alibaba.csv,50000mAh Taşınabilir Powerbank,"$6,26-7,50",80,#HızlıŞarj #LEDGörüntü #USB-C #Taşınabilir #CepTelefonu #Kamp #EnerjiVerimliliği #YüksekKapasiteli #Seyahat #MobilEnerji
+alibaba.csv,30000mAh REMAX Powerbank,"$7,65-9,90",75,#HızlıŞarj #Taşınabilir #ÇokUyumlu #Kamp #MobilEnerji #YüksekKapasiteli #LEDGörüntü #Seyahat #EnerjiVerimliliği #Akıllı
+alibaba.csv,200000mAh Kamp Powerbank,"$9,66-25,98",90,#Kamp #YüksekKapasiteli #LEDGörüntü #Taşınabilir #Seyahat #EnerjiVerimliliği #HızlıŞarj #AçıkHava #MobilEnerji #DahiliKablo
+alibaba.csv,Ultra İnce Kablosuz Powerbank,"$9,99-11,11",78,#KablosuzŞarj #Ultraİnce #HızlıŞarj #Taşınabilir #LEDLogo #MobilEnerji #Seyahat #YüksekKapasiteli #GelişmişTeknoloji #EnerjiVerimliliği
+alibaba.csv,20000mAh Powerbank,"$5,89-7,89",70,#YüksekKapasiteli #HızlıŞarj #LEDGörüntü #Taşınabilir #Seyahat #MobilEnerji #EnerjiVerimliliği #Kamp #DahiliKablo #Pratik
+alibaba.csv,30000mAh Güneş Enerjili Powerbank,"$7,35-20,25",88,#GüneşEnerjisi #HızlıŞarj #Taşınabilir #Kamp #Seyahat #YüksekKapasiteli #LEDGörüntü #EnerjiVerimliliği #MobilEnerji #ÇevreDostu
+alibaba.csv,50000mAh PD Powerbank,"$21,90-25",82,#HızlıŞarj #YüksekKapasiteli #Taşınabilir #LEDGörüntü #ÇokPortlu #MobilEnerji #Seyahat #EnerjiVerimliliği #GelişmişTeknoloji #Akıllı
+alibaba.csv,66W Hızlı Şarj Powerbank,"$5,80-12,80",76,#HızlıŞarj #YüksekKapasiteli #Taşınabilir #DijitalEkran #Seyahat #MobilEnerji #EnerjiVerimliliği #Pratik #Kamp #Akıllı
+Drones,4K Kamera Katlanabilir Drone,"$5,57-10",85,#4K #Katlanabilir #Drone #HavaFotoğrafçılığı #UzaktanKumanda #Eğlence #YüksekKalite #HızlıUçuş #Kamp #DışMekan
+Drones,E88 Pro Drone,"$4,32-5,60",80,#Katlanabilir #Drone #UzaktanKumanda #HavaFotoğrafçılığı #Eğlence #YüksekKalite #Kamp #DışMekan #HızlıUçuş #ÇocukOyuncağı
+alibaba.csv,Yeni S116 Drone 4K,24.90-28.90,85,#YeniTrend #4K #Wifi #EngelKaçınma #UzaktanKumanda #Profesyonel #HORECA #Eğlence #Dron #Kamera
+alibaba.csv,L300 Max Drone,73.90,90,#Profesyonel #HD #HavaFotoğrafçılığı #GPS #YeniTeknoloji #HORECA #Dron #YüksekKalite #Kamera #İnovasyon
+alibaba.csv,K19 MAX GPS Drone,48.75-54.17,80,#4K #GPS #EngelKaçınma #Profesyonel #FPV #HORECA #Dron #YüksekKalite #Kamera #İnovasyon
+alibaba.csv,E99 Pro Drone,4.80-5.70,75,#Katlanabilir #HavaFotoğrafçılığı #Dron #UzaktanKumanda #HORECA #Eğlence #Kamera #ÇiftKamera #YüksekKalite #Oyun
+alibaba.csv,DJI Mini 3 Fly More,389-589,95,#Profesyonel #4K #UzunUçuş #YüksekKalite #HORECA #Dron #Kamera #İnovasyon #HavaFotoğrafçılığı #Yetişkin
+alibaba.csv,2025 Lüks Çanta Seti,"6,12-7,08",85,#Lüks #ÇantaSeti #Kadın #Tasarımcı #YüksekKalite #Trendy #PUderi #ErkenTrend #Moda #HORECA
+alibaba.csv,Büyük Kapasiteli Tote Çanta,32-34,90,#Lüks #Tote #BüyükKapasite #HakikiDeri #Kadın #ErkenTrend #Marka #HORECA #Şıklık #Fonksiyonel
+alibaba.csv,Trendy Çanta Seti,"8,20-9,20",80,#Trendy #ÇantaSeti #Kadın #YüksekKalite #ErkenTrend #Moda #HORECA #Şıklık #Fonksiyonel #Cüzdan
+alibaba.csv,Yeni Moda PU Çanta,"1,90-3,90",75,#Yeni #Moda #PUderi #Çanta #Kadın #ErkenTrend #HORECA #UygunFiyat #Şıklık #Fonksiyonel
+alibaba.csv,Kare Manyetik Düğme Çanta,"0,88-1,08",70,#Kare #ManyetikDüğme #Trendy #PUderi #Çanta #Kadın #ErkenTrend #HORECA #Renkli #Şıklık
+alibaba.csv,Yeni Kore Tarzı Lüks Çanta,"5,84-6,13",78,#KoreTarzı #Lüks #Çanta #Trendy #Kadın #ErkenTrend #HORECA #Şıklık #Fonksiyonel #Tasarımcı
+alibaba.csv,PU Deri Kadın Çanta,1.90-3.85 $,75,#YeniTrend #KadınModa #Çanta #PUderi #Crossbody #Lüks #Toptan #Şık #Pratik #HORECA
+alibaba.csv,Özel Logo El Çantası,1.80-2.00 $,70,#ÖzelTasarım #Logo #KadınÇantası #Moda #Lüks #Crossbody #HORECA #Toptan #Şık #Pratik
+alibaba.csv,Büyük Kadın Çanta,11.90-12.80 $,80,#YeniTrend #KadınModa #BüyükÇanta #Lüks #Crossbody #TimsahDeri #HORECA #Şık #Pratik #Toptan
+alibaba.csv,El Yapımı Deri Çanta,8.00-8.90 $,85,#ElYapımı #Deri #KadınÇantası #Lüks #Şık #HORECA #Toptan #Pratik #ÖzelTasarım #Sürdürülebilir
+alibaba.csv,Kore Tarzı Lüks Çanta,5.84-6.13 $,78,#KoreTarzı #Lüks #Moda #Çanta #HORECA #Toptan #Şık #Pratik #YeniTrend #Crossbody
+alibaba.csv,Trendy PU Deri Çanta,3.70-4.00 $,72,#Trendy #PUderi #KadınÇantası #HORECA #Toptan #Şık #Pratik #YeniTrend #Lüks #Crossbody
+alibaba.csv,Keten Hediye Çantası,0.20-0.50 $,65,#Hediye #Keten #Çanta #Ekonomik #ÇevreDostu #HORECA #Toptan #Pratik #Noel #Sürdürülebilir
+alibaba.csv,Özel Mektup Keten Çanta,0.80-1.65 $,68,#ÖzelTasarım #Keten #Moda #Çanta #HORECA #Toptan #Pratik #Sınıf #İş #Günlük
+alibaba.csv,Baskılı Çevre Dostu Çanta,0.58-1.59 $,74,#ÇevreDostu #Baskılı #Çanta #HORECA #Toptan #Pratik #Sürdürülebilir #GeriDönüşüm #Moda #Ekonomik
+alibaba.csv,Logo ile Tuval Çanta,0.79-1.28 $,71,#Logo #Tuval #Çanta #HORECA #Toptan #Pratik #Günlük #Moda #ÖzelTasarım #Ekonomik
+alibaba.csv,Eco Dostu Alışveriş Çantası,"$0,30-0,68",85,#Sürdürülebilir #ÇevreDostu #Kullanılabilir #Alışveriş #Moda #Tasarımcı #YüksekTalep #HORECA #ÖzelLogo #RekabetçiFiyat
+alibaba.csv,Yıkanabilir Tote Çanta,"$0,69-1,50",80,#Sürdürülebilir #Yıkanabilir #ToteÇanta #HORECA #ÖzelLogo #Pratik #Alışveriş #Tasarımcı #YüksekTalep #ÇevreDostu
+alibaba.csv,Büyük Kapasiteli Tote Çanta,"$0,75-3,80",78,#BüyükKapasite #ToteÇanta #HORECA #Pratik #Alışveriş #ÖzelLogo #YüksekTalep #ÇevreDostu #Kullanışlı #Tasarımcı
+alibaba.csv,Özel Baskılı Tote Çanta,"$0,48-0,58",75,#ÖzelBaskı #ToteÇanta #HORECA #Alışveriş #Kullanışlı #Tasarımcı #YüksekTalep #ÇevreDostu #Pratik #Moda
+alibaba.csv,Çok Fonksiyonlu Tote Çanta,"$0,79-1,69",82,#ÇokFonksiyonlu #ToteÇanta #HORECA #Alışveriş #YüksekTalep #Pratik #Sürdürülebilir #Tasarımcı #ÇevreDostu #Kullanışlı
+alibaba.csv,Kadınlar için Büyük Tote Çanta,"$0,90-3,80",76,#Kadın #BüyükTote #HORECA #Alışveriş #Tasarımcı #YüksekTalep #ÇevreDostu #Pratik #Kullanışlı #Moda
+alibaba.csv,Şeffaf Tote Çanta,"$3,55-5,50",70,#Şeffaf #ToteÇanta #HORECA #Alışveriş #Moda #YüksekTalep #Pratik #Kullanışlı #Tasarımcı #ÇevreDostu
+alibaba.csv,Küçük İpli Çanta,"$0,21-0,38",65,#İpliÇanta #HORECA #Alışveriş #Küçük #Pratik #Tasarımcı #YüksekTalep #ÇevreDostu #Kullanışlı #Promosyon
+alibaba.csv,Yenilikçi Güvenlik Kamerası,"$19,80-28,35",88,#Güvenlik #Yenilikçi #HORECA #Teknoloji #YüksekTalep #Kablosuz #4G #GüneşEnerjisi #Akıllı #İzleme
+alibaba.csv,Panoramik Güvenlik Kamerası,"$24,64-27,28",85,#Panoramik #Güvenlik #HORECA #Teknoloji #YüksekTalep #Kablosuz #4G #İzleme #Akıllı #GüneşEnerjisi
+alibaba.csv,20MP Kablosuz CCTV,25.50-26.60,75,#Güvenlik #Kablosuz #YüksekÇözünürlük #PTZ #HareketAlgılama #GeceGörüş #HORECA #İzleme #ErkenTrend #AkıllıTeknoloji
+alibaba.csv,Vstarcam 12MP Wifi Kamera,23.40-25.90,70,#Güvenlik #Wifi #GeceGörüş #PTZ #HareketAlgılama #HORECA #İzleme #ErkenTrend #AkıllıTeknoloji #KullanıcıDostu
+alibaba.csv,Regis 25MP PTZ Kamera,29.40-36.00,80,#Güvenlik #PTZ #YüksekÇözünürlük #AkıllıTeknoloji #HareketAlgılama #HORECA #İzleme #ErkenTrend #KullanıcıDostu #Gelişmiş
+alibaba.csv,12MP Güneş Enerjili Kamera,19.80-28.35,85,#Güvenlik #GüneşEnerjisi #Kablosuz #PTZ #HareketAlgılama #HORECA #Sürdürülebilir #ErkenTrend #AkıllıTeknoloji #ÇevreDostu
+alibaba.csv,Panoramik 360 Kamera,24.64-27.28,78,#Güvenlik #Panoramik #360Derece #HareketAlgılama #HORECA #İzleme #ErkenTrend #AkıllıTeknoloji #KullanıcıDostu #Gelişmiş
+alibaba.csv,Yeni 12MP Güneş Kamera,25.15-39.26,82,#Güvenlik #GüneşEnerjisi #Kablosuz #HareketAlgılama #HORECA #Sürdürülebilir #ErkenTrend #AkıllıTeknoloji #ÇevreDostu #YüksekÇözünürlük
+alibaba.csv,XUPING Takı Bilezik,"1-2,80 $",75,#VeganAlternatif #Kişiselleştirilmiş #Moda #ErkekAksesuar #Zirkonya #YüksekTalep #HORECA #Şık #Toptan #AltınKaplama
+alibaba.csv,Paslanmaz Çelik Charm Bilezik,"1,20-2,16 $",70,#KadınAksesuar #Charm #PaslanmazÇelik #HORECA #Toptan #Moda #YüksekTalep #Şık #AltınKaplama #Sevimli
+alibaba.csv,Kelebek Bilezik,"0,84-1,95 $",68,#KadınAksesuar #Kelebek #PaslanmazÇelik #HORECA #Toptan #Moda #YüksekTalep #Şık #AltınKaplama #Bilezik
+alibaba.csv,Lüks Paslanmaz Çelik Bilezik,"6,80-7,43 $",80,#Lüks #ErkekAksesuar #PaslanmazÇelik #HORECA #YüksekTalep #Şık #AltınKaplama #Kişiselleştirilmiş #Toptan #Moda
+alibaba.csv,18K Altın Düz Bilezik,"0,45-1,80 $",65,#KadınAksesuar #DüzBilezik #PaslanmazÇelik #HORECA #Toptan #Moda #YüksekTalep #Şık #AltınKaplama #Bilezik
+alibaba.csv,Chunky Paslanmaz Çelik Bilezik,"0,69-2,29 $",72,#Chunky #PaslanmazÇelik #HORECA #Toptan #Moda #YüksekTalep #Şık #AltınKaplama #Kişiselleştirilmiş #Bilezik
+alibaba.csv,Yeni Açık Ayarlanabilir Bilezik,"0,79-1,25 $",66,#AçıkBilezik #KadınAksesuar #HORECA #Toptan #Moda #YüksekTalep #Şık #Bilezik #Charm #ErkenTrend
+alibaba.csv,Kalp Tenis Bilezik,1-3 $,74,#Kalp #TenisBilezik #KadınAksesuar #HORECA #Toptan #Moda #YüksekTalep #Şık #Zirkon #Kişiselleştirilmiş
+alibaba.csv,CZ Zirkon Tenis Bilezik,"3,99-4,90 $",78,#CZ #Zirkon #TenisBilezik #KadınAksesuar #HORECA #Toptan #Moda #YüksekTalep #Şık #AltınKaplama
+alibaba.csv,Timsah Desen Bilezik,"0,76-5,22 $",69,#TimsahDesen #ErkekAksesuar #HORECA #Toptan #Moda #YüksekTalep #Şık #Kişiselleştirilmiş #Bilezik #Gravür
+amazon.csv,Einhell 18V Starter Set,"1.483,00 TL",82,#Bahçe #BaşlangıçSeti #HORECA #YüksekTalep #Ergonomik #Profesyonel #Kullanım #Dayanıklı #Alet #Teknoloji
+amazon.csv,Bluefox Dijital Termometre,"199,00 TL",76,#DijitalTermometre #HORECA #İçMekan #NemÖlçer #YüksekTalep #Kompakt #LCD #Hassas #Bahçe #Teknoloji
+amazon.csv,Xiaomi Dijital Termometre,"494,00 TL",75,#DijitalTermometre #HORECA #İçMekan #NemÖlçer #YüksekTalep #LCD #Hassas #Bahçe #Teknoloji #Akıllı
+amazon.csv,ThermoPro Dijital Termometre,"589,50 TL",80,#DijitalTermometre #HORECA #İçMekan #NemÖlçer #YüksekTalep #Hassas #Bahçe #Teknoloji #Dokunmatik #Işıklı
+amazon.csv,Bosch Yüksek Basınçlı Yıkama,"6.240,28 TL",85,#YüksekBasınçlı #YıkamaMakinesi #HORECA #Bahçe #YüksekTalep #Profesyonel #Dayanıklı #Teknoloji #Temizlik #Alet
+amazon.csv,Sonkir Toprak pH Ölçer,"204,95 TL",75,#Bahçe #ToprakTesti #pHölçer #BitkiBakımı #HORECA #Sürdürülebilir #ÇiftlikKullanımı #İçMekan #DışMekan #YeniTrend
+amazon.csv,Einhell Akülü Dal Budama Testeresi,"3.274,99 TL",80,#Bahçe #AkülüAlet #Budama #HORECA #Verimlilik #YeniTeknoloji #DışMekan #BahçeBakımı #Profesyonel #Yenilik
+amazon.csv,Einhell Akülü Budama Makası,"3.116,98 TL",78,#Bahçe #AkülüAlet #Budama #HORECA #Verimlilik #YeniTeknoloji #DışMekan #BahçeBakımı #Profesyonel #Yenilik
+amazon.csv,HTC-1 Dijital Termometre,"219,99 TL",70,#Bahçe #Termometre #Nemölçer #HORECA #İçMekan #DışMekan #Verimlilik #SıcaklıkKontrolü #YeniTrend #Teknoloji
+amazon.csv,Bluefox Paslanmaz Temizleme Fırçası,"469,00 TL",72,#Bahçe #Temizlik #HORECA #Mangal #Barbekü #Paslanmaz #Ergonomik #YeniTrend #Verimlilik #Alet
+amazon.csv,Einhell Akülü Basınçlı Yıkama Tabancası,"6.166,99 TL",85,#Bahçe #Yıkama #AkülüAlet #HORECA #Verimlilik #YeniTeknoloji #DışMekan #Temizlik #Profesyonel #Yenilik
+amazon.csv,Qoolife Grow Light,"440,99 TL",76,#Bahçe #BüyüyenIşık #İçMekan #HORECA #BitkiGelişimi #YeniTrend #LED #Sürdürülebilir #Verimlilik #Teknoloji
+amazon.csv,Bosch Elektrikli Yaprak Üfleme Makinesi,"3.999,00 TL",82,#Bahçe #YaprakÜfleme #HORECA #Verimlilik #YeniTeknoloji #DışMekan #Profesyonel #BahçeBakımı #Yenilik #AkülüAlet
+amazon.csv,Pampers Islak Mendil 432 Yaprak,"990,00 TL",75,#HORECA #Bebek #IslakMendil #Hassas #Doğal #Pratik #Temizlik #BebekBakımı #YüksekTalep #ErkenTrend
+amazon.csv,Uni Baby Islak Mendil 1248 Yaprak,"523,79 TL",70,#HORECA #Bebek #IslakMendil #YüksekKapasiteli #Pratik #Temizlik #BebekBakımı #ErkenTrend #Hassas #Doğal
+amazon.csv,Sleepy Bio Natural Islak Havlu,"615,60 TL",80,#HORECA #Bebek #IslakHavlu #Doğal #Hassas #BebekBakımı #YüksekTalep #ErkenTrend #ÇevreDostu #Pratik
+amazon.csv,Molfix Maxi Bebek Bezi,"356,96 TL",65,#HORECA #Bebek #BebekBezi #YüksekTalep #Pratik #Hassas #BebekBakımı #ErkenTrend #Konfor #Doğal
+amazon.csv,Sudocrem Bebek Bakım Kremi,"492,00 TL",85,#HORECA #Bebek #BakımKremi #Hassas #Doğal #BebekBakımı #YüksekTalep #ErkenTrend #CiltKoruma #Pratik
+amazon.csv,Bioderma Bebek Şampuanı,"975,00 TL",90,#HORECA #Bebek #Şampuan #Doğal #Hassas #BebekBakımı #YüksekTalep #ErkenTrend #CiltDostu #Pratik
+amazon.csv,Uni Baby Biberon Temizleyici,"89,90 TL",60,#HORECA #Bebek #Temizlik #Biberon #Pratik #Hassas #BebekBakımı #ErkenTrend #Doğal #YüksekTalep
+amazon.csv,Sleepy Yatak Koruyucu,"245,95 TL",75,#HORECA #Bebek #YatakKoruyucu #Hassas #BebekBakımı #ErkenTrend #Pratik #YüksekTalep #Doğal #Konfor
+amazon.csv,Spigen USB-A to USB-C Kablo,"169,90 TL",75,#HızlıŞarj #Dayanıklı #USB-C #Verimlilik #HORECA #Teknoloji #Kablo #Güç #DataAktarım #YüksekPerformans
+amazon.csv,Kilifplus Galaxy Tab Kılıf,"574,90 TL",70,#TabletKılıfı #Katlanabilir #HORECA #YumuşakKapak #Stand #Pratik #KullanımKolaylığı #Silikon #Koruma #Yenilik
+amazon.csv,Spigen USB-C to USB-C Kablo,"279,89 TL",80,#HızlıŞarj #USB-C #Dayanıklı #Verimlilik #HORECA #Teknoloji #Kablo #Güç #DataAktarım #YüksekPerformans
+amazon.csv,Razer DeathAdder V3 Fare,"1.999,00 TL",85,#Esports #Ergonomik #HORECA #Oyun #YüksekPerformans #Teknoloji #Fare #Hız #KullanıcıDeneyimi #Yenilik
+amazon.csv,Apple 20W USB-C Adaptörü,"849,00 TL",90,#GüçAdaptörü #HızlıŞarj #HORECA #Teknoloji #Verimlilik #Kompakt #YüksekPerformans #Güvenilir #KullanımKolaylığı #Yenilik
+amazon.csv,Xiaomi Akıllı Kamera C300,"1.699,00 TL",78,#AkıllıKamera #Güvenlik #HORECA #İçMekan #GeceGörüşü #Teknoloji #BebekMonitörü #EvcilHayvan #Yenilik #360Dönüş
+amazon.csv,JBL Go4 Bluetooth Hoparlör,"1.524,00 TL",82,#BluetoothHoparlör #Taşınabilir #HORECA #Müzik #SuGeçirmez #YüksekSes #KullanımKolaylığı #Teknoloji #Yenilik #Eğlence
+amazon.csv,Apple AirPods 4.Nesil,"8.050,03 TL",95,#KablosuzKulaklık #AktifGürültüEngelleme #HORECA #Bluetooth #YüksekSesKalitesi #KullanımKolaylığı #Teknoloji #Yenilik #KişiselleştirilmişSes #GürültüEngelleme
+amazon.csv,Proline Aktif Karbonlu Kedi Kumu,"334,93 TL",85,#KediKumu #AktifKarbon #Topaklanan #HORECA #EvcilHayvan #Temizlik #YüksekKalite #HızlıTeslimat #MüşteriMemnuniyeti #Sürdürülebilir
+amazon.csv,Royal Canin Sterilised Kedi Maması,"3.874,00 TL",90,#KediMaması #Sterilised #HORECA #EvcilHayvan #Premium #Beslenme #Sağlık #YüksekKalite #MüşteriMemnuniyeti #HızlıTeslimat
+amazon.csv,Enjoy Tavuklu Kedi Maması,"1.100,00 TL",80,#KediMaması #Tavuklu #HORECA #EvcilHayvan #YüksekProtein #Beslenme #Sağlık #MüşteriMemnuniyeti #HızlıTeslimat #Kalite
+amazon.csv,Pro Plan Kısırlaştırılmış Kedi Maması,"988,20 TL",88,#KediMaması #Kısırlaştırılmış #HORECA #EvcilHayvan #Sağlık #Beslenme #Premium #YüksekKalite #MüşteriMemnuniyeti #HızlıTeslimat
+amazon.csv,Proline Aktif Karbonlu Topaklanan Kedi Kumu,"199,00 TL",82,#KediKumu #AktifKarbon #Topaklanan #HORECA #EvcilHayvan #Temizlik #YüksekKalite #HızlıTeslimat #MüşteriMemnuniyeti #Sürdürülebilir
+amazon.csv,Kahve Dünyası Lavi Çikolata 1kg,"500,00 TL",85,#Çikolata #Gıda #HORECA #Tatlı #ÖzelÜrün #Kalite #Lüks #EşsizTat #Gurme #Hediye
+amazon.csv,Nutella Kakaolu Fındık Kreması 750g,"250,15 TL",80,#Kremalı #Tatlı #HORECA #Popüler #Fındık #Kahvaltı #VeganAlternatif #YüksekTalep #Gurme #Lezzet
+amazon.csv,Julius Meinl Kahve 500g,"678,90 TL",90,#Kahve #HORECA #Gourmet #ÖzelKavurma #YüksekKalite #İthal #Gurme #Kafe #Restoran #Taze
+amazon.csv,Starbucks Veranda Blend 200g,"288,00 TL",75,#Kahve #HORECA #Popüler #ÖzelKavurma #Gurme #Taze #Restoran #Kafe #YüksekTalep #Lezzet
+amazon.csv,Kahve Dünyası Espresso 1kg,"660,00 TL",88,#Kahve #HORECA #Espresso #Gurme #YüksekKalite #İthal #Kafe #Restoran #Taze #ÖzelKavurma
+amazon.csv,Kahve Dünyası Filtre Kahve 250g,"214,95 TL",70,#Kahve #HORECA #Filtre #Popüler #Gurme #Taze #Restoran #Kafe #YüksekTalep #Lezzet
+amazon.csv,Kurukahveci Mehmet Efendi Türk Kahvesi 100g,"83,45 TL",78,#Kahve #HORECA #TürkKahvesi #Geleneksel #Popüler #Lezzet #Restoran #Kafe #YüksekTalep #Gurme
+amazon.csv,Züber Kakaolu Fındık Kreması 315g,"355,50 TL",76,#Kremalı #Tatlı #HORECA #Popüler #Fındık #Gurme #Lezzet #YüksekTalep #Hediye #ÖzelÜrün
+amazon.csv,Caprisun Multi Vitamin Meyve (200ml x 20),"330,00 TL",75,#ErkenTrend #Vitamin #Meyve #HORECA #İçecek #Çocuklar #Pratik #Sağlıklı #Çeşitlilik #Popüler
+amazon.csv,Julius Meinl Präsident Öğütülmüş Kahve 220g,"304,99 TL",80,#Kahve #FiltreKahve #HORECA #YüksekKalite #Gourmet #OrtaKavurma #Yumuşakİçim #Popüler #Gıda #İnovasyon
+amazon.csv,Lipton Earl Grey Dökme Çay 1000g,"339,95 TL",70,#Çay #EarlGrey #HORECA #DökmeÇay #Geleneksel #YüksekKalite #İçimKeyfi #Popüler #Gıda #İnovasyon
+amazon.csv,Starbucks Nespresso Blonde Espresso Kapsül 10 Adet,"314,50 TL",85,#Kahve #Espresso #HORECA #Nespresso #Pratik #YüksekKalite #Gourmet #Popüler #İnovasyon #Kapsül
+amazon.csv,Milka Fındıklı Sürülebilir Çikolata 350g,"119,90 TL",65,#Çikolata #Sürülebilir #HORECA #Tatlı #Atıştırmalık #Popüler #Fındık #İnovasyon #Gıda #VeganAlternatif
+amazon.csv,Züber %100 Fıstık Ezmesi 315g,"207,20 TL",90,#FıstıkEzmesi #HORECA #Sağlıklı #Vegan #Atıştırmalık #Popüler #Doğal #İnovasyon #Gıda #Protein
+amazon.csv,Tchibo Professional Espresso Çekirdek 1kg,"774,00 TL",88,#Kahve #Espresso #HORECA #Profesyonel #YüksekKalite #Çekirdek #Gourmet #Popüler #İnovasyon #KahveDünyası
+amazon.csv,Alpro Şekersiz Badem İçecek 1000ml,"139,90 TL",78,#BademSütü #HORECA #Vegan #Alternatifİçecek #Sağlıklı #DüşükKalori #Popüler #İnovasyon #BitkiBazlı #Gıda
+amazon.csv,Fellas Granola Yaban Mersini 200g,"129,97 TL",72,#Granola #Atıştırmalık #HORECA #Sağlıklı #YabanMersini #Popüler #İnovasyon #Gıda #Kahvaltı #Vegan
+amazon.csv,Kellogg's Granola Çikolata 340g,"119,94 TL",70,#Granola #Kahvaltı #HORECA #Çikolata #Popüler #Atıştırmalık #İnovasyon #Gıda #LifKaynağı #Antioksidan
+amazon.csv,Philips 13'ü 1 Arada Erkek Bakım Seti,"1913,00 TL",85,#ErkekBakım #ÇokFonksiyonlu #YüksekKalite #HORECA #ZamanTasarrufu #KullanımKolaylığı #YeniTrend #MüşteriMemnuniyeti #BakımSeti #ErkenTrend
+amazon.csv,BIC Flex 5 Hybrid Tıraş Bıçağı Seti,"499,90 TL",80,#ErkekBakım #TıraşBıçağı #Yenilikçi #HORECA #Konfor #UzunÖmürlü #MüşteriMemnuniyeti #HızlıKullanım #BakımÜrünü #ErkenTrend
+amazon.csv,Bioderma Atoderm Cream,"960,00 TL",90,#Nemlendirici #CiltBakımı #HORECA #YüksekKalite #AlerjiDostu #Çocuklarİçin #Yenilikçi #MüşteriMemnuniyeti #ErkenTrend #KuruCilt
+amazon.csv,NIVEA MEN El ve Vücut Kremi,"171,90 TL",75,#ErkekBakım #Nemlendirici #HORECA #YüksekKalite #FerahKoku #Yenilikçi #MüşteriMemnuniyeti #GünlükKullanım #ErkenTrend #CiltBakımı
+amazon.csv,URBAN Care Deniz Tuzu Saç Spreyi,"187,84 TL",78,#SaçBakımı #Vegan #DoğalÜrün #HORECA #Yenilikçi #DalgalıSaç #MüşteriMemnuniyeti #ErkenTrend #SaçSpreyi #KullanımKolaylığı
+amazon.csv,Old Spice Captain Deodorant,"139,90 TL",70,#ErkekDeodorant #UzunSüreliKoruma #HORECA #FerahKoku #MüşteriMemnuniyeti #Yenilikçi #KullanımKolaylığı #ErkenTrend #GünlükKullanım #Kaliteli
+amazon.csv,Sebamed Kepek Önleyici Şampuan,"329,00 TL",82,#SaçBakımı #KepekÖnleyici #HORECA #YüksekKalite #MüşteriMemnuniyeti #Yenilikçi #Doğalİçerik #ErkenTrend #SaçSağlığı #HassasCilt
+amazon.csv,Bambu Çorap Seti,"334,90 TL",75,#Sürdürülebilir #Bambu #Konfor #ErkekKadın #Çorap #Premium #Dikişsiz #NefesAlabilir #YüksekKalite #HORECA
+amazon.csv,Premium Boxer Seti,-,70,#Konfor #Erkek #Boxer #Premium #HORECA #YüksekKalite #GünlükKullanım #Esnek #Rahat #Çeşit
+amazon.csv,Ortopedik Tabanlık,"159,90 TL",80,#Ortopedik #Konfor #Sağlık #Ayakkabı #HORECA #Yenilikçi #Teknoloji #YüksekPerformans #Spor #GünlükKullanım
+amazon.csv,Ultra Hafif Valiz,"1.299,90 TL",85,#Hafif #Seyahat #Valiz #YüksekKalite #HORECA #Pratik #KabinBoy #Dayanıklı #Modern #Yenilikçi
+amazon.csv,Bambu Spor Çorap,"469,90 TL",78,#Sürdürülebilir #Spor #Bambu #Konfor #HORECA #YüksekPerformans #Dikişsiz #Rahat #Yıkamalı #Çeşit
+amazon.csv,Terrex Eastrail Ayakkabı,"2.485,00 TL",90,#Spor #Ayakkabı #YüksekPerformans #HORECA #DışMekan #Dayanıklı #Yenilikçi #Konfor #Erkek #Kadın
+amazon.csv,Stanley Quencher Termos Bardak,"1.800,00 TL",85,#ErkenTrend #Termos #Sürdürülebilir #PratikKullanım #HORECA #İçecekServisi #YüksekKapasiteli #ŞıkTasarım #MüşteriMemnuniyeti #ÇevreDostu
+amazon.csv,Philips LatteGo Espresso Makinesi,"22.999,00 TL",90,#ErkenTrend #EspressoMakinesi #Otomatik #HORECA #KahveServisi #YüksekPerformans #MüşteriMemnuniyeti #KolayKullanım #ŞıkTasarım #ÇokFonksiyonlu
+amazon.csv,Philips Airfryer 3000 Serisi,"1.999,00 TL",80,#ErkenTrend #Airfryer #SağlıklıPişirme #HORECA #DüşükYağ #ÇokFonksiyonlu #MüşteriMemnuniyeti #EnerjiTasarrufu #PratikKullanım #YüksekKapasiteli
+amazon.csv,Philips Buharlı Ütü,"3.929,00 TL",75,#ErkenTrend #BuharlıÜtü #HORECA #ZamandanTasarruf #YüksekPerformans #KolayKullanım #MüşteriMemnuniyeti #SıfırYanık #GüvenliTasarım #Pratik
+amazon.csv,Stanley Classic Termos,"1.719,00 TL",78,#ErkenTrend #Termos #Sürdürülebilir #HORECA #İçecekServisi #YüksekKapasiteli #ŞıkTasarım #MüşteriMemnuniyeti #ÇevreDostu #PratikKullanım
+amazon.csv,Philips Çelik Su Isıtıcı,"1.545,00 TL",70,#ErkenTrend #SuIsıtıcı #HORECA #EnerjiTasarrufu #KolayKullanım #MüşteriMemnuniyeti #ŞıkTasarım #HızlıIsıtma #GüvenliTasarım #Pratik
+amazon.csv,Vicloon Silikon Mutfak Seti,"304,90 TL",75,#ErkenTrend #MutfakYardımcı #SilikonSet #IsıyaDayanıklı #Yapışmaz #Paslanmaz #KolayTemizlik #ÇeşitliKullanım #HORECA #Pratik
+amazon.csv,Stanley Paslanmaz Termos,"1.424,25 TL",70,#ErkenTrend #Termos #Paslanmaz #SıcakTutma #HORECA #Dayanıklı #Seyahat #KafeKullanımı #Pratik #ŞıkTasarım
+amazon.csv,Busstier Airfryer Kağıdı,"109,00 TL",80,#ErkenTrend #Airfryer #YanmazKağıt #YağsızPişirme #HORECA #SağlıklıBeslenme #Pratik #MutfakÜrünü #ÇevreDostu #KolayKullanım
+amazon.csv,Hario V60 Dripper Filtresi,"323,10 TL",65,#KahveTrend #Hario #Dripper #Filtre #HORECA #KahveSeverler #ÖzelTasarım #YüksekKalite #PratikKullanım #Gourmet
+amazon.csv,Philips Espresso Kireç Çözücü,"499,00 TL",60,#BakımÜrünü #Espresso #KireçÇözücü #HORECA #MakineBakımı #UzunÖmür #KullanımKolaylığı #Temizlik #Verimlilik #Mutfak
+amazon.csv,Philips Çay Makinesi,"1.749,00 TL",85,#ErkenTrend #ÇayMakinesi #Otomatik #HızlıKaynatma #HORECA #KullanımKolaylığı #ŞıkTasarım #Verimlilik #Mutfak #Pratik
+amazon.csv,Philips Espresso Kahve Yağı Çözücü,"299,00 TL",55,#BakımÜrünü #Espresso #KahveYağı #HORECA #MakineBakımı #Temizlik #Verimlilik #KullanımKolaylığı #Mutfak #Pratik
+amazon.csv,LASTVOİCE Tel Nota Sehpası,"370,35 TL",50,#MüzikEkipmanı #Sehpa #TaşımaKolaylığı #HORECA #Performans #KullanımKolaylığı #Müzik #Pratik #Dayanıklı #Şık
+amazon.csv,Coverzone Kablosuz Mikrofon,"999,90 TL",90,#ErkenTrend #KablosuzMikrofon #Performans #HORECA #SahneKullanımı #KolayKullanım #Taşınabilir #YüksekKalite #Müzik #Aktivite
+amazon.csv,Akai MIDI Klavye Controller,"5.958,40 TL",95,#ErkenTrend #MIDI #Klavye #MüzikÜretimi #HORECA #Yaratıcılık #Taşınabilir #YüksekKalite #YazılımPaketi #Pratik
+amazon.csv,D'Addario Akustik Gitar Tel Seti,"283,00 TL",75,#Müzik #Enstrüman #Gitar #TelSeti #YüksekKalite #Performans #MüzikTrendleri #HORECA #Eğlence #Sanat
+amazon.csv,LASTVOİCE Org Sehpası,"925,76 TL",80,#Müzik #Ekipman #Sehpa #Organizasyon #HORECA #Performans #Yenilikçi #MüzikTrendleri #Konfor #Sanat
+amazon.csv,Presto Klavye Sehpası,"749,90 TL",78,#Müzik #Ekipman #Sehpa #Klavye #HORECA #Performans #Yenilikçi #MüzikTrendleri #Konfor #Sanat
+amazon.csv,Scrikss Dolma Kalem,"74,93 TL",65,#Kırtasiye #Kalem #Yazım #HORECA #Ofis #Yenilikçi #Kalite #Sanat #Eğitim #Günlük
+amazon.csv,Faber-Castell Yapıştırıcı,"82,07 TL",70,#Kırtasiye #Yapıştırıcı #Yenilikçi #HORECA #Ofis #Sanat #Eğitim #Kreatif #Proje #Yazım
+amazon.csv,Faber-Castell Tükenmez Kalem Seti,"136,26 TL",72,#Kırtasiye #KalemSeti #Yazım #HORECA #Ofis #Yenilikçi #Kalite #Sanat #Eğitim #Kreatif
+amazon.csv,Faber-Castell Grip Versatil Kalem,"149,00 TL",74,#Kırtasiye #Versatil #Kalem #HORECA #Ofis #Yenilikçi #Ergonomik #Kalite #Sanat #Eğitim
+amazon.csv,Rotring Visuclick Okul Seti,"160,84 TL",68,#Kırtasiye #OkulSeti #HORECA #Ofis #Yenilikçi #Kalite #Eğitim #Kreatif #Yazım #Sanat
+amazon.csv,Klasse Masa Matı,"499,90 TL",77,#Ofis #MasaMatı #HORECA #Ergonomik #Yenilikçi #Kalite #Dizüstü #Kullanım #Konfor #Estetik
+amazon.csv,AEE 7'li Temizlik Fırça Seti,"149,99 TL",75,#Temizlik #Araçİçi #HORECA #Pratik #Yumuşak #Detaylı #Kullanım #Hızlı #Verimlilik #Set
+amazon.csv,Michelin Konsantre Cam Suyu,"199,58 TL",70,#Temizlik #Konsantre #Cam #HORECA #Verimlilik #YüksekPerformans #Hızlı #Kullanım #Baharat #Yenilik
+amazon.csv,Wellhise Dijital Termometre,"202,50 TL",80,#Dijital #Termometre #HORECA #Sıcaklık #Nem #Ölçüm #Hızlı #Verimlilik #Teknoloji #Yenilik
+amazon.csv,Febreze Araba Kokusu,"227,90 TL",65,#Koku #HORECA #Ferahlama #Yenilik #Otomotiv #Hızlı #Kullanım #Pratik #Temizlik #MüşteriMemnuniyeti
+amazon.csv,Nasiol Nano Kaydırıcı,"456,00 TL",85,#NanoTeknoloji #CamKoruma #HORECA #Yenilik #SuKaydırıcı #UzunÖmürlü #Verimlilik #Otomotiv #YüksekPerformans #Temizlik
+amazon.csv,Tesla Wall Connector,"27.535,00 TL",90,#Şarjİstasyonu #ElektrikliAraç #HORECA #Yenilik #Sürdürülebilirlik #Teknoloji #Verimlilik #Gelecek #Enerji #Otomotiv
+amazon.csv,VAVANA Klima Kokusu,"249,00 TL",68,#Koku #HORECA #AraçParfümü #Yenilik #Ferahlama #UzunSüreli #MüşteriMemnuniyeti #Pratik #Kullanım #Otomotiv
+amazon.csv,Xiaomi Taşınabilir Kompresör,"1.929,00 TL",88,#Taşınabilir #Kompresör #HORECA #Yenilik #Teknoloji #Verimlilik #Hızlı #Kullanım #Otomotiv #Pratik
+amazon.csv,Nutraxin Magnezyum Takviyesi,"293,50 TL",85,#Sağlık #Takviye #Magnezyum #Enerji #HORECA #Yenilik #Doğal #Performans #İşletme #MüşteriMemnuniyeti
+amazon.csv,Oral-B Elektrikli Diş Fırçası,"1.119,58 TL",90,#Sağlık #DişBakımı #Teknoloji #HORECA #Yenilik #Hijyen #MüşteriMemnuniyeti #Verimlilik #Gelişmiş #Konfor
+amazon.csv,Nutraxin Omega-3 Takviyesi,"378,66 TL",80,#Sağlık #Takviye #Omega3 #HORECA #Yenilik #Doğal #Kalite #MüşteriMemnuniyeti #Enerji #Beslenme
+amazon.csv,Nutraxin D3K2 Vitamin,"194,00 TL",75,#Sağlık #Vitamin #HORECA #Yenilik #Doğal #Bağışıklık #MüşteriMemnuniyeti #Enerji #Takviye #Beslenme
+amazon.csv,SOLO Bambu Tuvalet Kağıdı,"233,91 TL",70,#ÇevreDostu #HORECA #Sürdürülebilir #Bambu #Hijyen #MüşteriMemnuniyeti #Yenilik #Doğal #Temizlik #Verimlilik
+amazon.csv,Opalescence Beyazlatıcı Diş Macunu,"445,44 TL",78,#DişBakımı #HORECA #Yenilik #Beyazlatma #Hijyen #MüşteriMemnuniyeti #Kalite #Gelişmiş #Sağlık #Estetik
+amazon.csv,Orzax ExtraMag Magnezyum 90 Tablet,"545,00 TL",85,#Sağlık #Magnezyum #Takviye #Enerji #HORECA #YüksekTalep #ErkenTrend #Beslenme #İşletmeVerimliliği #MüşteriMemnuniyeti
+amazon.csv,Nutraxin Multi Vitamin 60 Tablet,"265,02 TL",80,#Sağlık #Vitamin #Takviye #HORECA #ErkenTrend #MüşteriMemnuniyeti #Beslenme #Enerji #İşletmeVerimliliği #YüksekTalep
+amazon.csv,Sleepy Easy Clean Temizlik Havlusu 100 Yaprak,"82,79 TL",75,#Temizlik #HORECA #Verimlilik #ErkenTrend #MüşteriMemnuniyeti #KolayKullanım #Hijyen #İşletmeVerimliliği #YüksekTalep #ÇevreDostu
+amazon.csv,Finish Quantum Bulaşık Deterjanı 100 Kapsül,"428,90 TL",90,#Temizlik #Bulaşık #HORECA #ErkenTrend #Verimlilik #MüşteriMemnuniyeti #YüksekTalep #İşletmeVerimliliği #KolayKullanım #ÇevreDostu
+amazon.csv,Nutraxin Vitamin Max C-D-Zinc 60 Tablet,"201,60 TL",78,#Sağlık #Vitamin #Takviye #HORECA #ErkenTrend #MüşteriMemnuniyeti #Bağışıklık #Enerji #İşletmeVerimliliği #YüksekTalep
+amazon.csv,Stanley Classic Termos 1.4 Litre,"1.863,06 TL",88,#Spor #Termos #HORECA #ErkenTrend #MüşteriMemnuniyeti #YüksekTalep #Dayanıklılık #Fonksiyonellik #İşletmeVerimliliği #SıcaklıkKoruma
+amazon.csv,Stanley IceFlow Pipetli Su Şişesi 0.7 Litre,"1.489,32 TL",82,#Spor #SuŞişesi #HORECA #ErkenTrend #MüşteriMemnuniyeti #YüksekTalep #Fonksiyonellik #Taşınabilirlik #İşletmeVerimliliği #SıcaklıkKoruma
+amazon.csv,Stanley Aerolight Termos Bardak 0.47 Litre,"1.619,10 TL",84,#Spor #Termos #HORECA #ErkenTrend #MüşteriMemnuniyeti #YüksekTalep #Fonksiyonellik #Taşınabilirlik #İşletmeVerimliliği #SıcaklıkKoruma
+amazon.csv,AEE Pilates Bandı Seti,"229,99 TL",76,#Spor #Pilates #HORECA #ErkenTrend #MüşteriMemnuniyeti #YüksekTalep #Egzersiz #Sağlık #İşletmeVerimliliği #KolayKullanım
+amazon.csv,Stanley IceFlow Termos Bardak,2040.00 TL,85,#ErkenTrend #Sürdürülebilir #HORECA #Mikrofiber #PratikKullanım #Termos #SıcakSoğuk #Yenilikçi #Sporcu #Kullanışlı
+amazon.csv,Wonkey Sporcu Havlusu,299.80 TL,75,#ErkenTrend #Mikrofiber #HızlıKuruma #HORECA #Fitness #Sporcu #Havlu #Pratik #Hafif #ÇokAmaçlı
+amazon.csv,Contigo Shake Go Suluğu,679.15 TL,80,#ErkenTrend #Sürdürülebilir #HORECA #Suluğu #PratikKullanım #Sporcu #SağlıklıYaşam #Yenilikçi #KolayTemizlik #ŞıkTasarım
+amazon.csv,Direnç Bandı,269.00 TL,70,#ErkenTrend #Fitness #HORECA #KasGeliştirme #EvdeAntrenman #ÇokAmaçlı #Yenilikçi #Pratik #SağlıklıYaşam #Direnç
+amazon.csv,Steelseries Apex 3 Klavye,3363.75 TL,90,#ErkenTrend #Oyun #HORECA #RGB #Dayanıklı #YüksekPerformans #Klavye #Ergonomik #OyunKlavyesi #Premium
+amazon.csv,Logitech G502 HERO Mouse,1695.00 TL,88,#ErkenTrend #Oyun #HORECA #YüksekPerformans #Kablolu #Ergonomik #Programlanabilir #Hassas #GamingMouse #Premium
+amazon.csv,Sony PS5 Slim Digital Konsol,28490.00 TL,90,#YeniTrend #OyunKonsolu #DijitalOyun #Eğlence #Teknoloji #YüksekTalep #KullanıcıDeneyimi #HORECA #E-spor #SosyalOyun
+amazon.csv,Razer Viper V3 Pro Mouse,5949.00 TL,85,#OyunEkipmanı #HafifTasarım #YüksekPerformans #E-spor #Kablosuz #HORECA #OyunDeneyimi #Teknoloji #Yenilik #Hız
+amazon.csv,8Bitdo Ultimate Kablosuz Kontrolcü,2575.00 TL,80,#OyunKontrolcü #Kablosuz #Yenilikçi #HORECA #Eğlence #KullanıcıDeneyimi #Oyun #Teknoloji #Esneklik #Remap
+amazon.csv,Logitech G PRO X Superlight Mouse,6728.14 TL,88,#OyunEkipmanı #Kablosuz #Hafif #YüksekPerformans #HORECA #E-spor #Teknoloji #KullanıcıDeneyimi #Yenilik #Hız
+amazon.csv,Einhell 18V Starter Set,1483.00 TL,75,#AletSeti #YüksekVerimlilik #HORECA #Yenilik #KullanıcıDeneyimi #Teknoloji #BaşlangıçSeti #Pratik #İşletme #Güç
+amazon.csv,TP-Link Tapo H100 Akıllı Hub,999.00 TL,82,#AkıllıEv #Teknoloji #HORECA #Verimlilik #Otomasyon #Yenilik #KullanıcıDeneyimi #AkıllıKontrol #EnerjiTasarrufu #Güvenlik
+amazon.csv,NEROLIA Turbo Yüksek Basınçlı Duş Seti,299.90 TL,78,#SuTasarrufu #YüksekBasınç #HORECA #Banyo #Yenilik #KullanıcıDeneyimi #Konfor #Masaj #EkoDostu #Pratik
+amazon.csv,Stanley Termos 1.18L,2499 TL,85,#Yalıtımlı #Paslanmaz #Termos #Bardak #HORECA #SıcaklıkKoruma #Pratik #Şık #Seyahat #Kullanışlı
+n11.csv,Xiaomi Hava Temizleyici,"4336,85 TL",90,#HavaTemizleyici #AkıllıEv #Sağlık #EnerjiVerimliliği #HORECA #ÇevreDostu #Teknoloji #KullanıcıDostu #İnovasyon #Temizlik
+n11.csv,Xiaomi Buhar Makinesi,2689 TL,80,#BuharMakinesi #AkıllıEv #HORECA #Nemlendirme #Sağlık #Konfor #Teknoloji #Verimlilik #Yenilik #KullanıcıDostu
+n11.csv,Kahve Dünyası Espresso,"1257,70 TL",75,#Kahve #Espresso #HORECA #Gourmet #Lezzet #Taze #YüksekKalite #ÖzelKarışım #MüşteriMemnuniyeti #Gıda
+n11_sonuc.csv,MetaQuartz Gold Duvar Saati,950 TL,75,#Dekorasyon #İskandinav #Zaman Yönetimi #Modern #Şık #HORECA #Mekan Tasarımı #Trend #Kalite #Estetik
+n11_sonuc.csv,MetaQuartz Kristal Duvar Saati,1.250 TL,80,#Dekorasyon #İskandinav #Lüks #HORECA #Mekan Tasarımı #Trend #Kalite #Estetik #Zaman Yönetimi #Modern
+n11_sonuc.csv,Karaca Közde Türk Kahve Makinesi,"1.398,99 TL",85,#Kahve #HORECA #Geleneksel #Yenilikçi #Mutfak #Kahve Deneyimi #Gastronomi #Yüksek Kalite #Ekipman #Müşteri Memnuniyeti
+n11_sonuc.csv,Xiaomi Akıllı Buhar Makinesi,"2.831,04 TL",90,#Teknoloji #HORECA #Akıllı Ev #Verimlilik #Sağlık #Yenilikçi #Buhar #Konfor #Müşteri Deneyimi #Modern
+n11_sonuc.csv,Paşabahçe Hazırlık Seti,619 TL,70,#Mutfak #HORECA #Hazırlık #Pratik #Kalite #Gastronomi #Ekipman #Şık #Fonksiyonel #Kullanışlı
+trendyol.csv,Kadın Büyük Boy Fiyonk Toka,"14,99 TL",75,#Popüler #Aksesuar #Kadın #Fiyonk #Şık #Trend #HORECA #Müşteriİhtiyacı #Yenilikçi #GözAlıcı
+trendyol.csv,Kadın Zirkon Kalp Kolye,"49,99 TL",80,#Zirkon #Kolye #Kadın #Şıklık #HORECA #ÖzelGün #Yenilikçi #Müşteriİhtiyacı #Trend #Aksesuar
+trendyol.csv,Kadın Triko Atkı,"209,99 TL",70,#Triko #Atkı #Kadın #KışModası #HORECA #SıcakTutma #Yenilikçi #Şık #Müşteriİhtiyacı #Popüler
+trendyol.csv,Kadın Basic 4'lü Set,"136,72 TL",65,#Basic #Set #Kadın #HORECA #GünlükKullanım #Yenilikçi #Müşteriİhtiyacı #Popüler #Şıklık #Pratik
+trendyol.csv,Kadın Gümüş Zikron Küpe Seti,"25,00 TL",85,#Gümüş #Küpe #Kadın #Zikron #Şıklık #HORECA #Müşteriİhtiyacı #Trend #Aksesuar #Popüler
+trendyol.csv,Kadın Siyah Büyük Omuz Çanta,Sepette İndirimli,90,#Çanta #Kadın #Omuz #GünlükKullanım #HORECA #Pratik #Yenilikçi #Müşteriİhtiyacı #Popüler #Şıklık
+trendyol.csv,Siyah Su Geçirmez Sırt Çantası,"297,72 TL",75,#SırtÇantası #SuGeçirmez #HORECA #GünlükKullanım #Yenilikçi #Müşteriİhtiyacı #Popüler #Pratik #Şıklık #Fonksiyonel
+trendyol.csv,Ayetel Kürsi Bileklik,"220,00 TL",75,#Hediyelik #Şık #ErkekKadın #PaslanmazÇelik #Kombin #Dini #Trend #Aksesuar #ÖzelGün #Kişisel
+trendyol.csv,Deri Günlük Kemer,"107,99 TL",70,#Erkek #Günlük #Şık #SuniDeri #Moda #Kemer #HORECA #Kullanışlı #Yenilikçi #Trend
+trendyol.csv,Kare Parçalı Atkı,-,65,#Kış #Şal #Moda #Aksesuar #SıcakTutma #Yenilikçi #Renkli #HORECA #ÖzelGün #Hediye
+trendyol.csv,Kışlık Parmaksız Eldiven,"129,27 TL",80,#Kış #Termal #Eldiven #Kadın #Sıcak #Yenilikçi #HORECA #Konfor #Şık #Kullanışlı
+trendyol.csv,Yılbaşı Bileklik Seti,"249,90 TL",85,#Yılbaşı #Hediye #Set #Şık #Aksesuar #ÖzelGün #Trend #Kombin #ErkenTrend #HORECA
+trendyol.csv,Yılbaşı Temalı Anahtarlık,"48,00 TL",60,#Yılbaşı #Anahtarlık #Hediye #Eğlenceli #Aksesuar #KüçükHediyeler #Trend #Kullanışlı #HORECA #ÖzelGün
+trendyol.csv,Uzun Tokalı Kadın Kemeri,"124,00 TL",75,#Kadın #Kemer #Şık #Moda #HORECA #Kullanışlı #Yenilikçi #Günlük #Aksesuar #Trend
+trendyol.csv,Vegan Deri Cüzdan,"141,21 TL",90,#Vegan #Deri #Cüzdan #Şık #Sürdürülebilir #HORECA #Kullanışlı #Yenilikçi #Erkek #Aksesuar
+trendyol.csv,Mavi Işık Korumalı Gözlük,"104,90 TL",70,#Gözlük #MaviIşık #Koruma #Sağlık #HORECA #Yenilikçi #Moda #Kullanışlı #ErkekKadın #Aksesuar
+trendyol.csv,Yumuşak Dokulu Şal,"199,50 TL",75,#Şal #Yumuşak #Kadın #Moda #HORECA #Kış #Aksesuar #Konfor #Şık #Trend
+trendyol.csv,Kadın Zirkon Kalp Kolye,"49,99 TL",75,#Şık #Zirkon #Kolye #Hediyelik #Kadın #Moda #Trend #HORECA #Aksesuar #ÖzelTasarım
+trendyol.csv,Kadın Triko Atkı,"209,99 TL",80,#KışModası #Kadın #Atkı #SıcakTutma #Şık #HORECA #Aksesuar #YüksekKalite #Trend #GünlükKullanım
+trendyol.csv,Siyah Su Geçirmez Sırt Çantası,"297,72 TL",85,#Fonksiyonel #SuGeçirmez #SırtÇantası #GünlükKullanım #HORECA #Pratik #Şık #YüksekKalite #Trend #Seyahat
+trendyol.csv,Kadın Basic 4'lü Set,"136,72 TL",70,#TemelGiyim #Kadın #Set #HORECA #Pratik #Şık #GünlükKullanım #Moda #Trend #UygunFiyat
+trendyol.csv,Büyük Boy Yumuşak Derili Çanta,"429,00 TL",90,#Lüks #Kadın #Çanta #YumuşakDeri #HORECA #Şık #GünlükKullanım #Trend #YüksekKalite #ÖzelTasarım
+trendyol.csv,3'lü Termal Maske Seti,"149,98 TL",78,#Koruma #Termal #Maske #HORECA #Sağlık #Pratik #GünlükKullanım #Trend #YüksekKalite #ViralKoruma
+trendyol.csv,Kadın Pijama Takım,"330,67 TL",75,#Konfor #Şıklık #Ev Modası #Kadın #Pijama #Yüksek Kalite #Yeni Trend #HORECA #Giyim #Pamuk
+trendyol.csv,Kadın Termal Tayt,"249,00 TL",70,#Sıcak Tutma #Kış Modası #Kadın #Termal #HORECA #Giyim #Yeni Trend #Konfor #Yüksek Kalite #Peluş
+trendyol.csv,Yılbaşı Çorap 4'lü,"137,64 TL",65,#Yılbaşı #Eğlence #Hediye #Aile #Unisex #HORECA #Yeni Trend #Sıcak #Çorap #Kış
+trendyol.csv,Kadın Oversize Mont,"681,90 TL",80,#Oversize #Şıklık #Kadın #Kış Modası #HORECA #Yeni Trend #Sıcak #Yüksek Kalite #Giyim #Şişme
+trendyol.csv,Kadın Palazzo Pantolon,"459,00 TL",72,#Palazzo #Kadın #Şıklık #HORECA #Yeni Trend #Giyim #Rahat #Yüksek Bel #Bol Paça #Moda
+trendyol.csv,Yılbaşı Çorap 4'lü,"149,99 TL",75,#Yılbaşı #Eğlenceli #Unisex #Hediye #Sıcak #Renkli #Çorap #HORECA #MüşteriMemnuniyeti #Trend
+trendyol.csv,Yüksek Bel Palazzo Pantolon,"440,00 TL",80,#Kadın #Şık #YüksekBel #Palazzo #Moda #HORECA #Giyim #Konfor #Trend #Yeni
+trendyol.csv,Siyah Yüksek Bel Tayt,"126,00 TL",70,#Spor #Kadın #YüksekBel #Esnek #Fit #HORECA #Giyim #Aktif #Trend #Konfor
+trendyol.csv,Ultra Soft Bluz Ekru,"474,05 TL",85,#Şık #Kadın #Bluz #Yumuşak #HORECA #Giyim #Trend #Moda #Konfor #Yeni
+trendyol.csv,Dantel Fantezi İç Giyim,-,65,#Dantel #Fantezi #İçGiyim #Kadın #HORECA #Şıklık #Trend #Özel #Hediye #Rahat
+trendyol.csv,Anti-pilling Polar Sweatshirt,-,75,#Erkek #Polar #SoğukGeçirmez #Konfor #HORECA #Giyim #Trend #Rahat #Kış #Yeni
+trendyol.csv,Kışlık Kadın Yünlü Çorap,"332,23 TL",78,#Kış #Kadın #Yün #Çorap #Sıcak #HORECA #Rahat #Trend #Yumuşak #Yeni
+trendyol.csv,Biyeli Pijama Takım,"526,94 TL",82,#Pijama #Kadın #Rahat #HORECA #EvGiyimi #Trend #Yumuşak #Yeni #Şık #Konfor
+trendyol.csv,Külotlu Çorap Ten Renk,"499,99 TL",76,#Kadın #Külotlu #Çorap #TenRenk #HORECA #Şıklık #Trend #Rahat #Yeni #Giyim
+trendyol.csv,Oversize Triko Kazak,"649,99 TL",80,#Kadın #Oversize #Triko #Kazak #HORECA #Rahat #Şık #Trend #Yeni #Kış
+trendyol.csv,Beyazlatıcı Tonik,"259,99 TL",75,#ErkenTrend #Beyazlatıcı #Nemlendirici #HORECA #Kozmetik #Aydınlatıcı #LekeKarşıtı #YüzBakımı #YeniBaşlangıç #Doğalİçerik
+trendyol.csv,Dolgunlaştırıcı Şampuan,"189,00 TL",70,#ErkenTrend #SaçBakımı #HızlıUzama #HORECA #Kozmetik #Onarıcı #Besleyici #YeniBaşlangıç #VeganAlternatif #Doğalİçerik
+trendyol.csv,Nemlendirici Ruj,"279,99 TL",80,#ErkenTrend #Kozmetik #Nemlendirici #HORECA #Ruj #Parlak #YeniBaşlangıç #Kadın #Doğalİçerik #VeganAlternatif
+trendyol.csv,Aydınlatıcı Krem,"319,00 TL",85,#ErkenTrend #Kozmetik #Aydınlatıcı #HORECA #CiltBakımı #LekeKarşıtı #YeniBaşlangıç #Doğalİçerik #VeganAlternatif #HızlıSonuç
+trendyol.csv,Saç Dökülmesine Karşı Serum,"399,41 TL",90,#ErkenTrend #SaçBakımı #HORECA #DökülmeKarşıtı #Serum #YeniBaşlangıç #Doğalİçerik #VeganAlternatif #HızlıSonuç #Etkin
+trendyol.csv,Vücut Losyonu,"499,00 TL",75,#ErkenTrend #Kozmetik #VücutBakımı #HORECA #Nemlendirici #YeniBaşlangıç #Doğalİçerik #VeganAlternatif #HızlıSonuç #Lüks
+trendyol.csv,Nemlendirici Ruj - 009 Baby Girl,"287,00 TL",75,#Vegan #Nemlendirici #Ruj #HORECA #Makyaj #Kadın #Trendy #YüksekTalep #Kozmetik #YeniTrend
+trendyol.csv,Karınca Yumurtası Yağı,"179,90 TL",80,#Doğal #Yağ #HORECA #Kozmetik #TüyAzaltıcı #Yenilikçi #Vegan #YeniTrend #CiltBakımı #Talep
+trendyol.csv,Suya Dayanıklı Dudak Kalemi,"131,99 TL",70,#Makyaj #DudakKalemi #SuyaDayanıklı #HORECA #Kadın #YüksekTalep #Kozmetik #YeniTrend #Pratik #Günlük
+trendyol.csv,Forte Şampuan 3x300ml,"374,90 TL",85,#SaçBakımı #Şampuan #HORECA #YüksekTalep #Doğal #Vegan #Yenilikçi #Kozmetik #YeniTrend #SaçDökülmesi
+trendyol.csv,Peptide Keratin Şampuan,"389,90 TL",90,#SaçBakımı #Peptid #HORECA #YüksekTalep #Onarıcı #Kozmetik #Vegan #YeniTrend #SaçUzatan #Yenilikçi
+trendyol.csv,Biberiye Suyu Toniği,"299,00 TL",78,#Doğal #Toniği #HORECA #SaçBakımı #Yenilikçi #Vegan #YeniTrend #HızlıSaçUzatma #Talep #Kozmetik
+trendyol.csv,Bee Venom Krem,"329,00 TL",88,#Doğal #Krem #HORECA #Yenilikçi #CiltBakımı #Vegan #YeniTrend #Talep #Onarıcı #Kozmetik
+trendyol.csv,Soyulabilir Salyangoz Maskesi,"250,00 TL",82,#Maskeler #HORECA #Yenilikçi #CiltBakımı #Vegan #YeniTrend #Talep #Soyulabilir #Kozmetik #Onarıcı
+trendyol.csv,Güneş Kremi 50ml A'PIEU,"594,90 TL",85,#ErkenTrend #GüneşKoruma #CiltBakımı #Aydınlatıcı #YüksekKoruma #HORECA #VeganAlternatif #Doğalİçerik #YüksekTalep #KişiselBakım
+trendyol.csv,Bakım Yağı 20ml Vegan,"149,90 TL",80,#Vegan #Doğalİçerik #CiltBakımı #HORECA #YüksekTalep #ErkenTrend #HassasCiltler #BakımÜrünü #Organik #KişiselBakım
+trendyol.csv,Hindistan Cevizi Yağı 150ml,"250,12 TL",75,#DoğalYağ #HORECA #Organik #SaçBakımı #CiltBakımı #ErkenTrend #Vegan #ÇokAmaçlı #YüksekTalep #KişiselBakım
+trendyol.csv,Dökülme Karşıtı Şampuan 400ml,"255,00 TL",78,#SaçBakımı #DökülmeKarşıtı #HORECA #ErkenTrend #Onarıcı #Besleyici #YüksekTalep #KişiselBakım #Doğalİçerik #Vegan
+trendyol.csv,Aydınlatıcı Makyaj Bazı,"347,99 TL",82,#Makyaj #Aydınlatıcı #HORECA #ErkenTrend #CiltBakımı #YüksekTalep #Antioksidan #KişiselBakım #MakyajBazı #Vegan
+trendyol.csv,Yüz Güneş Kremi 50ml,-,88,#GüneşKoruma #CiltBakımı #HORECA #ErkenTrend #YüksekKoruma #Aydınlatıcı #Vegan #Doğalİçerik #YüksekTalep #KişiselBakım
+trendyol.csv,Keratin Saç Spreyi 200ml,"267,00 TL",76,#SaçBakımı #Keratin #HORECA #ErkenTrend #KolayTaramak #YüksekTalep #KişiselBakım #Doğalİçerik #Vegan #Onarıcı
+trendyol.csv,Hint Yağı 50ml,"149,00 TL",74,#DoğalYağ #HORECA #CiltBakımı #YüksekTalep #ErkenTrend #Vegan #ÇokAmaçlı #SaçBakımı #Organik #KişiselBakım
+trendyol.csv,Cilt Bakım Kremi 100g,"410,22 TL",79,#CiltBakımı #Nemlendirici #HORECA #ErkenTrend #YüksekTalep #Vegan #Doğalİçerik #KişiselBakım #Onarıcı #YüksekKoruma
+trendyol.csv,Jel Göz Kalemi,"269,90 TL",73,#Makyaj #GözBakımı #HORECA #ErkenTrend #SuyaDayanıklı #YüksekTalep #KişiselBakım #Vegan #KolayKullanım #MakyajÜrünü
+trendyol.csv,Stick Krem 75ml,"238,61 TL",77,#TerlemeÖnleyici #HORECA #ErkenTrend #Vegan #YüksekKoruma #KişiselBakım #YüksekTalep #KolayKullanım #Doğalİçerik #BakımÜrünü
+trendyol.csv,Konuşma Vakti Seti,"64,20 TL",75,#Eğitim #Çocuk #Gelişim #İletişim #Yardımcı #Etkileşim #Oyun #Öğrenme #Yenilikçi #Set
+trendyol.csv,Zeki Bebek Kütüphanesi,"289,00 TL",80,#Eğitim #Çocuk #Zeka #Gelişim #Kütüphane #Oyun #Etkileşim #Yenilikçi #Set #Bebek
+trendyol.csv,Dikkat Seti,"166,53 TL",70,#Eğitim #Çocuk #Dikkat #Gelişim #Oyun #Yardımcı #Etkileşim #Yenilikçi #Set #Zeka
+trendyol.csv,Konuşturan Oyuncak,"319,00 TL",85,#Eğitim #Çocuk #Oyun #İletişim #Yenilikçi #Etkileşim #Gelişim #Teknoloji #Yardımcı #Eğlenceli
+trendyol.csv,Cırt Cırtlı Etkinlik Kitabı,"77,00 TL",72,#Eğitim #Çocuk #Oyun #Etkileşim #Yardımcı #Gelişim #Yenilikçi #Eğlenceli #Kreatif #Set
+trendyol.csv,Dikkatini Geliştir,"199,00 TL",78,#Eğitim #Çocuk #Zeka #Gelişim #Yardımcı #Etkileşim #Yenilikçi #Oyun #Kreatif #Set
+trendyol.csv,300 Ledli Perde Işık,"255,00 TL",85,#Dekorasyon #Ambiyans #UzaktanKumanda #LED #EnerjiVerimliliği #HORECA #Etkinlik #Yılbaşı #Işıklandırma #Trend
+trendyol.csv,300 Ledli Perde Işık,"239,90 TL",80,#Dekorasyon #Ambiyans #UzaktanKumanda #LED #EnerjiVerimliliği #HORECA #Etkinlik #Yılbaşı #Işıklandırma #Trend
+trendyol.csv,Kar Tanesi Led Işık,"239,90 TL",75,#Dekorasyon #Ambiyans #LED #Yılbaşı #Aydınlatma #HORECA #Etkinlik #Süsleme #Trend #Günışığı
+trendyol.csv,Yılbaşı Çam Ağacı Seti,"649,90 TL",70,#Dekorasyon #Yılbaşı #HORECA #Süsleme #Set #Ağaç #Trend #Etkinlik #ÖzelTasarım #Ambiyans
+trendyol.csv,Yılbaşı Ağaç Süsü,"49,90 TL",65,#Dekorasyon #Yılbaşı #HORECA #Süsleme #Ambiyans #Trend #Eğlence #Hediye #KüçükBoy #ŞekerKamışı
+trendyol.csv,Yılbaşı Çam Ağacı Süsü 3 Cm 12 Adet Mini Gümüş Top,"135,56 TL",85,#Yılbaşı #Dekorasyon #Gümüş #Süsleme #Mini #Trend #HORECA #Parti #Estetik #YılbaşıSüsleri
+trendyol.csv,Yılbaşı Süsleri Seti 34 Parça Renkli,"399,90 TL",90,#Yılbaşı #Süsleme #Set #Renkli #HORECA #Parti #Trend #Dekorasyon #Eğlence #YeniYıl
+trendyol.csv,5 Metre Işıklı Yeşil Çam Dalı Garland,"187,99 TL",80,#Işıklı #Garland #Dekorasyon #Yeşil #HORECA #Yılbaşı #Eğlence #Estetik #Parti #YeniYıl
+trendyol.csv,Peri Led Işık 10 Metre Sarı,"123,90 TL",75,#PeriLed #Aydınlatma #Dekoratif #HORECA #Yılbaşı #Sarı #Eğlence #Parti #Estetik #YeniYıl
+trendyol.csv,Yılbaşı Çam Dalı Garland 5 Metre,"129,90 TL",78,#Garland #Dekorasyon #Yeşil #HORECA #Yılbaşı #Eğlence #Estetik #Parti #YeniYıl #DoğalGörünüm
+trendyol.csv,Yılbaşı Kırmızı Kapı Süsü,"144,50 TL",75,#Yılbaşı #Dekorasyon #KapıSüsü #Simli #Hediye #Süsleme #Etkileyici #HORECA #YeniTrend #Müşteriİhtiyacı
+trendyol.csv,Yılbaşı Çam Ağacı Süsü,"179,63 TL",70,#Yılbaşı #ÇamAğacı #Süsleme #Dekorasyon #Hediye #Etkileyici #HORECA #YeniTrend #Müşteriİhtiyacı #Parti
+trendyol.csv,Mutfak Tezgahı LED Işık,"279,90 TL",80,#LED #Aydınlatma #Mutfak #Dekorasyon #HORECA #Verimlilik #YeniTrend #Müşteriİhtiyacı #Fonksiyonel #Modern
+trendyol.csv,Yılbaşı Ağacı Süsleme Seti,"295,28 TL",85,#Yılbaşı #SüslemeSeti #Dekorasyon #Hediye #Etkileyici #HORECA #YeniTrend #Müşteriİhtiyacı #Parti #Koleksiyon
+trendyol.csv,Yılbaşı Cam Küre,"138,24 TL",65,#CamKüre #Dekorasyon #Hediye #Etkileyici #HORECA #YeniTrend #Müşteriİhtiyacı #Yılbaşı #Süsleme #Koleksiyon
+trendyol.csv,Yılbaşı Aydınlatma,"269,00 TL",78,#Aydınlatma #Yılbaşı #Dekorasyon #HORECA #YeniTrend #Müşteriİhtiyacı #Etkileyici #Fonksiyonel #Parti #Modern

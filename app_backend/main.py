@@ -230,3 +230,29 @@ async def chat_endpoint(request: ChatRequest):
 async def get_raw_data_endpoint(limit: int = 40):
     items = await model.get_filtered_raw_data([], limit)
     return {"status": "success", "raw_data": items}
+
+
+
+@app.get("/api/top-trends")
+async def top_trends_endpoint(period: str = "daily"):
+    trends = await model.get_top_trends(period)
+    return {"status": "success", "data": trends}
+
+
+# --- TREND HAVUZU ENDPOINT (Bunu main.py'a ekle) ---
+@app.get("/api/top-trends")
+async def top_trends_endpoint(period: str = "daily"):
+    # period: daily, weekly, monthly
+    try:
+        trends = await model.get_top_trends(period)
+        return {"status": "success", "data": trends}
+    except Exception as e:
+        print(f"Trend API Error: {e}")
+        return {"status": "error", "data": []}
+    
+    
+    
+    
+    
+    
+    

@@ -750,3 +750,187 @@ async def get_dashboard_stats(time_range: str = "24h"):
     except Exception as e:
         print(f"Stats Error: {e}")
         return None
+    
+    
+    
+    
+    
+    
+
+    # ---------------------------------------------------------------------------
+
+def safe_json_parse(content: Any) -> Any:
+    if isinstance(content, dict): return content
+    if isinstance(content, str):
+        try: return json.loads(content)
+        except: return {}
+    return {}
+
+# ---------------------------------------------------------------------------
+# 1. TREND HAVUZU (LİSTELEME SAYFASI İÇİN)
+# ---------------------------------------------------------------------------
+async def get_top_trends(period: str = "daily"):
+    """TrendsPage.tsx için verileri çeker."""
+    if not supabase: return []
+    
+    days = 1
+    if period == "weekly": days = 7
+    if period == "monthly": days = 30
+    
+    try:
+        response = supabase.rpc('get_top_trends', {'lookback_days': days}).execute()
+        return response.data or []
+    except Exception as e:
+        print(f"Trends Error: {e}")
+        return []
+
+# ---------------------------------------------------------------------------
+# 2. DASHBOARD ENGINE (AI ANALİZİ - DOSYA İSİMLERİNE GÖRE)
+# ---------------------------------------------------------------------------
+async def get_dashboard_stats(time_range: str = "24h"):
+    print(f"\n--- [DEBUG] Dashboard İsteği: {time_range} ---")
+    if not supabase: return None
+
+    # Saati SQL'e göndermek için hesapla
+    hours = 24
+    if time_range == "7d": hours = 168
+    if time_range == "30d": hours = 720
+
+    try:
+        # A) SQL VERİLERİ (Grafikler ve Sayılar)
+        response = supabase.rpc('get_trend_dashboard_stats', {'lookback_hours': hours}).execute()
+        data = response.data 
+        if not data: return None
+
+        # B) AI STRATEJİK İÇGÖRÜ (SON 50 VERİ ANALİZİ)
+        ai_insight = "Veriler analiz ediliyor..."
+        
+        # Period ismi
+        period_name = "son 24 saat"
+        if time_range == "7d": period_name = "son 1 hafta"
+        if time_range == "30d": period_name = "son 1 ay"
+        
+        if ai_client:
+            print("🔍 Filtresiz son 50 veri çekiliyor...")
+            
+            # Sistem testlerini hariç tut, gerisini al
+            query = supabase.table("processed_data")\
+                .select("content, source")\
+                .not_.ilike("source", "%test%")\
+                .not_.ilike("source", "%system%")\
+                .order("created_at", desc=True)\
+                .limit(50)\
+                .execute()
+            
+            raw_rows = query.data or []
+            
+            analysis_pool = []
+            
+            # --- GÜNCELLENMİŞ KAYNAK HARİTASI (SENİN DOSYALARINA GÖRE) ---
+            source_map = {
+                "trendyol": "Trendyol", 
+                "amazon": "Amazon", 
+                "n11": "N11", 
+                "alibaba": "Alibaba", 
+                "a101": "A101", 
+                "carrefour": "CarrefourSA", 
+                "google": "Google Trends",
+                "instagram": "Instagram",
+                "tiktok": "TikTok",
+                "twitter": "Twitter",
+                "youtube": "YouTube"
+            }
+
+            for r in raw_rows:
+                c = safe_json_parse(r.get('content'))
+                
+                # Kaynağı Bul (Önce JSON içindeki 'kaynak', yoksa 'source' dosya adı)
+                raw_src = str(r.get('source', '')).lower()
+                if isinstance(c, dict) and c.get('kaynak'):
+                    raw_src = str(c.get('kaynak')).lower()
+                
+                # Kaynağı Temiz İsimle Eşleştir
+                clean_source = "Genel"
+                for key, val in source_map.items():
+                    if key in raw_src: # örn: 'trendyol_kategorili.csv' içinde 'trendyol' var mı?
+                        clean_source = val
+                        break
+                
+                # İçeriği Formatla (AI'ya göndermek için özetle)
+                info = ""
+                if isinstance(c, dict):
+                    # Olası tüm veri alanlarını kontrol et
+                    parts = []
+                    
+                    # Ürün / Başlık
+                    p_name = c.get('urun_adi') or c.get('product_name') or c.get('title') or c.get('baslik') or c.get('query')
+                    if p_name: parts.append(str(p_name))
+                    
+                    # Fiyat
+                    price = c.get('fiyat') or c.get('price')
+                    if price: parts.append(f"Fiyat: {price}")
+                    
+                    # Sosyal Medya Metni
+                    text = c.get('text') or c.get('tweet') or c.get('icerik')
+                    if text: parts.append(f"İçerik: {str(text)[:100]}...") # Çok uzunsa kes
+                    
+                    # Eğer hiçbiri yoksa 'not' kısmına bak
+                    if not parts and c.get('not'):
+                        parts.append(str(c.get('not'))[:100])
+                        
+                    if parts:
+                        info = " | ".join(parts)
+                    else:
+                        info = str(c)[:150] # Hiçbir yapı yoksa ham JSON'ın başını al
+
+                if len(info) > 5:
+                    analysis_pool.append(f"[{clean_source}] {info}")
+
+            print(f"📊 AI İçin Hazırlanan Veri Sayısı: {len(analysis_pool)}")
+
+            # C) AI ANALİZİ
+            if analysis_pool:
+                # Rastgele 20 tanesini seç (Çeşitlilik için)
+                sample_size = min(len(analysis_pool), 20)
+                selected_items = random.sample(analysis_pool, sample_size)
+                summary_text = "\n".join(selected_items)
+                
+                prompt = f"""
+                Sen Kıdemli Veri Stratejistisin. Aşağıda veritabanına giren SON GERÇEK VERİLER listelenmiştir.
+                Her satırın başında [KAYNAK] belirtilmiştir (Örn: [Trendyol], [Twitter]).
+                
+                VERİLER:
+                {summary_text}
+                
+                GÖREV:
+                Bu verilere bakarak Yöneticiler için 2-3 cümlelik, SOMUT ve ÇARPICI bir "Durum Özeti" yaz.
+                - Hangi platformda (Trendyol, Twitter vb.) ne tür bir hareketlilik var?
+                - Öne çıkan bir ürün, konu veya fiyat değişimi var mı?
+                
+                Marka veya platform ismi vererek konuş. Asla 'veri yok' deme.
+                """
+                try:
+                    completion = ai_client.chat.completions.create(
+                        model=MODEL_NAME, messages=[{"role": "user", "content": prompt}],
+                        temperature=0.7, max_tokens=300
+                    )
+                    ai_insight = completion.choices[0].message.content.replace('"', '').strip()
+                except: 
+                    ai_insight = "AI servisine bağlanılamadı."
+            else:
+                ai_insight = "Veritabanında analiz edilecek anlamlı veri bulunamadı (Veriler test verisi olabilir)."
+
+        data['ai_insight'] = ai_insight
+        data['system_status'] = "Stabil"
+        return data
+
+    except Exception as e:
+        print(f"❌ Dashboard Hatası: {e}")
+        return None
+    
+
+   
+    
+    
+
+    
