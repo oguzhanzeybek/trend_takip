@@ -20,138 +20,192 @@ except ImportError:
 
 BASE_DIR = CURRENT_DIR
 SCREENSHOT_DIR = BASE_DIR / "debug_carrefour"
-SCREENSHOT_DIR.mkdir(exist_ok=True) # Klasör yoksa oluştur
+SCREENSHOT_DIR.mkdir(exist_ok=True) 
 
-print("🚀 CarrefourSA Scraper (Merkezi Sistem & Gelişmiş Mod) Başlatılıyor...")
+print("🚀 CarrefourSA Scraper (Veritabanı YOK - Sadece CSV) Başlatılıyor...")
 
-try:
-    driver = get_chrome_driver()
-    wait = WebDriverWait(driver, 15)
-except Exception as e:
-    print(f"❌ Driver başlatılamadı: {e}")
-    sys.exit(1)
+def scrape_carrefoursa():
+    try:
+        driver = get_chrome_driver()
+        wait = WebDriverWait(driver, 15)
+    except Exception as e:
+        print(f"❌ Driver başlatılamadı: {e}")
+        return
 
-try:
-    all_products = []
-    target_count = 500 # Hedef ürün sayısı
-    current_page = 0
-    MAX_RETRY = 3 
-
-    while len(all_products) < target_count:
+    try:
+        all_products = []
+        target_count = 500 
+        current_page = 0
         
-        url = f"https://www.carrefoursa.com/cok-satanlar/c/9124?q=%3AbestSeller&page={current_page}"
-        print(f"\n--- Gidiliyor: Sayfa {current_page + 1} ---")
-        driver.get(url)
-        
-        time.sleep(random.uniform(5, 8))
-
-        try:
-            buttons = ["onetrust-accept-btn-handler", "btn-accept-all", "close-modal"]
-            for btn_id in buttons:
-                try: driver.find_element(By.ID, btn_id).click()
-                except: pass
+        while len(all_products) < target_count:
             
-            driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
-        except: pass
-
-        print("⬇️ Resimlerin yüklenmesi için kaydırılıyor...")
-        for i in range(1, 4):
-            driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight * {i/4});")
-            time.sleep(1)
-
-        possible_selectors = [
-            "li.product-listing-item",       # Klasik yapı
-            ".product_list_item",            # Alternatif
-            "div.product-card",              # Modern yapı
-            ".item-product-card",            # Bazen kullanılan
-            "ul.product-listing li"          # Liste bazlı
-        ]
-
-        products = []
-        
-        print("🔍 Ürünler aranıyor...")
-        for selector in possible_selectors:
-            found = driver.find_elements(By.CSS_SELECTOR, selector)
-            if len(found) > 0:
-                products = found
-                print(f"✅ Seçici çalıştı: '{selector}' -> {len(found)} adet bulundu.")
-                break
-        
-        if len(products) == 0:
-            print("❌ HATA: Ürün bulunamadı.")
+            url = f"https://www.carrefoursa.com/cok-satanlar/c/9124?q=%3AbestSeller&page={current_page}"
+            print(f"\n--- Gidiliyor: Sayfa {current_page + 1} ---")
+            driver.get(url)
             
-            shot_path = SCREENSHOT_DIR / f"hata_sayfa_{current_page}.png"
-            driver.save_screenshot(str(shot_path))
-            print(f"📸 Hata görüntüsü kaydedildi: {shot_path}")
-            
-            page_source = driver.page_source.lower()
-            if "verify you are human" in page_source or "captcha" in page_source:
-                print("⚠️ KRİTİK: Bot korumasına (Cloudflare/WAF) takıldık.")
-                break
-            
-            if current_page > 0:
-                print("⏹️ Muhtemelen sayfa sonuna gelindi.")
-                break
-            else:
-                break
+            time.sleep(random.uniform(5, 8))
 
-        added_on_this_page = 0
-        for p in products:
-            if len(all_products) >= target_count: break
-            
             try:
-                title = ""
-                try: title = p.find_element(By.CSS_SELECTOR, ".item-name").text.strip()
-                except: 
-                    try: title = p.find_element(By.TAG_NAME, "h3").text.strip()
+                buttons = ["onetrust-accept-btn-handler", "btn-accept-all", "close-modal"]
+                for btn_id in buttons:
+                    try: driver.find_element(By.ID, btn_id).click()
                     except: pass
                 
-                if not title: continue # İsimsiz ürünü geç
+                driver.find_element(By.TAG_NAME, "body").send_keys(Keys.ESCAPE)
+            except: pass
 
-                price = "Fiyat Yok"
-                try: 
-                    raw_price = p.find_element(By.CSS_SELECTOR, ".item-price").text
-                    price = raw_price.replace("\n", "").strip()
-                except: pass
+            print("⬇️ Resimlerin yüklenmesi için kaydırılıyor...")
+            for i in range(1, 4):
+                driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight * {i/4});")
+                time.sleep(1)
 
-                link = ""
-                try: link = p.find_element(By.TAG_NAME, "a").get_attribute("href")
-                except: pass
+            possible_selectors = [
+                "li.product-listing-item",      
+                ".product_list_item",           
+                "div.product-card",             
+                ".item-product-card",           
+                "ul.product-listing li"         
+            ]
 
-                brand = "-"
-                try: brand = p.find_element(By.CSS_SELECTOR, ".item-brand").text.strip()
-                except: pass
+            products = []
+            
+            print("🔍 Ürünler aranıyor...")
+            for selector in possible_selectors:
+                found = driver.find_elements(By.CSS_SELECTOR, selector)
+                if len(found) > 0:
+                    products = found
+                    print(f"✅ Seçici çalıştı: '{selector}' -> {len(found)} adet bulundu.")
+                    break
+            
+            if len(products) == 0:
+                print("❌ HATA: Ürün bulunamadı.")
+                shot_path = SCREENSHOT_DIR / f"hata_sayfa_{current_page}.png"
+                driver.save_screenshot(str(shot_path))
+                print(f"📸 Hata görüntüsü kaydedildi: {shot_path}")
+                
+                page_source = driver.page_source.lower()
+                if "verify you are human" in page_source or "captcha" in page_source:
+                    print("⚠️ KRİTİK: Bot korumasına (Cloudflare/WAF) takıldık.")
+                    break
+                
+                if current_page > 0:
+                    print("⏹️ Muhtemelen sayfa sonuna gelindi.")
+                    break
+                else:
+                    break
 
-                all_products.append([brand, title, price, link])
-                added_on_this_page += 1
+            added_on_this_page = 0
+            for p in products:
+                if len(all_products) >= target_count: break
+                
+                try:
+                    title = ""
+                    try: title = p.find_element(By.CSS_SELECTOR, ".item-name").text.strip()
+                    except: 
+                        try: title = p.find_element(By.TAG_NAME, "h3").text.strip()
+                        except: pass
+                    
+                    if not title: continue 
 
-            except Exception as e:
-                continue
-        
-        print(f"  -> Sayfadan eklenen: {added_on_this_page}")
-        print(f"  -> Toplam: {len(all_products)}/{target_count}")
-        
-        current_page += 1
+                    price = "Fiyat Yok"
+                    try: 
+                        raw_price = p.find_element(By.CSS_SELECTOR, ".item-price").text
+                        price = raw_price.replace("\n", "").strip()
+                    except: pass
 
-except Exception as e:
-    print(f"❌ Beklenmedik Hata: {e}")
+                    link = ""
+                    try: link = p.find_element(By.TAG_NAME, "a").get_attribute("href")
+                    except: pass
 
-finally:
-    try:
-        driver.quit()
-        print("🛑 Tarayıcı kapatıldı.")
-    except: pass
+                    brand = "-"
+                    try: brand = p.find_element(By.CSS_SELECTOR, ".item-brand").text.strip()
+                    except: pass
 
-    if all_products:
-        file_path = BASE_DIR / "carrefoursa.csv"
+                    all_products.append([brand, title, price, link])
+                    added_on_this_page += 1
+
+                except Exception as e:
+                    continue
+            
+            print(f"  -> Sayfadan eklenen: {added_on_this_page}")
+            print(f"  -> Toplam: {len(all_products)}/{target_count}")
+            
+            current_page += 1
+
+    except Exception as e:
+        print(f"❌ Beklenmedik Hata: {e}")
+
+    finally:
         try:
-            with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
-                writer = csv.writer(file)
-                writer.writerow(["Marka", "Ürün Adı", "Fiyat", "Link"])
-                writer.writerows(all_products)
-            print(f"\n✅ İŞLEM BAŞARILI!")
-            print(f"📄 Dosya: {file_path}")
+            driver.quit()
+            print("🛑 Tarayıcı kapatıldı.")
+        except: pass
+
+        # CSV KAYDI (Rank Eklendi)
+        if all_products:
+            file_path = BASE_DIR / "carrefoursa.csv"
+            try:
+                with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
+                    writer = csv.writer(file)
+                    # Header: Başa Rank ekledik
+                    writer.writerow(["Rank", "Marka", "Ürün Adı", "Fiyat", "Link"])
+                    
+                    # Sıra Numarasıyla Yazma
+                    for i, prod in enumerate(all_products, 1):
+                        writer.writerow([i] + prod)
+                        
+                print(f"\n✅ İŞLEM BAŞARILI!")
+                print(f"📄 Dosya: {file_path}")
+            except Exception as e:
+                print(f"❌ Dosya yazma hatası: {e}")
+        else:
+            print("\n⚠️ Veri çekilemedi. Lütfen 'debug_carrefour' klasöründeki ekran görüntüsünü kontrol et.")
+
+# ==========================================
+# OTO-İNDEKSLEME FONKSİYONU
+# ==========================================
+def auto_add_index_to_csvs():
+    import os
+    import csv
+    
+    folder_path = os.path.dirname(os.path.abspath(__file__))
+    csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
+    
+    print(f"\n🔄 İndeksleme Başladı: {folder_path} klasöründeki dosyalar taranıyor...")
+
+    for filename in csv_files:
+        file_path = os.path.join(folder_path, filename)
+        rows = []
+        try:
+            with open(file_path, 'r', encoding='utf-8-sig') as f:
+                reader = csv.reader(f)
+                rows = list(reader)
+            
+            if not rows: continue
+
+            header = rows[0]
+            data = rows[1:]
+
+            if header and str(header[0]).lower() == "rank":
+                print(f"  Start ⏩ {filename} (Zaten indeksli)")
+                continue
+
+            new_header = ["Rank"] + header
+            new_data = []
+            
+            for index, row in enumerate(data, 1):
+                new_data.append([index] + row)
+
+            with open(file_path, 'w', newline='', encoding='utf-8-sig') as f:
+                writer = csv.writer(f)
+                writer.writerow(new_header)
+                writer.writerows(new_data)
+            
+            print(f"  ✅ İndeks Eklendi: {filename}")
+
         except Exception as e:
-            print(f"❌ Dosya yazma hatası: {e}")
-    else:
-        print("\n⚠️ Veri çekilemedi. Lütfen 'debug_carrefour' klasöründeki ekran görüntüsünü kontrol et.")
+            print(f"  ❌ Hata ({filename}): {e}")
+
+if __name__ == "__main__":
+    scrape_carrefoursa()
+    auto_add_index_to_csvs()

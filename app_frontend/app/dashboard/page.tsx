@@ -14,16 +14,19 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [latency, setLatency] = useState(0); 
   
+  // AI Analizi için ayrı bir state tutuyoruz
+  const [aiInsight, setAiInsight] = useState("Yapay zeka verileri tarıyor, lütfen bekleyin...");
+
   const [stats, setStats] = useState<any>({
     period_count: 0,
     total_archive: 0,
     sources: { google: 0, ecommerce: 0, social: 0, news: 0 },
     chart_data: [],
     recent_activities: [],
-    ai_insight: "Veriler toplanıyor...",
     system_status: "..."
   });
 
+  // 1. İSTATİSTİKLERİ ÇEKEN FONKSİYON (Hızlıdır)
   const fetchStats = async () => {
     try {
         setLoading(true);
@@ -36,20 +39,46 @@ export default function DashboardPage() {
             setStats(data);
         }
     } catch (error) {
-        console.error("Dashboard hatası:", error);
+        console.error("Stats hatası:", error);
     } finally {
         setLoading(false);
     }
   };
 
-  useEffect(() => { fetchStats(); }, [timeRange]);
+  // 2. YAPAY ZEKA ANALİZİNİ ÇEKEN YENİ FONKSİYON (Biraz sürebilir)
+  const fetchAiInsight = async () => {
+    try {
+        // Yükleniyor mesajı verelim
+        setAiInsight("🤖 Yapay zeka milyonlarca veriyi analiz ediyor...");
+        
+        // Senin yeni oluşturduğun endpoint'e istek atıyoruz
+        const res = await fetch(`${API_BASE_URL}/api/strategic-insights?time_range=${timeRange}`);
+        
+        if (res.ok) {
+            const data = await res.json();
+            // Gelen cevabı state'e yazıyoruz
+            if (data.insight) {
+                setAiInsight(data.insight);
+            }
+        }
+    } catch (error) {
+        console.error("AI hatası:", error);
+        setAiInsight("Analiz servisine şu an ulaşılamıyor.");
+    }
+  };
+
+  // useEffect hem istatistikleri hem de AI analizini tetikler
+  useEffect(() => { 
+      fetchStats(); 
+      fetchAiInsight(); 
+  }, [timeRange]);
 
   const totalSrc = Object.values(stats?.sources || {}).reduce((a:any, b:any) => a+b, 0) || 1;
   const getPercent = (val: number) => Math.round((val / Number(totalSrc)) * 100);
 
   // Grafik Maksimum Değerini Bul
   const chartValues = stats?.chart_data?.map((d: any) => d.value) || [];
-  const maxChartValue = Math.max(...chartValues, 10); // En az 10 olsun
+  const maxChartValue = Math.max(...chartValues, 10); 
 
   return (
     <div className="p-8 h-full overflow-y-auto bg-zinc-950 text-white font-sans">
@@ -79,7 +108,7 @@ export default function DashboardPage() {
             ))}
           </div>
           
-          <button onClick={fetchStats} className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-gray-400 hover:text-white transition-colors">
+          <button onClick={() => { fetchStats(); fetchAiInsight(); }} className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-gray-400 hover:text-white transition-colors">
             <RefreshCcw size={18} className={loading ? "animate-spin" : ""} />
           </button>
         </div>
@@ -96,7 +125,7 @@ export default function DashboardPage() {
       {/* GRAFİK VE AI */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         
-        {/* --- DÜZELTİLMİŞ GRAFİK --- */}
+        {/* GRAFİK KISMI */}
         <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 min-h-[350px] flex flex-col relative">
            <div className="flex justify-between items-center mb-6">
              <div>
@@ -109,44 +138,41 @@ export default function DashboardPage() {
            </div>
            
            <div className="flex-1 flex gap-2 relative">
-              {/* Y-EKSENİ (0 - 50% - 100%) */}
-              <div className="absolute left-0 top-0 bottom-8 w-full flex flex-col justify-between pointer-events-none opacity-20 z-0">
-                  <div className="border-t border-zinc-500 w-full"></div>
-                  <div className="border-t border-zinc-500 w-full border-dashed"></div>
-                  <div className="border-t border-zinc-500 w-full"></div>
-              </div>
+             {/* Y-EKSENİ (Arka plan çizgileri) */}
+             <div className="absolute left-0 top-0 bottom-8 w-full flex flex-col justify-between pointer-events-none opacity-20 z-0">
+                 <div className="border-t border-zinc-500 w-full"></div>
+                 <div className="border-t border-zinc-500 w-full border-dashed"></div>
+                 <div className="border-t border-zinc-500 w-full"></div>
+             </div>
 
-              {/* BARLAR */}
-              <div className="flex-1 flex items-end justify-between z-10 gap-1 pb-6 overflow-x-auto">
-                {(stats?.chart_data || []).map((item: any, i: number) => {
-                    const heightPercent = Math.max((item.value / maxChartValue) * 100, 2); // En az %2 yükseklik
-                    return (
-                    <div key={i} className="min-w-[30px] w-full flex flex-col justify-end group relative h-full">
-                        {/* Sayı (Barın Üstünde) */}
-                        <div className="text-[10px] text-zinc-400 text-center mb-1 opacity-0 group-hover:opacity-100 transition-opacity font-bold">
-                            {item.value > 0 ? item.value : ''}
-                        </div>
-                        
-                        {/* Bar */}
-                        <div 
-                        className="w-full bg-zinc-800 rounded-t-sm transition-all duration-500 group-hover:bg-blue-500 relative overflow-hidden"
-                        style={{ height: `${heightPercent}%` }}
-                        >
-                            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-500/20 to-transparent"></div>
-                        </div>
-                        
-                        {/* X-Ekseni Etiketi */}
-                        <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-gray-500 font-mono w-max">
-                            {item.label.split(' ')[0]}
-                        </span>
-                    </div>
-                    )
-                })}
-              </div>
+             {/* BARLAR */}
+             <div className="flex-1 flex items-end justify-between z-10 gap-1 pb-6 overflow-x-auto">
+               {(stats?.chart_data || []).map((item: any, i: number) => {
+                   const heightPercent = Math.max((item.value / maxChartValue) * 100, 2); 
+                   return (
+                   <div key={i} className="min-w-[30px] w-full flex flex-col justify-end group relative h-full">
+                       <div className="text-[10px] text-zinc-400 text-center mb-1 opacity-0 group-hover:opacity-100 transition-opacity font-bold">
+                           {item.value > 0 ? item.value : ''}
+                       </div>
+                       
+                       <div 
+                       className="w-full bg-zinc-800 rounded-t-sm transition-all duration-500 group-hover:bg-blue-500 relative overflow-hidden"
+                       style={{ height: `${heightPercent}%` }}
+                       >
+                           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-500/20 to-transparent"></div>
+                       </div>
+                       
+                       <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-gray-500 font-mono w-max">
+                           {item.label?.split(' ')[0]}
+                       </span>
+                   </div>
+                   )
+               })}
+             </div>
            </div>
         </div>
 
-        {/* AI İÇGÖRÜSÜ */}
+        {/* AI İÇGÖRÜSÜ KISMI (GÜNCELLENDİ) */}
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-6 relative overflow-hidden flex flex-col">
            <div className="absolute top-0 right-0 w-40 h-40 bg-pink-600/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
            <div className="flex items-center justify-between mb-4">
@@ -156,8 +182,12 @@ export default function DashboardPage() {
              </h3>
              <span className="text-[10px] bg-pink-500/10 text-pink-500 px-2 py-1 rounded-full border border-pink-500/20 font-bold animate-pulse">CANLI</span>
            </div>
+           
            <div className="flex-1 bg-zinc-950/50 rounded-xl border border-zinc-800/50 p-5 relative overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-zinc-700">
-             <p className="text-sm text-gray-200 leading-relaxed font-medium whitespace-pre-wrap">{stats?.ai_insight}</p>
+             {/* BURASI ARTIK AI'DAN GELEN VERİYİ GÖSTERİYOR */}
+             <p className="text-sm text-gray-200 leading-relaxed font-medium whitespace-pre-wrap">
+               {aiInsight}
+             </p>
            </div>
         </div>
       </div>
@@ -175,27 +205,39 @@ export default function DashboardPage() {
            </div>
         </div>
 
-        {/* SON AKTİVİTELER */}
+        {/* SON AKTİVİTELER - SAATLİK ÖZET */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 col-span-1 lg:col-span-2">
            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Son Veri Girişleri (Dakikalık Gruplama)</h3>
+              <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Saatlik Veri Akışı</h3>
               <MoreHorizontal size={16} className="text-gray-500 cursor-pointer"/>
            </div>
+           
            <div className="space-y-0 relative">
               <div className="absolute left-[9px] top-2 bottom-2 w-[1px] bg-zinc-800"></div>
+              
               {(stats?.recent_activities || []).map((act: any, i:number) => (
                 <div key={i} className="relative pl-6 pb-6 last:pb-0 group">
+                  
+                  {/* Mavi Nokta */}
                   <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-[3px] border-zinc-900 bg-blue-500 z-10 group-hover:scale-125 transition-transform"></div>
+                  
                   <div>
+                      {/* Başlık: Kaç Veri Girdi? */}
                       <h4 className="text-sm font-bold text-white leading-none group-hover:text-blue-400 transition-colors mb-1.5">
-                        {act.count} Adet Veri Girildi
+                        {act.count} Adet Veri İşlendi
                       </h4>
+                      
+                      {/* Saat */}
                       <span className="text-[10px] text-gray-500 flex items-center gap-1 font-medium bg-zinc-950 px-2 py-0.5 rounded w-fit border border-zinc-800">
-                        <Calendar size={10} className="text-gray-500"/> {act.time_group}
+                        <Clock size={10} className="text-gray-500"/> {act.time_display} Saat Dilimi
                       </span>
                   </div>
                 </div>
               ))}
+
+              {(!stats?.recent_activities || stats.recent_activities.length === 0) && (
+                <div className="text-center text-gray-600 text-xs py-4">Son 24 saatte veri girişi yok.</div>
+              )}
            </div>
         </div>
       </div>

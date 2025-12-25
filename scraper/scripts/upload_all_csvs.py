@@ -1,13 +1,11 @@
 import os
 import sys
 import pandas as pd
-import json # JSON işlemleri için eklendi
+import json 
 from datetime import datetime
 from pathlib import Path
 
-
 CURRENT_DIR = Path(__file__).resolve().parent
-
 PROJECT_ROOT = CURRENT_DIR.parent.parent 
 
 if str(PROJECT_ROOT) not in sys.path:
@@ -70,9 +68,16 @@ def upload_single_file(db, file_path):
                 print("⚠️ Dosya boş, atlanıyor.")
                 return
             
+            # --- DÜZELTME BURADA ---
+            # Pandas sayısal kolonlarda None tutamaz, NaN yapar. Bu da JSON hatası verir.
+            # Bu yüzden önce tüm tabloyu 'object' tipine çeviriyoruz.
+            df = df.astype(object)
+            
+            # Şimdi NaN olanları None (JSON null) ile değiştiriyoruz.
+            df = df.where(pd.notnull(df), None)
+            
             for _, row in df.iterrows():
-                row_dict = row.where(pd.notnull(row), None).to_dict()
-                formatted_data.append(row_dict)
+                formatted_data.append(row.to_dict())
 
         elif full_path.suffix == '.json':
             with open(full_path, 'r', encoding='utf-8') as f:
@@ -83,7 +88,6 @@ def upload_single_file(db, file_path):
             if isinstance(data, list):
                 json_list = data
             elif isinstance(data, dict):
-                
                 potential_keys = ['analyzed_records', 'results', 'data', 'content']
                 found = False
                 for key in potential_keys:
@@ -108,7 +112,7 @@ def upload_single_file(db, file_path):
             print(f"❌ Desteklenmeyen dosya formatı: {full_path.suffix}. Atlanıyor.")
             return
 
-        print(f"   📊 Okunan Kayıt Sayısı: {len(formatted_data)}")
+        print(f"   📊 Okunan Kayıt Sayısı: {len(formatted_data)}")
     
     except Exception as e:
         print(f"❌ Okuma Hatası ({full_path.name}): {e}")
@@ -121,11 +125,27 @@ def upload_single_file(db, file_path):
     payloads_for_db = []
     
     for item in formatted_data:
+        # --- RANK ÇIKARMA BÖLÜMÜ ---
+        # CSV veya JSON içindeki "Rank", "rank" veya "trend_rank" alanlarını arıyoruz
+        rank_val = item.get("Rank") or item.get("rank") or item.get("trend_rank")
+        
+        final_rank = None
+        if rank_val is not None:
+            try:
+                # Gelen değer "#3", "No: 5" veya "3.0" olabilir. Sadece rakamları alıyoruz.
+                clean_r = ''.join(filter(str.isdigit, str(rank_val)))
+                if clean_r:
+                    final_rank = int(clean_r)
+            except:
+                final_rank = None
+
+        # Payload Hazırlama
         payload = {
-            "category": category,           
-            "data_type": data_type,         
-            "source": full_path.name,       
+            "category": category,          
+            "data_type": data_type,        
+            "source": full_path.name,      
             "created_at_custom": simdiki_zaman,
+            "trend_rank": final_rank, 
             "content": item 
         }
         payloads_for_db.append(payload)
@@ -138,7 +158,7 @@ def upload_single_file(db, file_path):
             batch = payloads_for_db[i:i + batch_size]
             db.insert_data("processed_data", batch)
             total_inserted += len(batch)
-            print(f"   ⏳ {total_inserted}/{len(payloads_for_db)} yüklendi...")
+            print(f"   ⏳ {total_inserted}/{len(payloads_for_db)} yüklendi...")
             
         print(f"✅ {full_path.name} BAŞARIYLA YÜKLENDİ.")
         
@@ -146,7 +166,7 @@ def upload_single_file(db, file_path):
         print(f"❌ Veritabanı Hatası ({full_path.name}): {e}")
 
 def main():
-    print("🚀 TOPLU CSV/JSON YÜKLEME BAŞLATILIYOR...")
+    print("🚀 TOPLU CSV/JSON YÜKLEME BAŞLATILIYOR (Rank ve NaN Düzeltmeli)...")
     
     try:
         db = DatabaseManager() 

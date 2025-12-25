@@ -76,7 +76,7 @@ def scrape_instagram_hashtags():
             try:
                 with open(output_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    writer.writerow(["ID", "Hashtag", "Count"])
+                    writer.writerow(["Rank", "Hashtag", "Count"])
                     writer.writerows(all_data)
                 print(f"✅ Dosya kaydedildi: {output_path}")
                 print(f"📊 Toplam {len(all_data)} hashtag toplandı.")

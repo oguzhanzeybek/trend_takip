@@ -1,47 +1,52 @@
 {
-    "analiz_tarihi": "2025-12-10 14:30:21",
+    "analiz_tarihi": "2025-12-17 05:19:31",
     "analiz_kaynağı": "social_media.csv",
-    "genel_değerlendirme": "Veriler, toplumun genel ruh halinin karmaşık bir tablo sunduğunu gösteriyor. İnsanlar arasında artan bir kaygı ve belirsizlik hissi var; bu durum, sosyal ve ekonomik belirsizliklerden kaynaklanıyor. Öfke ve bıkkınlık, özellikle siyasal konularda belirgin. Ancak, bazı kullanıcılar alaycı bir neşe ile bu durumu ele alıyor, bu da toplumun stresle başa çıkma mekanizmasını yansıtıyor.",
+    "genel_değerlendirme": "Veriler, halkın ruh halinin karmaşık bir yapıda olduğunu ve belirli konular etrafında yoğunlaştığını gösteriyor. İnsanlar, belirsizlik ve kaygı içinde iken, aynı zamanda alaycı bir mizah anlayışı geliştirmişler. Sosyal medya paylaşımlarında öne çıkan duygusal tonlar, hem öfke hem de bıkkınlık içeriyor.",
     "ana_duygular": [
-        {
-            "duygu": "Kaygı",
-            "skor": 85,
-            "gerekçe": "Ekonomik belirsizlikler, işsizlik oranları ve sosyal adaletsizlik konularındaki endişeler."
-        },
         {
             "duygu": "Öfke",
             "skor": 75,
-            "gerekçe": "Siyasal olaylar, hükümet politikaları ve sosyal medyada yayılan yanlış bilgiler üzerine tepkiler."
+            "gerekçe": "Hükümet politikaları ve ekonomik durum hakkında yapılan paylaşımlar, insanların öfkesini artıran temel unsurlar olarak öne çıkıyor."
+        },
+        {
+            "duygu": "Bıkkınlık",
+            "skor": 65,
+            "gerekçe": "Sürekli değişen kurallar ve belirsizlikler, insanların bıkkınlık hissetmesine neden oluyor."
+        },
+        {
+            "duygu": "Alaycı Neşe",
+            "skor": 55,
+            "gerekçe": "Durumun ciddiyetine rağmen, birçok kişi durumu mizahi bir dille ele alıyor."
         }
     ],
     "baskin_gundemler": [
         {
-            "konu": "Ekonomik Belirsizlik",
-            "köken": "Yüksek enflasyon, işsizlik ve yaşam standartlarındaki düşüşle ilgili paylaşımlar."
+            "konu": "Ekonomik Kriz",
+            "köken": "Yüksek enflasyon ve işsizlik oranları hakkında yapılan paylaşımlar."
         },
         {
-            "konu": "Siyasal Olaylar",
-            "köken": "Son seçim sonuçları, hükümetin aldığı kararlar ve protestolar üzerine yapılan yorumlar."
+            "konu": "Siyasi Tartışmalar",
+            "köken": "Seçim süreçleri ve hükümetin aldığı kararlar üzerine yapılan eleştiriler."
         },
         {
-            "konu": "Sosyal Adalet",
-            "köken": "Toplumda eşitsizlik, ayrımcılık ve insan hakları ihlalleri ile ilgili tartışmalar."
+            "konu": "Sosyal Medya Etkisi",
+            "köken": "Sosyal medyanın gündemi nasıl şekillendirdiği ve bireylerin bu süreçteki rolü."
         }
     ],
     "harcama_egilimi_analizi": {
         "egilim": "Tüketicilerin temel ihtiyaçlara yönelmesi.",
-        "sektor_etkisi": "Gıda ve temel ihtiyaç ürünlerinde artan harcamalar, lüks tüketim ürünlerinde ise düşüş."
+        "sektor_etkisi": "Gıda sektörü, artan fiyatlar nedeniyle en çok etkilenen alan. Giyim ve teknoloji harcamaları ise azalma gösteriyor."
     },
     "gelecek_tahminleri": [
         {
-            "tahmin": "Sosyal huzursuzluk artabilir.",
+            "tahmin": "Ekonomik belirsizliklerin artması",
             "risk_seviyesi": "Yüksek",
-            "neden": "Devam eden ekonomik sorunlar ve siyasal belirsizlikler."
+            "neden": "Devam eden enflasyon ve işsizlik oranlarının yükselmesi."
         },
         {
-            "tahmin": "Temel ihtiyaç ürünlerine talep artacak.",
+            "tahmin": "Sosyal medya üzerinden daha fazla aktivizm",
             "risk_seviyesi": "Orta",
-            "neden": "Tüketicilerin harcama alışkanlıklarını değiştirerek, güvenli liman arayışında olmaları."
+            "neden": "Toplumun yaşadığı sıkıntılara karşı duyarlılığın artması."
         }
     ]
 }

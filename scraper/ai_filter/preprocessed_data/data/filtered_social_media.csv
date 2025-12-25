@@ -1,47 +1,585 @@
-﻿kaynak_dosya,urun_adi,fiyat,potansiyel_skoru,not
-google_trends_168.csv,Napoli,-,75,#ErkenTrend #İtalyanMutfağı #Pizza #Gastronomi #YenilikçiLezzet #HORECA #RestoranMenüsü #MüşteriDeneyimi #GıdaTrendi #GastronomiYeniliği
-google_trends_168.csv,Payco,-,70,#DijitalÖdeme #HORECA #MüşteriDeneyimi #Teknoloji #RestoranOperasyonu #YenilikçiÇözümler #Fintech #HızlıÖdeme #GüvenliÖdeme #MüşteriSadakati
-google_trends_168.csv,Jacobs,-,80,#Kahve #HORECA #Gastronomi #İşletmeVerimliliği #MüşteriDeneyimi #YüksekKalite #KahveKültürü #RestoranMenüsü #Yenilikçiİçecek #GıdaTrendi
-google_trends_168.csv,Weather,-,65,#HavaDurumu #Planlama #HORECA #MüşteriDeneyimi #DışMekan #EtkinlikPlanlama #RestoranOperasyonu #YenilikçiÇözümler #HavaTahmini #İşletmeVerimliliği
-google_trends_168.csv,One UI,-,60,#MobilTeknoloji #HORECA #DijitalDeneyim #RestoranOperasyonu #MüşteriDeneyimi #YenilikçiÇözümler #Teknoloji #UygulamaGeliştirme #İşletmeVerimliliği #DijitalDönüşüm
-google_trends_168.csv,Yemek Butik,-,85,#ErkenTrend #Gastronomi #YemekSanatı #ÖzelServis #HORECA #YenilikçiMenü #MüşteriDeneyimi #GıdaEstetiği #Gurme #KafeRestoran
-google_trends_168.csv,Fast,-,85,#ErkenTrend #HızlıServis #Yenilikçi #HORECA #Restoran #Kafe #Catering #Verimlilik #MüşteriDeneyimi #GıdaTeknolojisi
-google_trends_168.csv,Freddy Pizza,-,85,#ErkenTrend #Pizza #HORECA #Yenilik #Eğlence #Aile #Çocuklar #Restoran #Menü #Etkileşim
-instagram.csv,Kafe Instagramable,-,85,#ErkenTrend #Kafe #Instagram #Dekorasyon #MekanTasarımı #SosyalMedya #MüşteriDeneyimi #Yenilikçi #Görsellik #HORECA
-instagram.csv,Düşük Kalori Çikolata,-,78,#SağlıklıYaşam #DüşükKalori #Çikolata #Vegan #HORECA #TatlıAlternatifi #MüşteriTalepleri #Yenilik #GıdaTrendi #Lezzet
-instagram.csv,Yenilikçi Mutfak Eşyası,-,80,#Mutfak #Yenilik #Eşya #Verimlilik #HORECA #Gastronomi #İnovasyon #MutfakTeknolojisi #GıdaHazırlama #Pratik
-instagram.csv,Sosyal Medya İle Uyumlu Menü,-,90,#Menü #SosyalMedya #HORECA #DijitalPazarlama #MüşteriEtkileşimi #Yenilik #Görsellik #Trend #Gastronomi #Deneyim
-instagram.csv,Meksika Pizza,-,75,#ErkenTrend #VeganAlternatif #YenilikçiLezzet #HızlıServis #MüşteriMemnuniyeti #Çeşitlilik #YüksekTalep #RestoranMenüsü #YemekSunumu #SosyalMedya
-instagram.csv,Burgers,-,80,#ErkenTrend #HızlıYemek #YenilikçiLezzet #MüşteriMemnuniyeti #Çeşitlilik #RestoranMenüsü #SosyalMedya #YüksekTalep #Gastronomi #YemekSunumu
-instagram.csv,Kafe,-,70,#ErkenTrend #KafeKültürü #SosyalMedya #MüşteriDeneyimi #YenilikçiHizmet #HızlıServis #Çeşitlilik #Gastronomi #YemekSunumu #RestoranMenüsü
-instagram.csv,Catering,-,85,#ErkenTrend #CateringHizmeti #MüşteriMemnuniyeti #YüksekTalep #YenilikçiHizmet #EtkinlikYönetimi #Gastronomi #RestoranMenüsü #SosyalMedya #Çeşitlilik
-instagram.csv,Organik Domuz,-,85,#ErkenTrend #VeganAlternatif #SağlıklıBeslenme #Sürdürülebilir #HORECA #MenüYeniliği #GıdaTrendi #DoğalÜrün #YüksekTalep #Gastronomi
-instagram.csv,Bahrain Sanat,-,75,#Sanat #YerelÜrün #KültürelDeneyim #HORECA #MenüZenginliği #Yenilikçi #Gastronomi #EşsizDeneyim #MüşteriÇekimi #SosyalMedya
-instagram.csv,Kafe Eğlencesi,-,70,#Eğlence #KafeTrendi #MüşteriDeneyimi #HORECA #SosyalAktivite #Yenilikçi #MenüGelişimi #Etkileşim #Topluluk #Gastronomi
-instagram.csv,Vegan Alternatif,-,90,#Vegan #SağlıklıYaşam #HORECA #MenüYeniliği #Sürdürülebilir #GıdaTrendi #ErkenTrend #MüşteriTalepleri #AlternatifBeslenme #Gastronomi
-instagram.csv,Sosyal Medya,-,80,#SosyalMedya #Pazarlama #HORECA #MüşteriEtkileşimi #DijitalTrend #Etkileşim #Gastronomi #Yenilikçi #MenüGelişimi #MarkaFarkındalığı
-instagram.csv,Vegan Kosmetik,-,85,#ErkenTrend #VeganAlternatif #DoğaDostu #CiltBakımı #HORECA #Sürdürülebilir #Yenilikçi #MüşteriTalepleri #Güzellik #Organik
-instagram.csv,Jumpsuit Hijab,-,75,#ModayaUygun #HORECA #Çeşitlilik #MüşteriTalepleri #Yenilikçi #Konfor #Pratik #Giyim #Restoran #Kafe
-instagram.csv,Cannabis Kozmetik,-,80,#ErkenTrend #DoğaDostu #CiltBakımı #HORECA #Yenilikçi #MüşteriTalepleri #Sürdürülebilir #Organik #Güzellik #Alternatif
-instagram.csv,Restoran Yönetim Yazılımı,-,85,#ErkenTrendSinyali #Dijitalleşme #Verimlilik #RestoranYönetimi #MüşteriDeneyimi #Otomasyon #HORECA #YenilikçiÇözümler #Teknoloji #İşletmeGelişimi
-instagram.csv,Vegan Menü Seçenekleri,-,90,#VeganAlternatif #SağlıklıBeslenme #Sürdürülebilirlik #HORECA #MüşteriTalepleri #YenilikçiMenü #GıdaTrendi #Beslenme #Çeşitlilik #ErkenTrend
-instagram.csv,Online Sipariş Sistemi,-,80,#DijitalSipariş #HORECA #MüşteriDeneyimi #Verimlilik #Teknoloji #RestoranYönetimi #OnlineHizmet #YenilikçiÇözümler #ErkenTrend #Otomasyon
-instagram.csv,Sürdürülebilir Ambalaj,-,88,#Sürdürülebilirlik #ÇevreDostu #HORECA #Ambalaj #YenilikçiÇözümler #GıdaTrendi #ErkenTrend #MüşteriTalepleri #YeşilAlternatif #İşletmeVerimliliği
-instagram.csv,Akıllı Mutfak Ekipmanları,-,82,#Teknoloji #MutfakEkipmanları #HORECA #Verimlilik #Otomasyon #YenilikçiÇözümler #AkıllıEv #ErkenTrend #MüşteriDeneyimi #İşletmeGelişimi
-instagram.csv,#microderma,-,75,#CiltBakımı #Güzellik #HORECA #Spa #Wellness #MüşteriDeneyimi #Yenilik #ErkenTrend #VeganAlternatif #DoğalÜrün
-instagram.csv,#amazingeurope,-,70,#Turizm #Gastronomi #Deneyim #HORECA #Yenilik #ErkenTrend #KültürelDeneyim #MüşteriDeneyimi #Sürdürülebilirlik #GastronomiTuru
-instagram.csv,#maraschinocherries,-,80,#Tatlı #Kokteyl #HORECA #Yenilik #ErkenTrend #Gastronomi #Dekoratif #MüşteriDeneyimi #ÖzelÜrün #GıdaSanayi
-instagram.csv,Hava Temizleyici,-,85,#ErkenTrend #HavaKalitesi #Sağlık #RestoranVerimliliği #MüşteriMemnuniyeti #Sürdürülebilirlik #İnovasyon #HORECA #Temizlik #GüvenliAlan
-instagram.csv,Vegan Menü Seçenekleri,-,90,#VeganAlternatif #SağlıklıBeslenme #MüşteriTalepleri #Sürdürülebilirlik #HORECA #Yenilik #MenüGeliştirme #ErkenTrend #Restoran #Catering
-instagram.csv,Dijital Menü,-,80,#Dijitalleşme #MüşteriDeneyimi #HORECA #Teknoloji #Verimlilik #ErkenTrend #Restoran #Catering #İnovasyon #MenüYönetimi
-instagram.csv,Sıfır Atık Ürünler,-,88,#SıfırAtık #Sürdürülebilirlik #HORECA #ÇevreDostu #ErkenTrend #İnovasyon #Restoran #Catering #MüşteriTalepleri #Verimlilik
-instagram.csv,Akıllı Sipariş Sistemleri,-,82,#Teknoloji #Dijitalleşme #HORECA #MüşteriDeneyimi #Verimlilik #ErkenTrend #Restoran #Catering #İnovasyon #SiparişYönetimi
-instagram.csv,Dragon Ball Temalı Ürün,-,75,#ErkenTrendSinyali #Eğlence #KafeDekorasyonu #RestoranTeması #GençHedefKitle #SosyalMedya #YenilikçiÜrün #EşsizDeneyim #MüşteriÇekimi #KültürelÖgeler
-instagram.csv,Tribal Kolye,-,70,#VeganAlternatif #ElYapımı #KişiselDokunuş #SürdürülebilirModa #RestoranHediyelik #MüşteriSadakati #YerliÜretim #ÖzgünTasarım #KafeAksesuarı #EşsizDeneyim
-instagram.csv,Fangen Ürünü,-,80,#ErkenTrendSinyali #YenilikçiÜrün #MüşteriDeneyimi #Restoranİnovasyonu #SosyalMedya #EşsizDeneyim #KafeMenüsü #YemekSunumu #GörselÇekicilik #YemekSanatı
-instagram.csv,Oty Ürünü,-,85,#SağlıklıYaşam #VeganAlternatif #RestoranMenüsü #YenilikçiÜrün #MüşteriÇekimi #Sürdürülebilirlik #GıdaTrendi #KafeAlternatifi #ErkenTrendSinyali #YemekSunumu
-instagram.csv,Naisha Hijabı,-,65,#ModaTrendi #KafeAksesuarı #RestoranDekorasyonu #KültürelÖgeler #MüşteriDeneyimi #SosyalMedya #YerliÜretim #EşsizDeneyim #HedefKitle #KişiselDokunuş
-instagram.csv,Pizzaroyalty,-,90,#YemekTrendi #RestoranMenüsü #EşsizDeneyim #MüşteriÇekimi #SosyalMedya #YenilikçiÜrün #GörselÇekicilik #YemekSanatı #KafeAlternatifi #ErkenTrendSinyali
-twitter_trends_tagged.csv,Devri,-,75,#ErkenTrend #Yenilik #HORECA #Restoran #Kafe #Catering #MenüDeğişimi #MüşteriDeneyimi #Sürdürülebilirlik #Gıdaİnovasyonu
-twitter_trends_tagged.csv,Sakat,-,70,#SağlıklıYaşam #VeganAlternatif #HORECA #Restoran #Kafe #MenüGeliştirme #MüşteriTalepleri #Sürdürülebilirlik #Gıdaİnovasyonu #AlternatifBeslenme
-twitter_trends_tagged.csv,Uyuşturucu,-,60,#Hukuk #GıdaGüvenliği #HORECA #Restoran #Kafe #SosyalSorumluluk #MüşteriGüveni #İşletmeVerimliliği #Gıdaİnovasyonu #ToplumsalFarkındalık
+﻿rank,kaynak_dosya,urun_adi,fiyat,potansiyel_skoru,not
+1,google_trends_168.csv,Sadettin S.,500 B+,90,
+2,google_trends_168.csv,Fenerbahçe - Beşiktaş,2 Mn+,95,
+4,google_trends_168.csv,Asgari Ücret 2026,1 Mn+,88,
+7,google_trends_168.csv,Memur Zammı 2026,100 B+,85,
+39,google_trends_168.csv,Gençlerbirliği - Trabzon,500 B+,80,
+47,google_trends_168.csv,Cristiano R.,500+,92,
+48,google_trends_168.csv,Galatasaray - Kasımpaşa,500 B+,87,
+53,google_trends_168.csv,AFC Kupası,500+,90,#AFC #Kupa
+59,google_trends_168.csv,Cezayir,500+,85,#Cezayir
+62,google_trends_168.csv,Şivlilik,500+,80,#Şivlilik
+67,google_trends_168.csv,A. Joshua,100,75,#Joshua #Boks
+68,google_trends_168.csv,Başakşehir - Gaziantep,100,80,#Başakşehir #Gaziantep
+74,google_trends_168.csv,S. Saran - H. Avşar,100+,85,#Saran #Avşar
+78,google_trends_168.csv,Ezan Vakti,100,90,#Ezan
+81,google_trends_168.csv,Gram Altın,100,95,#Altın
+89,google_trends_168.csv,Eşref Rüya,100,80,#Eşref #Rüya
+91,google_trends_168.csv,Galatasaray - Başakşehir,200,85,#Galatasaray #Başakşehir
+96,google_trends_168.csv,Şenol Güneş,200+,75,#Güneş
+99,google_trends_168.csv,Talavera - Real Madrid,100,80,#Talavera #RealMadrid
+109,google_trends_168.csv,BJK - RZSP,100 B+,90,#Futbol #Spor
+142,google_trends_168.csv,SSP,100 B+,88,#Futbol #Spor
+124,google_trends_168.csv,BF,500+,85,#Haber #Ekonomi
+137,google_trends_168.csv,Sömestr,500+,80,#Eğitim #Tatil
+151,google_trends_168.csv,bim hisse,B+,90,
+156,google_trends_168.csv,epic games ücretsiz,B+,80,
+168,google_trends_168.csv,lig puan durumu,B+,75,
+175,google_trends_168.csv,tomarza,200+,70,
+195,google_trends_168.csv,manchester city - brentford,B+,85,
+200,google_trends_168.csv,hızlı ve öfkeli 11,B+,80,
+201,google_trends_168.csv,Algeria-Sudan,100+,90,#Algeria #Sudan
+220,google_trends_168.csv,Bağdat Yangın,200+,85,#Bağdat #Yangın
+228,google_trends_168.csv,Spurs-Thunder,500+,88,#Spurs #Thunder
+250,google_trends_168.csv,Ümit Özdağ,100+,92,#ÜmitÖzdağ
+270,google_trends_168.csv,Avengers Doomsday,200+,90,#Avengers #Doomsday
+280,google_trends_168.csv,BBC,500+,95,#BBC
+289,google_trends_168.csv,Suns - Lakers,500+,92,#Suns #Lakers
+296,google_trends_168.csv,Tunus - Uganda,500+,88,#Tunus #Uganda
+281,google_trends_168.csv,Championship,200+,85,#Championship
+282,google_trends_168.csv,Feyza Civelek,100+,87,#FeyzaCivelek
+301,google_trends_168.csv,anadolujet,200+,90,
+302,google_trends_168.csv,nicki minaj,200+,88,
+303,google_trends_168.csv,oyak çimento,1 B+,85,
+304,google_trends_168.csv,fc alverca - porto,2 B+,80,
+316,google_trends_168.csv,rashica,500+,87,
+324,google_trends_168.csv,konya,500+,82,
+331,google_trends_168.csv,caldas sc - braga,500+,86,
+346,google_trends_168.csv,asgari ücret,500+,89,
+350,google_trends_168.csv,airporthaber,500+,84,
+352,google_trends_168.csv,doha,500+,90,#doha
+357,google_trends_168.csv,warriors-magic,500+,88,#NBA
+365,google_trends_168.csv,nuggets-jazz,500+,87,#NBA
+374,google_trends_168.csv,kuruluş-orhan,500+,85,#dizi
+383,google_trends_168.csv,chobani,500+,86,#gıda
+384,google_trends_168.csv,exxen,500+,89,#platform
+388,google_trends_168.csv,fb-bjk,500+,91,#derbi
+391,google_trends_168.csv,hafsanur,500+,92,#fenomen
+398,google_trends_168.csv,altın-grafik,500+,84,#finans
+403,google_trends_168.csv,Akor Adams,200+,90,#Akor #Müzik
+413,google_trends_168.csv,Evan Ferguson,500+,95,#Futbol #Yetenek
+417,google_trends_168.csv,Meloni,100+,80,#Politika
+419,google_trends_168.csv,Mısır,500+,92,#Gıda #Sağlık
+425,google_trends_168.csv,Bayern - Hapoel,500+,88,#Futbol #Maç
+428,google_trends_168.csv,Afra Saraçoğlu,500+,85,#Ünlü #Dizi
+429,google_trends_168.csv,Giray Altınok,500+,87,#Futbol #Hakem
+431,google_trends_168.csv,Fedon,500+,83,#Müzik #Sanatçı
+433,google_trends_168.csv,Demokratik Kongo - Benin,500+,90,#Futbol #Maç
+434,google_trends_168.csv,David Neres,500+,91,#Futbol #Yetenek
+439,google_trends_168.csv,Tammy Abraham,500+,94,#Futbol #Yetenek
+446,google_trends_168.csv,Farah Zeynep,500+,86,#Müzik #Sanatçı
+454,google_trends_168.csv,al hilal,500+,90,#alhilal
+461,google_trends_168.csv,elektrik kesintisi,500+,85,#elektrikkesintisi
+466,google_trends_168.csv,ankara su kesintisi,500+,80,#ankarasukesintisi
+474,google_trends_168.csv,ümit dikbayır,500+,75,#ümitdikbayır
+480,google_trends_168.csv,genoa,500+,70,#genoa
+484,google_trends_168.csv,haydar fenerbahçe,500+,85,#haydarfenerbahçe
+485,google_trends_168.csv,epic games,100+,90,#epicgames
+491,google_trends_168.csv,egypt vs zimbabwe,200+,80,#egyptvszimbabwe
+495,google_trends_168.csv,redmond,200+,75,#redmond
+499,google_trends_168.csv,djalo,200+,70,#djalo
+505,google_trends_168.csv,Muşspor,500+,90,#Muşspor
+511,google_trends_168.csv,Manuel Ugarte,500+,85,#ManuelUgarte
+515,google_trends_168.csv,Marcão,500+,80,#Marcão
+516,google_trends_168.csv,Portekiz Süper Ligi,500+,75,#PortekizSüperLigi
+520,google_trends_168.csv,Balıkesirspor,500+,80,#Balıkesirspor
+525,google_trends_168.csv,Fanil Sarvarov,500+,70,#FanilSarvarov
+530,google_trends_168.csv,Incendies,500+,75,#Incendies
+548,google_trends_168.csv,Alina Boz,500+,85,#AlinaBoz
+549,google_trends_168.csv,Tufan,500+,80,#Tufan
+550,google_trends_168.csv,Man. City - West Ham,500+,90,#ManCity #WestHam
+551,google_trends_168.csv,eve,1 B+,60,
+552,google_trends_168.csv,mark levin,500+,70,
+554,google_trends_168.csv,demir ege,200+,65,
+555,google_trends_168.csv,survivor 2026,2 B+,80,
+557,google_trends_168.csv,bosch,500+,75,
+559,google_trends_168.csv,abdurrahim,500+,70,
+564,google_trends_168.csv,basel,500+,75,
+567,google_trends_168.csv,demet akalın,500+,80,
+569,google_trends_168.csv,altın s1,500+,70,
+574,google_trends_168.csv,ben leman,500+,65,
+582,google_trends_168.csv,onana,500+,75,
+586,google_trends_168.csv,everton-arsenal,500+,80,
+589,google_trends_168.csv,valencia fc,500+,75,
+590,google_trends_168.csv,club brugge,500+,70,
+591,google_trends_168.csv,deniz barut,500+,65,
+592,google_trends_168.csv,cengiz çandar,500+,70,
+596,google_trends_168.csv,izlanda,500+,75,
+598,google_trends_168.csv,survivor,500+,85,
+599,google_trends_168.csv,s sport,500+,70,
+601,google_trends_168.csv,Bedaş,500+,80,
+606,google_trends_168.csv,Wordle,1 B+,90,
+607,google_trends_168.csv,Steam Kış İndirimleri,1 B+,85,
+620,google_trends_168.csv,Galatasaray Fikstür,500+,75,
+623,google_trends_168.csv,Elon Musk,500+,88,
+636,google_trends_168.csv,Turkish Airlines Euroleague,1 B+,82,
+646,google_trends_168.csv,De Vrij,500+,78,
+647,google_trends_168.csv,Bournemouth,500+,76,
+651,google_trends_168.csv,as,100+,90,#Trend
+655,google_trends_168.csv,yozgat bozokspor,500+,85,#Trend
+656,google_trends_168.csv,hava durumu antalya,500+,80,#Trend
+659,google_trends_168.csv,samet akaydın,500+,75,#Trend
+661,google_trends_168.csv,süper lig fikstür,1 B+,70,#Trend
+668,google_trends_168.csv,brawl stars,500+,85,#Trend
+673,google_trends_168.csv,la la land,500+,80,#Trend
+678,google_trends_168.csv,safonov,500+,75,#Trend
+690,google_trends_168.csv,call of duty,500+,85,#Trend
+694,google_trends_168.csv,suudi arabistan,500+,80,#Trend
+698,google_trends_168.csv,leonardo dicaprio,500+,75,#Trend
+707,google_trends_168.csv,Alanya,500+,90,#Alanya #Turizm
+708,google_trends_168.csv,Osimhen,500+,88,#Osimhen #Futbol
+715,google_trends_168.csv,18 Aralık,500+,85,#Tarih #ÖnemliGün
+717,google_trends_168.csv,Flamengo PSG,500+,87,#Flamengo #PSG #Futbol
+720,google_trends_168.csv,Çılgın Loto,1 B+,92,#Loto #ŞansOyunları
+730,google_trends_168.csv,Halkbank Promosyon,500+,86,#Halkbank #Promosyon
+745,google_trends_168.csv,Fenerbahçe Maçı,500+,89,#Fenerbahçe #Futbol
+748,google_trends_168.csv,Ersin Tatar,500+,84,#ErsinTatar #Spor
+754,google_trends_168.csv,Halka Arz,500+,90,#HalkaArz
+757,google_trends_168.csv,İstiklal Marşı,500+,85,#İstiklalMarşı
+759,google_trends_168.csv,A101 Kataloğu,500+,88,#A101
+760,google_trends_168.csv,GS Maç,500+,87,#GSMaç
+766,google_trends_168.csv,Newcastle,500+,85,#Newcastle
+770,google_trends_168.csv,TV İzle,500+,90,#TVİzle
+771,google_trends_168.csv,TVE La 1,500+,85,#TVELa1
+782,google_trends_168.csv,Çanakkale Deprem,200+,80,#ÇanakkaleDeprem
+787,google_trends_168.csv,Dwayne Johnson,200+,82,#DwayneJohnson
+789,google_trends_168.csv,ÖSYM Giriş,200+,80,#ÖSYMGiriş
+795,google_trends_168.csv,Galatasaray - Trabzonspor,100+,75,#GalatasarayTrabzonspor
+801,google_trends_168.csv,Tuncay Arslan,100+,90,#TuncayArslan
+802,google_trends_168.csv,Rize,200+,85,#Rize
+803,google_trends_168.csv,Gökalp İçer,200+,88,#Gökalpİçer
+804,google_trends_168.csv,Mert Demir,200+,87,#MertDemir
+820,google_trends_168.csv,MEB,500+,92,#MEB
+824,google_trends_168.csv,NBA,500+,95,#NBA
+831,google_trends_168.csv,Fallout 2. Sezon,200+,89,#Fallout
+834,google_trends_168.csv,Cemre Baysel,500+,91,#CemreBaysel
+844,google_trends_168.csv,Serenay Sarıkaya,200+,90,#SerenaySarıkaya
+851,google_trends_168.csv,Torino FC,100+,90,#Futbol #Torino
+852,google_trends_168.csv,Okan B.,200+,85,#TV #Okan
+853,google_trends_168.csv,Yavuz G.,200+,80,#TV #Yavuz
+857,google_trends_168.csv,FIFA K. K.,200+,88,#Futbol #FIFA
+862,google_trends_168.csv,2. Lig,200+,75,#Futbol #Lig
+864,google_trends_168.csv,A Spor,200+,85,#TV #Spor
+877,google_trends_168.csv,ABD Enfl.,200+,82,#Ekonomi #ABD
+878,google_trends_168.csv,Teknoloji H.,200+,90,#Teknoloji #Haber
+885,google_trends_168.csv,Kapalı Ç.,200+,78,#Pazar #Kapalı
+890,google_trends_168.csv,Fethiye S.,200+,80,#Futbol #Fethiye
+895,google_trends_168.csv,Yapay Z.,100+,92,#Teknoloji #Yapay
+901,google_trends_168.csv,A. Costa,100+,90,
+902,google_trends_168.csv,Influencer,100+,85,
+903,google_trends_168.csv,S. Levendoğlu,100+,88,
+909,google_trends_168.csv,S. Şahin,200+,92,
+915,google_trends_168.csv,Taşacak Bu Deniz,200+,90,
+919,google_trends_168.csv,A. Üniversitesi,200+,91,
+921,google_trends_168.csv,Sahipsizler Fragman,100+,87,
+925,google_trends_168.csv,M. Döngel,100+,86,
+907,google_trends_168.csv,Çanakkale,100+,84,
+29,google_trends_24.csv,CR7,500+,90,#CristianoRonaldo
+31,google_trends_24.csv,B.Ö.,500+,85,#BeyazıtÖztürk
+33,google_trends_24.csv,A.S.,500+,88,#AlexanderSörloth
+36,google_trends_24.csv,C.M.T.,500+,80,#Cezayir
+56,google_trends_24.csv,S.T.,500+,75,#SömestrTatili
+65,google_trends_24.csv,S.Y.A.,500+,82,#ShowYayınAkışı
+72,google_trends_24.csv,H.F.,500+,78,#HakanFidan
+76,google_trends_24.csv,S. Özcan,100+,90,#SosyalMedya
+79,google_trends_24.csv,E. Çetin,500+,95,#SosyalMedya
+81,google_trends_24.csv,FB Beko,10 B+,92,#SosyalMedya
+85,google_trends_24.csv,KYK TL 2026,500+,88,#SosyalMedya
+90,google_trends_24.csv,A. Sudan,100+,85,#SosyalMedya
+92,google_trends_24.csv,B. Caddesi Yangın,200+,87,#SosyalMedya
+96,google_trends_24.csv,S. Thunder,500+,90,#SosyalMedya
+100,google_trends_24.csv,Ü. Özdağ,100+,80,#SosyalMedya
+117,google_trends_24.csv,T. Uganda,500+,89,#SosyalMedya
+123,google_trends_24.csv,İ. Nasaf,500+,91,#SosyalMedya
+124,google_trends_24.csv,D. Polat,100+,85,#SosyalMedya
+125,google_trends_24.csv,at,1 B+,85,
+126,google_trends_24.csv,rashica,500+,90,
+129,google_trends_24.csv,libya tezkeresi,500+,88,
+134,google_trends_24.csv,skriniar,500+,87,
+138,google_trends_24.csv,airporthaber,500+,85,
+140,google_trends_24.csv,mbwana,500+,86,
+142,google_trends_24.csv,kuruluş orhan,500+,89,
+143,google_trends_24.csv,chobani,500+,90,
+144,google_trends_24.csv,exxen,500+,88,
+146,google_trends_24.csv,hafsanur,500+,87,
+152,google_trends_24.csv,rafa silva,500+,85,
+155,google_trends_24.csv,afra,500+,86,
+158,google_trends_24.csv,tammy,500+,89,
+175,google_trends_24.csv,bloomberg ht,200+,90,
+176,google_trends_24.csv,haydar fb,200+,85,
+177,google_trends_24.csv,anlık altın,100+,80,
+178,google_trends_24.csv,mc alger,100+,75,
+179,google_trends_24.csv,gökhan sazdağı,200+,88,
+180,google_trends_24.csv,stranger things,100+,82,
+181,google_trends_24.csv,survivor 2026,100+,78,
+182,google_trends_24.csv,epic games,100+,85,
+183,google_trends_24.csv,ademola l.,200+,80,
+184,google_trends_24.csv,semenyo,100+,70,
+185,google_trends_24.csv,malta,100+,75,
+186,google_trends_24.csv,bedaş,100+,70,
+187,google_trends_24.csv,gazete m.,100+,72,
+188,google_trends_24.csv,huawei,100+,76,
+189,google_trends_24.csv,vs,100+,65,
+65,instagram.csv,buschbeer,"33,390",95,#buschbeer
+59,instagram.csv,botamontaria,"18,367",90,#botamontaria
+54,instagram.csv,miacorvere,"15,254",88,#miacorvere
+70,instagram.csv,merthan,"17,305",87,#merthan
+38,instagram.csv,goodbyenganggur,"10,530",85,#goodbyenganggur
+41,instagram.csv,artgallerybrisbane,"4,462",80,#artgallerybrisbane
+78,instagram.csv,newyearhairstyle,"5,541",82,#newyearhairstyle
+88,instagram.csv,#platecantik,"1,916",90,#platecantik
+93,instagram.csv,#naturepage,"23,891",95,#naturepage
+95,instagram.csv,#caspe,"40,559",92,#caspe
+106,instagram.csv,#silverpearls,"12,095",88,#silverpearls
+107,instagram.csv,#maquiagemamarela,"16,855",87,#maquiagemamarela
+110,instagram.csv,#weddingphot,"15,299",90,#weddingphot
+119,instagram.csv,#pinefurniture,"40,094",93,#pinefurniture
+123,instagram.csv,#harbininstituteoftechnology,"33,308",89,#harbininstituteoftechnology
+128,instagram.csv,#motivacionemprendedora,"37,486",91,#motivacionemprendedora
+136,instagram.csv,#smiledr,"1,295",75,#smiledr
+137,instagram.csv,#pagarnusacepu,"9,457",80,#pagarnusacepu
+147,instagram.csv,#campodeconcentracion,"10,575",85,#campodeconcentracion
+151,instagram.csv,#kepitinghouse,"9,386",78,#kepitinghouse
+157,instagram.csv,#setphoto,"14,085",82,#setphoto
+183,instagram.csv,#popularairsoft,"16,661",90,#popularairsoft
+176,instagram.csv,#horsemedicine,"28,325",88,#horsemedicine
+186,instagram.csv,#microneedling,60,85,#microneedlingreno
+187,instagram.csv,#stromspeicher,"14,193",90,#stromspeicher
+189,instagram.csv,#bohobodyscrub,62,80,#bohobodyscrub
+216,instagram.csv,#amazonkeratin,"28,796",88,#amazonkeratin
+235,instagram.csv,#lifewithbabies,"20,712",87,#lifewithbabies
+240,instagram.csv,#hotspot,"4,941",90,#hotspotinthealps
+250,instagram.csv,#feedyourimagination,"14,410",88,#feedyourimagination
+252,instagram.csv,#mogadipermudahkan,"35,402",92,#mogadipermudahkan
+253,instagram.csv,#jca,"84,875",95,#jca
+261,instagram.csv,#cachorros,"18,412",87,#cachorrosengracados
+270,instagram.csv,#loeypark,"13,430",86,#loeypark
+275,instagram.csv,#bridgeoflions,"13,821",89,#bridgeoflions
+286,instagram.csv,#jyotibro,103,70,
+290,instagram.csv,#6fanart,"6,263",80,
+293,instagram.csv,#indianturism,"7,552",85,
+299,instagram.csv,#docestropical,"8,481",90,
+300,instagram.csv,#sarasotaweddingplanner,"16,990",95,
+308,instagram.csv,#kedilerisevin,"26,036",90,
+322,instagram.csv,#planetvenus,"14,488",85,
+329,instagram.csv,#terbesardimalaysia,"15,617",88,
+331,instagram.csv,#iberostargrandbavaro,"9,826",80,
+336,instagram.csv,Gucci Parfüm,Fiyat,90,#gucciperfumes
+344,instagram.csv,Organik Domuz,Fiyat,80,#organicpork
+353,instagram.csv,Bahrain Sanatçıları,Fiyat,75,#bahrainartists
+374,instagram.csv,Cappadocia Ziyareti,Fiyat,85,#visitcappadocia
+345,instagram.csv,Grind Now,Fiyat,78,#grindnow
+362,instagram.csv,Trophy Tuesday,Fiyat,82,#trophytuesday
+370,instagram.csv,Wire Word,Fiyat,76,#wireword
+381,instagram.csv,Küçük İşletme Sahibi,Fiyat,77,#kentsmallbusinessowner
+386,instagram.csv,#lareinadelcarnaval,"1,566",75,#lareinadelcarnaval
+388,instagram.csv,#staygdup,"7,852",80,#staygdup
+391,instagram.csv,#mirandakonstantinidou,"23,363",90,#mirandakonstantinidou
+393,instagram.csv,#verlassenabernichtvergessen,"16,425",85,#verlassenabernichtvergessen
+395,instagram.csv,#walltowallcarpet,"14,602",80,#walltowallcarpet
+399,instagram.csv,#noiceravamo,"20,689",90,#noiceravamo
+413,instagram.csv,#glowmakeuplook,"32,039",95,#glowmakeuplook
+427,instagram.csv,#nirvanalive,"20,286",90,#nirvanalive
+428,instagram.csv,#festivaloutfitinspo,"13,129",85,#festivaloutfitinspo
+436,instagram.csv,#bajukondanganseragam,297,60,#bajukondanganseragam
+437,instagram.csv,#tinybikinis,"5,263",90,#tinybikinis
+439,instagram.csv,#foundationsofyoga,"6,241",75,#foundationsofyoga
+446,instagram.csv,#tiffanyandcompany,"24,187",95,#tiffanyandcompany
+457,instagram.csv,#saintsebastien,"28,340",85,#saintsebastien
+462,instagram.csv,#cannabiscosmetics,"3,808",70,#cannabiscosmetics
+480,instagram.csv,#mantaparabebe,"19,513",80,#mantaparabebe
+485,instagram.csv,#hikingdaily,"24,630",90,#hikingdaily
+492,instagram.csv,wedding_naija,"90,631",90,#weddingsinnaija
+494,instagram.csv,miami_puppy,"20,759",85,#miamipuppy
+516,instagram.csv,makandi_rumahaja,"25,187",80,#makandirumahaja
+520,instagram.csv,desi_food_lovers,"5,852",75,#desifoodlovers
+519,instagram.csv,mountain_jam,"25,574",80,#mountainjam
+548,instagram.csv,Melb. Ajansı,"19,998",90,#melbourneagency
+550,instagram.csv,Rest. Valencia,"19,998",95,#restaurantesenvalencia
+576,instagram.csv,Confiarendios,"25,043",88,#confiarendios
+564,instagram.csv,Knotless Braids,"25,478",87,#knotlessbraidsmiami
+551,instagram.csv,Mutlu Olmak İçin,"12,133",80,#mutluolmakicinkucukseyler
+553,instagram.csv,Eyelash Korea,"4,071",75,#eyelasheskorea
+582,instagram.csv,Humboldt Dogs,"3,776",78,#humboldtdogs
+539,instagram.csv,Boobs Life,"3,286",70,#boobsforlife
+558,instagram.csv,Cannabis Journey,"2,616",72,#cannabisjourney
+541,instagram.csv,Jual Khimar Premium,"2,055",68,#jualkhimarpremium
+547,instagram.csv,Lace Kurung,"2,847",69,#lacekurungmurahmalaysia
+586,instagram.csv,#photographsunmori,31,60,
+587,instagram.csv,#mattryanreal,"2,770",75,
+588,instagram.csv,#budoniwelcome,"5,578",70,
+589,instagram.csv,#fourrosesdistillery,"6,401",80,
+591,instagram.csv,#picenodascoprire,"11,170",85,
+596,instagram.csv,#sonynz,"25,581",90,
+599,instagram.csv,#rishikeshcamping,"11,412",80,
+614,instagram.csv,#mejuripartner,"52,971",95,
+626,instagram.csv,#amazingeurope,"39,100",90,
+628,instagram.csv,#travelgirlspakistan,"34,886",85,
+645,instagram.csv,Grampians NP,"66,389",90,#grampiansnationalpark
+655,instagram.csv,Profilaxis Dental,"66,978",88,#profilaxisdental
+643,instagram.csv,Venerdi,"35,408",85,#venerdi17
+662,instagram.csv,Maraschino,"18,667",80,#maraschinocherries
+678,instagram.csv,Minhaviagem,"15,798",82,#minhaviagemlivre
+647,instagram.csv,Taskecesolo,"10,469",75,#taskecesolo
+666,instagram.csv,Ritmix,"10,395",78,#ritmix
+673,instagram.csv,Triadanime,"9,394",76,#triadanimecon
+683,instagram.csv,Reflexiones,"10,289",74,#reflexionesdedomingo
+687,instagram.csv,#vempraprime,"35,748",90,#vempraprime
+710,instagram.csv,#fragaddict,"25,145",88,#fragaddict
+725,instagram.csv,#globexperformance,"22,060",87,#globexperformance
+715,instagram.csv,#saccounty,"13,600",85,#saccounty
+723,instagram.csv,#perthshops,"13,623",84,#perthshops
+719,instagram.csv,#johannesburgweddingphotographer,"15,590",83,#johannesburgweddingphotographer
+716,instagram.csv,#watercoloreffect,"24,737",82,#watercoloreffect
+731,instagram.csv,#croatianblogger,"18,936",81,#croatianblogger
+688,instagram.csv,#tvlnysquad,251,80,#tvlnysquad
+736,instagram.csv,#malearmpit,"19,514",90,#malearmpit
+774,instagram.csv,#cuirchevelu,"19,918",88,#cuirchevelu
+779,instagram.csv,#oty,"29,171",92,#oty
+780,instagram.csv,#naishahijab,"6,597",85,#naishahijab
+785,instagram.csv,#browznbeauty,"6,753",87,#browznbeauty
+786,instagram.csv,#pizzaroyalty,"1,446",90,#pizzaroyalty
+788,instagram.csv,#walshtx,"1,508",85,#walshtx
+790,instagram.csv,#carstop,"11,929",88,#carstop
+796,instagram.csv,#kulitmenawan,"10,601",87,#kulitmenawan
+797,instagram.csv,#createwithme,"30,736",95,#createwithme
+810,instagram.csv,#hondenliefhebbers,"11,042",86,#hondenliefhebbers
+815,instagram.csv,#houseplantsph,"73,868",92,#houseplantsph
+831,instagram.csv,#pracovninasazeni,"7,788",84,#pracovninasazeni
+850,instagram.csv,kpopblockparty,,90,#kpopblockparty
+857,instagram.csv,soprogresso,,88,#soprogresso
+858,instagram.csv,melanz,,92,#melanz
+872,instagram.csv,onlyny,,95,#onlyny
+879,instagram.csv,khomsa,,87,#khomsa
+880,instagram.csv,polskastylistka,,85,#polskastylistka
+886,instagram.csv,#actresshotbody,"4,274",90,#actresshotbody
+887,instagram.csv,#shopsmalleveryday,"13,327",88,#shopsmalleveryday
+899,instagram.csv,#fecoach,"15,134",92,#fecoach
+1,tiktok_trends.csv,#baile,,85,#baile
+2,tiktok_trends.csv,#fyr,,80,#fyr
+3,tiktok_trends.csv,#dance,,90,#dance
+11,tiktok_trends.csv,#trendingdance,,87,#trendingdance
+34,tiktok_trends.csv,#viralvideos,,89,#viralvideos
+36,tiktok_trends.csv,#fyp,N/A,90,#fyp
+37,tiktok_trends.csv,#02,N/A,80,#02
+38,tiktok_trends.csv,#fyppppppppppppppppppppppppppppppppppp,N/A,75,#fyppppppppppppppppppppppppppppppppppp
+39,tiktok_trends.csv,#explore,N/A,85,#explore
+40,tiktok_trends.csv,#тренд,N/A,70,#тренд
+41,tiktok_trends.csv,#fyp,N/A,90,#fyp
+42,tiktok_trends.csv,#trendy,N/A,80,#trendy
+43,tiktok_trends.csv,#russiantrend,N/A,65,#russiantrend
+44,tiktok_trends.csv,#vibe,N/A,75,#vibe
+45,tiktok_trends.csv,#recommendations,N/A,70,#recommendations
+46,tiktok_trends.csv,#fpy,N/A,80,#fpy
+47,tiktok_trends.csv,#xuhong,N/A,65,#xuhong
+48,tiktok_trends.csv,#fouryou,N/A,75,#fouryou
+49,tiktok_trends.csv,#girlfirend,N/A,70,#girlfirend
+50,tiktok_trends.csv,#dancetrends,N/A,85,#dancetrends
+51,tiktok_trends.csv,#dancetrend,N/A,80,#dancetrend
+52,tiktok_trends.csv,#costume,N/A,75,#costume
+53,tiktok_trends.csv,#trending,N/A,85,#trending
+54,tiktok_trends.csv,#transition,N/A,70,#transition
+55,tiktok_trends.csv,#humor,N/A,65,#humor
+56,tiktok_trends.csv,#duo,N/A,70,#duo
+57,tiktok_trends.csv,#foryoupage,N/A,90,#foryoupage
+58,tiktok_trends.csv,#girls,N/A,75,#girls
+59,tiktok_trends.csv,#fypシ,N/A,80,#fypシ
+60,tiktok_trends.csv,#tshirt,N/A,70,#tshirt
+61,tiktok_trends.csv,#xuhongtiktok,N/A,65,#xuhongtiktok
+62,tiktok_trends.csv,#makeup,N/A,85,#makeup
+63,tiktok_trends.csv,#tiktokchallenge,N/A,80,#tiktokchallenge
+64,tiktok_trends.csv,#halloween,N/A,75,#halloween
+65,tiktok_trends.csv,#tiktoker,N/A,70,#tiktoker
+66,tiktok_trends.csv,#oh,N/A,60,#oh
+67,tiktok_trends.csv,#viraltiktok,N/A,85,#viraltiktok
+68,tiktok_trends.csv,#fun,N/A,70,#fun
+69,tiktok_trends.csv,#parati,N/A,65,#parati
+70,tiktok_trends.csv,#highschool,N/A,75,#highschool
+71,tiktok_trends.csv,#couplegoals,N/A,80,#couplegoals
+72,tiktok_trends.csv,#catsoftiktok,N/A,70,#catsoftiktok
+73,tiktok_trends.csv,#meme,N/A,65,#meme
+74,tiktok_trends.csv,#fyyyyyy,N/A,60,#fyyyyyy
+75,tiktok_trends.csv,#dancing,N/A,85,#dancing
+76,tiktok_trends.csv,#goviral,N/A,80,#goviral
+77,tiktok_trends.csv,#foryoupage❤️❤️,N/A,90,#foryoupage❤️❤️
+78,tiktok_trends.csv,#animal,N/A,70,#animal
+79,tiktok_trends.csv,#dança,N/A,65,#dança
+80,tiktok_trends.csv,#мемы,N/A,60,#мемы
+81,tiktok_trends.csv,#trendingreels,N/A,80,#trendingreels
+82,tiktok_trends.csv,#trend??tiktok,N/A,70,#trend??tiktok
+83,tiktok_trends.csv,#viralllllll,N/A,65,#viralllllll
+84,tiktok_trends.csv,#magic,N/A,75,#magic
+85,tiktok_trends.csv,#paratii,N/A,70,#paratii
+86,tiktok_trends.csv,couple,N/A,75,#couple
+88,tiktok_trends.csv,trend,N/A,80,#trend
+90,tiktok_trends.csv,newtrend,N/A,85,#newtrend
+95,tiktok_trends.csv,challenge,N/A,78,#challenge
+98,tiktok_trends.csv,dancechallenge,N/A,82,#dancechallenge
+108,tiktok_trends.csv,viralvideo,N/A,90,#viralvideo
+115,tiktok_trends.csv,trendingvideo,N/A,88,#trendingvideo
+118,tiktok_trends.csv,beauty,N/A,80,#beauty
+120,tiktok_trends.csv,popular,N/A,85,#popular
+124,tiktok_trends.csv,gmx8,N/A,70,#gmx8
+12,twitter_trends.csv,DirtyDisinfo,N/A,75,#DirtyDisinformation
+13,twitter_trends.csv,Dilan P.,N/A,70,#DilanPolat
+22,twitter_trends.csv,Fatih T.,N/A,80,#FatihTerim
+34,twitter_trends.csv,Ali K.,N/A,65,#AliKoç
+43,twitter_trends.csv,Aziz Y.,N/A,60,#AzizYıldırım
+51,twitter_trends.csv,FenerBizim,N/A,85,#FenerBizimSaranBizim
+212,twitter_trends.csv,#EmeklininMaaşı,N/A,90,#Emekli #Maaş
+217,twitter_trends.csv,Christmas,N/A,80,#Noel #Kutlama
+220,twitter_trends.csv,Fatih Terim,N/A,75,#Futbol #Terim
+222,twitter_trends.csv,#MahkumAilesi,N/A,70,#Siyasi #Oy
+249,twitter_trends.csv,Mutlu Noeller,N/A,85,#Noel #Kutlama
+250,twitter_trends.csv,WE ARE CLEAN,N/A,80,#Temizlik #Kampanya
+258,twitter_trends.csv,Neymar,N/A,90,#Futbol #Yetenek
+412,twitter_trends.csv,Pozitif,N/A,75,N/A
+413,twitter_trends.csv,#BozdurBozdurHarca,N/A,80,#BozdurBozdurHarca
+414,twitter_trends.csv,Ezgi Fındık,N/A,70,N/A
+415,twitter_trends.csv,#BIMAS,N/A,85,#BIMAS
+417,twitter_trends.csv,Koko,N/A,65,N/A
+419,twitter_trends.csv,EnBüyükSuçlu,N/A,60,N/A
+425,twitter_trends.csv,WE ARE CLEAN,N/A,90,#WEARECLEAN
+432,twitter_trends.csv,Merry Christmas,N/A,75,N/A
+450,twitter_trends.csv,Haymana,N/A,70,N/A
+452,twitter_trends.csv,Neymar,N/A,80,N/A
+460,twitter_trends.csv,#MahkumAilesindenCHPyeOyYok,N/A,85,#MahkumAilesindenCHPyeOyYok
+462,twitter_trends.csv,Pozitif,N/A,75,N/A
+463,twitter_trends.csv,Ezgi Fındık,N/A,80,N/A
+464,twitter_trends.csv,#BIMAS,N/A,90,#BIMAS
+465,twitter_trends.csv,Rezan E.,N/A,70,N/A
+466,twitter_trends.csv,Koko,N/A,85,N/A
+467,twitter_trends.csv,Serhat,N/A,65,N/A
+471,twitter_trends.csv,Fenerbahçeliler,N/A,80,N/A
+482,twitter_trends.csv,Merry X-mas,N/A,75,N/A
+494,twitter_trends.csv,Gazoz,N/A,80,N/A
+497,twitter_trends.csv,Dolar,N/A,90,N/A
+502,twitter_trends.csv,Neymar,N/A,85,N/A
+512,twitter_trends.csv,CLEAN,N/A,90,#WEARECLEAN
+513,twitter_trends.csv,Taurasi,N/A,80,
+514,twitter_trends.csv,Emekli Maaşı,N/A,75,#EmeklininMaaşıEnAz50BinOlmalı
+516,twitter_trends.csv,Koko,N/A,70,
+520,twitter_trends.csv,Lube,N/A,65,
+538,twitter_trends.csv,Dolar,N/A,85,
+541,twitter_trends.csv,Falcon 50,N/A,75,
+550,twitter_trends.csv,Ela Ruemeysa,N/A,80,
+562,twitter_trends.csv,Pozitif,N/A,75,#Pozitif
+563,twitter_trends.csv,Lube,N/A,70,#Lube
+564,twitter_trends.csv,Libya,N/A,65,#Libya
+565,twitter_trends.csv,Depozito,N/A,80,#Depozito
+570,twitter_trends.csv,Koko,N/A,60,#Koko
+579,twitter_trends.csv,Falcon 50,N/A,85,#Falcon50
+580,twitter_trends.csv,Dolar,N/A,90,#Dolar
+588,twitter_trends.csv,ElaRuemeysa,N/A,75,#ElaRuemeysaCebeci
+590,twitter_trends.csv,asgariücret,N/A,80,#asgariücret
+601,twitter_trends.csv,Neymar,N/A,85,#Neymar
+602,twitter_trends.csv,Kokain,N/A,70,#Kokain
+612,twitter_trends.csv,Falcon 50,N/A,90,#Falcon50
+640,twitter_trends.csv,asgariücret,N/A,80,#asgariücret
+641,twitter_trends.csv,FBvBJK,N/A,75,#FBvBJK
+642,twitter_trends.csv,BuTopraktaİzinVar,N/A,70,#BuTopraktaİzinVar
+644,twitter_trends.csv,BozdurBozdurHarca,N/A,65,#BozdurBozdurHarca
+690,twitter_trends.csv,#asgariücret,Fiyat,90,#asgariücret
+691,twitter_trends.csv,#FBvBJK,Fiyat,88,#FBvBJK
+692,twitter_trends.csv,#Çarşamba,Fiyat,85,#Çarşamba
+693,twitter_trends.csv,#BozdurBozdurHarca,Fiyat,87,#BozdurBozdurHarca
+694,twitter_trends.csv,#BuTopraktaİzinVar,Fiyat,86,#BuTopraktaİzinVar
+712,twitter_trends.csv,Falcon 50,N/A,90,#Falcon50
+740,twitter_trends.csv,#asgariücret,N/A,80,#asgariücret
+748,twitter_trends.csv,FB-BJK,N/A,75,#FenerbahçeBeşiktaş
+862,twitter_trends.csv,Eyüp,N/A,75,N/A
+863,twitter_trends.csv,9H-DFJ,N/A,70,N/A
+865,twitter_trends.csv,Jurasek,N/A,80,N/A
+866,twitter_trends.csv,Kadıköy,N/A,85,N/A
+868,twitter_trends.csv,Galata,N/A,90,N/A
+870,twitter_trends.csv,Umut,N/A,75,N/A
+890,twitter_trends.csv,#asgariücret,N/A,95,N/A
+891,twitter_trends.csv,#FBvBJK,N/A,80,N/A
+892,twitter_trends.csv,#BuTopraktaİzinVar,N/A,85,N/A
+897,twitter_trends.csv,#salı,N/A,70,N/A
+899,twitter_trends.csv,#KademeErtelenemez,N/A,80,N/A
+1012,twitter_trends.csv,haberscoop,N/A,75,N/A
+1013,twitter_trends.csv,Jurasek,N/A,70,N/A
+1014,twitter_trends.csv,Eyüp,N/A,80,N/A
+1016,twitter_trends.csv,Umut E.,N/A,65,N/A
+1017,twitter_trends.csv,Galata K.,N/A,90,N/A
+1020,twitter_trends.csv,Kadıköy,N/A,85,N/A
+1040,twitter_trends.csv,#asgariücret,N/A,95,N/A
+1041,twitter_trends.csv,#FBvBJK,N/A,90,N/A
+1046,twitter_trends.csv,FB - BJK,N/A,88,N/A
+1053,twitter_trends.csv,BenLeman D+,N/A,75,N/A
+1112,twitter_trends.csv,Ligde,N/A,75,N/A
+1115,twitter_trends.csv,BenLeman,N/A,80,N/A
+1116,twitter_trends.csv,Şehit Çocukları Günü,N/A,70,N/A
+1118,twitter_trends.csv,Semedo,N/A,65,N/A
+1120,twitter_trends.csv,Rakip 10,N/A,60,N/A
+1124,twitter_trends.csv,Asensio,N/A,75,N/A
+1138,twitter_trends.csv,Makarna,N/A,85,N/A
+1140,twitter_trends.csv,#BuTopraktaİzinVar,N/A,90,Hashtag
+1142,twitter_trends.csv,#FBvBJK,N/A,80,Hashtag
+1145,twitter_trends.csv,#asgariücret,N/A,85,Hashtag
+451,twitter_trends_tagged.csv,Sadettin S.,N/A,75,#SadettinSaran
+452,twitter_trends_tagged.csv,Neymar,N/A,80,#Neymar
+454,twitter_trends_tagged.csv,Ali K.,N/A,70,#AliKoç
+457,twitter_trends_tagged.csv,Aziz Y.,N/A,65,#AzizYıldırım
+462,twitter_trends_tagged.csv,Pozitif,N/A,60,#Pozitif
+501,twitter_trends_tagged.csv,Neymar,Fiyat,90,#Neymar
+507,twitter_trends_tagged.csv,#BozdurBozdurHarca,Fiyat,88,#BozdurBozdurHarca
+514,twitter_trends_tagged.csv,#EmeklininMaaşı50Bin,Fiyat,85,#EmeklininMaaşıEnAz50BinOlmalı
+579,twitter_trends_tagged.csv,Falcon 50,N/A,90,#Falcon50
+601,twitter_trends_tagged.csv,Neymar,N/A,85,#Neymar
+605,twitter_trends_tagged.csv,Açlık,N/A,80,#Açlık
+612,twitter_trends_tagged.csv,Falcon 50,N/A,90,#Falcon50
+740,twitter_trends_tagged.csv,#asgariücret,N/A,90,#asgariücret
+741,twitter_trends_tagged.csv,#FBvBJK,N/A,85,#FBvBJK
+742,twitter_trends_tagged.csv,#Çarşamba,N/A,80,#Çarşamba
+743,twitter_trends_tagged.csv,#BuTopraktaİzinVar,N/A,75,#BuTopraktaİzinVar
+744,twitter_trends_tagged.csv,#BozdurBozdurHarca,N/A,70,#BozdurBozdurHarca
+751,twitter_trends_tagged.csv,Açlık,N/A,65,Açlık
+759,twitter_trends_tagged.csv,Falcon 50,N/A,60,Falcon 50
+762,twitter_trends_tagged.csv,Dünya Şehit Çocukları Günü,N/A,55,Dünya Şehit Çocukları Günü
+773,twitter_trends_tagged.csv,Jayden,N/A,75,N/A
+774,twitter_trends_tagged.csv,Umut,N/A,70,N/A
+775,twitter_trends_tagged.csv,Galata,N/A,80,N/A
+788,twitter_trends_tagged.csv,Neymar,N/A,85,N/A
+790,twitter_trends_tagged.csv,#asgariücret,N/A,90,N/A
+791,twitter_trends_tagged.csv,#FBvBJK,N/A,88,N/A
+793,twitter_trends_tagged.csv,#BuTopraktaİzinVar,N/A,82,N/A
+806,twitter_trends_tagged.csv,Falcon,N/A,78,N/A
+807,twitter_trends_tagged.csv,Şehit Çocukları,N/A,76,N/A
+815,twitter_trends_tagged.csv,Kadıköy,N/A,74,N/A
+823,twitter_trends_tagged.csv,Oster,N/A,70,N/A
+824,twitter_trends_tagged.csv,Bekçi H.,N/A,65,N/A
+825,twitter_trends_tagged.csv,Anadolu,N/A,75,N/A
+826,twitter_trends_tagged.csv,Tedesco,N/A,60,N/A
+827,twitter_trends_tagged.csv,Penaltı,N/A,80,N/A
+840,twitter_trends_tagged.csv,#asgariücret,N/A,90,N/A
+841,twitter_trends_tagged.csv,#FBvBJK,N/A,85,N/A
+843,twitter_trends_tagged.csv,#BuTopraktaİzinVar,N/A,88,N/A
+857,twitter_trends_tagged.csv,Dünya Şehit Ç.,N/A,75,N/A
+860,twitter_trends_tagged.csv,Hayırlı S.,N/A,70,N/A
+1001,twitter_trends_tagged.csv,Açlık,24,90,
+1003,twitter_trends_tagged.csv,BenLeman DisneyPlusa,24,80,
+1008,twitter_trends_tagged.csv,Falcon 50,24,75,
+1010,twitter_trends_tagged.csv,Dünya Şehit Çocukları Günü,24,85,
+1073,twitter_trends_tagged.csv,Asensio,N/A,75,N/A
+1074,twitter_trends_tagged.csv,Tedesco,N/A,70,N/A
+1090,twitter_trends_tagged.csv,#BuTopraktaİzinVar,N/A,80,#Hashtag
+1092,twitter_trends_tagged.csv,#FBvBJK,N/A,85,#Hashtag
+1101,twitter_trends_tagged.csv,#RüyaGibi,N/A,90,#Hashtag
+1115,twitter_trends_tagged.csv,BenLeman DisneyPlusa,N/A,78,N/A
+1116,twitter_trends_tagged.csv,Dünya Şehit Çocukları Günü,N/A,82,N/A
+1123,twitter_trends_tagged.csv,Dolar,24,90,
+1124,twitter_trends_tagged.csv,Asensio,24,80,
+1125,twitter_trends_tagged.csv,Ziraat,24,75,
+1135,twitter_trends_tagged.csv,Benfica,24,70,
+1142,twitter_trends_tagged.csv,#FBvBJK,24,85,
+1153,twitter_trends_tagged.csv,Falcon,50 24,88,
+1164,twitter_trends_tagged.csv,Dünya Şehit Çocukları Günü,24,80,
+34,youtube_trends.csv,Komik Yorumlar,N/A,90,#komikyorumlar
+36,youtube_trends.csv,Sevgilim,N/A,75,#yeni
+51,youtube_trends.csv,Telefon,N/A,80,#yeni
+53,youtube_trends.csv,Samsung,N/A,85,#yeni
+28,youtube_trends_tag.csv,iPhone,Fiyat,90,#iphone
+53,youtube_trends_tag.csv,Samsung,Fiyat,85,#samsung
+54,youtube_trends_tag.csv,Trailer,Fiyat,80,#trailer

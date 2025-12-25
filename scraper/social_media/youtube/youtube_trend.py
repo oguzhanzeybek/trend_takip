@@ -3,7 +3,7 @@ import time
 import csv
 from pathlib import Path
 from bs4 import BeautifulSoup
-import os # sys.path için gerekli
+import os 
 
 CURRENT_DIR = Path(__file__).resolve().parent
 ROOT_DIR = CURRENT_DIR.parent.parent 
@@ -53,12 +53,20 @@ def scrape_youtube_trends():
 
     tagged_rows = []
     
+    # --- DEĞİŞİKLİK BURADA BAŞLIYOR (Sıra Numarası Ekleme) ---
+    # Global bir sayaç tutuyoruz ki kanallardan sonra kelimeler kaldığı yerden devam etsin
+    current_rank = 1 
+    
     for c in channels:
-        tagged_rows.append([c, ""])
+        # Listenin başına 'current_rank' ekledik
+        tagged_rows.append([current_rank, c, ""]) 
+        current_rank += 1
         
     for k in keywords:
-        tagged_rows.append(["", k])
-
+        # Listenin başına 'current_rank' ekledik
+        tagged_rows.append([current_rank, "", k])
+        current_rank += 1
+    # ---------------------------------------------------------
 
     
     file_path_raw = BASE_DIR / "youtube_trends.csv"
@@ -66,8 +74,13 @@ def scrape_youtube_trends():
         try:
             with open(file_path_raw, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
-                writer.writerow(["Channels / Keywords"])
-                writer.writerows([[item] for item in all_raw_data])
+                # Header'a "Rank" ekledik
+                writer.writerow(["Rank", "Channels / Keywords"]) 
+                
+                # enumerate ile her satıra numara vererek yazıyoruz
+                for i, item in enumerate(all_raw_data, 1):
+                    writer.writerow([i, item])
+                    
             print(f"✅ Dosya kaydedildi: {file_path_raw}")
         except Exception as e:
             print(f"❌ Ham Dosya yazma hatası: {e}")
@@ -77,7 +90,8 @@ def scrape_youtube_trends():
         try:
             with open(file_path_tag, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
-                writer.writerow(["video", "tag"]) 
+                # Header'a "rank" ekledik
+                writer.writerow(["rank", "video", "tag"]) 
                 writer.writerows(tagged_rows)
             print(f"✅ Dosya kaydedildi: {file_path_tag}")
         except Exception as e:

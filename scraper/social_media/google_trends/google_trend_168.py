@@ -123,8 +123,14 @@ def scrape_google_trends():
             try:
                 with open(output_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    writer.writerow(["Trend Başlık", "Arama Hacmi", "Ne Zaman Başladı"])
-                    writer.writerows(all_trends_data)
+                    
+                    # --- DEĞİŞİKLİK BURADA: Header'a Rank Eklendi ---
+                    writer.writerow(["Rank", "Trend Başlık", "Arama Hacmi", "Ne Zaman Başladı"])
+                    
+                    # --- DEĞİŞİKLİK BURADA: Sıra numarasıyla yazıyoruz ---
+                    for i, row in enumerate(all_trends_data, 1):
+                        writer.writerow([i] + row)
+
                 print(f"✅ Dosya kaydedildi: {output_path}")
                 print(f"📊 Toplam {len(all_trends_data)} trend bulundu.")
             except Exception as e:
@@ -132,5 +138,56 @@ def scrape_google_trends():
         else:
             print(f"❌ Veri oluşmadığı için '{output_filename}' kaydedilemedi.")
 
+# ==========================================
+# OTO-İNDEKSLEME FONKSİYONU
+# ==========================================
+def auto_add_index_to_csvs():
+    """
+    Bulunduğu klasördeki CSV dosyalarını bulur ve 
+    en başa 1,2,3 diye giden 'Rank' sütunu ekler.
+    """
+    import os
+    import csv
+    
+    folder_path = os.path.dirname(os.path.abspath(__file__))
+    csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
+    
+    print(f"\n🔄 İndeksleme Başladı: {folder_path} klasöründeki dosyalar taranıyor...")
+
+    for filename in csv_files:
+        file_path = os.path.join(folder_path, filename)
+        rows = []
+        try:
+            with open(file_path, 'r', encoding='utf-8-sig') as f:
+                reader = csv.reader(f)
+                rows = list(reader)
+            
+            if not rows: continue
+
+            header = rows[0]
+            data = rows[1:]
+
+            if header and str(header[0]).lower() == "rank":
+                print(f"  Start ⏩ {filename} (Zaten indeksli)")
+                continue
+
+            new_header = ["Rank"] + header
+            new_data = []
+            
+            for index, row in enumerate(data, 1):
+                new_data.append([index] + row)
+
+            with open(file_path, 'w', newline='', encoding='utf-8-sig') as f:
+                writer = csv.writer(f)
+                writer.writerow(new_header)
+                writer.writerows(new_data)
+            
+            print(f"  ✅ İndeks Eklendi: {filename}")
+
+        except Exception as e:
+            print(f"  ❌ Hata ({filename}): {e}")
+
 if __name__ == "__main__":
     scrape_google_trends()
+    # İşlem bitince klasördeki dosyaları kontrol et
+    auto_add_index_to_csvs()

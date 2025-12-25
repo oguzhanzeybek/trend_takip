@@ -148,19 +148,78 @@ def scrape_tiktok_trends():
         output_filename = "tiktok_trends.csv"
         output_path = BASE_DIR / output_filename
 
-        if collected_hashtags:
+        # Set'i listeye çeviriyoruz ki sıralama yapabilelim
+        hashtag_list = list(collected_hashtags)
+
+        # CSV KAYDI (Rank Eklendi)
+        if hashtag_list:
             try:
                 with open(output_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    writer.writerow(["Hashtag"])
-                    for tag in collected_hashtags:
-                        writer.writerow([tag])
+                    # Header güncellendi: Başa "Rank" eklendi
+                    writer.writerow(["Rank", "Hashtag"])
+                    
+                    # Sıra numarasıyla yazıyoruz (enumerate 1'den başlar)
+                    for i, tag in enumerate(hashtag_list, 1):
+                        writer.writerow([i, tag])
+                        
                 print(f"✅ Dosya kaydedildi: {output_path}")
-                print(f"📊 Toplam {len(collected_hashtags)} benzersiz hashtag toplandı.")
+                print(f"📊 Toplam {len(hashtag_list)} benzersiz hashtag toplandı.")
             except Exception as e:
                 print(f"❌ Dosya yazma hatası: {e}")
         else:
             print(f"❌ Veri oluşmadığı için '{output_filename}' kaydedilemedi.")
 
+# ==========================================
+# OTO-İNDEKSLEME FONKSİYONU
+# ==========================================
+def auto_add_index_to_csvs():
+    """
+    Bulunduğu klasördeki CSV dosyalarını bulur ve 
+    en başa 1,2,3 diye giden 'Rank' sütunu ekler.
+    """
+    import os
+    import csv
+    
+    folder_path = os.path.dirname(os.path.abspath(__file__))
+    csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
+    
+    print(f"\n🔄 İndeksleme Başladı: {folder_path} klasöründeki dosyalar taranıyor...")
+
+    for filename in csv_files:
+        file_path = os.path.join(folder_path, filename)
+        rows = []
+        try:
+            with open(file_path, 'r', encoding='utf-8-sig') as f:
+                reader = csv.reader(f)
+                rows = list(reader)
+            
+            if not rows: continue
+
+            header = rows[0]
+            data = rows[1:]
+
+            if header and str(header[0]).lower() == "rank":
+                print(f"  Start ⏩ {filename} (Zaten indeksli)")
+                continue
+
+            new_header = ["Rank"] + header
+            new_data = []
+            
+            for index, row in enumerate(data, 1):
+                new_data.append([index] + row)
+
+            with open(file_path, 'w', newline='', encoding='utf-8-sig') as f:
+                writer = csv.writer(f)
+                writer.writerow(new_header)
+                writer.writerows(new_data)
+            
+            print(f"  ✅ İndeks Eklendi: {filename}")
+
+        except Exception as e:
+            print(f"  ❌ Hata ({filename}): {e}")
+
 if __name__ == "__main__":
     scrape_tiktok_trends()
+    # Scraper bittikten sonra klasördeki diğer dosyaları da kontrol et
+    auto_add_index_to_csvs()

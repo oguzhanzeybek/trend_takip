@@ -138,6 +138,51 @@ def process_batch(category_list, worker_id):
 
     return batch_results
 
+# ==========================================
+# OTO-İNDEKSLEME FONKSİYONU
+# ==========================================
+def auto_add_index_to_csvs():
+    import os
+    import csv
+    
+    folder_path = os.path.dirname(os.path.abspath(__file__))
+    csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
+    
+    print(f"\n🔄 İndeksleme Başladı: {folder_path} klasöründeki dosyalar taranıyor...")
+
+    for filename in csv_files:
+        file_path = os.path.join(folder_path, filename)
+        rows = []
+        try:
+            with open(file_path, 'r', encoding='utf-8-sig') as f:
+                reader = csv.reader(f)
+                rows = list(reader)
+            
+            if not rows: continue
+
+            header = rows[0]
+            data = rows[1:]
+
+            if header and str(header[0]).lower() == "rank":
+                print(f"  Start ⏩ {filename} (Zaten indeksli)")
+                continue
+
+            new_header = ["Rank"] + header
+            new_data = []
+            
+            for index, row in enumerate(data, 1):
+                new_data.append([index] + row)
+
+            with open(file_path, 'w', newline='', encoding='utf-8-sig') as f:
+                writer = csv.writer(f)
+                writer.writerow(new_header)
+                writer.writerows(new_data)
+            
+            print(f"  ✅ İndeks Eklendi: {filename}")
+
+        except Exception as e:
+            print(f"  ❌ Hata ({filename}): {e}")
+
 if __name__ == "__main__":
     
     start_time = time.time()
@@ -172,8 +217,12 @@ if __name__ == "__main__":
     try:
         with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
             writer = csv.writer(file)
-            writer.writerow(["Kategori", "Ürün Başlığı", "Fiyat", "Min. Sipariş", "Link"])
-            writer.writerows(all_final_data)
+            # Header: Başa Rank Eklendi
+            writer.writerow(["Rank", "Kategori", "Ürün Başlığı", "Fiyat", "Min. Sipariş", "Link"])
+            
+            # Veriler enumerate ile numaralandırılarak yazılıyor
+            for i, row in enumerate(all_final_data, 1):
+                writer.writerow([i] + row)
 
         duration = time.time() - start_time
         print(f"\n🎉 ALIBABA SCRAPER TAMAMLANDI!")
@@ -183,3 +232,6 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"❌ Dosya kaydetme hatası: {e}")
+
+    # İşlem bittikten sonra klasör taraması yap
+    auto_add_index_to_csvs()

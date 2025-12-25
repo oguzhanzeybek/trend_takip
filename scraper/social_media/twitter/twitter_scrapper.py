@@ -29,7 +29,7 @@ def scrape_twitter_trends():
         url = "https://trends24.in/turkey/"
         print(f"🌐 Gidiliyor: {url}")
         driver.get(url)
-        time.sleep(5) # Sayfanın oturması için bekle
+        time.sleep(5) 
 
         soup = BeautifulSoup(driver.page_source, "html.parser")
         
@@ -49,9 +49,11 @@ def scrape_twitter_trends():
             print("🛑 Tarayıcı kapatıldı.")
 
     processed_rows = []
-    header = ["Trend", "Tag"]
+    # Header'a 'Rank' ekledik
+    header = ["Rank", "Trend", "Tag"] 
 
     for i, trend in enumerate(trends_list):
+        # Tag mantığın aynen duruyor
         if i < 50: tag = 0
         elif i < 200: tag = 1 
         elif i < 250: tag = 2
@@ -71,16 +73,19 @@ def scrape_twitter_trends():
         elif i < 1000: tag = 16
         else: tag = 24
         
-        processed_rows.append([trend, tag])
+        # En başa sıra numarasını (i+1) ekledik
+        processed_rows.append([i+1, trend, tag])
 
     if trends_list:
         file_path_raw = BASE_DIR / "twitter_trends.csv"
         try:
             with open(file_path_raw, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
-                writer.writerow(["Trend"])
-                for t in trends_list:
-                    writer.writerow([t])
+                # Header'a 'Rank' ekledik
+                writer.writerow(["Rank", "Trend"])
+                # Döngüde sıra numarası vererek yazıyoruz
+                for i, t in enumerate(trends_list, 1):
+                    writer.writerow([i, t])
             print(f"✅ Ham Dosya kaydedildi: {file_path_raw}")
         except Exception as e:
             print(f"❌ Ham Dosya yazma hatası: {e}")
@@ -90,8 +95,8 @@ def scrape_twitter_trends():
         try:
             with open(file_path_tagged, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
-                writer.writerow(header)
-                writer.writerows(processed_rows)
+                writer.writerow(header) # Güncel header
+                writer.writerows(processed_rows) # Güncel satırlar
             print(f"✅ Taglenmiş Dosya kaydedildi: {file_path_tagged} (Toplam: {len(processed_rows)})")
         except Exception as e:
             print(f"❌ Taglenmiş Dosya yazma hatası: {e}")
