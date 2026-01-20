@@ -5,10 +5,8 @@ from pathlib import Path
 def merge_with_source_at_start():
     output_dir = Path(__file__).resolve().parent
     
-    # Scraper kök dizinine çık (scraper/ klasörü)
     scraper_root = output_dir.parents[1]
     
-    # Hedef kategoriler
     target_categories = ["online_shopping", "Rival", "social_media"]
 
     print(f"--- BİRLEŞTİRME İŞLEMİ BAŞLIYOR (Rank Destekli) ---\n📁 Kök Dizin: {scraper_root}\n")
@@ -22,7 +20,6 @@ def merge_with_source_at_start():
 
         print(f"📂 Kategori Taranıyor: {category}")
         
-        # Alt klasörlerdeki tüm CSV'leri bul
         all_csv_files = list(category_path.rglob("*.csv"))
         
         if not all_csv_files:
@@ -32,7 +29,6 @@ def merge_with_source_at_start():
         category_dataframes = []
 
         for file_path in all_csv_files:
-            # Kendisinin (output klasörünün) içindeki dosyaları tekrar okumasın
             if file_path.parent == output_dir:
                 continue
 
@@ -53,12 +49,10 @@ def merge_with_source_at_start():
                     print(f"   ⚠️ Tablo Boş: {file_path.name}")
                     continue
 
-                # Kaynak Dosya İsmi Ekle
                 source_name = file_path.name 
                 if 'KAYNAK' not in df.columns:
                     df['KAYNAK'] = source_name
                 
-                # Tüm verileri string'e çevir (Hata önlemek için)
                 df = df.astype(str)
                 
                 category_dataframes.append(df)
@@ -68,25 +62,18 @@ def merge_with_source_at_start():
                 print(f"   ❌ Hata: {file_path.name} okunamadı: {e}")
 
         if category_dataframes:
-            # Tüm dataframe'leri alt alta birleştir
             merged_df = pd.concat(category_dataframes, ignore_index=True, sort=False)
             
-            # --- SÜTUN SIRALAMA (KAYNAK -> RANK -> DİĞERLERİ) ---
             cols = list(merged_df.columns)
             
-            # 'KAYNAK' en başa
             if 'KAYNAK' in cols:
                 cols.insert(0, cols.pop(cols.index('KAYNAK')))
             
-            # 'Rank' varsa onu da 'KAYNAK'tan hemen sonraya al
             if 'Rank' in cols:
-                # Rank'i listeden çıkar ve 1. indexe (Kaynak'tan sonraya) koy
                 cols.insert(1, cols.pop(cols.index('Rank')))
             
-            # Yeni sıraya göre dataframe'i düzenle
             merged_df = merged_df[cols]
 
-            # Dosyayı kaydet
             output_filename = f"{category}.csv"
             save_path = output_dir / output_filename
             

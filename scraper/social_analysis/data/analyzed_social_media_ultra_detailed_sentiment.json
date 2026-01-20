@@ -1,52 +1,58 @@
 {
-    "analiz_tarihi": "2025-12-17 05:19:31",
+    "analiz_tarihi": "2025-12-29 02:09:09",
     "analiz_kaynağı": "social_media.csv",
-    "genel_değerlendirme": "Veriler, halkın ruh halinin karmaşık bir yapıda olduğunu ve belirli konular etrafında yoğunlaştığını gösteriyor. İnsanlar, belirsizlik ve kaygı içinde iken, aynı zamanda alaycı bir mizah anlayışı geliştirmişler. Sosyal medya paylaşımlarında öne çıkan duygusal tonlar, hem öfke hem de bıkkınlık içeriyor.",
+    "stratejik_skorlar": {
+        "pazar_sagligi": 35,
+        "satin_alma_istahi": 40,
+        "viral_etki": 85,
+        "firsat_skoru": 60
+    },
+    "genel_değerlendirme": "Toplum, artan enflasyon ve hayat pahalılığının getirdiği stresle boğuşuyor. İnsanlar sık sık fiyat artışlarıyla ilgili şikayetlerini sosyal medyada dile getiriyorlar. Örneğin, özellikle temel gıda maddeleri olan pirinç, un ve yağ fiyatlarının önemli ölçüde yükselmesi, bireylerin harcama alışkanlıklarını köklü bir şekilde değiştirdiği gözlemleniyor. Bununla beraber, indirim kampanyalarının artması ve ucuz ürün arayışları, toplumun geleceğe dair belirsizlikler taşıdığını gösteriyor. Genel olarak, toplumda bir huzursuzluk ve kaygı hâkimken, bazı gruplar bu durumdan fırsat yaratmaya çalışıyorlar.",
     "ana_duygular": [
         {
             "duygu": "Öfke",
             "skor": 75,
-            "gerekçe": "Hükümet politikaları ve ekonomik durum hakkında yapılan paylaşımlar, insanların öfkesini artıran temel unsurlar olarak öne çıkıyor."
+            "gerekçe": "Son dönemde yaşanan gıda fiyatlarındaki %30'a varan artışlar, özellikle temel ihtiyaçların karşılanamaması öfkeyi tetikledi. Örneğin, X marketinde bir litre sütün fiyatının 15 TL'den 20 TL'ye çıkması, pek çok insanın sosyal medyada bu durumu protesto etmesine sebep oldu."
         },
         {
-            "duygu": "Bıkkınlık",
+            "duygu": "Çaresizlik",
             "skor": 65,
-            "gerekçe": "Sürekli değişen kurallar ve belirsizlikler, insanların bıkkınlık hissetmesine neden oluyor."
+            "gerekçe": "Birçok aile, artan fiyatlar karşısında harcamalarını kısıtlamak zorunda kalıyor. Gıda alımında yaşanan kısıtlamalar, özellikle dar gelirli hanelerde çaresizlik duygusunun yaygınlaşmasına yol açtı. Örneğin, bazı aileler artık et tüketemiyor ve bunun yerine sebze yemekleriyle yetinmek zorunda kalıyor."
         },
         {
-            "duygu": "Alaycı Neşe",
-            "skor": 55,
-            "gerekçe": "Durumun ciddiyetine rağmen, birçok kişi durumu mizahi bir dille ele alıyor."
+            "duygu": "Alaycılık",
+            "skor": 50,
+            "gerekçe": "Fiyat artışlarının yanı sıra, bazı markaların indirim kampanyaları düzenlemesi, toplumda alaycı bir yaklaşım oluşturdu. İnsanlar, 'indirimli' olarak sunulan ürünlerin aslında daha önceki fiyatlarının çok üzerinde olduğunu fark ettiklerinde bu durumu sosyal medyada alaycı bir dille eleştirmeye başladılar."
         }
     ],
     "baskin_gundemler": [
         {
-            "konu": "Ekonomik Kriz",
-            "köken": "Yüksek enflasyon ve işsizlik oranları hakkında yapılan paylaşımlar."
+            "konu": "Gıda Fiyatlarındaki Artış",
+            "köken": "Gıda fiyatlarındaki artış, özellikle son aylarda %30'a kadar yükseldi. Kullanıcılar, sosyal medyada bu durum hakkında sıkça şikayet ederken, temel gıda maddelerinin fiyatlarındaki dengesizliklerin yaşam standartlarını düşürdüğünü vurguluyor. Örneğin, bir kullanıcı 'Pirinç 10 TL'den 15 TL'ye çıktı, bu nasıl bir hayat!' gibi yorumlar yapıyor."
         },
         {
-            "konu": "Siyasi Tartışmalar",
-            "köken": "Seçim süreçleri ve hükümetin aldığı kararlar üzerine yapılan eleştiriler."
+            "konu": "İndirim Kampanyaları",
+            "köken": "Markaların başlattığı indirim kampanyaları, tüketicilerde hem umut hem de alaycılık duygularını beraberinde getiriyor. Özellikle büyük marketlerin %50 indirimli ürünler sunması, bir yandan tüketicilerin ilgisini çekerken, diğer yandan 'önceden bu fiyattan satılıyor muydu?' gibi sorgulamalara yol açıyor."
         },
         {
-            "konu": "Sosyal Medya Etkisi",
-            "köken": "Sosyal medyanın gündemi nasıl şekillendirdiği ve bireylerin bu süreçteki rolü."
+            "konu": "Dar Gelirli Ailelerin Durumu",
+            "köken": "Dar gelirli aileler, artan hayat pahalılığı karşısında en çok etkilenen grup olarak öne çıkıyor. Sosyal medyada paylaşılan içeriklerde, bu ailelerin gıda alımında zorlandıkları ve bunun sonucunda sağlıklı beslenme imkanlarının kısıtlandığı sıkça dile getiriliyor. Bir kullanıcı, 'Bir paket makarna almak için iki gün bekliyorum' şeklinde bir paylaşımda bulundu."
         }
     ],
     "harcama_egilimi_analizi": {
-        "egilim": "Tüketicilerin temel ihtiyaçlara yönelmesi.",
-        "sektor_etkisi": "Gıda sektörü, artan fiyatlar nedeniyle en çok etkilenen alan. Giyim ve teknoloji harcamaları ise azalma gösteriyor."
+        "egilim": "Tüketicilerin lüks harcamalardan kaçınarak, temel ihtiyaçlara yönelmesi ve indirimli ürünleri tercih etmesi",
+        "sektor_etkisi": "Gıda sektörü ve perakende mağazaları, talep artışı nedeniyle olumlu etkileniyor. Ancak, lüks tüketim ürünleri ve restoran sektörü, giderek artan boykotlar ve düşük harcama eğilimleri nedeniyle olumsuz etkileniyor."
     },
     "gelecek_tahminleri": [
         {
-            "tahmin": "Ekonomik belirsizliklerin artması",
+            "tahmin": "Gıda fiyatlarının daha da artması",
             "risk_seviyesi": "Yüksek",
-            "neden": "Devam eden enflasyon ve işsizlik oranlarının yükselmesi."
+            "neden": "Dünyada yaşanan tarım krizleri ve iklim değişikliği, gıda üretiminde aksamalara neden olabileceği için fiyatların artması bekleniyor."
         },
         {
-            "tahmin": "Sosyal medya üzerinden daha fazla aktivizm",
+            "tahmin": "İndirimli ürün talebinin artması",
             "risk_seviyesi": "Orta",
-            "neden": "Toplumun yaşadığı sıkıntılara karşı duyarlılığın artması."
+            "neden": "Tüketicilerin bütçelerini zorlaması ve alışveriş alışkanlıklarını değiştirmesi, indirimli ürünlere olan talebi artıracaktır."
         }
     ]
 }

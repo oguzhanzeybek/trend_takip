@@ -5,7 +5,7 @@ import {
   TrendingUp, Youtube, Search, X, Calendar, BarChart2, ExternalLink,
   ShoppingBag, ShoppingCart, Twitter, Instagram, Video, Store, Globe,
   Clock, CalendarDays, CalendarRange, Loader2, Layers, Download, 
-  Activity, ArrowUpDown
+  Activity, ArrowUpDown, ChevronDown, Filter, Zap, Smartphone, Shirt, Home, Coffee
 } from "lucide-react";
 
 // API URL
@@ -27,9 +27,83 @@ const PLATFORMS = [
     { id: 'carrefour', name: 'Carrefour', icon: <ShoppingBag size={16}/> },
 ];
 
-// --- STİL YARDIMCISI ---
+// --- GELİŞMİŞ ALT KATEGORİ SİSTEMİ (TÜRKİYE ODAKLI) ---
+const SUBCATEGORIES: Record<string, { id: string, label: string, icon?: any, keywords: string[] }[]> = {
+    // E-TİCARET DETAYLI
+    ecommerce: [
+        { 
+            id: 'elektronik', label: 'Teknoloji & Elektronik', icon: <Smartphone size={14}/>,
+            keywords: ['telefon', 'iphone', 'samsung', 'xiaomi', 'android', 'bilgisayar', 'laptop', 'tablet', 'kulaklık', 'airpods', 'şarj', 'kılıf', 'televizyon', 'tv', 'robot süpürge', 'dyson', 'airfryer', 'ütü', 'kahve makinesi', 'blender', 'teknoloji', 'dijital', 'akıllı saat'] 
+        },
+        { 
+            id: 'moda', label: 'Moda & Giyim', icon: <Shirt size={14}/>,
+            keywords: ['elbise', 'pantolon', 'tişört', 'gömlek', 'kazak', 'mont', 'ceket', 'kaban', 'ayakkabı', 'bot', 'çizme', 'spor ayakkabı', 'sneaker', 'çanta', 'cüzdan', 'aksesuar', 'takı', 'saat', 'giyim', 'kombin', 'moda', 'trend', 'kumaş', 'pamuk', 'deri', 'kadın', 'erkek', 'çocuk'] 
+        },
+        { 
+            id: 'ev_yasam', label: 'Ev & Yaşam', icon: <Home size={14}/>,
+            keywords: ['mobilya', 'koltuk', 'yatak', 'masa', 'sandalye', 'halı', 'perde', 'nevresim', 'yastık', 'dekorasyon', 'aydınlatma', 'avize', 'mutfak', 'banyo', 'havlu', 'deterjan', 'temizlik', 'yumuşatıcı', 'organizer', 'saklama kabı', 'bardak', 'tabak', 'tencere', 'tava'] 
+        },
+        { 
+            id: 'kozmetik', label: 'Kozmetik & Bakım', icon: <Zap size={14}/>,
+            keywords: ['krem', 'nemlendirici', 'güneş kremi', 'parfüm', 'deodorant', 'ruj', 'oje', 'makyaj', 'maskara', 'fondöten', 'şampuan', 'saç kremi', 'duş jeli', 'sabun', 'diş macunu', 'bakım', 'güzellik', 'cilt', 'serum', 'tonik'] 
+        },
+        { 
+            id: 'market', label: 'Süpermarket & Gıda', icon: <Coffee size={14}/>,
+            keywords: ['gıda', 'yağ', 'ayçiçek', 'zeytinyağı', 'çay', 'kahve', 'şeker', 'un', 'makarna', 'pirinç', 'bakliyat', 'peynir', 'süt', 'yoğurt', 'et', 'kıyma', 'tavuk', 'balık', 'meyve', 'sebze', 'atıştırmalık', 'çikolata', 'bisküvi', 'içecek', 'su', 'soda', 'market', 'toptan'] 
+        },
+        {
+            id: 'anne_bebek', label: 'Anne & Bebek', 
+            keywords: ['bebek', 'bez', 'mama', 'biberon', 'emzik', 'oyuncak', 'puset', 'oto koltuğu', 'hamile', 'anne', 'çocuk', 'giyim']
+        }
+    ],
+    // SOSYAL MEDYA & GÜNDEM DETAYLI
+    social: [
+        { 
+            id: 'siyaset', label: 'Siyaset & Gündem', 
+            keywords: [
+                'siyaset', 'gündem', 'haber', 'son dakika', 'meclis', 'tbmm', 'karar', 'resmi gazete', 'seçim', 'oy', 
+                'erdoğan', 'tayyip', 'cumhurbaşkanı', 'reis', 'ak parti', 'akp', 
+                'chp', 'özgür özel', 'imamoğlu', 'ekrem', 'mansur yavaş', 'kılıçdaroğlu', 
+                'mhp', 'bahçeli', 'iyi parti', 'dem parti', 'bakan', 'şimşek', 'yerlikaya', 'belediye'
+            ] 
+        },
+        { 
+            id: 'ekonomi', label: 'Ekonomi & Finans', 
+            keywords: ['dolar', 'euro', 'altın', 'borsa', 'bist', 'hisse', 'faiz', 'merkez bankası', 'enflasyon', 'zam', 'fiyat', 'maaş', 'asgari ücret', 'emekli', 'memur', 'kripto', 'bitcoin', 'btc', 'ekonomi', 'banka', 'kredi'] 
+        },
+        { 
+            id: 'spor', label: 'Spor & Futbol', 
+            keywords: ['futbol', 'maç', 'gol', 'süper lig', 'galatasaray', 'fenerbahçe', 'beşiktaş', 'trabzonspor', 'icardi', 'dzeko', 'transfer', 'şampiyon', 'milli takım', 'voleybol', 'filenin sultanları', 'basketbol', 'nba', 'spor'] 
+        },
+        { 
+            id: 'magazin', label: 'Magazin & Dizi', 
+            keywords: ['magazin', 'ünlü', 'dizi', 'film', 'sinema', 'oyuncu', 'şarkıcı', 'konser', 'yalı çapkını', 'kızılcık şerbeti', 'masterchef', 'survivor', 'acun', 'tv8', 'reyting', 'bomba', 'aşk', 'boşanma', 'evlilik'] 
+        },
+    ],
+    // VİDEO İÇERİKLERİ
+    video: [
+        { id: 'viral', label: 'Viral & Akımlar', keywords: ['akım', 'challenge', 'viral', 'keşfet', 'tiktok', 'reels', 'shorts', 'dans', 'komik', 'eğlence', 'tepki', 'pov'] },
+        { id: 'egitim', label: 'Eğitim & Bilgi', keywords: ['nasıl', 'nedir', 'belgesel', 'tarih', 'bilim', 'inceleme', 'rehber', 'teknoloji', 'yazılım', 'ders', 'sınav', 'yks', 'kpss'] },
+        { id: 'oyun', label: 'Oyun (Gaming)', keywords: ['oyun', 'game', 'gameplay', 'canlı yayın', 'twitch', 'valorant', 'league of legends', 'lol', 'cs2', 'minecraft', 'gta', 'pubg', 'mobile', 'espor'] },
+        { id: 'yemek', label: 'Yemek & Tarif', keywords: ['yemek', 'tarif', 'mutfak', 'lezzet', 'sokak lezzetleri', 'gurme', 'tadına baktım', 'mukbang', 'pasta', 'börek'] }
+    ]
+};
+
+// --- YARDIMCI FONKSİYONLAR ---
+
+// Türkçe karakterleri düzgün küçültme fonksiyonu (Arama kalbi burası)
+const toLowerTR = (str: string) => str.toLocaleLowerCase('tr-TR');
+
+// Platform ID'sini hangi kategori grubuna yönlendireceğimizi seçen yardımcı
+const getSubCategoryGroup = (platformId: string) => {
+    if (['trendyol', 'amazon', 'n11', 'alibaba', 'a101', 'carrefour'].includes(platformId)) return SUBCATEGORIES.ecommerce;
+    if (['twitter', 'google_trends'].includes(platformId)) return SUBCATEGORIES.social;
+    if (['youtube', 'tiktok', 'instagram'].includes(platformId)) return SUBCATEGORIES.video;
+    return []; // 'all' veya diğerleri için boş döner, hepsi görünür
+};
+
 const getSourceStyle = (sourceName: string) => {
-    const s = (sourceName || "").toLowerCase();
+    const s = toLowerTR(sourceName || "");
     
     if (s.includes("google")) return { name: "Google Trends", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20 hover:border-blue-400", bar: "bg-blue-400", icon: <Activity size={14} /> };
     if (s.includes("tiktok")) return { name: "TikTok", color: "text-rose-500", bg: "bg-rose-500/10", border: "border-rose-500/20 hover:border-rose-500", bar: "bg-rose-500", icon: <Video size={14} /> };
@@ -50,6 +124,8 @@ export default function TrendsPage() {
   const [selectedTrend, setSelectedTrend] = useState<any>(null);
   const [timeRange, setTimeRange] = useState("daily"); 
   const [selectedPlatform, setSelectedPlatform] = useState("all"); 
+  const [selectedSubCategory, setSelectedSubCategory] = useState("all");
+
   const [trends, setTrends] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +137,8 @@ export default function TrendsPage() {
   const fetchTrends = async () => {
     try {
         setLoading(true);
-        const res = await fetch(`${API_BASE_URL}/api/trends?platform=${selectedPlatform}&period=${timeRange}&limit=100`);
+        // Backend'den veri çekerken de dilersen filtreleme yapabilirsin ama şimdilik client-side filtreliyoruz
+        const res = await fetch(`${API_BASE_URL}/api/trends?platform=${selectedPlatform}&period=${timeRange}&limit=150`);
         
         if (res.ok) {
             const result = await res.json();
@@ -83,47 +160,84 @@ export default function TrendsPage() {
     fetchTrends();
     setSearchQuery(""); 
     setActiveTag(null);
+    setSelectedSubCategory("all"); 
   }, [timeRange, selectedPlatform]);
 
-  // --- HESAPLANAN VERİLER (TEMİZLİK VE FİLTRELEME) ---
+  // --- MÜKEMMELLEŞTİRİLMİŞ FİLTRELEME ALGORİTMASI ---
   const processedData = useMemo(() => {
     let filtered = [...trends];
 
-    // --- 1. ÇÖP VERİ TEMİZLİĞİ (YENİ EKLENDİ) ---
-    // Başlığı olmayan ("Başlıksız Trend" olacak olan) verileri baştan eliyoruz.
+    // 1. Çöp Veri Temizliği
     filtered = filtered.filter(t => {
         const c = t.content || {};
-        // Başlık olabilecek alanları kontrol et
         const hasTitle = c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || c.Hashtag;
-        
-        // Eğer başlık alanı yoksa veya boşsa, bu veriyi gösterme.
-        // Ayrıca başlık "sistem bağlantı testi" gibi teknik mesajlarsa da eleyebiliriz.
         if (!hasTitle || String(hasTitle).trim() === "") return false;
-
         return true;
     });
 
-    // 2. Arama Filtresi
+    // 2. Arama Filtresi (Türkçe Uyumlu)
     if (searchQuery) {
-        const q = searchQuery.toLowerCase();
+        const q = toLowerTR(searchQuery);
         filtered = filtered.filter(t => {
             const c = t.content || {};
-            const title = c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || "";
-            const desc = c.not || c.description || "";
-            return String(title).toLowerCase().includes(q) || String(desc).toLowerCase().includes(q);
+            const textData = toLowerTR(
+                (c["Ürün Adı"] || "") + " " + 
+                (c["urun_adi"] || "") + " " + 
+                (c.title || "") + " " + 
+                (c["Trend Başlık"] || "") + " " + 
+                (c.Trend || "") + " " + 
+                (c.not || "") + " " + // AI notlarını (hashtagleri) da arar
+                (c.description || "")
+            );
+            return textData.includes(q);
         });
     }
 
-    // 3. Tag Filtresi
+    // 3. Alt Kategori Filtresi (GELİŞMİŞ EŞLEŞTİRME)
+    if (selectedSubCategory !== "all") {
+        const currentGroup = getSubCategoryGroup(selectedPlatform);
+        const subCat = currentGroup.find(s => s.id === selectedSubCategory);
+        
+        if (subCat) {
+            filtered = filtered.filter(t => {
+                const c = t.content || {};
+                // Tüm metin alanlarını birleştir ve Türkçe'ye çevir
+                const textToCheck = toLowerTR(
+                    (c["Ürün Adı"] || "") + " " + 
+                    (c["urun_adi"] || "") + " " + 
+                    (c.title || "") + " " + 
+                    (c["Trend Başlık"] || "") + " " + 
+                    (c.Trend || "") + " " + 
+                    (c.not || "") + " " +  // Hashtagler burada!
+                    (c.description || "") + " " +
+                    (c.KAYNAK || "") + " " +
+                    (t.source || "")
+                );
+                
+                // Anahtar kelimelerden EN AZ BİRİ geçiyorsa eşleşir
+                return subCat.keywords.some(k => textToCheck.includes(toLowerTR(k)));
+            });
+        }
+    }
+
+    // 4. Tag Filtresi
     if (activeTag) {
+         const qTag = toLowerTR(activeTag);
          filtered = filtered.filter(t => {
             const c = t.content || {};
-            const title = c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || "";
-            return String(title).toLowerCase().includes(activeTag.toLowerCase());
+            const textToCheck = toLowerTR(
+                (c["Ürün Adı"] || "") + " " + 
+                (c["urun_adi"] || "") + " " + 
+                (c.title || "") + " " + 
+                (c["Trend Başlık"] || "") + " " + 
+                (c.Trend || "") + " " + 
+                (c.not || "")
+            );
+            return textToCheck.includes(qTag);
         });
     }
 
-    // 4. Sıralama
+    // 5. Sıralama
     if (sortBy === "score") {
         filtered.sort((a, b) => (b.content?.potansiyel_skoru || 0) - (a.content?.potansiyel_skoru || 0));
     } else if (sortBy === "date") {
@@ -133,19 +247,25 @@ export default function TrendsPage() {
     }
 
     return filtered;
-  }, [trends, searchQuery, sortBy, activeTag]);
+  }, [trends, searchQuery, sortBy, activeTag, selectedSubCategory, selectedPlatform]);
 
-  // --- POPÜLER ETİKETLER ---
+  // --- POPÜLER ETİKETLER (TÜRKÇE AYIKLAMA) ---
   const popularTags = useMemo(() => {
       const words: Record<string, number> = {};
-      const stopWords = ["ve", "ile", "bir", "için", "çok", "bu", "tl", "adet", "set", "li", "trend", "erkentrend", "horeca", "fiyat", "uyumlu", "siyah"]; 
+      const stopWords = ["ve", "ile", "bir", "için", "çok", "bu", "tl", "adet", "set", "li", "trend", "erkentrend", "horeca", "fiyat", "uyumlu", "siyah", "beyaz", "kargo", "bedava"]; 
       
-      // Sadece filtrelenmiş (temiz) verilerden etiket çıkar
       processedData.forEach(t => {
           const c = t.content || {};
-          const title = (c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || "").toLowerCase();
+          // Başlık ve Notlardan (Hashtaglerden) kelime topla
+          const combinedText = (
+              (c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || "") + " " + 
+              (c.not || "")
+          );
           
-          title.split(/[\s-]+/).forEach((w: string) => {
+          const cleanText = toLowerTR(combinedText);
+          
+          cleanText.split(/[\s,.\-#]+/).forEach((w: string) => {
+              // Sadece harf ve sayı içerenleri al
               const cleanW = w.replace(/[^a-z0-9çğıöşü]/g, "");
               if (cleanW.length > 3 && !stopWords.includes(cleanW)) {
                   words[cleanW] = (words[cleanW] || 0) + 1;
@@ -155,13 +275,13 @@ export default function TrendsPage() {
 
       return Object.entries(words)
           .sort((a, b) => b[1] - a[1])
-          .slice(0, 8)
+          .slice(0, 10) // İlk 10 etiketi göster
           .map(entry => entry[0]);
-  }, [processedData]); // trends yerine processedData kullanıldı (temiz veri için)
+  }, [processedData]);
 
   const handleExport = () => {
     if (processedData.length === 0) return;
-    const headers = ["Rank", "Platform", "Tarih", "Başlık", "Skor", "Fiyat", "Link", "Açıklama"];
+    const headers = ["Rank", "Platform", "Tarih", "Başlık", "Skor", "Fiyat", "Link", "Notlar/Etiketler"];
     const rows = processedData.map(t => {
         const c = t.content || {};
         const title = c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || "";
@@ -188,10 +308,13 @@ export default function TrendsPage() {
     link.click();
   };
 
+  // Aktif Platformun Alt Kategorileri
+  const currentSubCategories = getSubCategoryGroup(selectedPlatform);
+
   return (
     <div className="p-6 md:p-8 h-full overflow-y-auto bg-zinc-950 text-white font-sans">
       
-      {/* ÜST KISIM */}
+      {/* ÜST HEADER */}
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 mb-8 border-b border-zinc-800/50 pb-6">
         <div>
             <h1 className="text-3xl font-bold text-white flex items-center gap-3">
@@ -199,7 +322,7 @@ export default function TrendsPage() {
             Trend Havuzu
             </h1>
             <p className="text-gray-400 mt-2 text-sm flex items-center gap-2">
-               Analiz edilen <span className="text-white font-bold">{processedData.length}</span> nitelikli trend.
+               Filtrelenen <span className="text-white font-bold">{processedData.length}</span> nitelikli trend.
             </p>
         </div>
 
@@ -229,13 +352,15 @@ export default function TrendsPage() {
         </div>
       </div>
 
-      {/* PLATFORMLAR */}
-      <div className="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
-          {PLATFORMS.map((platform) => (
+      {/* 1. PLATFORM SEÇİMİ */}
+      <div className="flex gap-2 overflow-x-auto pb-4 mb-2 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+          {PLATFORMS.map((platform) => {
+              const hasSub = getSubCategoryGroup(platform.id).length > 0;
+              return (
               <button
                 key={platform.id}
                 onClick={() => setSelectedPlatform(platform.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium whitespace-nowrap transition-all ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium whitespace-nowrap transition-all group ${
                     selectedPlatform === platform.id 
                     ? "bg-blue-600/10 border-blue-600 text-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.2)]" 
                     : "bg-zinc-900 border-zinc-800 text-gray-400 hover:bg-zinc-800 hover:text-white"
@@ -243,17 +368,51 @@ export default function TrendsPage() {
               >
                   {platform.icon}
                   {platform.name}
+                  {hasSub && (
+                      <ChevronDown size={14} className={`transition-transform ${selectedPlatform === platform.id ? 'rotate-180 text-blue-500' : 'opacity-50'}`}/>
+                  )}
               </button>
-          ))}
+          )})}
       </div>
 
-      {/* ARAMA VE SIRALAMA */}
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
+      {/* 2. ALT KATEGORİ SEÇİMİ (DINAMİK) */}
+      {selectedPlatform !== 'all' && currentSubCategories.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6 animate-in fade-in slide-in-from-top-1 bg-zinc-900/30 p-3 rounded-2xl border border-zinc-800/50">
+              <div className="flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-lg text-xs text-gray-500 mr-2 h-fit">
+                  <Filter size={12}/> Kategori:
+              </div>
+              <button 
+                  onClick={() => setSelectedSubCategory("all")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
+                      selectedSubCategory === "all" ? "bg-white text-black border-white" : "text-gray-400 border-zinc-800 hover:border-gray-600 bg-zinc-950"
+                  }`}
+              >
+                  Tümü
+              </button>
+              {currentSubCategories.map((sub) => (
+                  <button
+                      key={sub.id}
+                      onClick={() => setSelectedSubCategory(sub.id)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                          selectedSubCategory === sub.id 
+                          ? "bg-zinc-800 text-white border-zinc-600 shadow-sm" 
+                          : "text-gray-400 border-zinc-800 hover:border-gray-600 bg-zinc-950"
+                      }`}
+                  >
+                      {sub.icon && <span className="opacity-70">{sub.icon}</span>}
+                      {sub.label}
+                  </button>
+              ))}
+          </div>
+      )}
+
+      {/* 3. ARAMA VE SIRALAMA */}
+      <div className="flex flex-col md:flex-row gap-4 mb-6 mt-4">
            <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                 <input 
                     type="text" 
-                    placeholder="Trendlerde ara (Örn: kahve, termos, airfryer, pizza...)" 
+                    placeholder="Trendlerde akıllı arama yap (Ürün, kişi, olay...)" 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full bg-zinc-900 border border-zinc-800 text-white pl-10 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-gray-600"
@@ -280,11 +439,11 @@ export default function TrendsPage() {
            </div>
       </div>
 
-      {/* ETİKETLER */}
+      {/* 4. AKILLI ETİKETLER */}
       {popularTags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-8 items-center animate-in fade-in slide-in-from-top-2 duration-500">
               <span className="text-xs text-gray-500 uppercase font-bold mr-2 flex items-center gap-1">
-                  <TrendingUp size={12} className="text-green-500"/> Yükselen Kelimeler:
+                  <TrendingUp size={12} className="text-green-500"/> Öne Çıkanlar:
               </span>
               {popularTags.map(tag => (
                   <button
@@ -302,24 +461,23 @@ export default function TrendsPage() {
           </div>
       )}
 
-      {/* LİSTE */}
+      {/* 5. SONUÇ LİSTESİ */}
       {loading ? (
           <div className="flex flex-col justify-center items-center h-64 gap-4">
               <Loader2 className="animate-spin text-blue-500" size={48} />
-              <p className="text-gray-500 text-sm font-medium">Pazar verileri analiz ediliyor...</p>
+              <p className="text-gray-500 text-sm font-medium">Veriler işleniyor...</p>
           </div>
       ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pb-20">
         {processedData.length > 0 ? (
             processedData.map((trend, i) => {
             const c = trend.content || {};
-            // Başlık Bulma (Varsa)
             const title = c["Ürün Adı"] || c["urun_adi"] || c.title || c["Trend Başlık"] || c.Trend || c.Hashtag;
             const desc = c.not || c.description || c.snippet || "Açıklama yok.";
             const sourceRaw = c["KAYNAK"] || c["kaynak_dosya"] || trend.source || "";
             const price = c["Fiyat"] || c.price || c.fiyat || null;
             const link = c.Link || c.link || c.url || null;
-            const score = c.potansiyel_skoru || Math.floor(Math.random() * 20) + 70;
+            const score = c.potansiyel_skoru || 75;
             const rank = trend.trend_rank || c.Rank || c.rank || "-";
             
             const style = getSourceStyle(sourceRaw);
@@ -381,14 +539,15 @@ export default function TrendsPage() {
         ) : (
             <div className="col-span-full flex flex-col items-center justify-center py-20 text-gray-500 border border-dashed border-zinc-800 rounded-2xl bg-zinc-900/20">
                 <Search size={48} className="mb-4 opacity-20"/>
-                <p className="text-lg font-medium">Görüntülenecek nitelikli trend bulunamadı.</p>
-                <p className="text-sm opacity-60">Filtrelerinizi değiştirin veya daha geniş bir zaman aralığı seçin.</p>
+                <p className="text-lg font-medium">Bu kriterlere uygun trend bulunamadı.</p>
+                <p className="text-sm opacity-60">Lütfen kategoriyi değiştirin veya aramayı temizleyin.</p>
+                <button onClick={() => {setSearchQuery(""); setSelectedSubCategory("all");}} className="mt-4 px-4 py-2 bg-zinc-800 rounded-lg text-sm hover:bg-zinc-700 transition-colors">Filtreleri Temizle</button>
             </div>
         )}
       </div>
       )}
 
-      {/* MODAL */}
+      {/* DETAY MODAL */}
       {selectedTrend && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
              <div className="bg-zinc-900 border border-zinc-700 w-full max-w-lg rounded-2xl shadow-2xl relative flex flex-col max-h-[90vh]">
@@ -421,7 +580,7 @@ export default function TrendsPage() {
 
                     <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-800 mb-6 flex items-center justify-between">
                          <div>
-                            <span className="text-xs text-gray-500 uppercase font-bold">Trend Potansiyeli</span>
+                            <span className="text-xs text-gray-500 uppercase font-bold">Trend Skoru</span>
                             <div className={`text-2xl font-black mt-1 ${selectedTrend.score > 80 ? "text-green-500" : "text-white"}`}>
                                 {selectedTrend.score}/100
                             </div>
@@ -433,7 +592,7 @@ export default function TrendsPage() {
 
                     <div className="bg-zinc-950 p-5 rounded-xl border border-zinc-800 mb-6">
                         <h3 className="text-sm font-bold text-gray-300 mb-3 flex items-center gap-2">
-                            <BarChart2 size={16} className="text-blue-500"/> Yapay Zeka Analizi
+                            <BarChart2 size={16} className="text-blue-500"/> Yapay Zeka Notları
                         </h3>
                         <p className="text-gray-400 text-sm leading-relaxed border-l-2 border-zinc-800 pl-3">
                             {selectedTrend.desc}

@@ -11,7 +11,6 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 def check_latest_data():
     print("--- VERİTABANI SON DURUM KONTROLÜ ---")
     
-    # Filtresiz son 5 veriyi çek
     response = (
         supabase.table("processed_data")
         .select("created_at, data_type, source, content")

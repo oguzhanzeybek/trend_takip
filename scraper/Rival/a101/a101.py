@@ -123,16 +123,13 @@ def scrape_a101():
             print("🛑 Tarayıcı kapatıldı.")
         except: pass
 
-        # CSV KAYDI (Rank Eklendi)
         if all_products:
             file_path = BASE_DIR / "a101.csv"
             try:
                 with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    # Header: Başa Rank ekledik
                     writer.writerow(["Rank", "Ürün Adı", "Fiyat", "Link"])
                     
-                    # Sıra Numarasıyla Yazma
                     for i, prod in enumerate(all_products, 1):
                         writer.writerow([i] + prod)
 
@@ -143,9 +140,6 @@ def scrape_a101():
         else:
             print("\n⚠️ Ürün listesi boş.")
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     import os
     import csv

@@ -63,21 +63,15 @@ def upload_single_file(db, file_path):
     
     try:
         if full_path.suffix == '.csv':
-            df = pd.read_csv(full_path, encoding="utf-8-sig")
+            # NaN değerleri boş string yapıyoruz (JSON null hatası vermemesi için)
+            df = pd.read_csv(full_path, encoding="utf-8-sig").fillna("")
+            
             if df.empty:
                 print("⚠️ Dosya boş, atlanıyor.")
                 return
             
-            # --- DÜZELTME BURADA ---
-            # Pandas sayısal kolonlarda None tutamaz, NaN yapar. Bu da JSON hatası verir.
-            # Bu yüzden önce tüm tabloyu 'object' tipine çeviriyoruz.
-            df = df.astype(object)
-            
-            # Şimdi NaN olanları None (JSON null) ile değiştiriyoruz.
-            df = df.where(pd.notnull(df), None)
-            
-            for _, row in df.iterrows():
-                formatted_data.append(row.to_dict())
+            # DataFrame'i sözlük listesine çevir
+            formatted_data = df.to_dict(orient='records')
 
         elif full_path.suffix == '.json':
             with open(full_path, 'r', encoding='utf-8') as f:
@@ -125,32 +119,42 @@ def upload_single_file(db, file_path):
     payloads_for_db = []
     
     for item in formatted_data:
-        # --- RANK ÇIKARMA BÖLÜMÜ ---
-        # CSV veya JSON içindeki "Rank", "rank" veya "trend_rank" alanlarını arıyoruz
+        # Rank değerini temizle ve integer yap
         rank_val = item.get("Rank") or item.get("rank") or item.get("trend_rank")
         
         final_rank = None
         if rank_val is not None:
             try:
-                # Gelen değer "#3", "No: 5" veya "3.0" olabilir. Sadece rakamları alıyoruz.
                 clean_r = ''.join(filter(str.isdigit, str(rank_val)))
                 if clean_r:
                     final_rank = int(clean_r)
             except:
                 final_rank = None
 
-        # Payload Hazırlama
+        # --- GÜNCELLEME: AÇIKLAMA KONTROLÜ ---
+        # Eğer item (satır) içinde 'aciklama' yoksa, boş string olarak ekle.
+        # Böylece JSON içinde mutlaka bir "aciklama" alanı olur.
+        if "aciklama" not in item:
+            item["aciklama"] = ""
+
+        # Veritabanına gidecek paket
         payload = {
-            "category": category,          
-            "data_type": data_type,        
-            "source": full_path.name,      
+            "category": category,           
+            "data_type": data_type,         
+            "source": full_path.name,       
             "created_at_custom": simdiki_zaman,
             "trend_rank": final_rank, 
+            
+            # DİKKAT: 'aciklama' burada AYRI bir sütun olarak YOK.
+            # 'content' içine 'item'ı koyuyoruz. 'item'ın içinde 'aciklama' zaten var (CSV'den geldi).
             "content": item 
         }
         payloads_for_db.append(payload)
 
     try:
+        # Eski verileri temizleyelim mi? (İsteğe bağlı, duplicate önlemek için iyi olabilir)
+        # db.client.table("processed_data").delete().eq("source", full_path.name).execute()
+
         batch_size = 1000
         total_inserted = 0
         
@@ -166,7 +170,7 @@ def upload_single_file(db, file_path):
         print(f"❌ Veritabanı Hatası ({full_path.name}): {e}")
 
 def main():
-    print("🚀 TOPLU CSV/JSON YÜKLEME BAŞLATILIYOR (Rank ve NaN Düzeltmeli)...")
+    print("🚀 TOPLU CSV/JSON YÜKLEME BAŞLATILIYOR (JSONB İçine Açıklama Dahil)...")
     
     try:
         db = DatabaseManager() 

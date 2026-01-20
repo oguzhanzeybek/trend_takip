@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { 
-  Brain, Activity, TrendingUp, MessageCircle, ShoppingCart, 
-  Smile, Frown, Meh, AlertTriangle, Users, Zap, Loader2, 
-  CalendarDays, RefreshCcw, Download, Cloud, CloudRain, Sun, Wind, Thermometer
+  Brain, Activity, TrendingUp, ShoppingCart, 
+  Smile, Users, Zap, Loader2, 
+  CalendarDays, RefreshCcw, Download, Cloud, CloudRain, Sun, Thermometer
 } from "lucide-react";
 import { 
-  PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, 
+  PieChart, Pie, Cell, ResponsiveContainer, 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
 } from 'recharts';
 
@@ -15,20 +15,23 @@ import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
 
 const API_BASE_URL = "http://127.0.0.1:8000";
-const COLORS = ['#22c55e', '#eab308', '#ef4444']; 
+// Duygular için Mor, Mavi, Turuncu paleti
+const COLORS = ['#a855f7', '#3b82f6', '#f97316']; 
 
 // --- ANIMASYONLU SAYAÇ ---
 const AnimatedNumber = ({ value }: { value: number }) => {
     const [count, setCount] = useState(0);
     useEffect(() => {
         let start = 0;
-        const end = value;
+        const end = value || 0; 
         if (start === end) return;
         const duration = 1000;
-        const incrementTime = (duration / end) * 5; 
+        const incrementTime = (duration / (Math.abs(end) || 1)) * 5; 
 
         const timer = setInterval(() => {
-            start += 1;
+            if (start < end) start += 1;
+            else if (start > end) start -= 1;
+            
             setCount(start);
             if (start === end) clearInterval(timer);
         }, incrementTime);
@@ -40,25 +43,23 @@ const AnimatedNumber = ({ value }: { value: number }) => {
 
 export default function AnalyzePage() {
   const [analysisData, setAnalysisData] = useState<any>(null);
-  const [weatherData, setWeatherData] = useState<any>(null); // Hava Durumu State'i
+  const [weatherData, setWeatherData] = useState<any>(null); 
   const [loading, setLoading] = useState(true);
   const [pdfGenerating, setPdfGenerating] = useState(false);
   
   const printRef = useRef<HTMLDivElement>(null);
 
-  // --- VERİ ÇEKME FONKSİYONLARI ---
+  // --- VERİ ÇEKME ---
   const fetchData = async () => {
     try {
       setLoading(true);
       
-      // 1. Analiz Verisini Çek
       const resAnalysis = await fetch(`${API_BASE_URL}/api/analysis`);
       const resultAnalysis = await resAnalysis.json();
       if (resultAnalysis.status === "success" && resultAnalysis.data) {
         setAnalysisData(resultAnalysis.data);
       }
 
-      // 2. Hava Durumunu Çek (Backend'den)
       const resWeather = await fetch(`${API_BASE_URL}/api/weather`);
       const resultWeather = await resWeather.json();
       if (resultWeather.status === "success" && resultWeather.data) {
@@ -114,14 +115,15 @@ export default function AnalyzePage() {
 
   if (loading) return (
     <div className="flex flex-col items-center justify-center h-full gap-4">
-        <Loader2 size={48} className="animate-spin text-pink-500" />
-        <p className="text-gray-400 animate-pulse">Yapay zeka verileri işliyor...</p>
+        <Loader2 size={64} className="animate-spin text-pink-500" />
+        <p className="text-xl text-gray-400 animate-pulse">Yapay zeka verileri işliyor...</p>
     </div>
   );
 
-  if (!analysisData) return <div className="p-8 text-white">Veri bulunamadı.</div>;
+  if (!analysisData) return <div className="p-8 text-white text-2xl">Veri bulunamadı.</div>;
 
   // --- HESAPLAMALAR ---
+
   const avgEmotionScore = analysisData.ana_duygular 
     ? analysisData.ana_duygular.reduce((acc:any, curr:any) => acc + curr.skor, 0) / analysisData.ana_duygular.length
     : 50;
@@ -134,11 +136,67 @@ export default function AnalyzePage() {
   }, 0);
   const avgRiskScore = riskScoreTotal / (risks.length || 1);
 
-  const marketHealth = Math.round(Math.max(10, 100 - (avgRiskScore * 0.8)));
-  const viralScore = Math.min(100, Math.round(avgEmotionScore * 1.2)); 
-  const purchaseIntent = Math.round((marketHealth * 0.7) + (30 - (avgRiskScore / 5)));
-  const opportunityScore = Math.round(100 - avgRiskScore);
+  const aiScores = analysisData.stratejik_skorlar || {};
 
+  // Yardımcı Fonksiyonlar
+  const getSmartScore = (key: string, fallbackVal: number) => {
+      const val = aiScores[key];
+      if (typeof val === 'number') return val; 
+      if (typeof val === 'object' && val?.skor !== undefined) return val.skor; 
+      return fallbackVal; 
+  };
+
+  const getSmartDesc = (key: string, defaultDesc: string) => {
+      const val = aiScores[key];
+      if (typeof val === 'object' && val?.aciklama) return val.aciklama; 
+      return defaultDesc; 
+  };
+
+  // --- METRİKLER VE BASİT DİL AÇIKLAMALARI ---
+  const marketHealth = getSmartScore("pazar_sagligi", Math.round(Math.max(10, 100 - (avgRiskScore * 0.8))));
+  const marketHealthDesc = getSmartDesc("pazar_sagligi", "Piyasanın nabzı nasıl? İnsanlar genel olarak huzurlu mu yoksa gidişattan endişeli mi? Bu puan bunu gösterir.");
+
+  const purchaseIntent = getSmartScore("satin_alma_istahi", Math.round((marketHealth * 0.7) + (30 - (avgRiskScore / 5))));
+  const purchaseIntentDesc = getSmartDesc("satin_alma_istahi", "Cüzdanlar açılıyor mu? Tüketiciler para harcamaya hevesli mi yoksa kemer mi sıkıyorlar?");
+
+  const viralScore = getSmartScore("viral_etki", Math.min(100, Math.round(avgEmotionScore * 1.2)));
+  const viralDesc = getSmartDesc("viral_etki", "Herkes bunu mu konuşuyor? Gündemdeki olaylar ne kadar hızlı yayılıyor ve etkileşim alıyor?");
+
+  const opportunityScore = getSmartScore("firsat_skoru", Math.round(100 - avgRiskScore));
+
+  // --- DİNAMİK RENK FONKSİYONU ---
+  const getScoreColorInfo = (score: number) => {
+    if (score >= 70) return { 
+        text: "text-green-500", 
+        bg: "bg-green-500", 
+        border: "border-green-500/30", 
+        glow: "bg-green-500/10", 
+        from: "from-green-600", 
+        to: "to-green-400" 
+    };
+    if (score >= 40) return { 
+        text: "text-yellow-500", 
+        bg: "bg-yellow-500", 
+        border: "border-yellow-500/30", 
+        glow: "bg-yellow-500/10", 
+        from: "from-yellow-600", 
+        to: "to-yellow-400" 
+    };
+    return { 
+        text: "text-red-500", 
+        bg: "bg-red-500", 
+        border: "border-red-500/30", 
+        glow: "bg-red-500/10", 
+        from: "from-red-600", 
+        to: "to-red-400" 
+    };
+  };
+
+  const marketColor = getScoreColorInfo(marketHealth);
+  const purchaseColor = getScoreColorInfo(purchaseIntent);
+  const viralColor = getScoreColorInfo(viralScore);
+  
+  // Grafik Verileri
   const sentimentData = (analysisData.ana_duygular || []).map((e:any) => ({ name: e.duygu, value: e.skor }));
 
   const radarData = [
@@ -154,29 +212,26 @@ export default function AnalyzePage() {
     if (level === "Orta") return "text-orange-400 bg-orange-500/10 border-orange-500/20";
     return "text-green-400 bg-green-500/10 border-green-500/20";
   };
-
-  // --- HAVA DURUMU ETKİ ANALİZİ ---
+  
+  // --- HAVA DURUMU ---
   const getWeatherImpact = () => {
       const temp = weatherData?.temperature || 15;
       const code = weatherData?.weathercode || 0;
       
-      // Basit Hava Durumu Mantığı
       let condition = "Parçalı Bulutlu";
-      let icon = <Cloud size={32} className="text-gray-400"/>;
+      let icon = <Cloud size={40} className="text-gray-400"/>;
       let impactTitle = "Normal Seyir";
       let insight = "Hava koşulları alışveriş alışkanlıklarını nötr etkiliyor.";
 
-      // Yağmur Kodları (OpenMeteo: 51, 53, 55, 61, 63, 65, 80, 81, 82)
       if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) {
           condition = "Yağmurlu";
-          icon = <CloudRain size={32} className="text-blue-400"/>;
+          icon = <CloudRain size={40} className="text-blue-400"/>;
           impactTitle = "Online Sipariş Artışı";
           insight = "Yağışlı hava fiziksel mağaza trafiğini düşürüp online siparişleri artırabilir.";
       } 
-      // Güneşli Kodları (0, 1)
       else if ([0, 1].includes(code)) {
           condition = "Güneşli";
-          icon = <Sun size={32} className="text-yellow-400 animate-spin-slow"/>;
+          icon = <Sun size={40} className="text-yellow-400 animate-spin-slow"/>;
           impactTitle = "Fiziksel Trafik Artışı";
           insight = "Güzel hava insanları dışarı çıkmaya ve AVM/cadde mağazalarını gezmeye teşvik ediyor.";
       }
@@ -189,26 +244,26 @@ export default function AnalyzePage() {
   return (
     <div className="h-full overflow-y-auto bg-black text-white font-sans selection:bg-pink-500/30">
       
-      <div ref={printRef} className="p-6 md:p-8 min-h-screen bg-black">
+      <div ref={printRef} className="p-6 md:p-10 min-h-screen bg-black">
       
           {/* --- HEADER --- */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 pb-6 border-b border-zinc-800">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 pb-6 border-b border-zinc-800">
             <div>
-              <h1 className="text-4xl font-black text-white flex items-center gap-3 tracking-tight">
-                <div className="p-2 bg-pink-600 rounded-lg shadow-[0_0_20px_rgba(236,72,153,0.5)]">
-                    <Brain className="text-white" size={28} />
+              <h1 className="text-4xl font-black text-white flex items-center gap-4 tracking-tight">
+                <div className="p-3 bg-pink-600 rounded-xl shadow-[0_0_30px_rgba(236,72,153,0.5)]">
+                    <Brain className="text-white" size={32} />
                 </div>
                 AI Stratejik Raporu
               </h1>
               <div className="flex items-center gap-4 mt-3">
-                  <span className="px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-gray-400 flex items-center gap-2">
-                    <CalendarDays size={12}/> 
+                  <span className="px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-sm text-gray-400 flex items-center gap-2">
+                    <CalendarDays size={16}/> 
                     {new Date(analysisData.analiz_tarihi || Date.now()).toLocaleDateString("tr-TR", {
                         day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
                     })}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-green-900/20 border border-green-900/30 text-xs text-green-500 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div> Sistem Aktif
+                  <span className="px-4 py-2 rounded-full bg-green-900/20 border border-green-900/30 text-sm text-green-500 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> Sistem Aktif
                   </span>
               </div>
             </div>
@@ -217,94 +272,120 @@ export default function AnalyzePage() {
                 <button 
                     onClick={handleDownloadPDF} 
                     disabled={pdfGenerating}
-                    className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold border border-zinc-800 transition-all ${
+                    className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold border border-zinc-800 transition-all text-base ${
                         pdfGenerating ? "bg-zinc-800 text-gray-500 cursor-wait" : "bg-zinc-900 hover:bg-zinc-800 hover:text-white text-gray-400"
                     }`}
                 >
-                    {pdfGenerating ? <Loader2 size={18} className="animate-spin"/> : <Download size={18} />} 
+                    {pdfGenerating ? <Loader2 size={20} className="animate-spin"/> : <Download size={20} />} 
                     <span className="hidden md:inline">{pdfGenerating ? "Oluşturuluyor..." : "PDF İndir"}</span>
                 </button>
                 
-                <button onClick={fetchData} className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold bg-white text-black hover:bg-gray-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all">
-                    <RefreshCcw size={18} /> <span className="hidden md:inline">Canlı Analiz</span>
+                <button onClick={fetchData} className="flex items-center gap-2 px-6 py-3 rounded-xl font-bold bg-white text-black hover:bg-gray-200 shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all text-base">
+                    <RefreshCcw size={20} /> <span className="hidden md:inline">Canlı Analiz</span>
                 </button>
             </div>
           </div>
 
-          {/* --- KPI KARTLARI --- */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {/* --- KPI KARTLARI (GÜNCELLENDİ: Daha Kompakt ama Net) --- */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             
-            {/* Pazar Sağlığı */}
-            <div className="bg-zinc-900/50 backdrop-blur-xl p-6 rounded-3xl border border-zinc-800 relative overflow-hidden group hover:border-green-500/30 transition-all">
+            {/* 1. Pazar Sağlığı */}
+            <div className={`bg-zinc-900/50 backdrop-blur-xl p-6 rounded-3xl border border-zinc-800 relative overflow-hidden group hover:${marketColor.border} transition-all`}>
                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                  <Activity size={100} className="text-green-500" />
+                  <Activity size={100} className={marketColor.text} />
                </div>
-               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-green-500/20 blur-[80px] rounded-full group-hover:bg-green-500/30 transition-all"></div>
+               <div className={`absolute -bottom-10 -left-10 w-32 h-32 ${marketColor.glow} blur-[80px] rounded-full transition-all`}></div>
                
-               <h3 className="text-gray-400 font-bold text-xs uppercase tracking-widest mb-1">Pazar Sağlığı</h3>
+               <h3 className="text-gray-400 font-bold text-sm uppercase tracking-widest mb-2">Pazar Sağlığı</h3>
+               
                <div className="flex items-end gap-2 mb-4">
-                  <span className="text-5xl font-black text-white tracking-tighter">
+                  <span className="text-6xl font-black text-white tracking-tighter leading-none">
                       <AnimatedNumber value={marketHealth} />
-                      <span className="text-2xl text-zinc-600">/100</span>
                   </span>
+                  <span className="text-3xl text-zinc-500 font-bold">/100</span>
                </div>
-               <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-green-600 to-green-400" style={{ width: `${marketHealth}%` }}></div>
+               
+               <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-4">
+                  <div className={`h-full bg-gradient-to-r ${marketColor.from} ${marketColor.to}`} style={{ width: `${marketHealth}%` }}></div>
+               </div>
+               
+               {/* Açıklama Alanı */}
+               <div className="bg-black/20 rounded-xl p-3 border border-white/5">
+                   <p className="text-xs font-bold text-white mb-1 uppercase opacity-70">Bu Ne Demek?</p>
+                   <p className="text-sm text-gray-300 leading-snug">
+                     {marketHealthDesc}
+                   </p>
                </div>
             </div>
 
-            {/* Satın Alma */}
-            <div className="bg-zinc-900/50 backdrop-blur-xl p-6 rounded-3xl border border-zinc-800 relative overflow-hidden group hover:border-blue-500/30 transition-all">
+            {/* 2. Satın Alma */}
+            <div className={`bg-zinc-900/50 backdrop-blur-xl p-6 rounded-3xl border border-zinc-800 relative overflow-hidden group hover:${purchaseColor.border} transition-all`}>
                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                  <ShoppingCart size={100} className="text-blue-500" />
+                  <ShoppingCart size={100} className={purchaseColor.text} />
                </div>
-               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/20 blur-[80px] rounded-full group-hover:bg-blue-500/30 transition-all"></div>
+               <div className={`absolute -bottom-10 -left-10 w-32 h-32 ${purchaseColor.glow} blur-[80px] rounded-full transition-all`}></div>
 
-               <h3 className="text-gray-400 font-bold text-xs uppercase tracking-widest mb-1">Satın Alma İştahı</h3>
-               <div className="flex items-end gap-2 mb-4">
-                  <span className="text-5xl font-black text-white tracking-tighter">
-                      %<AnimatedNumber value={purchaseIntent} />
+               <h3 className="text-gray-400 font-bold text-sm uppercase tracking-widest mb-2">Satın Alma İştahı</h3>
+               <div className="flex items-start gap-1 mb-4">
+                  <span className="text-3xl text-zinc-500 font-bold mt-2">%</span>
+                  <span className="text-6xl font-black text-white tracking-tighter leading-none">
+                      <AnimatedNumber value={purchaseIntent} />
                   </span>
                </div>
-               <p className="text-xs text-gray-400 line-clamp-1 border-l-2 border-blue-500 pl-2">
-                 {analysisData.harcama_egilimi_analizi?.egilim}
-               </p>
+               <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-4">
+                  <div className={`h-full bg-gradient-to-r ${purchaseColor.from} ${purchaseColor.to}`} style={{ width: `${purchaseIntent}%` }}></div>
+               </div>
+               {/* Açıklama Alanı */}
+               <div className="bg-black/20 rounded-xl p-3 border border-white/5">
+                   <p className="text-xs font-bold text-white mb-1 uppercase opacity-70">Bu Ne Demek?</p>
+                   <p className="text-sm text-gray-300 leading-snug">
+                     {purchaseIntentDesc}
+                   </p>
+               </div>
             </div>
 
-            {/* Viral Skor */}
-            <div className="bg-zinc-900/50 backdrop-blur-xl p-6 rounded-3xl border border-zinc-800 relative overflow-hidden group hover:border-pink-500/30 transition-all">
+            {/* 3. Viral Skor */}
+            <div className={`bg-zinc-900/50 backdrop-blur-xl p-6 rounded-3xl border border-zinc-800 relative overflow-hidden group hover:${viralColor.border} transition-all`}>
                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                  <Zap size={100} className="text-pink-500" />
+                  <Zap size={100} className={viralColor.text} />
                </div>
-               <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-pink-500/20 blur-[80px] rounded-full group-hover:bg-pink-500/30 transition-all"></div>
+               <div className={`absolute -bottom-10 -left-10 w-32 h-32 ${viralColor.glow} blur-[80px] rounded-full transition-all`}></div>
 
-               <h3 className="text-gray-400 font-bold text-xs uppercase tracking-widest mb-1">Viral Etki</h3>
-               <div className="flex items-end gap-2 mb-4">
-                  <span className="text-5xl font-black text-white tracking-tighter">
-                      %<AnimatedNumber value={viralScore} />
+               <h3 className="text-gray-400 font-bold text-sm uppercase tracking-widest mb-2">Viral Etki</h3>
+               <div className="flex items-start gap-1 mb-4">
+                  <span className="text-3xl text-zinc-500 font-bold mt-2">%</span>
+                  <span className="text-6xl font-black text-white tracking-tighter leading-none">
+                      <AnimatedNumber value={viralScore} />
                   </span>
                </div>
-               <p className="text-xs text-gray-400 line-clamp-1 border-l-2 border-pink-500 pl-2">
-                 Gündem yoğunluğu ve etkileşim
-               </p>
+               <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-4">
+                  <div className={`h-full bg-gradient-to-r ${viralColor.from} ${viralColor.to}`} style={{ width: `${viralScore}%` }}></div>
+               </div>
+               {/* Açıklama Alanı */}
+               <div className="bg-black/20 rounded-xl p-3 border border-white/5">
+                   <p className="text-xs font-bold text-white mb-1 uppercase opacity-70">Bu Ne Demek?</p>
+                   <p className="text-sm text-gray-300 leading-snug">
+                     {viralDesc}
+                   </p>
+               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            {/* --- SOL KOLON (GRAFİKLER & HAVA DURUMU) --- */}
+            {/* --- SOL KOLON --- */}
             <div className="space-y-8">
                 
                 {/* RADAR CHART */}
                 <div className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 relative overflow-hidden">
                     <h3 className="font-bold text-white mb-6 flex items-center gap-2 text-sm uppercase tracking-wider">
-                        <Users size={16} className="text-pink-500"/> Pazar Dengesi
+                        <Users size={18} className="text-pink-500"/> Pazar Dengesi
                     </h3>
                     <div className="h-[250px] w-full flex justify-center items-center -ml-2">
                         <ResponsiveContainer width="100%" height="100%">
                             <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
                                 <PolarGrid stroke="#3f3f46" strokeOpacity={0.5} />
-                                <PolarAngleAxis dataKey="subject" tick={{ fill: '#a1a1aa', fontSize: 11, fontWeight: 'bold' }} />
+                                <PolarAngleAxis dataKey="subject" tick={{ fill: '#d4d4d8', fontSize: 11, fontWeight: 'bold' }} />
                                 <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false}/>
                                 <Radar name="Skor" dataKey="A" stroke="#db2777" strokeWidth={3} fill="#db2777" fillOpacity={0.4} />
                             </RadarChart>
@@ -315,13 +396,13 @@ export default function AnalyzePage() {
                 {/* PASTA GRAFİĞİ */}
                 <div className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6">
                     <h3 className="font-bold text-white mb-6 flex items-center gap-2 text-sm uppercase tracking-wider">
-                        <Smile size={16} className="text-yellow-500"/> Duygu Dağılımı
+                        <Smile size={18} className="text-yellow-500"/> Duygu Dağılımı
                     </h3>
-                    <div className="flex items-center">
-                        <div className="h-[160px] w-1/2">
+                    <div className="flex items-center flex-col md:flex-row gap-4">
+                        <div className="h-[180px] w-full md:w-1/2">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
-                                    <Pie data={sentimentData} innerRadius={45} outerRadius={65} paddingAngle={6} dataKey="value" stroke="none">
+                                    <Pie data={sentimentData} innerRadius={50} outerRadius={75} paddingAngle={6} dataKey="value" stroke="none">
                                         {sentimentData.map((entry:any, index:number) => (
                                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                         ))}
@@ -329,83 +410,86 @@ export default function AnalyzePage() {
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
-                        <div className="w-1/2 space-y-3">
+                        <div className="w-full md:w-1/2 space-y-2">
                             {analysisData.ana_duygular?.map((d:any, i:number) => (
-                                <div key={i} className="flex justify-between items-center text-xs">
-                                    <span className="text-gray-400 flex items-center gap-2">
-                                        <div className={`w-2 h-2 rounded-full shadow-[0_0_8px]`} style={{backgroundColor: COLORS[i%3], boxShadow: `0 0 10px ${COLORS[i%3]}`}}></div>
+                                <div key={i} className="flex justify-between items-center text-sm p-2 bg-black/20 rounded-lg">
+                                    <span className="text-gray-300 flex items-center gap-2 font-medium">
+                                        <div className={`w-3 h-3 rounded-full shadow-[0_0_8px]`} style={{backgroundColor: COLORS[i%3], boxShadow: `0 0 10px ${COLORS[i%3]}`}}></div>
                                         {d.duygu}
                                     </span>
-                                    <span className="font-bold text-white bg-zinc-800 px-2 py-0.5 rounded-md">%{d.skor}</span>
+                                    <span className="font-bold text-white bg-zinc-800 px-3 py-0.5 rounded-md">%{d.skor}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                {/* 🌤️ GERÇEK HAVA DURUMU WIDGET'I */}
+                {/* HAVA DURUMU */}
                 <div className="bg-gradient-to-br from-blue-900/20 to-zinc-900 border border-blue-500/20 rounded-3xl p-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[60px] rounded-full"></div>
-                    
                     <h3 className="font-bold text-white mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-                        <Cloud size={16} className="text-blue-400"/> Dış Faktörler
+                        <Cloud size={18} className="text-blue-400"/> Dış Faktörler
                     </h3>
-
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center gap-3">
                             <div className="p-3 bg-zinc-950 rounded-2xl border border-zinc-800">
                                 {weatherImpact.icon}
                             </div>
                             <div>
-                                <div className="text-2xl font-black text-white">{weatherImpact.temp}°C</div>
-                                <div className="text-xs text-gray-400 font-bold">{weatherImpact.condition}</div>
+                                <div className="text-4xl font-black text-white">{weatherImpact.temp}°C</div>
+                                <div className="text-sm text-gray-400 font-bold">{weatherImpact.condition}</div>
                             </div>
                         </div>
                         <div className="text-right">
-                            <div className="text-[10px] text-gray-500 uppercase font-bold">Rüzgar</div>
+                            <div className="text-xs text-gray-500 uppercase font-bold">Rüzgar</div>
                             <div className="text-lg font-bold text-green-400">{weatherData?.windspeed || 0} km/s</div>
                         </div>
                     </div>
-
-                    <div className="p-3 bg-black/30 rounded-xl border border-white/5">
-                        <div className="flex items-center gap-2 mb-1">
-                            <Thermometer size={14} className="text-gray-400"/>
-                            <span className="text-xs font-bold text-white">{weatherImpact.impactTitle}</span>
+                    <div className="p-4 bg-black/30 rounded-xl border border-white/5">
+                        <div className="flex items-center gap-2 mb-2">
+                            <Thermometer size={16} className="text-gray-400"/>
+                            <span className="text-sm font-bold text-white">{weatherImpact.impactTitle}</span>
                         </div>
-                        <p className="text-xs text-gray-400 leading-relaxed">
+                        <p className="text-sm text-gray-400 leading-relaxed">
                             {weatherImpact.insight}
                         </p>
                     </div>
                 </div>
-
             </div>
 
-            {/* --- ORTA KOLON (ÖZET & GÜNDEM) --- */}
-            <div className="lg:col-span-2 space-y-6">
+            {/* --- ORTA KOLON --- */}
+            <div className="lg:col-span-2 space-y-8">
                 
-                {/* AI EXECUTIVE SUMMARY */}
+                {/* AI SUMMARY */}
                 <div className="bg-gradient-to-br from-zinc-900 via-zinc-900 to-black border border-zinc-800 rounded-3xl p-8 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-pink-600/5 blur-[120px] rounded-full"></div>
                     
-                    <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3 relative z-10">
-                        <div className="p-2 bg-pink-500/10 rounded-lg">
-                            <Brain className="text-pink-500" size={20}/>
+                    <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6 relative z-10">
+                        <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                            <div className="p-2 bg-pink-500/10 rounded-lg">
+                                <Brain className="text-pink-500" size={24}/>
+                            </div>
+                            Yapay Zeka Yönetici Özeti
+                        </h3>
+                        {/* GÜNCELLEME: En Baskın Gündem Burada Gösteriliyor */}
+                        <div className="bg-pink-600/20 border border-pink-500/30 px-4 py-2 rounded-full">
+                            <span className="text-xs text-pink-400 font-bold uppercase tracking-wider mr-2">En Sıcak Konu:</span>
+                            <span className="text-white font-bold">{analysisData.baskin_gundemler?.[0]?.konu || "Analiz Ediliyor"}</span>
                         </div>
-                        Yapay Zeka Yönetici Özeti
-                    </h3>
-                    
-                    <p className="text-gray-300 leading-8 text-lg font-light relative z-10 border-l-2 border-pink-500/30 pl-6">
+                    </div>
+
+                    <p className="text-gray-300 leading-loose text-lg font-light relative z-10 border-l-4 border-pink-500/30 pl-6">
                         {analysisData.genel_değerlendirme}
                     </p>
-
+                    
                     <div className="mt-8 pt-8 border-t border-zinc-800/50 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                        <div className="group">
-                            <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">Baskın Gündem</span>
+                        <div className="group p-4 bg-black/20 rounded-2xl border border-white/5 hover:border-pink-500/30 transition-all">
+                            <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">Detaylı Gündem</span>
                             <div className="text-white font-bold mt-2 text-xl group-hover:text-pink-400 transition-colors">
-                                {analysisData.baskin_gundemler?.[0]?.konu || "Tespit Edilemedi"}
+                                {analysisData.baskin_gundemler?.[0]?.köken || "Veri bekleniyor..."}
                             </div>
                         </div>
-                        <div className="group">
+                        <div className="group p-4 bg-black/20 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all">
                             <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">Sektörel Etki</span>
                             <div className="text-white font-bold mt-2 text-xl group-hover:text-blue-400 transition-colors">
                                 {analysisData.harcama_egilimi_analizi?.sektor_etkisi?.split('.')[0] || "Veri Bekleniyor"}
@@ -414,49 +498,44 @@ export default function AnalyzePage() {
                     </div>
                 </div>
 
-                {/* RİSKLER VE ÖNGÖRÜLER GRID */}
+                {/* RİSKLER */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    {/* GELECEK TAHMİNLERİ */}
                     <div className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6">
                         <h3 className="font-bold text-white mb-6 flex items-center gap-2 text-sm uppercase tracking-wider">
-                            <TrendingUp size={16} className="text-blue-500"/> Gelecek Öngörüleri
+                            <TrendingUp size={18} className="text-blue-500"/> Gelecek Öngörüleri
                         </h3>
                         <div className="space-y-4">
                             {analysisData.gelecek_tahminleri?.map((t:any, i:number) => (
                                 <div key={i} className="p-4 bg-black/40 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all group">
                                     <div className="flex justify-between items-start mb-2">
-                                        <span className="text-sm font-bold text-gray-200 group-hover:text-white transition-colors">{t.tahmin}</span>
-                                        <span className={`text-[10px] px-2 py-1 rounded-lg font-bold border ${getRiskColor(t.risk_seviyesi)}`}>
+                                        <span className="text-lg font-bold text-gray-200 group-hover:text-white transition-colors">{t.tahmin}</span>
+                                        <span className={`text-[10px] px-3 py-1 rounded-lg font-bold border uppercase tracking-wider ${getRiskColor(t.risk_seviyesi)}`}>
                                             {t.risk_seviyesi} RİSK
                                         </span>
                                     </div>
-                                    <p className="text-xs text-gray-500">{t.neden}</p>
+                                    <p className="text-sm text-gray-500 leading-relaxed">{t.neden}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
-
-                    {/* GÜNDEM MADDELERİ */}
                     <div className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6">
                         <h3 className="font-bold text-white mb-6 flex items-center gap-2 text-sm uppercase tracking-wider">
-                            <Users size={16} className="text-purple-500"/> Toplumun Gündemi
+                            <Users size={18} className="text-purple-500"/> Toplumun Gündemi
                         </h3>
                         <div className="space-y-4">
                             {analysisData.baskin_gundemler?.map((g:any, i:number) => (
-                                <div key={i} className="flex gap-4 items-start p-2 hover:bg-white/5 rounded-xl transition-colors">
-                                    <div className="mt-1 min-w-[28px] h-[28px] rounded-full bg-zinc-800 text-gray-400 border border-zinc-700 flex items-center justify-center text-xs font-bold font-mono">
+                                <div key={i} className="flex gap-4 items-start p-3 hover:bg-white/5 rounded-xl transition-colors border border-transparent hover:border-white/10">
+                                    <div className="mt-1 min-w-[32px] h-[32px] rounded-full bg-zinc-800 text-gray-400 border border-zinc-700 flex items-center justify-center text-sm font-bold font-mono">
                                         {i+1}
                                     </div>
                                     <div>
-                                        <div className="text-sm font-bold text-white">{g.konu}</div>
-                                        <div className="text-xs text-gray-500 leading-snug mt-1">{g.köken}</div>
+                                        <div className="text-lg font-bold text-white">{g.konu}</div>
+                                        <div className="text-sm text-gray-500 leading-snug mt-1">{g.köken}</div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
-
                 </div>
             </div>
 

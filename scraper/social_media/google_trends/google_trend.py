@@ -114,10 +114,8 @@ def scrape_google_trends_24():
                 with open(output_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
                     
-                    # --- DEĞİŞİKLİK BURADA: Header'a Rank Eklendi ---
                     writer.writerow(["Rank", "Trend Başlık", "Arama Hacmi"])
                     
-                    # --- DEĞİŞİKLİK BURADA: Sıra numarasıyla yazıyoruz ---
                     for i, row in enumerate(all_trends_data, 1):
                         writer.writerow([i] + row) # [1, Başlık, Hacim] şeklinde yazar
 
@@ -128,9 +126,6 @@ def scrape_google_trends_24():
         else:
             print(f"❌ Veri oluşmadığı için '{output_filename}' kaydedilemedi.")
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     """
     Bulunduğu klasördeki CSV dosyalarını bulur ve 
@@ -179,5 +174,4 @@ def auto_add_index_to_csvs():
 
 if __name__ == "__main__":
     scrape_google_trends_24()
-    # İşlem bitince klasördeki dosyaları kontrol et
     auto_add_index_to_csvs()

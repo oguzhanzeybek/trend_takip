@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { 
   LayoutDashboard, ShoppingBag, Brain, Zap, ArrowRight, Clock,
   MoreHorizontal, ArrowUpRight, ArrowDownRight, Activity,
-  Search, Globe, RefreshCcw, BarChart2, Wifi, Calendar
+  Search, Globe, RefreshCcw, BarChart2, Wifi, Calendar, PieChart
 } from "lucide-react";
 
 const API_BASE_URL = "http://127.0.0.1:8000";
@@ -13,8 +13,6 @@ export default function DashboardPage() {
   const [timeRange, setTimeRange] = useState("24h");
   const [loading, setLoading] = useState(true);
   const [latency, setLatency] = useState(0); 
-  
-  // AI Analizi için ayrı bir state tutuyoruz
   const [aiInsight, setAiInsight] = useState("Yapay zeka verileri tarıyor, lütfen bekleyin...");
 
   const [stats, setStats] = useState<any>({
@@ -26,7 +24,6 @@ export default function DashboardPage() {
     system_status: "..."
   });
 
-  // 1. İSTATİSTİKLERİ ÇEKEN FONKSİYON (Hızlıdır)
   const fetchStats = async () => {
     try {
         setLoading(true);
@@ -45,18 +42,13 @@ export default function DashboardPage() {
     }
   };
 
-  // 2. YAPAY ZEKA ANALİZİNİ ÇEKEN YENİ FONKSİYON (Biraz sürebilir)
   const fetchAiInsight = async () => {
     try {
-        // Yükleniyor mesajı verelim
         setAiInsight("🤖 Yapay zeka milyonlarca veriyi analiz ediyor...");
-        
-        // Senin yeni oluşturduğun endpoint'e istek atıyoruz
         const res = await fetch(`${API_BASE_URL}/api/strategic-insights?time_range=${timeRange}`);
         
         if (res.ok) {
             const data = await res.json();
-            // Gelen cevabı state'e yazıyoruz
             if (data.insight) {
                 setAiInsight(data.insight);
             }
@@ -67,7 +59,6 @@ export default function DashboardPage() {
     }
   };
 
-  // useEffect hem istatistikleri hem de AI analizini tetikler
   useEffect(() => { 
       fetchStats(); 
       fetchAiInsight(); 
@@ -122,57 +113,46 @@ export default function DashboardPage() {
         <StatCard title="Sistem Sağlığı" value="OK" change="Backend Aktif" isPositive={true} icon={<Wifi size={20} className="text-green-500"/>} color="green"/>
       </div>
 
-      {/* GRAFİK VE AI */}
+      {/* ÜST BÖLÜM: KAYNAK DAĞILIMI (BÜYÜK) ve AI İÇGÖRÜ */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         
-        {/* GRAFİK KISMI */}
-        <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 min-h-[350px] flex flex-col relative">
+        {/* 1. KAYNAK DAĞILIMI (ARTIK BURADA - BÜYÜK ALAN) */}
+        <div className="lg:col-span-2 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 min-h-[350px] flex flex-col">
            <div className="flex justify-between items-center mb-6">
-             <div>
-               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                 <BarChart2 size={18} className="text-blue-500"/>
-                 Veri Giriş Grafiği
-               </h3>
-               <p className="text-xs text-gray-500">Maksimum Veri Anlık: <span className="text-white font-bold">{maxChartValue.toLocaleString()}</span></p>
-             </div>
+             <h3 className="text-lg font-bold text-white flex items-center gap-2">
+               <PieChart size={18} className="text-orange-500"/>
+               Kaynak Dağılımı ve Yoğunluk
+             </h3>
+             <span className="text-xs text-gray-500 bg-zinc-950 px-2 py-1 rounded border border-zinc-800">{timeRange} Verileri</span>
            </div>
-           
-           <div className="flex-1 flex gap-2 relative">
-             {/* Y-EKSENİ (Arka plan çizgileri) */}
-             <div className="absolute left-0 top-0 bottom-8 w-full flex flex-col justify-between pointer-events-none opacity-20 z-0">
-                 <div className="border-t border-zinc-500 w-full"></div>
-                 <div className="border-t border-zinc-500 w-full border-dashed"></div>
-                 <div className="border-t border-zinc-500 w-full"></div>
-             </div>
 
-             {/* BARLAR */}
-             <div className="flex-1 flex items-end justify-between z-10 gap-1 pb-6 overflow-x-auto">
-               {(stats?.chart_data || []).map((item: any, i: number) => {
-                   const heightPercent = Math.max((item.value / maxChartValue) * 100, 2); 
-                   return (
-                   <div key={i} className="min-w-[30px] w-full flex flex-col justify-end group relative h-full">
-                       <div className="text-[10px] text-zinc-400 text-center mb-1 opacity-0 group-hover:opacity-100 transition-opacity font-bold">
-                           {item.value > 0 ? item.value : ''}
+           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Sol Taraf: Büyük İstatistikler */}
+              <div className="space-y-6">
+                 <BigSourceBar name="Google Trends" count={stats?.sources?.google} percent={getPercent(stats?.sources?.google || 0)} color="bg-blue-500" icon={<Search size={18}/>} />
+                 <BigSourceBar name="E-Ticaret Platformları" count={stats?.sources?.ecommerce} percent={getPercent(stats?.sources?.ecommerce || 0)} color="bg-orange-500" icon={<ShoppingBag size={18}/>} />
+                 <BigSourceBar name="Sosyal Medya" count={stats?.sources?.social} percent={getPercent(stats?.sources?.social || 0)} color="bg-pink-500" icon={<Globe size={18}/>} />
+                 <BigSourceBar name="Haberler / Diğer" count={stats?.sources?.news} percent={getPercent(stats?.sources?.news || 0)} color="bg-gray-500" icon={<Globe size={18}/>} />
+              </div>
+
+              {/* Sağ Taraf: Görsel Özet (Opsiyonel Daire) */}
+              <div className="flex justify-center items-center relative h-full min-h-[200px]">
+                  {/* Basit CSS Pasta Grafiği Efekti */}
+                  <div className="w-48 h-48 rounded-full border-[20px] border-zinc-800 flex items-center justify-center relative overflow-hidden">
+                       <div className="absolute inset-0 border-[20px] border-orange-500 rounded-full" style={{ clipPath: `polygon(0 0, 100% 0, 100% 100%, 0 100%)`, opacity: 0.8 }}></div>
+                       <div className="flex flex-col items-center">
+                           <span className="text-3xl font-black text-white">{(stats?.period_count || 0).toLocaleString()}</span>
+                           <span className="text-xs text-gray-500">Toplam Veri</span>
                        </div>
-                       
-                       <div 
-                       className="w-full bg-zinc-800 rounded-t-sm transition-all duration-500 group-hover:bg-blue-500 relative overflow-hidden"
-                       style={{ height: `${heightPercent}%` }}
-                       >
-                           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-500/20 to-transparent"></div>
-                       </div>
-                       
-                       <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-gray-500 font-mono w-max">
-                           {item.label?.split(' ')[0]}
-                       </span>
-                   </div>
-                   )
-               })}
-             </div>
+                  </div>
+                  <div className="absolute bottom-0 text-center w-full">
+                      <p className="text-xs text-gray-400">En baskın kaynak: <span className="text-orange-400 font-bold">E-Ticaret</span></p>
+                  </div>
+              </div>
            </div>
         </div>
 
-        {/* AI İÇGÖRÜSÜ KISMI (GÜNCELLENDİ) */}
+        {/* 2. AI İÇGÖRÜSÜ (YERİ AYNI) */}
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-6 relative overflow-hidden flex flex-col">
            <div className="absolute top-0 right-0 w-40 h-40 bg-pink-600/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
            <div className="flex items-center justify-between mb-4">
@@ -184,7 +164,6 @@ export default function DashboardPage() {
            </div>
            
            <div className="flex-1 bg-zinc-950/50 rounded-xl border border-zinc-800/50 p-5 relative overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-zinc-700">
-             {/* BURASI ARTIK AI'DAN GELEN VERİYİ GÖSTERİYOR */}
              <p className="text-sm text-gray-200 leading-relaxed font-medium whitespace-pre-wrap">
                {aiInsight}
              </p>
@@ -192,42 +171,56 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ALT GRID */}
+      {/* ALT BÖLÜM: VERİ GİRİŞ GRAFİĞİ (KÜÇÜK) ve SAATLİK AKIŞ */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* KAYNAK DAĞILIMI */}
+        
+        {/* 3. VERİ GİRİŞ GRAFİĞİ (ARTIK BURADA - DAHA KOMPAKT) */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Kaynak Dağılımı ({timeRange})</h3>
-           <div className="space-y-5">
-              <SourceItem name="Google Trends" percent={getPercent(stats?.sources?.google || 0)} color="bg-blue-500" icon={<Search size={14}/>} />
-              <SourceItem name="E-Ticaret" percent={getPercent(stats?.sources?.ecommerce || 0)} color="bg-orange-500" icon={<ShoppingBag size={14}/>} />
-              <SourceItem name="Sosyal Medya" percent={getPercent(stats?.sources?.social || 0)} color="bg-pink-500" icon={<Globe size={14}/>} />
-              <SourceItem name="Haberler / Diğer" percent={getPercent(stats?.sources?.news || 0)} color="bg-gray-500" icon={<Globe size={14}/>} />
-           </div>
+            <div className="flex justify-between items-center mb-4">
+               <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                 <BarChart2 size={16}/> Veri Giriş Hızı
+               </h3>
+               <span className="text-xs text-blue-500 font-bold">Max: {maxChartValue}</span>
+            </div>
+            
+            {/* Grafiğin Kompakt Hali */}
+            <div className="h-[200px] w-full flex items-end justify-between gap-1">
+               {(stats?.chart_data || []).map((item: any, i: number) => {
+                   const heightPercent = Math.max((item.value / maxChartValue) * 100, 5); 
+                   return (
+                   <div key={i} className="flex-1 bg-zinc-800 rounded-t-sm hover:bg-blue-500 transition-colors relative group" style={{ height: `${heightPercent}%` }}>
+                       {/* Tooltip */}
+                       <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-black text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-20 font-bold pointer-events-none">
+                           {item.value} Veri
+                       </div>
+                   </div>
+                   )
+               })}
+            </div>
+            <div className="flex justify-between mt-2 px-1">
+                <span className="text-[10px] text-gray-600">00:00</span>
+                <span className="text-[10px] text-gray-600">12:00</span>
+                <span className="text-[10px] text-gray-600">23:00</span>
+            </div>
         </div>
 
-        {/* SON AKTİVİTELER - SAATLİK ÖZET */}
+        {/* 4. SON AKTİVİTELER - SAATLİK ÖZET (AYNI YERİNDE AMA 2 SÜTUN KAPLIYOR) */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 col-span-1 lg:col-span-2">
            <div className="flex justify-between items-center mb-4">
               <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Saatlik Veri Akışı</h3>
               <MoreHorizontal size={16} className="text-gray-500 cursor-pointer"/>
            </div>
            
-           <div className="space-y-0 relative">
+           <div className="space-y-0 relative max-h-[220px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-zinc-700">
               <div className="absolute left-[9px] top-2 bottom-2 w-[1px] bg-zinc-800"></div>
               
               {(stats?.recent_activities || []).map((act: any, i:number) => (
                 <div key={i} className="relative pl-6 pb-6 last:pb-0 group">
-                  
-                  {/* Mavi Nokta */}
                   <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-[3px] border-zinc-900 bg-blue-500 z-10 group-hover:scale-125 transition-transform"></div>
-                  
                   <div>
-                      {/* Başlık: Kaç Veri Girdi? */}
                       <h4 className="text-sm font-bold text-white leading-none group-hover:text-blue-400 transition-colors mb-1.5">
                         {act.count} Adet Veri İşlendi
                       </h4>
-                      
-                      {/* Saat */}
                       <span className="text-[10px] text-gray-500 flex items-center gap-1 font-medium bg-zinc-950 px-2 py-0.5 rounded w-fit border border-zinc-800">
                         <Clock size={10} className="text-gray-500"/> {act.time_display} Saat Dilimi
                       </span>
@@ -245,7 +238,8 @@ export default function DashboardPage() {
   );
 }
 
-// YARDIMCI KOMPONENTLER (Aynı Kalsın)
+// YARDIMCI KOMPONENTLER (GÜNCELLENDİ)
+
 function StatCard({ title, value, change, isPositive, icon, color }: any) {
   const colorClass = color === 'blue' ? 'text-blue-500' : color === 'purple' ? 'text-purple-500' : color === 'green' ? 'text-green-500' : 'text-yellow-500';
   return (
@@ -266,16 +260,25 @@ function StatCard({ title, value, change, isPositive, icon, color }: any) {
   );
 }
 
-function SourceItem({ name, percent, color, icon }: any) {
-  return (
-    <div>
-      <div className="flex justify-between text-xs mb-2 text-gray-300 font-medium">
-        <span className="flex items-center gap-2">{icon} {name}</span>
-        <span>{percent}%</span>
+// BÜYÜK KAYNAK ÇUBUĞU (YENİ)
+function BigSourceBar({ name, percent, count, color, icon }: any) {
+    return (
+      <div>
+        <div className="flex justify-between items-end mb-2">
+            <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-lg bg-zinc-950 border border-zinc-800 text-gray-300`}>{icon}</div>
+                <div>
+                    <h4 className="text-sm font-bold text-white">{name}</h4>
+                    <p className="text-xs text-gray-500">{(count || 0).toLocaleString()} Veri</p>
+                </div>
+            </div>
+            <span className="text-lg font-bold text-white">{percent}%</span>
+        </div>
+        <div className="w-full bg-zinc-950 h-3 rounded-full overflow-hidden border border-zinc-800">
+          <div className={`h-full ${color} transition-all duration-1000 ease-out relative`} style={{ width: `${percent}%` }}>
+              <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-white/50"></div>
+          </div>
+        </div>
       </div>
-      <div className="w-full bg-zinc-950 h-2.5 rounded-full overflow-hidden border border-zinc-800">
-        <div className={`h-full ${color} transition-all duration-1000 ease-out`} style={{ width: `${percent}%` }}></div>
-      </div>
-    </div>
-  );
+    );
 }

@@ -49,11 +49,9 @@ def scrape_twitter_trends():
             print("🛑 Tarayıcı kapatıldı.")
 
     processed_rows = []
-    # Header'a 'Rank' ekledik
     header = ["Rank", "Trend", "Tag"] 
 
     for i, trend in enumerate(trends_list):
-        # Tag mantığın aynen duruyor
         if i < 50: tag = 0
         elif i < 200: tag = 1 
         elif i < 250: tag = 2
@@ -73,7 +71,6 @@ def scrape_twitter_trends():
         elif i < 1000: tag = 16
         else: tag = 24
         
-        # En başa sıra numarasını (i+1) ekledik
         processed_rows.append([i+1, trend, tag])
 
     if trends_list:
@@ -81,9 +78,7 @@ def scrape_twitter_trends():
         try:
             with open(file_path_raw, "w", newline="", encoding="utf-8-sig") as file:
                 writer = csv.writer(file)
-                # Header'a 'Rank' ekledik
                 writer.writerow(["Rank", "Trend"])
-                # Döngüde sıra numarası vererek yazıyoruz
                 for i, t in enumerate(trends_list, 1):
                     writer.writerow([i, t])
             print(f"✅ Ham Dosya kaydedildi: {file_path_raw}")

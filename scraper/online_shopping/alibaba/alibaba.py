@@ -138,9 +138,6 @@ def process_batch(category_list, worker_id):
 
     return batch_results
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     import os
     import csv
@@ -217,10 +214,8 @@ if __name__ == "__main__":
     try:
         with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
             writer = csv.writer(file)
-            # Header: Başa Rank Eklendi
             writer.writerow(["Rank", "Kategori", "Ürün Başlığı", "Fiyat", "Min. Sipariş", "Link"])
             
-            # Veriler enumerate ile numaralandırılarak yazılıyor
             for i, row in enumerate(all_final_data, 1):
                 writer.writerow([i] + row)
 
@@ -233,5 +228,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"❌ Dosya kaydetme hatası: {e}")
 
-    # İşlem bittikten sonra klasör taraması yap
     auto_add_index_to_csvs()

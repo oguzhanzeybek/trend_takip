@@ -148,18 +148,14 @@ def scrape_tiktok_trends():
         output_filename = "tiktok_trends.csv"
         output_path = BASE_DIR / output_filename
 
-        # Set'i listeye çeviriyoruz ki sıralama yapabilelim
         hashtag_list = list(collected_hashtags)
 
-        # CSV KAYDI (Rank Eklendi)
         if hashtag_list:
             try:
                 with open(output_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    # Header güncellendi: Başa "Rank" eklendi
                     writer.writerow(["Rank", "Hashtag"])
                     
-                    # Sıra numarasıyla yazıyoruz (enumerate 1'den başlar)
                     for i, tag in enumerate(hashtag_list, 1):
                         writer.writerow([i, tag])
                         
@@ -170,9 +166,6 @@ def scrape_tiktok_trends():
         else:
             print(f"❌ Veri oluşmadığı için '{output_filename}' kaydedilemedi.")
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     """
     Bulunduğu klasördeki CSV dosyalarını bulur ve 
@@ -221,5 +214,4 @@ def auto_add_index_to_csvs():
 
 if __name__ == "__main__":
     scrape_tiktok_trends()
-    # Scraper bittikten sonra klasördeki diğer dosyaları da kontrol et
     auto_add_index_to_csvs()

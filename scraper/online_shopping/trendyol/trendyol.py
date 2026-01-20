@@ -130,10 +130,8 @@ def scrape_trendyol():
             try:
                 with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    # --- Header Güncellendi: Başa 'Rank' eklendi ---
                     writer.writerow(["Rank", "Kategori", "Marka", "Ürün Adı", "Fiyat", "Link"])
                     
-                    # --- Veriler 1'den başlayarak numaralandırılıyor ---
                     for i, prod in enumerate(all_products, 1):
                         writer.writerow([i] + prod)
 
@@ -145,9 +143,6 @@ def scrape_trendyol():
         else:
             print("\n⚠️ Hiçbir veri çekilemedi.")
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     import os
     import csv

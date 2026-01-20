@@ -1,0 +1,651 @@
+RAPOR 1:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['toki', 'atalanta', 'inter', 'fenerbahçe', 'beşiktaş', 'bologna', 'sassuolo', 'cremonese', 'napoli', 'braga', 'benfica'], 'kisiler': ['erden timur', 'brigitte bardot', 'hazal çağlar', 'necip uysal', 'engin nurşani', 'buse iskenderoğlu', 'ahmet emin yavuk', 'necmettin nursaçan', 'maya hawke', 'mustafa karataş', 'serkan keskin', 'batagov'], 'yerler': ['şanlıurfa', 'diyarbakır', 'konya', 'gaziantep', 'batman', 'aksaray', 'fildişi sahili', 'kamerun', 'pisa', 'juventus'], 'fiyatlar': ['28 aralık çeyrek altın fiyatları'], 'olaylar': ['yarın okullar tatil mi', 'milli savunma bakanlığı personel alımı', 'güller ve günahlar son bölüm', 'masterchef te altın önlüğü kim', 'emekli maaşı zammı 2026', 'regaip kandili']}
+Duygu: Merak ve heyecan
+Kanıt/Detay: Metinde geçen 'yarın okullar tatil mi' ve 'emekli maaşı zammı 2026' gibi ifadeler, insanların güncel olaylar ve gelecek planları hakkında merak içinde olduklarını gösteriyor.
+
+---
+RAPOR 2:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['thunder', '76ers', 'raptors', 'warriors', 'chelsea', 'aston villa', 'milan', 'verona', 'petkim', 'beşiktaş', 'tottenham', 'bologna', 'serikspor', 'boluspor', 'al nassr', 'al akhdoud', 'sporting', 'sporting lizbon'], 'kisiler': ['rojda yakışıklı', 'rabia soytürk', 'robbie williams', 'giray altınok', 'souffian el karouani', 'ercan yılmaz', 'hakan çalhanoğlu', 'kerem özdoğan', 'ebru köksal'], 'yerler': ['kazakistan', 'nijerya', 'tunus', 'çine', 'urla', 'azerbaycan', 'tacikistan'], 'fiyatlar': ['asgari ücret son dakika 2026'], 'olaylar': ['milletler cemiyeti', 'inter maçı', 'masterchef eren neden yok', 'stranger things izle']}
+Duygu: Hareketlilik ve merak
+Kanıt/Detay: Verilerdeki trendler ve arama hacimleri, insanların spor, hava durumu, popüler kişiler ve güncel olaylar hakkında yoğun bir ilgi gösterdiğini ortaya koyuyor.
+
+---
+RAPOR 3:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['fenerbahçe', 'manchester united', 'real madrid', 'samsunspor', 'vanspor', 'al nassr'], 'kisiler': ['baba vanga', 'esref ruya', 'yağız kaan erdoğmuş', 'ezgi fındık', 'ryan gosling', 'sadettin saran', 'emine gouiri', 'adnan oktar'], 'yerler': ['polonya', 'vatikan', 'pekin', 'libya', 'filipinler', 'izmir', 'istanbul', 'gabon'], 'olaylar': ['baba vanga 2026 kehanetleri', 'sunderland - leeds united', 'manchester united - newcastle united', 'samsunspor - eyüpspor', 'rockets - cavaliers', 'algeria vs burkina faso']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Öne çıkan konular arasında spor karşılaşmaları, ünlü isimlerin gündemde olması ve dini ritüellerin vurgulanması dikkat çekiyor. Örneğin, 'samsunspor - eyüpspor' ve 'fenerbahçe - manisa' gibi maçlar, spor tutkusunu yansıtıyor. Ayrıca, 'baba vanga 2026 kehanetleri' gibi konular, gelecekle ilgili merak ve inançları ön plana çıkarıyor.
+
+---
+RAPOR 4:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['galatasaray', 'juventus', 'aston villa', 'arsenal', 'lakers', 'monako', 'tog t10x'], 'Kişiler': ['haji wright', 'yasin kol', 'umut evirgen', 'barış terkoğlu', 'ali sabancı', 'mbaye diagne', 'vince zampella', 'margot robbie', 'emir berke zincidi'], 'Yerler': ['başakşehir', 'gaziantep', 'udinese', 'lazio', 'konyaspor', 'antalyaspor', 'elazığ', 'ığdır', 'düzce'], 'Olaylar': ['g20', 'sömestr tatili', 'gap projesi', 'bedelli askerlik', 'pazar günü marketler kapalı mı']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Son zamanlarda popüler olan konular arasında spor karşılaşmaları, hava durumu, tatil dönemleri ve güncel olaylar dikkat çekiyor. Örneğin, 'galatasaray - trabzonspor' ve 'konyaspor - antalyaspor' gibi spor karşılaşmaları geniş bir ilgi görüyor.
+
+---
+RAPOR 5:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['türk telekom', 'anadolu efes', 'xiaomi', 'cavo otomotiv', 'atv', 'fenerbahçe', 'benfica', 'ac milan', 'arsenal', 'magic', 'msb', 'muğlaspor', 'pegasus'], 'Kisiler': ['eda erol', 'timur savcı', 'ali öner', 'seda sayan', 'kerem gülkoparan', 'sadettin saran', 'chris rea', 'akın gürlek'], 'Yerler': ['suriye', 'karabük üniversitesi', 'montreal', 'makedonya', 'napoli', 'bologna'], 'Olaylar': ['afad personel alımı', 'ikindi namazı', '27 aralık ne günü']}
+Duygu: Hareketlilik
+Kanıt/Detay: Dün, 'türk telekom - anadolu efes' ve 'eda erol' gibi başlıklar öne çıktı. Ayrıca, 'suriye para birimi' ve 'fenerbahçe - barcelona' gibi konular da dikkat çekiyor.
+
+---
+RAPOR 6:
+Konu: İnsanlar hava durumu, spor olayları ve güncel konular hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['ekol tv', 'medistate çekmeköy', 'manchester united', 'burnley - everton', 'genk - club brugge'], 'Kişiler': ['sevilay yılman', 'tayyip erdoğan', 'mahmut uğur ziylan', 'sabalenka', 'magnus carlsen', 'warren buffett', 'cristiano ronaldo', 'eren özken', 'göksel aşan', 'göktan gürpüz', 'can armando güner', 'thilo kehrer'], 'Yerler': ['ankara', 'tayvan', 'malatya', 'nauru', 'şırnak', 'erzurum', 'yakutistan', 'monako', 'büyükçekmece', 'senegal', 'demokratik kongo'], 'Fiyatlar': ['pasaport ücreti 2026', '2026 kıdem tazminatı tavanı', 'kyk bursu ne kadar 2026'], 'Olaylar': ['miraç kandili', 'çılgın sayısal loto çekilişi', '26 aralık cuma hutbesi konusu', 'livorpool vs wolverhampton', 'تشيلسي ضد أستون فيلا']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Özellikle 'ankara hava durumu', 'tayvan', 'manchester united' ve 'miraç kandili ne zaman' gibi başlıklar, insanların gündeminin ne kadar çeşitli olduğunu gösteriyor.
+
+---
+RAPOR 7:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Clippers', 'Rockets', 'Liverpool', 'Chelsea', 'Athletic Bilbao', 'Espanyol', 'Show TV', 'Ziraat Türkiye Kupası'], 'Kişiler': ['Kübra Süzgün', 'İsmet İnönü', 'Ece Vahapoğlu', 'Gamze Özçelik', 'Derin Talu', 'Cemal Özgörkey'], 'Yerler': ['Konya', 'Mekke', 'Yalova', 'Karabük', 'Afyon', 'Kahramanmaraş', 'Bolu', 'Macaristan', 'Algerie', 'Burkina Faso'], 'Olaylar': ['Deprem', 'Su kesintisi', 'Trafik kazası', 'Futbol maçları'], 'Fiyatlar': ['Gümüş fiyatı']}
+Duygu: Hareketlilik ve merak
+Kanıt/Detay: Öne çıkan konular arasında doğal afetler, spor etkinlikleri ve hava durumu gibi günlük yaşamı etkileyen olaylar bulunmaktadır. 'Konya deprem' ve 'Kahramanmaraş hava durumu' gibi başlıklar, insanların anlık durumlarına dair kaygılarını ve meraklarını yansıtmaktadır.
+
+---
+RAPOR 8:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['everton', 'fenerbahçe', 'celtic'], 'kisiler': ['sinan çalışkanoğlu', 'halis serbest', 'barış boyun', 'burak yörük', 'omar marmoush', 'jason statham', 'remzi albayrak', 'elon musk', 'hülya koçyiğit', 'sydney sweeney'], 'yerler': ['çanakkale', 'izmir', 'adana', 'melbourne', 'hakkari'], 'olaylar': ['12 yaşındaki çocuk okul müdürünü öldürdü', 'akaryakıt zam', 'fenerbahçe transfer haberleri']}
+Duygu: Hareketlilik ve merak
+Kanıt/Detay: Metinde geçen popüler konular arasında spor takımları, ünlü kişiler, güncel olaylar ve hava durumu gibi çeşitli temalar öne çıkıyor. Örneğin, 'fenerbahçe transfer haberleri' ve '12 yaşındaki çocuk okul müdürünü öldürdü' gibi başlıklar, toplumun spor ve güvenlik konularına olan ilgisini yansıtıyor.
+
+---
+RAPOR 9:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['spurs', 'jazz', 'warriors', 'mavericks', 'arsenal', 'bülent uygun', 'bjk', 'tdk', 'napoli', 'fenerbahçe', 'epic games'], 'Kişiler': ['nihat hatipoğlu', 'ertan torunoğulları', 'özlem öz', 'zuhal topal', 'andressa urach', 'mustafa köseoğlu', 'tayfun kahraman', 'semiramis pekkan', 'sergen yalçın', 'bergüzar korel', 'tyler chase', 'simge sağın', 'hadise', 'arda kural', 'umut nayir', 'asensio', 'taner arı', 'sedat peker'], 'Yerler': ['bursa', 'adana', 'morocco', 'mali', 'ankara', 'zincirlikuyu mezarlığı'], 'Fiyatlar': ['50 euro'], 'Olaylar': ['kadir gecesi', '31 aralık yarım gün mü', 'hava durumu']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Son günlerde 'nihat hatipoğlu', 'spurs - jazz' ve 'kadir gecesi' gibi konular ön plana çıkıyor. Bu durum, insanların gündemdeki olaylara ve kişilere olan ilgilerini gösteriyor.
+
+---
+RAPOR 10:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['fenarbahçe', 'liverpool fc'], 'kisiler': ['hülya avşar', 'pavel durov', 'jeff bezos', 'ademola lookman', 'logon paul', 'leonardo dicaprio', 'acun ilıcalı', 'enes ünal', 'goretzka', 'fedon', 'bahar şahin', 'brad pitt', 'ibrahim burtakuçin', 'kerem aktürkoğlu', 'feyza civelek'], 'yerler': ['kastamonu', 'adana', 'trabzon', 'gent', 'sivas'], 'fiyatlar': ['100+', '200+', '500+', '1 B+', '2 B+'], 'olaylar': ['grammy ödülü', 'trail blazers - clippers', "hülya avşar'ın gündeme gelmesi", 'fenarbahçe - beşiktaş maçı', 'kayseri namaz vakitleri', 'stranger things eddie']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Örneğin, 'grammy ödülü kazanan şarkıcı kimdir?' sorusu, müzik dünyasına olan ilgiyi gösteriyor.
+
+---
+RAPOR 11:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['bim', 'spk', 'oyak çimento'], 'kisiler': ['hakan fidan', 'kubilay', 'irfan can kahveci', 'serenay sarıkaya', 'marcao', 'nba youngboy', 'beyazıt öztürk', 'aslı bekiroğlu', 'haydar karataş', 'gürkan teoman', 'ibrahim tatlıses', 'beyonce', 'devrim şahin'], 'yerler': ['kocaeli', 'bodrum', 'manisa', 'mechelen', 'porto', 'al hilal', 'samsun'], 'olaylar': ['2026 vergi dilimleri', 'süper kupa', 'galatasaray maçı kasımpaşa maçı', 'hatay hava durumu', 'afşin hava durumu', 'championship', 'bim hisse']}
+Duygu: Baskın his
+Kanıt/Detay: Metinde geçen markalar, kişiler ve olaylar üzerinden toplumsal ilgi alanlarının geniş bir yelpazede yer aldığı görülmektedir.
+
+---
+RAPOR 12:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['tüvtürk', 'cnn', 'ntv', 'harvard üniversitesi', 'espanyol', 'al ittihad'], 'Kişiler': ['ayşe şeyma keten', 'anthony dennis', 'tümer metin', 'esra yoldaş balcı', 'murat kurum', 'arnold schwarzenegger', 'melissa fidan çalışkan', 'bella hadid', 'zeki çelik', 'yağmur uçkun'], 'Yerler': ['antalya', 'kırıkkale', 'inegöl', 'bilecik', 'döşemealtı'], 'Olaylar': ['survivor 2026 ünlüler kadrosu', '25 aralık gaziantep in kurtuluşu', 'on numara çekiliş sonuçları', '21 aralık nar kırma ritüeli'], 'Fiyatlar': ['1 B+', '2 B+', '10 B+', '100+', '200+', '500+']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: İnsanlar hava durumu, spor olayları ve ünlü kişilerin gündemde olmasını merak ediyorlar. Örneğin, 'survivor 2026 ünlüler kadrosu' ve '25 aralık gaziantep in kurtuluşu' gibi başlıklar dikkat çekiyor.
+
+---
+RAPOR 13:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['netflix', 'call of duty', 'flightradar24'], 'Kişiler': ['yeşim ceren bozoğlu', 'kenan imirzalıoğlu', 'davide frattesi', 'ayberk karapo', 'selin yağcıoğlu', 'ahmet yozgatlıgil'], 'Yerler': ['hatay', 'tunis', 'doha', 'giresun', 'burkina faso', 'konya'], 'Olaylar': ['deprem', 'elektrik kesintisi', 'akşam ezanı vakti', 'emekli promosyon 2026']}
+Duygu: Hareketlilik ve endişe
+Kanıt/Detay: Öne çıkan konular arasında deprem ve elektrik kesintileri gibi acil durumlar, popüler kültür ve spor etkinlikleri yer alıyor. Bu durum, insanların güncel olaylara olan duyarlılığını ve sosyal medya üzerinden bilgi paylaşımını artırdığını gösteriyor.
+
+---
+RAPOR 14:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['a haber', 'tv+'], 'Kişiler': ['teoman', 'evan ferguson', 'alain delon', 'muhasebetr', 'yiğit efe demir', 'madonna', 'farah zeynep abdullah', 'rezan epözdemir', 'mbwana samatta', 'sadettin saran', 'hülya avşar', 'conor gallagher', 'nicki minaj', 'ümit dikbayır'], 'Yerler': ['pendik', 'libya', 'türkiye', 'turks and caicos', 'habeşistan', 'afyon'], 'Fiyatlar': ['2023 asgari ücret'], 'Olaylar': ['kim milyoner olmak ister', 'şarika karşı الهلال']}
+Duygu: Baskın his
+Kanıt/Detay: Son günlerde birçok kişi, 'kim milyoner olmak ister' ve '2023 asgari ücret' gibi konular üzerinde yoğunlaşıyor. Ayrıca, ünlü isimlerin gündemde olduğu ve çeşitli olayların dikkat çektiği görülüyor.
+
+---
+RAPOR 15:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Chobani', 'Exxen', 'PBS'], 'Kişiler': ['Meryem Boz', 'Demet Özdemir', 'Arthur Avom', 'Manuel Ugarte', 'Rafa Silva', 'Harry Kane'], 'Yerler': ['Çekmeköy', 'Muş', 'Denizli', 'Malatya', 'Samsun', 'Arnavutköy', 'Bursa'], 'Olaylar': ['Denizli deprem', 'AFAD deprem', 'Survivor 2026', 'Yarıyıl tatili 2026', 'Egypt vs Zimbabwe', 'Bayern - Hapoel Tel Aviv']}
+Duygu: Hareketlilik ve endişe
+Kanıt/Detay: Özellikle 'deniz depremi' ve 'survivor' gibi olaylar, insanların gündeminde önemli bir yer tutmakta. 'Denizli deprem' ve 'AFAD deprem' gibi konular, toplumsal bir kaygı ve endişe yaratırken, 'survivor' gibi eğlence programları ise insanların dikkatini çekiyor.
+
+---
+RAPOR 16:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['tesla', 'habertürk', 'bosch', 'battlefield 6', 'anadolujet', 'brent petrol'], 'kisiler': ['afra saraçoğlu', 'murat emir', 'tammy abraham', 'deniz barut', 'joão pedro', 'deniz türüç', 'alperen şengün', 'jack doherty', 'yusuf güney', 'ahmet özer', 'florian wirtz', 'ahmet mustafa timo', 'alexander sörloth', 'mehmet mustafa gürban', 'ömer çelik'], 'olaylar': ['sahtekarlar 11 bölüm', '24 aralık hangi burç', 'futbol puan durumu', 'bağdat caddesi yangın', 'çağrı filmi nerede çekildi'], 'yerler': ['portekiz süper ligi', 'birmingham city', 'moldova', 'virtus bologna - brescia', 'santa clara'], 'fiyatlar': ['çeyrek bilet ne kadar']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Son günlerde popüler olan konular arasında 'tesla', 'afra saraçoğlu' ve 'sahtekarlar 11 bölüm' öne çıkıyor. Ayrıca, '24 aralık hangi burç' ve 'bağdat caddesi yangın' gibi olaylar da dikkat çekiyor.
+
+---
+RAPOR 17:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['enerjisa', 'power fm', 'mynet haber', 'ahaber'], 'Kişiler': ['vince mcmahon', 'ihh', 'djalo', 'kartal kayra yılmaz', 'mehmet tosmur', 'ernest muçi', 'erdal beşikçioğlu', 'richie omorowa', 'murat ülker', 'bilal erdoğan', 'gökhan sazdağı', 'roman abramovich', 'pervin buldan'], 'Yerler': ['balıkesir', 'koçarlı', 'redmond', 'ankara', 'isveç', 'aydın', 'ipswich', 'ريال بتيس ضد خيتافي', 'yozgat'], 'Olaylar': ['gelinim mutfakta kim elendi', 'milletvekili maaşı', 'ibb şehir tiyatroları', 'aksam namazi', 'sabah namazı', 'takım sıralaması', 'pelicans - mavericks', 'dijital hizmet vergisi']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Gözlemlenen trendler arasında, özellikle dini ritüeller (sabah namazı, aksam namazi) ve güncel olaylar (gelinim mutfakta kim elendi, milletvekili maaşı) üzerine yoğun bir ilgi var. Ayrıca, hava durumu gibi günlük yaşamı etkileyen konular da dikkat çekiyor.
+
+---
+RAPOR 18:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['cnn', 'halk tv', 'siemens', 'huawei'], 'kisiler': ['nezir çınarlı', 'ozan kılıç', 'sebastian hertner', 'attila szalai', 'changpeng zhao', 'stefan savić', 'özlem bodur', 'ümit özdağ'], 'yerler': ['karşıyaka', 'şişhane metro', 'kapalı çarşı', 'istanbul'], 'olaylar': ['italya süper kupası', '2026 bütçesi', 'mısır millî futbol takımı', 'trendyol 1 lig puan durumu']}
+Duygu: Hareketlilik ve ilgi
+Kanıt/Detay: Gözlemlenen trendler, özellikle spor olayları ve canlı yayınlar etrafında yoğunlaşıyor. Örneğin, 'karşıyaka sk', 'italya süper kupası' ve 'halk tv canlı' gibi başlıklar, izleyicilerin ilgisini çeken konular arasında.
+
+---
+RAPOR 19:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['inter', 'atalanta', 'crystal palace', 'tottenham', 'bologna', 'masterchef', 'robbie williams', 'sporting'], 'Kişiler': ['brigitte bardot', 'buse iskenderoğlu', 'necmettin nursaçan', 'irfan can kahveci', 'serkan keskin', 'rojda yakışıklı'], 'Yerler': ['şanlıurfa', 'konya', 'gaziantep', 'azerbaycan', 'fildişi sahili', 'polonya', 'urla'], 'Fiyatlar': ['28 aralık çeyrek altın fiyatları'], 'Olaylar': ['yarın okullar tatil mi', 'güller ve günahlar son bölüm', 'roboski katliami', 'masterchef eren neden yok']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Özellikle 'yarın okullar tatil mi' ve '28 aralık çeyrek altın fiyatları' gibi sorgular, insanların güncel olaylara ve finansal duruma olan ilgisini yansıtıyor.
+
+---
+RAPOR 20:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['real madrid', 'barcelona', 'trt spor', 'trtspor', 'sporting lizbon', 'gap projesi', 'tog t10x', 'cezayir milli takımı', 'gabon millî futbol takımı', 'kristal palas'], 'kisiler': ['hakan çalhanoğlu', 'filip jorgensen', 'kerem özdoğan', 'mustafa karataş', 'sander svendsen', 'ryan gosling', 'margot robbie', 'ercan yılmaz', 'yağız kaan erdoğmuş', 'rahmetullah berişbek', 'filipinler', 'kenan yıldız'], 'yerler': ['serik', 'bolu', 'nevşehir', 'mardin', 'pekin', 'vatikan', 'istanbul', 'izmir', 'uşak', 'monako', 'gabon', 'elazığ'], 'olaylar': ['sunderland - leeds united', 'real madrid - unicaja', 'bilbao - barcelona', 'atalanta - inter', 'algeria - burkina faso', 'hangisi tdk güncel türkçe sözlüğe girmiş bir ifade değildir']}
+Duygu: Baskın his
+Kanıt/Detay: Örneğin, 'hava durumu mardin' ve 'izmir hava durumu' gibi başlıklar, insanların hava durumuna olan ilgisini gösteriyor.
+
+---
+RAPOR 21:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['ac milan', 'magic - nuggets', 'büyükçekmece - bursaspor', 'melbourne city', 'bjk gain'], 'kisiler': ['ali öner', 'adnan oktar', 'victor osimhen', 'tayyip erdoğan', 'magnus carlsen', 'warren buffett', 'hakan sabancı', 'elon musk', 'hülya koçyiğit', 'zuhal topal', 'gamze özçelik', 'eda ece', 'sabalenka', 'rasmus højlund', 'mert günok'], 'yerler': ['ığdır', 'kartepe', 'aydın', 'suriye', 'ankaragücü', 'karabük', 'nauru', 'erzurum', 'bolu', 'çanakkale', 'tayvan', 'montreal', 'macaristan', 'adana'], 'olaylar': ['okullar ne zaman tatil', 'gönül dağı oyuncuları', 'milano vs hellas verona', 'algérie – burkina faso', 'kings - mavericks', 'spurs - jazz'], 'fiyatlar': ['200+', '1 B+', '500+', '100+']}
+Duygu: İlgi ve merak
+Kanıt/Detay: Metinde geçen isimler ve markalar, güncel olaylar ve ilgi alanları hakkında yüksek arama hacmi ile dikkat çekiyor.
+
+---
+RAPOR 22:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['starbucks', 'ugg'], 'kisiler': ['bülent uygun', 'bergüzar korel', 'hadise', 'jeff bezos', 'ademola lookman', 'hülya avşar', 'leonardo dicaprio', 'beyazıt öztürk', 'aslı bekiroğlu', 'teoman', 'kees smit', 'jasmine'], 'yerler': ['bursa', 'düzce'], 'olaylar': ['survivor 2026 ünlüler kadrosu', 'stranger things final bölümü'], 'fiyatlar': ['قیمت لیر']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: İnsanlar, popüler kültür ve güncel olaylar hakkında sorular sormakta ve meraklarını dile getirmekte. Örneğin, '2026 ya kaç gün kaldı?' gibi sorular, geleceğe dair bir ilgi ve heyecanı yansıtmaktadır.
+
+---
+RAPOR 23:
+Konu: İnsanlar sosyal medya üzerinden çeşitli konular ve duygular hakkında paylaşımlarda bulunuyor.
+Tespit Edilen Varlıklar/Markalar: {'Hashtagler': ['#ncigjoeflizzow', '#tasketaskediri', '#coloriinvernali', '#vocedasilva', '#miamifamilies', '#jerseybolagradeorimurah', '#showoffyourskills', '#talksex', '#bourboncoffee', '#freilichttheater', '#lukisjaketjogja', '#meetmyfeetph', '#lukeposner', '#eyelasheselise', '#goodbyenganggur', '#telekungreadysolat', '#familydollarsavingmoney', '#artgallerybrisbane', '#spotonambassador', '#insyaallahlulusyes', '#delcosalon', '#sanisidrolimaperu', '#portraitpakistan', '#jacketparasutjoma', '#newdesignbags', '#fietssaojose', '#rozcountry', '#alligatorjuniper', '#billardtisch', '#seragamkerudung', '#miacorvere', '#doubledeliciousness', '#virgofact', '#setkuashellokitty', '#queenurvashirautela', '#botamontaria', '#thelassocompany', '#rokbungamurah', '#nzstore', '#jualkyliekosmetikori', '#prunusavium', '#buschbeer', '#rocksgroupantigua', '#populace', '#psyjane', '#kaoscowokterlaris', '#merthan', '#jashujanroksby', '#jualhormonestrogen', '#colarrodio']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Hashtagler, farklı ilgi alanlarını ve toplulukları temsil ediyor, bu da kullanıcıların çeşitli konulara olan ilgisini ve katılımını gösteriyor.
+
+---
+RAPOR 24:
+Konu: Kullanıcıların sosyal medya üzerinden paylaştığı yaratıcı içerikler ve etkinlikler
+Tespit Edilen Varlıklar/Markalar: {'Hashtagler': ['#ripkidvillain', '#campuskaraoke', '#mukenapradatimbul', '#batikcouplekeluargamodern', '#newyearhairstyle', '#paketikangoreng', '#bruneiteamfsl', '#trendinguttarakhand', '#chupitosgratis', '#agenertosjakarta', '#codareaselamaperakkedah', '#balderncastle', '#teamqee', '#citateljicepisu', '#platecantik', '#vrijeschooldingen', '#drsippy', '#mahdapekalongan', '#ecolocandatirolese', '#naturepage', '#prelovedjakartamurahmeriah', '#caspe', '#gamistangerangkota', '#tothebitterend', '#besttile', '#patthaya', '#photographycompetitions', '#pomeraniansofdubai', '#euamoleitura', '#rakhiyal', '#wujudkankaryakalian', '#boodywear', '#silverpearls', '#maquiagemamarela', '#cheesetartbandarenstek', '#vasenhighlight', '#weddingphot', '#segiempatbellalasercut', '#clasesgraduandas', '#taskulitpadang', '#bolsachique', '#customsoftplastics', '#kodinremontti', '#pigmentosrbkollors', '#ambwdate', '#pinefurniture', '#roupascasuais', '#ormondbeachflorida', '#crazytrapbeat', '#harbininstituteoftechnology']}
+Duygu: Yaratıcılık ve toplumsal etkileşim
+Kanıt/Detay: Kullanıcılar, farklı konular ve etkinlikler etrafında toplumsal etkileşimlerini artırmak için çeşitli hashtagler kullanıyorlar.
+
+---
+RAPOR 25:
+Konu: İnsanlar sosyal medyada parfüm, moda ve yaşam tarzı ile ilgili içerikleri paylaşıyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Giordani', 'Hermes', 'Arthur P. Jacobs'], 'kisiler': ['Anil Kapoor'], 'yerler': ['Jawa'], 'olaylar': ['Kampanya', 'Tüketici ilgisi']}
+Duygu: İlgi ve merak
+Kanıt/Detay: Öne çıkan hashtag'ler arasında #giordanigoldparfum ve #hermescertified gibi markalara ait olanlar, kullanıcıların bu markalara olan ilgisini gösteriyor.
+
+---
+RAPOR 26:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': [], 'yerler': [], 'fiyatlar': [], 'olaylar': ['#sportseventindonesia', '#horsemedicine', '#sosserum', '#drinkcraftbeeronly', '#choxmoist', '#popularairsoft', '#gastronomiavalluna', '#microneedlingreno', '#naturalinteriordesign', '#commercialrealestatefinance', '#stayathomestyle']}
+Duygu: Çeşitlilik ve ilgi
+Kanıt/Detay: Çeşitli etkinlikler, sağlık ve güzellik ürünleri, yerel işletmeler ve sosyal medya trendleri üzerine konuşmalar mevcut.
+
+---
+RAPOR 27:
+Konu: İnsanlar sosyal medya üzerinden çeşitli etkinlikler, yerler ve markalar hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Kodak', 'Sherman Brothers', 'Ginecologist A Goiania'], 'Kişiler': ['Isabel Angelica'], 'Yerler': ['Goiânia', 'Mumbai'], 'Olaylar': ['Casablanca Wedding Service', 'Dark Skin Girls Killing It', 'Bilingual Driver']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Öne çıkan hashtag'ler arasında #goianiaeventos, #makamhajikartasura ve #feedyourimagination gibi ifadeler, insanların farklı etkinlikler ve deneyimlerle ilgilendiğini gösteriyor.
+
+---
+RAPOR 28:
+Konu: İnsanlar sosyal medya platformlarında çeşitli konular ve ilgi alanları hakkında konuşuyorlar.
+Tespit Edilen Varlıklar/Markalar: {'Hashtag': ['#plikofooldingboosterseat', '#bridgeoflions', '#grosircelanachinoanak', '#veterinariasunam', '#londoninstinct', '#batugiokbaubausulawesi', '#galerianovabarao', '#kasurpompatraveling', '#concentratesupplyco', '#grosirpkumurahbanget', '#wawacosmeticsarawak', '#juventuenecimento', '#jyotibro', '#promoblackgarlick', '#umandarudecemberpromo', '#kokorolearningcenter', '#6fanart', '#perioddesign', '#speakbahasaindonesia', '#indianturism', '#doorgiftselangormurah', '#libertytavern', '#shortthrow', '#testconducir', '#igerspalazzoloacreide', '#docestropical', '#sarasotaweddingplanner', '#robynschneider', '#turbosession', '#jualtasdumai', '#caramembuatcoklatputih', '#eyelashjelambarbaruraya', '#mutethenegative', '#nowaricanduva', '#kedilerisevin', '#agardenisneverfinished', '#tamilnadubeauties', '#jaxmuaythai', '#malaysiasextoys', '#gallionsreach', '#tripconte', '#stephaniesosa', '#yogaisunionwithgod', '#polaroidsemarangmurah', '#payungstandarpromosi', '#pusatbelanjabatikonline', '#isherinails', '#mediamangatattoo', '#planetvenus', '#clovismomsfitness']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Hashtag'lerde görülen çeşitlilik, insanların farklı ilgi alanlarına ve etkinliklere yöneldiğini gösteriyor.
+
+---
+RAPOR 29:
+Konu: İnsanlar, modadan sanata, seyahat ve etkinliklere kadar geniş bir yelpazede ilgi alanlarını paylaşıyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Gucci', 'Iberostar Grand Bavaro'], 'kisiler': ['Helene Udy'], 'yerler': ['Malaysia', 'Yogyakarta', 'Bali', 'Bahrain'], 'olaylar': ['Thank You Day Today', 'San Diego Burlesque']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Örneğin, '#jeansbudakperempuanmurahmalaysia' etiketi ile moda ve yerel kültür üzerine bir ilgi var. Aynı zamanda '#harnesslife' etiketi, yaşam tarzı ve kişisel gelişim konularında bir tartışma başlatıyor.
+
+---
+RAPOR 30:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': [], 'yerler': ['Cappadocia', 'Palembang', 'Bandung', 'Raleigh', 'Bali'], 'fiyatlar': [], 'olaylar': ['Karnaval', 'Düğün', 'Trekking']}
+Duygu: Çeşitlilik ve Yaratıcılık
+Kanıt/Detay: Hashtag'lerde görülen çeşitlilik, insanların farklı yerler, etkinlikler ve yaratıcı projeler hakkında konuştuğunu gösteriyor. Örneğin, #visitcappadocia, #indonesiatrekkingcompany gibi etiketler, belirli yerler ve deneyimlere olan ilgiyi yansıtıyor.
+
+---
+RAPOR 31:
+Konu: İnsanlar sosyal medya üzerinden çeşitli konular ve markalar hakkında paylaşımlarda bulunuyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['tiffanyandcompany', 'onitsukabatam', 'dcshoeplug'], 'kisiler': ['naomikurung', 'jaydayoungantypebeat'], 'yerler': ['cincinnaibpermata', 'eldersburgsalonandspa'], 'fiyatlar': ['5,500', '20,286', '13,129'], 'olaylar': ['texasfloodrocknblues', 'festivaloutfitinspo']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Örneğin, #fossilemmawallet etiketi 5,500 arama hacmine sahipken, #nirvanalive etiketi 20,286 arama hacmi ile dikkat çekiyor.
+
+---
+RAPOR 32:
+Konu: İnsanlar çeşitli konular ve ilgi alanları hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'Hashtag': ['#bananarun', '#doorgiftmajliskawin', '#quartetoconvida', '#vanessaguzman', '#losangelescountytermites', '#gorillapodslrmurah', '#mantaparabebe', '#mascaraalistermurah', '#collagensinergy', '#robloxgroups', '#sarnialocalbussiness', '#hikingdaily', '#scultoreparkeunsun', '#contemporarypaintingartist', '#sobellamurahmurah', '#bajuanakperempuananakmurah', '#fortnitethumbnailsforsale', '#houstonkidsthronechairs', '#weddingsinnaija', '#setelanokbggirl', '#miamipuppy', '#dogueattire', '#chikichubakiloan', '#pgavillage', '#haryanvigirl', '#alatukirsayur', '#pattayadestinationweddings', '#boobsfordaysss', '#rashmonimathur', '#itsnotarace', '#outfitsnagitaslavina', '#satriamudatransport', '#celanasbymurah', '#thecompleteplanning', '#nomakeupchallenges', '#farmhousenursery', '#friendsinqatar', '#counselinglouisiana', '#dairyblock', '#vapingbrasil', '#raindropsdroptops', '#kiddiesitems', '#makandirumahaja', '#candytheclownesse', '#jegskalgiftes', '#mountainjam', '#desifoodlovers', '#isiheliumsurabaya', '#radtrain', '#cinepsycho']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Verilerdeki hashtag çeşitliliği, insanların farklı ilgi alanlarına ve etkinliklere yöneldiğini gösteriyor. Örneğin, '#weddingsinnaija' etiketi, düğün organizasyonlarına olan ilgiyi yansıtırken, '#hikingdaily' doğa yürüyüşlerine olan ilgiyi ortaya koyuyor.
+
+---
+RAPOR 33:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Priyanka Chopra'], 'yerler': ['Surabaya', 'Valencia', 'Korea', 'Miami', 'Doncaster', 'Malaysia', 'Bandung', 'Sussex'], 'fiyatlar': [], 'olaylar': ['Ujian UKMPPD', 'Tarian Traditional', 'Cannabis Journey']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Metinde geçen konular, sosyal medya trendleri ve popüler kültüre dair ilginç etkileşimleri yansıtıyor. Örneğin, '#handmadeofootwear' ve '#premiumcarsurabaya' gibi etiketler, insanların belirli ürünlere olan ilgisini gösteriyor.
+
+---
+RAPOR 34:
+Konu: İnsanlar sosyal medya üzerinden çeşitli konular hakkında paylaşımlar yapıyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['sonynz', 'lancomehypnosedrama'], 'kisiler': [], 'yerler': ['rishikeshcamping', 'jeparaindahbna'], 'fiyatlar': [], 'olaylar': ['travelbusinessnetworking', 'birthdaydressbaby']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Örneğin, '#beautifulapartmentsnyc' etiketi ile güzel daireler hakkında bir merak var.
+
+---
+RAPOR 35:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Hashtagler': ['#hampersgalantine', '#microderma', '#amazingeurope', '#dokterpenyakitdalam', '#travelgirlspakistan', '#heavydutymaterial', '#parentsxmxl', '#agendacustommurah', '#emiratespalaceabudhabi', '#fitnessmodellife', '#everythingboxy', '#jackoscarstatham', '#seragamkemejatoko', '#prunesforlife', '#bisjadul', '#obatgataleksimkering', '#millimeterwaves', '#klubkidsnewcastle', '#troymcclure', '#venerdi17', '#jualshihtzubetina', '#grampiansnationalpark', '#cupangpkfancy', '#taskecesolo', '#hansanitizer', '#tupperwarepurple', '#corsidanzaroma', '#lakewoodmoms', '#eyesmilecouple', '#wesleychapelfamilyphotographer', '#stikernamainfinity', '#profilaxisdental', '#liveaectionofaladdin', '#boobsallover', '#sanayak', '#dekormantenmalang', '#sampurngyanhindi', '#passionanimals', '#maraschinocherries', '#sarungadat', '#japaneseimperials', '#boobsize', '#ritmix', '#straightoutthejungle', '#jualjaketseken', '#connectibadanweddings', '#ojasrawchocolate', '#campinafactofy', '#monstrosmuaythai', '#triadanimecon']}
+Duygu: İlgi ve merak
+Kanıt/Detay: Hashtagler, sosyal medya kullanıcılarının en çok ilgi duyduğu konuları ve trendleri yansıtmaktadır. Örneğin, '#grampiansnationalpark' ve '#travelgirlspakistan' gibi etiketler, seyahat ve doğa ile ilgili içeriklere olan ilgiyi göstermektedir.
+
+---
+RAPOR 36:
+Konu: İnsanlar sosyal medya üzerinden çeşitli konular hakkında paylaşımlar yapıyor.
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': [], 'Yerler': ['Barcelona', 'Mumbai', 'Jakarta', 'Wirral', 'Qatar', 'Bali', 'Johannesburg'], 'Fiyatlar': [], 'Olaylar': []}
+Duygu: Çeşitlilik ve keşif
+Kanıt/Detay: Öne çıkan hashtag'ler arasında #minhaviagemlivre (15,798), #vempraprime (35,748) ve #fragaddict (25,145) gibi yüksek arama hacmine sahip etiketler bulunuyor.
+
+---
+RAPOR 37:
+Konu: İnsanlar sosyal medya üzerinden çeşitli konular hakkında paylaşımlar yapıyor.
+Tespit Edilen Varlıklar/Markalar: {'hashtagler': ['#jackworks', '#globexperformance', '#zabania', '#jastipeurekaoriginal', '#grosircasemurahsemurahsemurah', '#kembalikepadaallah', '#boobsgarage', '#croatianblogger', '#annaemcnultyfan', '#wwactivitypoints', '#filmsuperhero', '#agenkasurmalang', '#malearmpit', '#sanggarbimbeldm', '#jeddahphotographers', '#layananakikahbogor', '#shishacafesurabaya', '#funnypackaging', '#pisangcheeseselambak', '#boyolalibmx', '#palhacodehospital', '#printedtudung', '#clubatleticosanlorenzodealmagro', '#jamtangannaviforceori', '#gerlonggirang', '#kretivhediyyeler', '#followmetravel', '#jualiphonexpluscase', '#jeonginedits', '#travelgirlsgetaway', '#fosslileather', '#megabloksbayi', '#theredstonehotchilicompany', '#richbmc', '#floristowentonky', '#telebeheyati', '#jaketcombi', '#luznomundomovement', '#prefeituraouropreto', '#foodcartsportland', '#livemoveson', '#manuelaschikorsky', '#degustazionedivino', '#bucktailjigs', '#flowergirlmurah', '#bajumaxigrosir', '#ajudamonografia', '#beritanegeri', '#celanawjeans', '#bimbelpolrioke']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Hashtagler, kullanıcıların ilgi alanlarını ve sosyal etkileşimlerini yansıtan bir araç olarak kullanılıyor.
+
+---
+RAPOR 38:
+Konu: İnsanlar sosyal medyada çeşitli ve ilginç konuları tartışıyor.
+Tespit Edilen Varlıklar/Markalar: {'hashtagler': ['#cuirchevelu', '#dragonballsexy', '#tribalpendant', '#vemcomhilda', '#fangen', '#oty', '#naishahijab', '#teamforst', '#layananakikahterbaik', '#dalhousietrip', '#kaelarmy', '#browznbeauty', '#pizzaroyalty', '#memberjaframagelang', '#walshtx', '#informationplanet', '#carstop', '#publicoinfantil', '#mulanfanart', '#salessuzukijakarta', '#stivesapricotfreshskin', '#islemleri', '#kulitmenawan', '#createwithme', '#avaliacoes', '#fuzhouniversity', '#clumberlove', '#lionparceldenpasartangkubanperahu', '#stokgaia', '#kurungminifishtail', '#brouge', '#visitforchheim', '#kursirotancafee', '#suplementwajahcantik', '#sydneyfoodaddicts', '#dawnreginaporras', '#hondenliefhebbers', '#gaspendaki', '#enrigacaodepastagem', '#jualftp', '#sprekenvoorpubliek', '#houseplantsph', '#brentemandler', '#kaosuprightbandung', '#gaunpestamuslimahbrokat', '#fashioncolorextraordinaire', '#supplierjilbabsegiempatmurah', '#terapikecemasan', '#iepunkflea', '#movepassionatelymovesavagely']}
+Duygu: Çeşitlilik ve ilgi çekicilik
+Kanıt/Detay: Hashtaglerin çeşitliliği, farklı ilgi alanlarını ve sosyal etkileşimleri yansıtıyor.
+
+---
+RAPOR 39:
+Konu: İnsanlar sosyal medya üzerinden çeşitli konular hakkında etkileşimde bulunuyor.
+Tespit Edilen Varlıklar/Markalar: {'Hashtaglar': ['#setcombojimatnuno', '#bandcampcodes', '#jualhairclipduri', '#sandritacakes', '#nationalsecuritycouncil', '#blakelangermann', '#produccionesdigitales', '#pracovninasazeni', '#waduhbisalumpuhgue', '#bartenderlisa', '#jagadguruttamdham', '#beanbagsmall', '#fifeanddrumcorps', '#silkpressclt', '#hijossanos', '#sagamiindonesia', '#queering', '#istanbulairporttaksi', '#ikanguppyindo', '#jualtopleskeripik', '#photographydecor', '#sabyasachisarees', '#agereverseandglowingserum', '#hijabpurbalinggamurah', '#opcdriversswitzerland', '#chattanoogafitness', '#kpopblockparty', '#animeanother', '#tokoitemmurah', '#kainkonveksimurah', '#vacantescali', '#satanpetitcoeur', '#manoula', '#soprogresso', '#melanz', '#rastreieseucarro', '#vapecape', '#planetcasemurah', '#styrofoampotongbanjarbaru', '#trendsekarang', '#setbajutunang', '#feedinwithcurls', '#ifanseventeenlovers', '#dragisvalid', '#katespadeadaira', '#kueslogohimo', '#tasserutpalembang', '#pendaftarangrabindonesia', '#onlyny', '#prparisi'], 'Öne Çıkanlar': {'Yüksek Arama Hacmi': [{'Hashtag': '#hijossanos', 'Hacim': '16,628'}, {'Hashtag': '#kpopblockparty', 'Hacim': '22,443'}, {'Hashtag': '#melanz', 'Hacim': '29,497'}, {'Hashtag': '#soprogresso', 'Hacim': '26,943'}, {'Hashtag': '#setcombojimatnuno', 'Hacim': '1,072'}, {'Hashtag': '#bandcampcodes', 'Hacim': '3,132'}, {'Hashtag': '#jualhairclipduri', 'Hacim': '901'}, {'Hashtag': '#sandritacakes', 'Hacim': '462'}, {'Hashtag': '#nationalsecuritycouncil', 'Hacim': '1,178'}, {'Hashtag': '#blakelangermann', 'Hacim': '2,676'}]}}
+Duygu: Çeşitlilik ve Yüksek İlgi
+Kanıt/Detay: Yüksek arama hacmine sahip hashtaglar, kullanıcılara geniş bir ilgi alanı ve etkileşim sağlıyor. Örneğin, '#melanz' ve '#kpopblockparty' gibi popüler etiketler, belirli bir kültürel fenomenin veya etkinliğin sosyal medyada ne kadar yankı bulduğunu gösteriyor.
+
+---
+RAPOR 40:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': [], 'Yerler': [], 'Fiyatlar': [], 'Olaylar': ['viral içerik', 'dans trendleri', 'hashtag kullanımı']}
+Duygu: Trend ve popülarite arayışı
+Kanıt/Detay: Hashtag'lerin popülaritesi, sosyal medya kullanıcılarının ilgi alanlarını ve etkileşimlerini yansıtmaktadır. Örneğin, '#dance' ve '#viral' gibi terimler, dans ve viral içeriklere olan ilgiyi göstermektedir.
+
+---
+RAPOR 41:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Hashtaglar': ['#dlaciebie', '#love', '#pye', '#rek', '#coupletrend', '#elbruso', '#linda', '#sisters', '#family', '#viralvideos', '#laraibmalik', '#forupage', '#explore', '#тренд', '#fyp', '#trendy', '#russiantrend', '#vibe', '#recommendations', '#fpy', '#xuhong', '#fouryou', '#girlfirend', '#dancetrends', '#dancetrend', '#costume', '#trending', '#transition', '#humor', '#duo', '#foryoupage', '#girls', '#fypシ', '#tshirt', '#xuhongtiktok', '#makeup', '#tiktokchallenge', '#halloween', '#tiktoker', '#viraltiktok', '#fun', '#parati', '#highschool', '#couplegoals', '#catsoftiktok', '#meme']}
+Duygu: Eğlenceli ve sosyal bağ kurma isteği
+Kanıt/Detay: Hashtagların çoğu, aşk, ilişkiler, eğlence ve viral içerik etrafında dönerken, 'coupletrend' ve 'couplegoals' gibi etiketler sosyal bağların ve ilişkilerin önemine vurgu yapıyor.
+
+---
+RAPOR 42:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'hashtagler': ['#fyyyyyy', '#dancing', '#goviral', '#foryoupage❤️❤️', '#animal', '#dança', '#мемы', '#trendingreels', '#trend??tiktok', '#viralllllll', '#magic', '#paratii', '#couple', '#brasil🇧🇷', '#trend', '#blowthisup', '#newtrend', '#kennykyawt', '#funny', '#foru', '#retable', '#challenge', '#paratiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', '#vanenengg', '#dancechallenge', '#fup', '#dancer', '#tiktok', '#drafts', '#foryou', '#fypage', '#dc', '#trendingnow', '#asian', '#viralvideo', '#fypp', '#treanding', '#🤍', '#fypシ゚', '#boyfriend', '#twins', '#trendingvideo', '#tik_tok', '#ai', '#beauty', '#tiktokdance', '#popular', '#tiktokindia', '#gehviral', '#usa']}
+Duygu: Eğlenceli ve yaratıcı
+Kanıt/Detay: Hashtagler, dans, eğlence ve viral içeriklere olan ilgiyi gösteriyor; '#dancing' ve '#dancechallenge' gibi etiketler, kullanıcıların dans içeriklerine yöneldiğini ortaya koyuyor.
+
+---
+RAPOR 43:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Amedspor'], 'Kişiler': ['Edinson Cavani', 'Cüneyt Arkın', 'Şener Şen', 'Gülben Ergen', 'Yağız Sabuncuoğlu', 'Uğurcan Çakır', 'Leyla Zana', 'ABD Başkanı Trump', 'Oğuz', 'Moreno', 'Murat Ağırel', 'Alper'], 'Yerler': ['Galata Köprüsü', 'Erzurum', 'Roboski', 'Uludere'], 'Olaylar': ['Kabine2024KPSSEkYirmiBeşBin', 'HayaliYurtdışı', 'Gençliğimizi Yok Saydınız']}
+Duygu: Hareketlilik ve tartışma
+Kanıt/Detay: Çeşitli duygu ve düşüncelerin öne çıktığı bir ortamda, özellikle toplumsal olaylar ve kişisel hikayeler üzerinden tartışmalar yaşanıyor.
+
+---
+RAPOR 44:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': ['Edinson Cavani', 'ABD Başkanı Trump', 'Leyla Zana', 'Şener Şen', 'Brigitte Bardot', 'Gülben Ergen', 'Yağız Kaan Erdoğmuş', 'Veyis Ateş', 'Uğurcan Çakır'], 'Yerler': ['Galata Köprüsü', 'Roboski', 'Uludere'], 'Olaylar': ['Hayali Yurtdışı', 'Gençliğimizi Yok Saydınız', 'Utanmıyoruz']}
+Duygu: Toplumsal duyarlılık ve siyasi bilinç
+Kanıt/Detay: Toplumda siyasi olaylar ve sosyal adalet konuları öne çıkmakta; '#Utanmıyoruz' ve '#HayaliYurtdışı' gibi etiketler, katılımcıların toplumsal duyarlılığını ve eleştirilerini yansıtmaktadır.
+
+---
+RAPOR 45:
+Konu: Toplumun çeşitli kesimlerinin gündem maddeleri ve duygusal tepkileri
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Amedspor', 'Erzurumspor FK', 'Ankaragücü', 'Bayraktar'], 'kisiler': ['Edinson Cavani', 'ABD Başkanı Trump', 'Leyla Zana', 'Gülben Ergen', 'Yağız Kaan Erdoğmuş', 'Yağız Sabuncuoğlu', 'Veyis Ateş', 'Uğurcan Çakır', 'Jonah Mathews', 'Brigitte Bardot', 'Şener Şen', 'Bilge Kağan Şarbat'], 'yerler': ['Galata Köprüsü', 'Roboski', 'Uludere'], 'olaylar': ['Günah Gecesi', 'Çatlı Fragman', 'Kabine 2024 KPSS']}
+Duygu: Karşıtlık ve Umut
+Kanıt/Detay: Toplumun farklı kesimlerinin, özellikle spor, siyaset ve sosyal adalet konularında güçlü duygular beslediği ve bu konuların sosyal medyada aktif olarak tartışıldığı görülmektedir.
+
+---
+RAPOR 46:
+Konu: Toplumun çeşitli sosyal ve siyasi konular üzerindeki düşünceleri ve hisleri
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Amedspor', 'Ankaragücü', 'Miss Türkiye 2016', 'Bayraktar'], 'Kişiler': ['Bilge Kağan Şarbat', 'Şener Şen', 'Cristiano Ronaldo', 'Uğurcan Çakır', 'Yağız Sabuncuoğlu', 'Esed', 'namjoon', 'Veyis Ateş'], 'Yerler': ['Galata Köprüsü', 'Roboski', 'Uludere', "Suriye'nin Lazkiye", 'Erzurumspor FK'], 'Olaylar': ['Günah Gecesi', 'Gençliğimizi Yok Saydınız', 'Kabine 2024 KPSSE Ek Yirmi Beş Bin']}
+Duygu: Duygusal bağlılık ve sosyal bilinç
+Kanıt/Detay: Metinde geçen hashtagler ve isimler, toplumun güncel olaylara ve sosyal meselelere olan duyarlılığını yansıtıyor. Örneğin, '#GazzeyiUnutma' ve '#YaparsaErdoğanYapar' gibi ifadeler, siyasi konulara dair güçlü bir duygu ve düşünceyi ortaya koyuyor.
+
+---
+RAPOR 47:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Beşiktaş GAİN'], 'kişiler': ['Bilge Kağan Şarbat', 'Şener Şen', 'Uğurcan Çakır', 'Yağız Kaan Erdoğmuş', 'Oğuz Aydın', 'Veyis Ateş', 'Taner Çağlı', 'Yağız Sabuncuoğlu', 'Jonah Mathews', 'Brigitte Bardot', 'Rahmetullah Berişbek'], 'yerler': ['Galata Köprüsü', "Suriye'nin Lazkiye", 'Roboski', 'Uludere'], 'olaylar': ['Günah Gecesi', 'Miss Türkiye 2016', 'Gençliğimizi Yok Saydınız']}
+Duygu: Hüzün ve mücadele
+Kanıt/Detay: Metinde geçen 'Gençliğimizi Yok Saydınız' ifadesi, gençlerin hissettiği hüzün ve mücadele duygusunu yansıtmaktadır.
+
+---
+RAPOR 48:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Amedspor', 'Beşiktaş Gain'], 'Kişiler': ['Aybüke Pusat', 'Brigitte Bardot', 'Jonah Mathews', 'Şener Şen', 'Yağız Kaan Erdoğmuş', 'Uğurcan Çakır', 'Nkunku', 'Veyis Ateş', 'Mimar Sinan', 'Yağız Sabuncuoğlu', 'Enes Zengin', 'Oğuz Aydın', 'Buse İskenderoğlu', 'Taner Çağlı'], 'Yerler': ["Suriye'nin Lazkiye", 'Uludere'], 'Olaylar': ['Roboski', 'Kaçakçılık', 'Yargıtay', 'Gençliğimizi Yok Saydınız']}
+Duygu: Çeşitlilik ve merak
+Kanıt/Detay: Metinde geçen etiketler ve isimler, toplumsal olaylar, kültürel figürler ve güncel tartışmaları yansıtıyor. Örneğin, '#Amedspor' ve '#KIZILELMA' gibi etiketler, spor ve sosyal meseleler hakkında yoğun bir ilgi olduğunu gösteriyor.
+
+---
+RAPOR 49:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Beşiktaş Gain', 'Milli Teknoloji Hamlesi'], 'Kişiler': ['Brigitte Bardot', 'Aybüke Pusat', 'Jonah Mathews', 'Yağız Kaan Erdoğmuş', 'Namjoon', 'Dusan', 'Şener Şen', 'Uğurcan Çakır', 'Veyis Ateş', 'Mimar Sinan', 'Esad', 'Buse İskenderoğlu', 'İrfan Can Kahveci', 'Oğuz Aydın', 'Ege Karataşlı', 'Taner Çağlı'], 'Yerler': ["Suriye'nin Lazkiye", 'Uludere', 'Nusayri', 'Roma'], 'Olaylar': ['Günah Gecesi', 'Roboski', 'Kaçakçılık', 'Gençliğimizi Yok Saydınız']}
+Duygu: Merak ve tartışma
+Kanıt/Detay: Öne çıkan hashtagler arasında #MilliTeknolojiHamlesi ve #GünahGecesi gibi konular dikkat çekiyor. Bu durum, toplumda teknoloji ve ahlaki değerler üzerine bir tartışma olduğunu gösteriyor.
+
+---
+RAPOR 50:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': ['Brigitte Bardot', 'Jonah Mathews', 'Aybüke Pusat', 'Şener Şen', 'Yağız Kaan Erdoğmuş', 'Veyis Ateş', 'Taner Çağlı', 'Uğurcan Çakır', 'Miss Türkiye 2016', 'Buse İskenderoğlu', 'İrfan Can Kahveci', 'Oğuz Aydın', 'Ege Karataşlı', 'Gülben'], 'Yerler': ['Roboski', 'Uludere', 'Kadıköy'], 'Fiyatlar': [], 'Olaylar': ['Günah Gecesi', 'Gençliğimizi Yok Saydınız', 'Milli Teknoloji Hamlesi', 'Hayali Yurtdışı']}
+Duygu: Harekete geçme ve dayanışma
+Kanıt/Detay: İnsanlar, sosyal adalet ve dayanışma temalı konular üzerinde yoğunlaşmakta; özellikle gençliğin yok sayılması ve yerel olaylar hakkında farkındalık yaratmaya çalışmaktadırlar.
+
+---
+RAPOR 51:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Brigitte Bardot', 'Veyis Ateş', 'Taner Çağlı', 'Necip', 'Gülben', 'Buse İskenderoğlu', 'Semih', 'Ceballos', 'Ege Karataşlı', 'Recep Tayyip Erdoğan', 'Yağız Kaan Erdoğmuş', 'Taha Çakmak', 'Oğuz Aydın', 'Uğurcan', 'Miss Türkiye 2016', 'Tayfun Kahraman', 'Sebahattin Şirin', 'Mert Günok', 'Enes Zengin', 'Ali Sabancı', 'Magnus Carlsen', 'Şener Şen'], 'Markalar': [], 'Yerler': ['Somaliland', 'Hatay', 'Anıtkabir', 'Bolu Yedigöller Milli Parkı'], 'Olaylar': ['Uludere', 'Deprem', "Suriye'nin Lazkiye"], 'Hashtagler': ['#ErdenTimurYalnızDeğildir', '#AsrınLideriErdoğan', '#TürkiyeninBaşarısı', '#pazar']}
+Duygu: Politik ve sosyal duyarlılık
+Kanıt/Detay: Metinde geçen ifadeler, özellikle 'Gençliğimizi Yok Saydınız' ve 'kimse susturamaz' gibi cümleler, toplumsal bir duyarlılığın ve politik bir eleştirinin var olduğunu göstermektedir.
+
+---
+RAPOR 52:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': ['Veyis Ateş', 'Taner Çağlı', 'Necip', 'Gülben', 'Buse İskenderoğlu', 'Semih Kılıçsoy', 'Enes Zengin', 'Ege Karataşlı', 'Oğuz Aydın', 'Miss Türkiye 2016', 'Ali Baran Süzer', 'Sultan Süleyman', 'Şebnem İnan', 'Sebahattin Şirin', 'Cengiz Can Atasoy', 'Murat Kurum', 'Ali Sabancı', 'Mert Günok', 'Serkan Keskin', 'Demir Ege'], 'Yerler': ['Roboski', 'Somaliland', 'Anıtkabir', 'Uludere', 'Hatay', 'İzmir'], 'Olaylar': ['Gazze İçin Birleşin', 'Asrın İnşası', 'Deprem']}
+Duygu: Hareketlilik ve toplumsal duyarlılık
+Kanıt/Detay: Toplum, sosyal adalet, ulusal kimlik ve uluslararası meseleler üzerine yoğunlaşmış durumda. Öne çıkan hashtag'ler ve isimler, bu konuların halk arasında nasıl yankı bulduğunu gösteriyor.
+
+---
+RAPOR 53:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Veyis Ateş', 'Taner Çağlı', 'Gülben', 'Buse İskenderoğlu', 'Semih Kılıçsoy', 'Enes Zengin', 'Ege Karataşlı', 'Oğuz Aydın', 'Tayfun Kahraman', 'Ali Baran Süzer', 'Cengiz Ünder', 'Murat Kurum', 'Mert Günok', 'Cengiz Can Atasoy', 'Brigitte Bardot'], 'yerler': ['Gazze', 'Somaliland', 'Hatay', 'Anıtkabir', 'İstanbul Şişli', 'Uludere'], 'olaylar': ['Roboski', 'Asrın İnşası', 'Deprem', 'Miss Türkiye 2016', 'İstiklal Marşımızın']}
+Duygu: Hüzün ve dayanışma
+Kanıt/Detay: Metinde geçen 'Gençliğimizi Yok Saydınız' ve '#AsrınLideriErdoğan' gibi ifadeler, toplumsal bir eleştiriyi ve duygu yoğunluğunu yansıtıyor.
+
+---
+RAPOR 54:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Taner Çağlı', 'Buse İskenderoğlu', 'Gülben', 'Semih Kılıçsoy', 'Şebnem İnan', 'Ege Karataşlı', 'Oğuz Aydın', 'Ömer Toprak', 'Veysi Ateş', 'Ali Baran Süzer', 'Murat Kurum', 'Cengiz Can Atasoy', 'Erden Timur'], 'yerler': ['Gazze', 'Somaliland', 'Uludere', 'Anıtkabir', 'Bolu Yedigöller Milli Parkı', 'İstanbul Şişli'], 'olaylar': ['Roboski', 'Asrın İnşası', 'Miss Türkiye 2016', 'İstiklal Marşımızın']}
+Duygu: Çeşitli duygular ve sosyal konular üzerine yoğunlaşma
+Kanıt/Detay: Metinde geçen detaylar, sosyal konulara ve bireylerin toplumsal olaylara karşı duyarlılıklarını yansıtmaktadır.
+
+---
+RAPOR 55:
+Konu: İnsanlar ulusal başarılar ve toplumsal olaylar hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Brigitte Bardot', 'Buse İskenderoğlu', 'Ege Karataşlı', 'Gülben', 'Şebnem İnan', 'Semih Kılıçsoy', 'Cengiz Can Atasoy', 'Tayfun Kahraman', 'Ömer Toprak', 'Mustafa Kemal Atatürk', 'Veysi Ateş', 'Oğuz Aydın', 'Murat Kurum', 'Mert Günok', 'Erden Timur'], 'yerler': ['Gazze', 'Somaliland', 'Bolu Yedigöller Milli Parkı', 'Hatay', 'Anıtkabir'], 'olaylar': ['Roboski', 'Uludere', 'Asrın İnşası', 'Miss Türkiye 2016']}
+Duygu: Ulusal gurur ve toplumsal hassasiyet
+Kanıt/Detay: Metinde geçen 'Gençliğimizi Yok Saydınız' ve '#TürkiyeninBaşarısı' gibi ifadeler, toplumsal hassasiyet ve ulusal kimlik vurgusu yapıyor.
+
+---
+RAPOR 56:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Mehmet Akif Ersoy', 'Buse İskenderoğlu', 'Ege Karataşlı', 'Semih Kılıçsoy', 'Gülben', 'Cengiz Ünder', 'Mustafa Kemal Atatürk', 'Tayfun Kahraman', 'Oğuz Aydın', 'Mert Günok', 'Oğuzhan Özyakup', 'Ali Palabıyık', 'Hazal Çağlar', 'Erden Timur'], 'yerler': ['Gazze', 'Somaliland', 'Bolu Yedigöller Milli Parkı', 'Anıtkabir', 'Hatay'], 'olaylar': ['İstiklal Marşımızın', "Atatürk'ün Ankara'ya", 'Gençliğimizi Yok Saydınız', 'Uludere', 'CihAl YoksaYokuz'], 'fiyatlar': []}
+Duygu: Milliyetçilik ve başarı vurgusu
+Kanıt/Detay: Metinde geçen #TürkiyeninBaşarısı ve #AsrınLideriErdoğan etiketleri, milliyetçi bir duygunun ve başarı vurgusunun öne çıktığını gösteriyor.
+
+---
+RAPOR 57:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': ['Mehmet Akif Ersoy', 'Taner Çağlı', 'Ege Karataşlı', 'Veyis Ateş', 'Semih Kılıçsoy', 'Gülben', 'Mimar Sinan', 'Tayfun Kahraman', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Oğuzhan Özyakup', 'Oğuz Aydın', 'Devlet Bahçeli', 'Erden Timur'], 'Yerler': ['Bolu Yedigöller Milli Parkı', 'Hatay', 'Anıtkabir', 'İran', 'Uludere'], 'Olaylar': ['Gazze İçin Birleşin', 'Miss Türkiye 2016', 'Asrın İnşası', 'Gençliğimizi Yok Saydınız', 'Kimse Susturamaz']}
+Duygu: Hüzün ve endişe
+Kanıt/Detay: Halkın endişeleri ve duygusal durumları, '#BenimEndişem' ve 'Gazze İçin Birleşin' gibi etiketlerle ortaya çıkıyor. Özellikle 'Asrın İnşası' ve 'Gençliğimizi Yok Saydınız' ifadeleri, toplumsal kaygıları ve tarihsel figürlere olan özlemi yansıtıyor.
+
+---
+RAPOR 58:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Buse İskenderoğlu', 'Ege Karataşlı', 'Necip', 'Semih Kılıçsoy', 'Murat Kurum', 'Mert Günok', 'Ali Palabıyık', 'Oğuz Aydın', 'Devlet Bahçeli', 'Oğuzhan Özyakup', 'Ali Sabancı', 'Erden Timur'], 'Markalar': [], 'Yerler': ['Bolu Yedigöller Milli Parkı', 'Hatay', 'İstanbul Esenyurt'], 'Olaylar': ['Gazze İçin Birleşin', 'Miss Türkiye 2016', 'Asrın İnşası', 'Sultan Süleyman', 'Şike']}
+Duygu: Belirsizlik ve umut
+Kanıt/Detay: ['Gençliğimizi Yok Saydınız', 'Kimse Susturamaz', 'CihAl YoksaYokuz', 'BenimEndişem']
+
+---
+RAPOR 59:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Mehmet Akif Ersoy', 'Buse İskenderoğlu', 'Ege Karataşlı', 'Necip', 'Gülben', 'Mert Günok', 'Mimar Sinan', 'Tayfun Kahraman', 'Ali Palabıyık', 'Sultan Süleyman', 'Murat Kurum', 'Devlet Bahçeli', 'Ali Sabancı', 'Oğuzhan Özyakup', 'Erden Timur'], 'Olaylar': ['Gazze İçin Birleşin', "İstiklal Marşı'nın", "Atatürk'ün Ankara'ya", 'Anıtkabir', 'sonkabineengelliöğretmenle', 'Kimse Susturamaz', 'Uludere', 'vefatının 89'], 'Yerler': ['Hatay', 'Somaliland'], 'Markalar': ['AK Parti', 'UEFA']}
+Duygu: Duygusal ve toplumsal hassasiyet
+Kanıt/Detay: Metin, toplumun çeşitli kesimlerinde duygu ve düşüncelerin yoğun bir şekilde ifade edildiğini gösteriyor. Örneğin, "Gazze İçin Birleşin" ve "İstiklal Marşı'nın" gibi ifadeler, toplumsal dayanışma ve milli duyguları ön plana çıkarıyor.
+
+---
+RAPOR 60:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Mehmet Akif Ersoy', 'Necip', 'Semih Kılıçsoy', 'Tayfun Kahraman', 'Mert Günok', 'Ali Palabıyık', 'Murat Kurum', 'Sultan Süleyman', 'Devlet Bahçeli', 'Ali Sabancı', 'Erden Timur', 'Oğuz Aydın', 'Gülben', 'Remzi Albayrak'], 'yerler': ['Gazze', 'Ankara', 'Hatay', 'Somaliland', 'İstanbul Esenyurt', 'Uludere'], 'olaylar': ['istiklal marşımızın', 'vefatının 89', 'Gençliğimizi Yok Saydınız', 'Kimse Susturamaz'], 'fiyatlar': []}
+Duygu: Ulusal ve tarihsel bir duygu
+Kanıt/Detay: Metinde geçen 'Kimse Susturamaz' ve 'Gençliğimizi Yok Saydınız' ifadeleri, toplumsal bir bilinç ve ulusal değerlerin savunulması gerektiğini vurguluyor.
+
+---
+RAPOR 61:
+Konu: İnsanlar ulusal meseleler ve birlik çağrıları üzerinde yoğunlaşıyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['AK Parti', 'Aston Villa'], 'kisiler': ['Necip', 'Semih Kılıçsoy', 'Mustafa Kemal Atatürk', 'Mert Günok', 'Tayfun Kahraman', 'Ali Palabıyık', 'Devlet Bahçeli', 'Ali Sabancı', 'Remzi Albayrak', 'Rojda', 'Erden Timur'], 'yerler': ['Gazze', 'Hatay', 'İstanbul Esenyurt', 'Anıtkabir'], 'olaylar': ['istiklal marşımızın', 'vefatının 89']}
+Duygu: Ulusal birlik ve dayanışma
+Kanıt/Detay: Öne çıkan başlıklar arasında 'Gazze İçin Birleşin' ve 'Kimse Susturamaz' gibi ifadeler, toplumsal bir dayanışma ve ulusal birlik çağrısını vurguluyor.
+
+---
+RAPOR 62:
+Konu: İnsanlar ulusal kimlik, tarih ve güncel olaylar hakkında konuşuyorlar.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Aston Villa', 'AK Parti'], 'kisiler': ['Necip', 'Semih Kılıçsoy', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mert Günok', 'Murat Kurum', 'Devlet Bahçeli', 'Remzi Albayrak', 'Erden Timur', 'Oğuz Aydın'], 'yerler': ['Gazze', 'Somaliland', 'Hatay', 'İstanbul Esenyurt', 'Anıtkabir'], 'olaylar': ['istiklal marşımızın', 'şike', 'vefatının 89']}
+Duygu: Ulusal ve tarihi bir aidiyet duygusu
+Kanıt/Detay: Metinde geçen ifadelerle, 'kimse susturamaz' ve '#AsrınLideriErdoğan' hashtagleri, güçlü bir ulusal duyguyu ve liderlik arayışını yansıtıyor.
+
+---
+RAPOR 63:
+Konu: İnsanlar ulusal değerler ve tarih üzerine yoğunlaşıyorlar.
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Necip', 'Semih Kılıçsoy', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mert Günok', 'Murat Kurum', 'Ali Sabancı', 'Devlet Bahçeli', 'Oğuz Aydın', 'Erden Timur'], 'Markalar': [], 'Yerler': ['Gazze', 'Hatay', 'Anıtkabir', 'İstanbul Esenyurt'], 'Olaylar': ['6 Şubat', 'Şike']}
+Duygu: Ulusal ve tarihi değerlere sahip çıkma
+Kanıt/Detay: Örneğin, 'Atatürk'ün Ankara'ya' ve 'istiklal marşı'mızın' gibi ifadeler, ulusal kimliğe ve tarihe vurgu yapmaktadır.
+
+---
+RAPOR 64:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Aston Villa', 'Ak Parti'], 'Kişiler': ['Necip', 'Semih Kılıçsoy', 'Gülben', 'Mert Günok', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mimar Sinan', 'Tayfun Kahraman', 'Murat Kurum', 'Ali Sabancı', 'Sultan Süleyman', 'Devlet Bahçeli', 'Remzi Albayrak', 'Kenan Yıldız', 'Erden Timur'], 'Yerler': ['Gazze', 'Hatay', 'İstanbul Esenyurt', 'Anıtkabir'], 'Olaylar': ['6 Şubat', 'vefatının 89', 'Şike'], 'Duygular': ['Birleşme', 'Bağlılık', 'Saygı']}
+Duygu: Ulusal duygu ve birliktelik
+Kanıt/Detay: Metinde geçen 'Gazze İçin Birleşin' ve '#KademeyiÇıkarın' gibi ifadeler, ulusal birliğin ve toplumsal dayanışmanın önemini vurguluyor.
+
+---
+RAPOR 65:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Aston Villa', 'Ak Parti'], 'Kişiler': ['Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mert Günok', 'Devlet Bahçeli', 'Erden Timur', 'Necip', 'Semih Kılıçsoy', 'Gülben', 'Tayfun Kahraman', 'Mimar Sinan', 'Ali Sabancı', 'Rojda', 'Karakuş', 'gürkan teoman', 'Murad Kurum'], 'Yerler': ['Gazze', 'Anıtkabir', 'İstanbul Esenyurt', 'Hatay', 'Somaliland'], 'Olaylar': ['Vefatının 89', "istiklal marşı'mızın"], 'Duygular': ['Birleşme', 'Ulusal gurur', 'Saygı', 'Üzüntü']}
+Duygu: Ulusal ve tarihi duyguların ön planda olduğu bir atmosfer
+Kanıt/Detay: Metinde geçen ifadeler, tarihi figürlere olan saygıyı ve ulusal olayların önemini vurguluyor. Örneğin, 'Atatürk'ün Ankara'ya' ve 'istiklal marşı'mızın' gibi ifadeler, ulusal kimlik ve tarih bilincini ön plana çıkarıyor.
+
+---
+RAPOR 66:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Ak Parti', 'UEFA'], 'kisiler': ['Necip', 'Semih Kılıçsoy', 'Recep Tayyip Erdoğan', 'Gülben', 'Mert Günok', 'Tayfun Kahraman', 'Ali Palabıyık', 'gürkan teoman', 'Murat Kurum', 'Oğuz Aydın', 'Devlet Bahçeli', 'Remzi Albayrak', 'Ali Sabancı', 'Kenan Yıldız'], 'yerler': ['Gazze', 'Hatay', 'Anıtkabir', 'İstanbul Esenyurt', 'Somaliland', 'Bursa', 'Nijerya', 'Faslı'], 'olaylar': ['Gazze İçin Birleşin', 'Gençliğimizi Yok Saydınız', 'Anahtar Teslimi', 'Şike']}
+Duygu: Baskın his
+Kanıt/Detay: Metinde geçen ifadeler, çeşitli sosyal ve siyasi konulara dair duygu ve düşünceleri yansıtmaktadır. Örneğin, '#GazzeyiUnutma' ve 'Gazze İçin Birleşin' gibi ifadeler, toplumsal dayanışma ve uluslararası olaylara duyulan hassasiyeti göstermektedir.
+
+---
+RAPOR 67:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Amedspor'], 'Kişiler': ['Bilge Kağan Şarbat', 'Özlem Zengin', 'Edinson Cavani', 'Batagov', 'Cüneyt Arkın', 'Şener Şen', 'Brigitte Bardot', 'Cristiano Ronaldo', 'Gülben Ergen', 'Murat Ağırel', 'Yağız Sabuncuoğlu', 'Uğurcan Çakır', 'Alper'], 'Yerler': ['Roboski', 'Uludere', 'Erzurum', 'Galata Köprüsü'], 'Olaylar': ['Utanmıyoruz', 'HalefinGüneşi AybükePusat', 'Gençliğimizi Yok Saydınız', 'Sayın Valim', 'Sayın Genel Başkanım']}
+Duygu: Çeşitlilik ve tartışma
+Kanıt/Detay: Metinde geçen ifadeler, toplumun çeşitli kesimlerinin gündeminde olan konuların çeşitliliğini yansıtmaktadır. Örneğin, 'Utanmıyoruz' ve 'Gençliğimizi Yok Saydınız' gibi ifadeler, toplumsal eleştiriyi ve duygu durumunu ortaya koymaktadır.
+
+---
+RAPOR 68:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'kişiler': ['Bilge Kağan Şarbat', 'Edinson Cavani', 'Oğuz', 'ABD Başkanı Trump', 'Leyla Zana', 'Şener Şen', 'Brigitte Bardot', 'Cristiano Ronaldo', 'Yağız Kaan Erdoğmuş', 'Gülben Ergen', 'Yağız Sabuncuoğlu', 'Uğurcan Çakır', 'Veyis Ateş', 'Alper', 'Bayraktar'], 'markalar': [], 'yerler': ['Roboski', 'Uludere', 'Galata Köprüsü'], 'olaylar': ['Gençliğimizi Yok Saydınız', 'Utanmıyoruz']}
+Duygu: Sosyal ve politik duyarlılık
+Kanıt/Detay: Metinde geçen ifadeler, toplumsal olaylara ve bireysel duyarlılıklara dikkat çekiyor. Özellikle 'Gençliğimizi Yok Saydınız' ve 'Utanmıyoruz' gibi ifadeler, toplumsal eleştiriyi ve duyarlılığı ön plana çıkarıyor.
+
+---
+RAPOR 69:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'kişiler': ['Bilge Kağan', 'Edinson Cavani', 'ABD Başkanı Trump', 'Leyla Zana', 'Brigitte Bardot', 'Cristiano Ronaldo', 'Gülben Ergen', 'Yağız Kaan Erdoğmuş', 'Uğurcan Çakır', 'Veyis Ateş', 'Alper', 'Şener Şen'], 'markalar': [], 'yerler': ['Roboski', 'Uludere', 'Galata Köprüsü', 'Erzurumspor FK'], 'olaylar': ['29 Aralık Pazartesi', 'Gençliğimizi Yok Saydınız', 'Günah Gecesi'], 'duygular': ['Utanmıyoruz', 'Onurumuzdur']}
+Duygu: Çeşitlilik ve duygu yoğunluğu
+Kanıt/Detay: Metinde geçen isimler ve olaylar, toplumun farklı kesimlerinin duygu ve düşüncelerini yansıtmaktadır. Örneğin, 'Utanmıyoruz' ifadesi, bir toplumsal duruşu ve cesareti simgelerken, 'Onurumuzdur' ifadesi belirli bir gurur ve aidiyet hissini ortaya koymaktadır.
+
+---
+RAPOR 70:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Bilge Kağan Şarbat', 'Aybüke Pusat', 'Moreno', 'Oğuz', 'Brigitte Bardot', 'Şener Şen', 'Rahmetullah Berişbek', 'Jonah Mathews', 'Yağız Kaan Erdoğmuş', 'Cristiano Ronaldo', 'Esed', 'namjoon', 'Aleviler', 'Uğurcan Çakır', 'Veyis Ateş', 'Alper', 'Gülben Ergen', 'Yağız Sabuncuoğlu', 'Kimseye', 'Bayraktar'], 'Markalar': [], 'Yerler': ["Suriye'nin Lazkiye", 'Uludere', 'Ankaragücü', 'Galata Köprüsü', 'Erzurumspor FK'], 'Olaylar': ['Gençliğimizi Yok Saydınız', '2025 AGS', 'Miss Türkiye 2016', 'Günah Gecesi'], 'Fiyatlar': []}
+Duygu: Hareketlilik ve tartışma
+Kanıt/Detay: Öne çıkan konular arasında ünlü kişilerin isimleri, güncel olaylar ve sosyal medya trendleri bulunmakta. Özellikle 'Gençliğimizi Yok Saydınız' ifadesi, toplumsal bir eleştiriyi ve kaygıyı yansıtıyor.
+
+---
+RAPOR 71:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Beşiktaş GAİN', 'Amedspor'], 'kisiler': ['Bilge Kağan Şarbat', 'Aybüke Pusat', 'Brigitte Bardot', 'Jonah Mathews', 'Şener Şen', 'Rahmetullah Berişbek', 'Yağız Kaan Erdoğmuş', 'Uğurcan Çakır', 'Oğuz Aydın', 'Veyis Ateş', 'Taner Çağlı', 'Yağız Sabuncuoğlu'], 'yerler': ["Suriye'nin Lazkiye", 'Uludere', 'Roboski', 'Erzurumspor FK'], 'olaylar': ['Miss Türkiye 2016', 'Gençliğimizi Yok Saydınız']}
+Duygu: Çeşitlilik ve merak
+Kanıt/Detay: Metinde geçen isimler, markalar ve olaylar, toplumsal ilgi alanlarını ve güncel tartışmaları yansıtıyor.
+
+---
+RAPOR 72:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Brigitte Bardot', 'Jonah Mathews', 'Şener Şen', 'Yağız Kaan Erdoğmuş', 'Dusan', 'Namjoon', 'Uğurcan Çakır', 'Nkunku', 'Veyis Ateş', 'Mimar Sinan', 'Yağız Sabuncuoğlu', 'Enes Zengin', 'Oğuz Aydın', 'Buse İskenderoğlu', 'Taner Çağlı'], 'Yerler': ["Suriye'nin Lazkiye", 'Roboski', 'Uludere', 'Erzurumspor FK'], 'Olaylar': ['Kaçakçılık', 'Gençliğimizi Yok Saydınız', 'Günah Gecesi'], 'Hashtagler': ['#HayaliYurtdışı', '#freekeskin', '#Kabine2024KPSSEkYirmiBeşBin', '#sallandık', '#2025deyince', '#FreeEGE', '#pazar', '#Amedspor', '#KIZILELMA', '#MilliTeknolojiHamlesi', '#CbMüjdesiAGS20Bin', '#ErdenTimurYalnızDeğildir']}
+Duygu: Çeşitlilik ve sosyal meseleler üzerine yoğunlaşma
+Kanıt/Detay: Metinde geçen isimler ve olaylar, toplumsal ve kültürel meseleleri yansıtıyor. Örneğin, 'Gençliğimizi Yok Saydınız' ifadesi gençlerin sorunlarına dikkat çekiyor.
+
+---
+RAPOR 73:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'kişiler': ['Aybüke Pusat', 'Jonah Mathews', 'Yağız Kaan Erdoğmuş', 'Namjoon', 'Dusan', 'Şener Şen', 'Uğurcan Çakır', 'Veyis Ateş', 'Mimar Sinan', 'Esad', 'Buse İskenderoğlu', 'İrfan Can Kahveci', 'Oğuz Aydın', 'Ege Karataşlı', 'Motorcu', 'Brigitte Bardot'], 'markalar': ['Beşiktaş Gain', 'Miss Türkiye 2016'], 'yerler': ["Suriye'nin Lazkiye", 'Uludere', 'Nusayri', 'Roma'], 'olaylar': ['Roboski', 'Kaçakçılık', 'Yargıtay', 'Gençliğimizi Yok Saydınız'], 'duygular': ['Afiyetle', 'Kimseye']}
+Duygu: Çeşitlilik ve toplumsal meseleler üzerine yoğunlaşma
+Kanıt/Detay: Metin, toplumsal meseleler, bireylerin yaşadığı olaylar ve duygu durumları üzerine yoğunlaşarak, çeşitli isimler ve olaylar üzerinden güncel tartışmalara ışık tutmaktadır.
+
+---
+RAPOR 74:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Beşiktaş Gain', 'Miss Türkiye 2016'], 'kisiler': ['Jonah Mathews', 'Aybüke Pusat', 'Roboski', 'namjoon', 'Dusan', 'Şener Şen', 'Yağız Kaan Erdoğmuş', 'Veyis Ateş', 'Yılan', 'Nkunku', 'Bayraktar', 'Taner Çağlı', 'Uludere', 'Yağız Sabuncuoğlu', 'Enes Zengin', 'Mimar Sinan', 'Aleviler', 'Uğurcan Çakır', 'Buse İskenderoğlu', 'İrfan Can Kahveci', 'Oğuz Aydın', 'Ege Karataşlı', 'Gülben', 'Motorcu', 'CihAl YoksaYokuz', 'Brigitte Bardot', 'Necip', 'tekbaşrol metsu'], 'olaylar': ['Gençliğimizi Yok Saydınız', 'Günah Gecesi'], 'duygular': ['kimseye', 'afiyetle']}
+Duygu: Çeşitlilik ve sosyal etkileşim
+Kanıt/Detay: Metinde geçen isimler ve olaylar, sosyal ve kültürel konulara dikkat çekiyor. Örneğin, '#MilliTeknolojiHamlesi' ve 'Gençliğimizi Yok Saydınız' gibi etiketler, toplumsal meseleler hakkında tartışmaların yapıldığını gösteriyor.
+
+---
+RAPOR 75:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Buse İskenderoğlu', 'Semih', 'Ege Karataşlı', 'Recep Tayyip Erdoğan', 'Yağız Kaan Erdoğmuş', 'Taha Çakmak', 'Oğuz Aydın', 'Uğurcan', 'Miss Türkiye 2016', 'Tayfun Kahraman', 'Sebahattin Şirin', 'Mert Günok', 'Enes Zengin', 'Ali Sabancı', 'Magnus Carlsen', 'Şener Şen', 'Veyis Ateş', 'Taner Çağlı', 'Gülben'], 'Markalar': [], 'Yerler': ['Gazze', 'Somaliland', 'Uludere', "Suriye'nin Lazkiye", 'Anıtkabir', 'Hatay', 'Bolu Yedigöller Milli Parkı'], 'Olaylar': ['Deprem', 'Asrın İnşası']}
+Duygu: Baskın his
+Kanıt/Detay: Metinde geçen isimler, olaylar ve yerler üzerinden toplumsal duygu ve düşüncelerin yansıtıldığı görülüyor. Örneğin, 'Gençliğimizi Yok Saydınız' ifadesi, toplumsal bir eleştiriyi ve duygusal bir tepkiyi ortaya koyuyor.
+
+---
+RAPOR 76:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Buse İskenderoğlu', 'Semih Kılıçsoy', 'Enes Zengin', 'Ege Karataşlı', 'Asrın İnşası', 'Oğuz Aydın', 'Uğurcan', 'Tayfun Kahraman', 'Ali Baran Süzer', 'Şebnem İnan', 'Cengiz Can Atasoy', 'Mert Günok', 'Serkan Keskin', 'Veyis Ateş', 'Taner Çağlı', 'Gülben'], 'Olaylar': ['Gazze İçin Birleşin', 'Gençliğimizi Yok Saydınız', 'Deprem', 'Roboski', 'Anıtkabir', "Çağlayan Adliyesi'nde"], 'Yerler': ['Somaliland', 'Hatay', 'İzmir', 'Uludere', 'Mimar Sinan'], 'Markalar': ['Miss Türkiye 2016', 'UEFA'], 'Hashtaglar': ['#ErdenTimurYalnızDeğildir', '#AsrınLideriErdoğan', '#TürkiyeninBaşarısı', '#pazar', 'CihAl YoksaYokuz']}
+Duygu: Toplumsal duyarlılık ve birliktelik
+Kanıt/Detay: Toplum, sosyal adalet ve birlik olma çağrıları yapıyor; 'Gazze İçin Birleşin' ve 'Gençliğimizi Yok Saydınız' gibi ifadelerle toplumsal olaylara duyarlılık gösteriyor.
+
+---
+RAPOR 77:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Miss Türkiye 2016', 'UEFA', 'Brigitte Bardot'], 'kisiler': ['Buse İskenderoğlu', 'Semih Kılıçsoy', 'Enes Zengin', 'Ege Karataşlı', 'Şebnem İnan', 'Oğuz Aydın', 'Tayfun Kahraman', 'Ali Baran Süzer', 'Cengiz Ünder', 'Murat Kurum', 'Mert Günok', 'Veyis Ateş', 'Taner Çağlı', 'Gülben'], 'yerler': ['Gazze', 'Somaliland', 'Hatay', 'Anıtkabir', 'İstanbul Şişli', 'Uludere'], 'olaylar': ['Asrın İnşası', 'Deprem', 'kimse susturamaz', 'Roboski']}
+Duygu: Toplumsal duyarlılık ve aidiyet
+Kanıt/Detay: Toplum, Gazze'nin durumu ve ulusal aidiyet üzerine yoğunlaşmış; 'Gazze İçin Birleşin' ve 'kimse susturamaz' gibi ifadeler, toplumsal bir dayanışma çağrısını yansıtıyor.
+
+---
+RAPOR 78:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Buse İskenderoğlu', 'Mimar Sinan', 'Semih Kılıçsoy', 'Şebnem İnan', 'Ege Karataşlı', 'Miss Türkiye 2016', 'Tayfun Kahraman', 'Oğuz Aydın', 'Ömer Toprak', 'Veysi Ateş', 'Sultan Süleyman', 'Ali Baran Süzer', 'Uğurcan', 'Murat Kurum', 'Serkan Keskin', 'Nilay Didem Kılavuz', 'Cengiz Can Atasoy', 'Erden Timur', 'Taner Çağlı', 'Brigitte Bardot'], 'Yerler': ['Somaliland', 'Çağlayan Adliyesi', 'Anıtkabir', 'Bolu Yedigöller Milli Parkı', 'Hatay', 'İstanbul Şişli'], 'Olaylar': ['Gençliğimizi Yok Saydınız', "Atatürk'ün Ankara'ya", 'kimse susturamaz', 'Roboski'], 'Hashtagler': ['#AsrınLideriErdoğan', '#pazar', '#TürkiyeninBaşarısı', '#sallandık']}
+Duygu: Çeşitlilik ve ilgi
+Kanıt/Detay: Metinde birçok farklı kişi ve olay yer alıyor; bu da toplumsal ilgi alanlarının çeşitliliğini gösteriyor.
+
+---
+RAPOR 79:
+Konu: Toplumsal olaylar ve kişisel hikayeler üzerine tartışmalar
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Gülben', 'Şebnem İnan', 'Semih Kılıçsoy', 'Cengiz Can Atasoy', 'Demir Ege', 'Tayfun Kahraman', 'Ömer Toprak', 'Mustafa Kemal Atatürk', 'Veysi Ateş', 'Oğuz Aydın', 'Murat Kurum', 'Mert Günok', 'Taner Çağlı', 'Erden Timur', 'Buse İskenderoğlu', 'Ege Karataşlı'], 'yerler': ['Gazze', 'Somaliland', 'Bolu Yedigöller Milli Parkı', 'Anıtkabir', 'Hatay'], 'olaylar': ['Miss Türkiye 2016', 'Gençliğimizi Yok Saydınız', "Atatürk'ün Ankara'ya"]}
+Duygu: Çeşitlilik ve toplumsal konulara duyarlılık
+Kanıt/Detay: Metinde geçen isimler ve olaylar, bireylerin toplumsal konulara olan duyarlılığını ve bu konularda düşüncelerini ifade ettiklerini gösteriyor.
+
+---
+RAPOR 80:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'kişiler': ['Semih Kılıçsoy', 'Gülben', 'Cengiz Ünder', 'Tayfun Kahraman', 'Mustafa Kemal Atatürk', 'Oğuz Aydın', 'Mert Günok', 'Ali Palabıyık', 'Hazal Çağlar', 'Buse İskenderoğlu', 'Taner Çağlı', 'Ege Karataşlı', 'Veyis Ateş'], 'markalar': ['UEFA', 'Bayraktar'], 'yerler': ['Gazze', 'Somaliland', 'Bolu Yedigöller Milli Parkı', 'Anıtkabir', 'Hatay', 'Uludere', 'Ardahan'], 'olaylar': ['Miss Türkiye 2016', 'Gençliğimizi Yok Saydınız', 'CihAl YoksaYokuz', 'Asrın İnşası']}
+Duygu: Çeşitlilik ve toplumsal duyarlılık
+Kanıt/Detay: Metinde geçen isimler ve olaylar, toplumsal meseleler ve duygu durumları üzerine yoğun bir tartışma ortamı yarattığını göstermektedir. Özellikle 'Gençliğimizi Yok Saydınız' ifadesi, gençlerin hissettiği bir kaygıyı ve toplumsal eleştiriyi yansıtmaktadır.
+
+---
+RAPOR 81:
+Konu: İnsanlar Gazze, toplumsal olaylar ve ünlü kişileri konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Semih Kılıçsoy', 'Gülben', 'Tayfun Kahraman', 'Mert Günok', 'Oğuzhan Özyakup', 'Oğuz Aydın', 'Devlet Bahçeli', 'Buse İskenderoğlu', 'Ege Karataşlı'], 'yerler': ['Gazze', 'Bolu Yedigöller Milli Parkı', 'Hatay', 'Anıtkabir', 'Ardahan', 'Uludere'], 'olaylar': ['Miss Türkiye 2016', 'Asrın İnşası', "İstiklal Marşı'nın", 'Diyanet', 'Şike']}
+Duygu: Toplumsal hassasiyet ve duyarlılık
+Kanıt/Detay: Metinde geçen 'Gazze İçin Birleşin' ve 'Gençliğimizi Yok Saydınız' gibi ifadeler, toplumsal duyarlılığın ve aktivizmin ön planda olduğunu gösteriyor.
+
+---
+RAPOR 82:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': [], 'kisiler': ['Gülben', 'Tayfun Kahraman', 'Murat Kurum', 'Mert Günok', 'Ali Palabıyık', 'Oğuz Aydın', 'Oğuzhan Özyakup', 'Ali Sabancı', 'Buse İskenderoğlu', 'Ege Karataşlı', 'Necip', 'Semih Kılıçsoy'], 'yerler': ['Bolu Yedigöller Milli Parkı', 'Hatay', 'Anıtkabir', 'İstanbul Esenyurt'], 'olaylar': ['Miss Türkiye 2016', 'Gençliğimizi Yok Saydınız', 'Asrın İnşası', 'Army Run for Jin']}
+Duygu: Farklı konulara dair merak ve ilgi
+Kanıt/Detay: Metinde birçok kişi ve olayın yanı sıra yerler de geçmektedir, bu durum insanların gündemindeki çeşitli meseleleri ve toplumsal olayları yansıtmaktadır.
+
+---
+RAPOR 83:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['UEFA', 'AK Parti'], 'kisiler': ['Gülben', 'Mert Günok', 'Tayfun Kahraman', 'Ali Palabıyık', 'Murat Kurum', 'Devlet Bahçeli', 'Ali Sabancı', 'Oğuz Aydın', 'Oğuzhan Özyakup', 'Erden Timur', 'Semih Kılıçsoy'], 'yerler': ['Gazze', 'Somaliland', 'Hatay', 'Anıtkabir', 'Bursa'], 'olaylar': ["İstiklal Marşı'nın anılması", 'Uludere olayı', 'vefat', 'Şike']}
+Duygu: Birliktelik ve anma duygusu
+Kanıt/Detay: Metinde geçen 'Gazze İçin Birleşin', 'İstiklal Marşı'mızın' ve 'Uludere' gibi ifadeler, insanların sosyal adalet ve anma konularında duygu ve düşüncelerini yansıttığını gösteriyor.
+
+---
+RAPOR 84:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Kişiler': ['Gülben', 'Tayfun Kahraman', 'Mert Günok', 'Ali Palabıyık', 'Murat Kurum', 'Devlet Bahçeli', 'Ali Sabancı', 'Rojda', 'Sebo', 'Oğuz Aydın', 'Erden Timur', 'Semih Kılıçsoy'], 'Yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt', 'Uludere'], 'Markalar': ['AK Parti'], 'Olaylar': ["Atatürk'ün Ankara'ya gelişi", 'Gençliğimizi Yok Saydınız', 'Gazze İçin Birleşin']}
+Duygu: Merak ve tartışma
+Kanıt/Detay: Metinde geçen 'Kimse Susturamaz' ve '#TürkiyeninBaşarısı' gibi ifadeler, toplumsal olaylara ve siyasi tartışmalara duyulan ilginin yüksek olduğunu gösteriyor.
+
+---
+RAPOR 85:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Aston Villa', 'AK Parti'], 'kisiler': ['Gülben', 'Mustafa Kemal Atatürk', 'Mert Günok', 'Tayfun Kahraman', 'Mimar Sinan', 'Murat Kurum', 'Ali Palabıyık', 'Devlet Bahçeli', 'Ali Sabancı', 'Remzi Albayrak', 'Erden Timur', 'Semih Kılıçsoy', 'Rojda', 'Tuğyan Ülkem Gülter'], 'yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt'], 'olaylar': ["Atatürk'ün Ankara'ya gelişi", 'vefatının 89. yılı', 'Gazze İçin Birleşin']}
+Duygu: Ulusal duyarlılık ve sosyal bilinç
+Kanıt/Detay: Metin, ulusal değerler ve tarihsel figürler üzerine yoğunlaşarak, toplumsal bilinç ve duyarlılığın ön planda olduğunu gösteriyor. Örneğin, 'Kimse Susturamaz' ifadesi, bir toplumsal direniş ve ses çıkarma isteğini yansıtıyor.
+
+---
+RAPOR 86:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Aston Villa', 'AK Parti'], 'Kişiler': ['Gülben', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mert Günok', 'Tayfun Kahraman', 'Murat Kurum', 'Devlet Bahçeli', 'Ali Sabancı', 'Erden Timur', 'Oğuz Aydın', 'Semih Kılıçsoy'], 'Yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt', 'Bursa'], 'Olaylar': ['Gazze İçin Birleşin', 'Şike', 'Son kabine engelli öğretmenle']}
+Duygu: Ulusal ve tarihi bir duygu
+Kanıt/Detay: Metinde geçen 'kimse susturamaz' ve '#AsrınLideriErdoğan' ifadeleri, insanların güçlü bir liderlik ve ulusal bir birlik arayışında olduğunu gösteriyor.
+
+---
+RAPOR 87:
+Konu: İnsanlar tarihi figürler ve güncel olaylar hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Aston Villa', 'Ak Parti'], 'kisiler': ['Gülben', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mert Günok', 'Murat Kurum', 'Ali Sabancı', 'Devlet Bahçeli', 'Oğuz Aydın', 'Erden Timur', 'Semih Kılıçsoy'], 'yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt'], 'olaylar': ['vefatının 89', '6 Şubat']}
+Duygu: Milliyetçi ve tarihi bir his
+Kanıt/Detay: Metinde geçen 'Mustafa Kemal Atatürk', 'Anıtkabir' ve 'vefatının 89' ifadeleri, geçmişe olan bağlılığı ve saygıyı gösteriyor.
+
+---
+RAPOR 88:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'kişiler': ['Gülben', 'Mert Günok', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Tayfun Kahraman', 'Murat Kurum', 'Devlet Bahçeli', 'Ali Sabancı', 'Kenan Yıldız', 'Erden Timur', 'Semih Kılıçsoy'], 'markalar': ['Aston Villa', 'Ak Parti'], 'yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt'], 'olaylar': ['6 Şubat', 'vefatının 89']}
+Duygu: Tarih ve kimlik bilinci
+Kanıt/Detay: Metinde, 'Mustafa Kemal Atatürk' ve 'Anıtkabir' gibi tarihsel figürler ve yerler öne çıkmakta, bu durum insanların tarih bilincine ve kimliklerine olan bağlılıklarını yansıtmaktadır.
+
+---
+RAPOR 89:
+Konu: İnsanlar ulusal değerler, liderler ve anma olayları hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Aston Villa'], 'kisiler': ['Gülben', 'Atatürk', 'Mert Günok', 'Mustafa Kemal Atatürk', 'Ali Palabıyık', 'Mimar Sinan', 'gürkan teoman', 'Tayfun Kahraman', 'Murat Kurum', 'Ali Sabancı', 'Devlet Bahçeli', 'Remzi Albayrak', 'Kenan Yıldız', 'Rojda', 'Faslı', 'Erden Timur', 'Recep Tayyip Erdoğan', 'Necip', 'Semih Kılıçsoy', 'tuğyan ülkem gülter'], 'yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt', 'Trabzon'], 'olaylar': ['Vefatının 89', 'Gazze İçin Birleşin', 'Kimse Susturamaz']}
+Duygu: Ulusal ve tarihi bir bağlamda saygı ve anma duygusu
+Kanıt/Detay: Metinde geçen 'Atatürk' ve 'Anıtkabir' gibi ifadeler, ulusal kimliğin ve tarihsel figürlerin önemini vurguluyor.
+
+---
+RAPOR 90:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['Ak Parti', 'UEFA'], 'kisiler': ['Gülben', 'Erdoğan', 'Mustafa Kemal Atatürk', 'Mert Günok', 'Tayfun Kahraman', 'Ali Palabıyık', 'gürkan teoman', 'Murat Kurum', 'Oğuz Aydın', 'Ali Sabancı', 'Kenan Yıldız', 'Cumhurbaşkanımız Sayın', 'Devlet Bahçeli', 'Remzi Albayrak'], 'yerler': ['Anıtkabir', 'Hatay', 'İstanbul Esenyurt'], 'olaylar': ['Gençliğimizi Yok Saydınız', 'Kimse Susturamaz', 'sonkabineengelliöğretmenle', 'Yüzde', 'Şike']}
+Duygu: Ulusal duyguların ön planda olduğu bir tartışma
+Kanıt/Detay: Metinde geçen 'İstiklal Marşı'mızın', 'Atatürk'ün Ankara'ya' gibi ifadeler, ulusal kimlik ve tarih bilincinin önemine vurgu yapıyor.
+
+---
+RAPOR 91:
+Konu: İnsanlar ne konuşuyor?
+Tespit Edilen Varlıklar/Markalar: {'Markalar': [], 'Kişiler': ['Ela Deniz', 'Neorixal Eron', 'Edit Dünyam'], 'Yerler': ['uzakşehir'], 'Fiyatlar': [], 'Olaylar': ['komedi', 'motovlog']}
+Duygu: Merak ve eğlence
+Kanıt/Detay: Metinde sıkça geçen kelimeler arasında '#komedi', '#motovlog' ve 'komikyorumlar' gibi etiketler, insanların eğlence ve mizah arayışında olduklarını gösteriyor.
+
+---
+RAPOR 92:
+Konu: İnsanlar eğlenceli içerikler ve güncel olaylar üzerine konuşuyorlar.
+Tespit Edilen Varlıklar/Markalar: {'Markalar': ['Alps Media', 'Ulusal Kanal', 'showtv'], 'Kisiler': ['Kerem Balyemez'], 'Olaylar': ['manifest', 'komedi', 'futbol', 'motovlog'], 'Yerler': ['uzakşehir'], 'Hashtagler': ['#keşfet', '#komedi', '#uzakşehir', '#komikyorumlar', '#futbol', '#motovlog']}
+Duygu: Merak ve eğlence
+Kanıt/Detay: Kullanıcılar 'Demek Öyleymiş' ve 'Trend Ritim' gibi başlıklarla içeriklerin eğlenceli yönlerine dikkat çekiyorlar.
+
+---
+RAPOR 93:
+Konu: İnsanlar teknoloji ve yeni ürünler hakkında konuşuyor.
+Tespit Edilen Varlıklar/Markalar: {'markalar': ['smartphone'], 'kisiler': ['ilk', 'kişi', 'güzel'], 'yerler': [], 'fiyatlar': [], 'olaylar': ['elektrikli araba']}
+Duygu: Merak ve ilgi
+Kanıt/Detay: Metinde geçen 'elektrikli' ve '#smartphone' etiketleri, insanların teknolojiye olan ilgisini ve merakını gösteriyor.
+
+---

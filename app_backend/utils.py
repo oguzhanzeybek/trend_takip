@@ -9,7 +9,6 @@ from openai import OpenAI
 
 load_dotenv()
 
-# --- BAĞLANTILAR ---
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
@@ -33,7 +32,6 @@ if OPENROUTER_API_KEY:
     except Exception as e:
         print(f"❌ AI Hatası: {e}")
 
-# --- YARDIMCI FONKSİYONLAR ---
 
 def safe_json_parse(content: Any) -> Any:
     if isinstance(content, dict): return content
@@ -67,5 +65,4 @@ def extract_date_range_from_query(text: str) -> Tuple[datetime, datetime]:
     if "son ay" in text:
         return now - timedelta(days=30), now
         
-    # Varsayılan: Son 3 gün
     return now - timedelta(days=3), now

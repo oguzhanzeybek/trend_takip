@@ -4,7 +4,6 @@ from typing import List, Tuple
 from utils import ai_client, MODEL_NAME, extract_date_range_from_query, safe_json_parse
 import model_data 
 
-# Hafıza Yönetimi
 conversation_history = []
 last_successful_data = []
 last_date_info = ""
@@ -41,14 +40,12 @@ async def fetch_smart_filtered_data(user_query: str, intent_data: dict) -> Tuple
     start_date, end_date = extract_date_range_from_query(user_query)
     date_info = f"{start_date.strftime('%d %B')} - {end_date.strftime('%d %B')}"
     
-    # Tüm veriyi çek
     raw_rows = await model_data.fetch_data_in_range(start_date, end_date)
     filtered_results = []
     
     search_val = intent_data.get("value", "").lower()
     intent_type = intent_data.get("intent", "search")
 
-    # Basit Filtreleme Mantığı
     for row in raw_rows:
         content_str = str(row.get('content')).lower()
         source_str = str(row.get('source')).lower()
@@ -70,11 +67,9 @@ async def chat_with_ai(user_message: str) -> str:
     
     if not ai_client: return "⚠️ AI sistemi bağlı değil."
     
-    # 1. Niyet Analizi
     intent_data = get_search_intent_via_ai(user_message)
     intent_type = intent_data.get("intent", "search")
     
-    # 2. Sohbet Modu (Veri gerektirmez)
     if intent_type == "chat":
         messages = [{"role": "system", "content": "Sen TrendAI adında yardımsever bir asistansın."}]
         messages.extend(conversation_history[-3:])
@@ -86,13 +81,11 @@ async def chat_with_ai(user_message: str) -> str:
         conversation_history.append({"role": "assistant", "content": ai_reply})
         return ai_reply
 
-    # 3. Veri Çekme Modu
     db_data, date_info = await fetch_smart_filtered_data(user_message, intent_data)
     
     if not db_data:
         return f"🔍 {date_info} tarihleri arasında '{intent_data.get('value')}' ile ilgili veri bulamadım."
 
-    # 4. Bağlam Hazırlama (Context)
     context_str = json.dumps([row['content'] for row in db_data[:30]], ensure_ascii=False)
     
     system_prompt = f"""
@@ -119,7 +112,6 @@ async def chat_with_ai(user_message: str) -> str:
         resp = ai_client.chat.completions.create(model=MODEL_NAME, messages=messages, temperature=0.7)
         ai_reply = resp.choices[0].message.content
         
-        # Geçmişe kaydet
         conversation_history.append({"role": "user", "content": user_message})
         conversation_history.append({"role": "assistant", "content": ai_reply})
         return ai_reply
@@ -129,7 +121,6 @@ async def chat_with_ai(user_message: str) -> str:
 async def process_user_input(text: str) -> str:
     return await chat_with_ai(text)
 
-# --- YENİ EKLENEN KISIM: DASHBOARD İÇİN ANALİZ ---
 async def analyze_with_ai(prompt: str) -> str:
     """
     Sadece verilen prompt'u AI'ya gönderir ve cevabı döner.
@@ -140,7 +131,6 @@ async def analyze_with_ai(prompt: str) -> str:
         return "⚠️ AI sistemi bağlı değil."
     
     try:
-        # Basit, tek seferlik istek
         resp = ai_client.chat.completions.create(
             model=MODEL_NAME,
             messages=[

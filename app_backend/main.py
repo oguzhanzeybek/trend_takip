@@ -7,18 +7,15 @@ import requests
 import json
 from datetime import datetime, timedelta
 
-# Kendi modüllerimiz
 import model_data
 import model_chat
 from model_chat import analyze_with_ai  # Özel analiz fonksiyonu
 from utils import supabase
 
-# Ortam değişkenlerini yükle
 load_dotenv()
 
 app = FastAPI(title="Trend Takip AI Analiz Servisi")
 
-# --- CORS AYARLARI ---
 origins = ["*"]
 
 app.add_middleware(
@@ -29,7 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- VERİ MODELLERİ (PYDANTIC) ---
 class ChatRequest(BaseModel):
     message: str
 
@@ -40,14 +36,10 @@ class AnalyzeRequest(BaseModel):
 class AskAnalysisRequest(BaseModel):
     question: str
 
-# --- ROOT ---
 @app.get("/")
 def read_root():
     return {"message": "Trend Takip AI Analiz Servisi (Modular) Aktif 🚀"}
 
-# ==========================================
-# 1. DASHBOARD VE İSTATİSTİK ENDPOINTLERİ
-# ==========================================
 
 @app.get("/api/stats")
 async def get_stats_endpoint(time_range: str = "24h"):
@@ -55,7 +47,6 @@ async def get_stats_endpoint(time_range: str = "24h"):
         stats = await model_data.get_dashboard_stats(time_range)
         if stats:
             return stats
-        # Veri yoksa varsayılan boş veri dön
         return {"total_analysis": 0, "active_sources": 0, "trend_score": 0, "system_status": "Idle"}
     except Exception as e:
         print(f"Stats Error: {e}")
@@ -67,7 +58,6 @@ async def get_strategic_insights(time_range: str = "24h"):
     Dashboard için stratejik özet ve içgörü sağlar.
     """
     try:
-        # model_data.py içindeki fonksiyonu kullanıyoruz (Daha stabil)
         insights = await model_data.get_strategic_insights()
         if insights:
             return {"status": "success", "data": insights, "insight": insights.get("summary")}
@@ -75,9 +65,6 @@ async def get_strategic_insights(time_range: str = "24h"):
     except Exception as e:
         return {"status": "error", "message": str(e), "insight": "Hata oluştu."}
 
-# ==========================================
-# 2. TREND VERİLERİ (Trendler Sayfası)
-# ==========================================
 
 @app.get("/api/trends")
 async def get_trends_endpoint(
@@ -94,7 +81,6 @@ async def get_trends_endpoint(
 
 @app.get("/api/top-trends")
 async def get_top_trends_endpoint(period: str = "daily"):
-    # model_data.py içinde bu fonksiyon varsa çalışır, yoksa get_filtered_trends kullanılır
     try:
         data = await model_data.get_filtered_trends("all", period, 10)
         return {"status": "success", "data": data}
@@ -109,9 +95,6 @@ async def get_raw_data_endpoint(limit: int = 40):
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
-# ==========================================
-# 3. DETAYLI AI ANALİZ RAPORU (Analiz Sayfası)
-# ==========================================
 
 @app.get("/api/analysis")
 async def get_analysis_endpoint():
@@ -133,15 +116,12 @@ async def ask_analysis_endpoint(request: AskAnalysisRequest):
     Kullanıcının mevcut analiz raporuyla sohbet etmesini sağlar.
     """
     try:
-        # 1. Mevcut analizi çek
         analysis_data = await model_data.get_latest_social_analysis()
         if not analysis_data:
             return {"reply": "Henüz analiz verisi oluşmadığı için cevap veremiyorum."}
             
-        # 2. Context oluştur
         context_str = json.dumps(analysis_data, ensure_ascii=False)
         
-        # 3. AI'ya sor
         prompt = f"""
         Sen bu analiz raporunun uzmanısın. Kullanıcının sorusunu verilere dayanarak cevapla.
         
@@ -161,9 +141,6 @@ async def ask_analysis_endpoint(request: AskAnalysisRequest):
         print(f"Ask Analysis Error: {e}")
         return {"reply": "Üzgünüm, şu an cevap veremiyorum."}
 
-# ==========================================
-# 4. GENEL CHAT VE ÖZEL ANALİZ
-# ==========================================
 
 @app.post("/api/chat")
 async def chat_endpoint(request: ChatRequest):
@@ -171,7 +148,6 @@ async def chat_endpoint(request: ChatRequest):
         if not request.message:
             raise HTTPException(status_code=400, detail="Mesaj boş olamaz")
             
-        # model_chat modülünü kullanıyoruz
         response = await model_chat.process_user_input(request.message)
         return {"reply": response}
     except Exception as e:
@@ -186,9 +162,6 @@ async def analyze_custom_endpoint(request: AnalyzeRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# ==========================================
-# 5. HAVA DURUMU (Widget)
-# ==========================================
 
 @app.get("/api/weather")
 async def get_weather_data():
@@ -208,9 +181,6 @@ async def get_weather_data():
         print(f"Weather Error: {e}")
         return {"status": "error", "message": str(e)}
 
-# ==========================================
-# SERVER BAŞLATMA (Opsiyonel)
-# ==========================================
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

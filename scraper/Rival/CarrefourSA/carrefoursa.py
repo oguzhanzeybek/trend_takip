@@ -141,16 +141,13 @@ def scrape_carrefoursa():
             print("🛑 Tarayıcı kapatıldı.")
         except: pass
 
-        # CSV KAYDI (Rank Eklendi)
         if all_products:
             file_path = BASE_DIR / "carrefoursa.csv"
             try:
                 with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
-                    # Header: Başa Rank ekledik
                     writer.writerow(["Rank", "Marka", "Ürün Adı", "Fiyat", "Link"])
                     
-                    # Sıra Numarasıyla Yazma
                     for i, prod in enumerate(all_products, 1):
                         writer.writerow([i] + prod)
                         
@@ -161,9 +158,6 @@ def scrape_carrefoursa():
         else:
             print("\n⚠️ Veri çekilemedi. Lütfen 'debug_carrefour' klasöründeki ekran görüntüsünü kontrol et.")
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     import os
     import csv

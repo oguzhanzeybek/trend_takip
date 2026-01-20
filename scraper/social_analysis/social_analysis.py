@@ -10,13 +10,14 @@ import re
 import datetime
 import math 
 
+# --- AYARLAR ---
 MODEL_NAME = "openai/gpt-4o-mini" 
-
-BATCH_SIZE = 50 # Her bir AI isteği için 50 satır veri
-WAIT_TIME = 1 # 1 saniye dinlenme
+BATCH_SIZE = 50 
+WAIT_TIME = 1 
 
 BASE_DIR = Path(__file__).resolve().parent
 
+# .env yükleme
 env_path = None
 search_dirs = [BASE_DIR] + list(BASE_DIR.parents)[:3]
 for d in search_dirs:
@@ -35,242 +36,247 @@ client = OpenAI(
     api_key=api_key,
 )
 
-
 def truncate_text(text, max_chars=1000):
-    """Token maliyetini düşürmek için metni kısaltır."""
     if len(text) > max_chars:
         return text[:max_chars] + "..."
     return text
 
 def clean_data(df):
-    """
-    TEMİZLİK VE KIRPMA
-    """
     initial_len = len(df)
-    print(f"  🧹 Ön temizlik... (Giriş: {initial_len})")
-    
+    print(f" 🧹 Ön temizlik... (Giriş: {initial_len})")
     df = df.dropna(how='all').drop_duplicates() 
-    
     df_temp = df.copy()
     if df_temp.shape[1] > 1:
         df_temp.iloc[:, 1:] = df_temp.iloc[:, 1:].astype(str).apply(
             lambda col: col.apply(lambda x: truncate_text(x, 1000))
         )
-    
-    print(f"  ✨ Veri Hazır: {len(df_temp)} satır")
+    print(f" ✨ Veri Hazır: {len(df_temp)} satır")
     return df_temp.astype(str) 
 
-def get_output_file_path(filename):
+def save_analysis_json(data, filename):
     output_dir = BASE_DIR / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
-    return output_dir / f"analyzed_{filename}.json"
-
-def save_analysis_json(data, filename):
-    output_path = get_output_file_path(filename)
+    # Dosya ismini standartlaştırdık
+    output_path = output_dir / f"analyzed_{filename}.json"
     
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-    print(f"  💾 Analiz Sonucu Kaydedildi: {output_path.name}")
-
+    print(f" 💾 Analiz Sonucu Kaydedildi: {output_path.name}")
 
 def analyze_data_with_ai(data_chunk, df_columns, is_final_analysis=False, retry=0):
-    column_names = ", ".join(df_columns) 
     current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
-    role = "**Sen Türkiye'nin en obsesif Veri Madencisi ve Sosyal Medya Dedektifisin. Senin işin genellemeler yapmak değil, önüne gelen veri parçasındaki (batch) benzersiz ve spesifik parmak izlerini bulmaktır. Asla varsayımlarla konuşmazsın, sadece kanıtla konuşursun.**"
-    
-    if is_final_analysis:
-        prompt_goal = "Görevin, sağlanan TÜM ara analiz özetlerini (batch sonuçlarını) birleştirerek, tekrar eden kalıpları değil, verilerin toplamından çıkan BÜYÜK RESMİ, çelişkileri ve nüansları raporlamaktır. **Ezbere cümleler kurma, analiz edilen binlerce satırın gerçek hikayesini anlat.**"
-        data_header = "VERİ (Toplu işlerden gelen ara analiz özetleri):"
-        analysis_structure = """
-    1. **Ana Duygu Durumu:** Tüm parçalara baktığında halkın gerçek ruh hali nedir? (Sadece 'endişe' deyip geçme; öfke mi, bıkkınlık mı, alaycı bir neşe mi? Detaylandır).
-    2. **Baskın Gündemler:** Verilerde en çok tekrar eden 3 somut olay/konu nedir?
-    3. **Harcama Eğilimi:** İnsanlar neyden şikayet ediyor veya neye para harcıyor? Sektörel bazda (Gıda, Giyim, Teknoloji vb.) çıkarım yap.
-    4. **Gelecek Tahmini:** Bu verilere dayanarak önümüzdeki 3 ayda ne olması muhtemel?
-    5. ÇIKTI sadece ve sadece tek bir JSON nesnesi olmalıdır.
-        """
-        json_output_template = f"""
-    "analiz_tarihi": "{current_time}",
-    "analiz_kaynağı": "social_media.csv",
-    "genel_değerlendirme": "Verilerin tamamına dayalı, genellemelerden uzak, çok katmanlı ve derinlemesine bir özet paragraf.",
-    "ana_duygular": [
-      {{ "duygu": "Duygu Adı 1", "skor": 0-100, "gerekçe": "Bu duygunun kaynağı olan spesifik olaylar ve veriler." }},
-      {{ "duygu": "Duygu Adı 2", "skor": 0-100, "gerekçe": "Bu duygunun kaynağı olan spesifik olaylar ve veriler." }}
-    ],
-    "baskin_gundemler": [
-      {{ "konu": "Konu Başlığı 1", "köken": "Bu konuyu tetikleyen sosyal medya içerikleri." }}, 
-      {{ "konu": "Konu Başlığı 2", "köken": "Bu konuyu tetikleyen sosyal medya içerikleri." }}
-    ],
-    "harcama_egilimi_analizi": {{
-        "egilim": "Tüketici davranışındaki net değişim.",
-        "sektor_etkisi": "Etkilenen sektörler ve nedenleri."
-    }},
-    "gelecek_tahminleri": [
-        {{ "tahmin": "Tahmin 1", "risk_seviyesi": "Yüksek/Orta/Düşük", "neden": "Dayanak noktası." }},
-        {{ "tahmin": "Tahmin 2", "risk_seviyesi": "Yüksek/Orta/Düşük", "neden": "Dayanak noktası." }}
-    ]
-        """
-    else:
-        prompt_goal = "Görevin, sana verilen **bu spesifik 50 satırlık veri parçasını** incelemektir. **DİKKAT: Asla önceki bildiklerini veya genel geçer 'ekonomi kötü' ezberlerini kullanma.** Sadece bu metinlerde geçen **ÖZEL İSİMLERİ, MARKALARI, OLAYLARI ve HASHTAG'LERİ** raporla. Eğer metinlerde futbol varsa futbol yaz, dizi varsa dizi yaz. Veri ne diyorsa o.SEN BİR TOPLUM BİLİMCİSİ BİR DAHİSİN , İNSANLIĞIN KURTARICI OLARAK TANRI GIBI KUŞBAKIŞI ANALİZ ET Kİ HALKI ANLAYABİLELİM."
-        data_header = f"VERİ (Bu Batch İçin Ham Metinler): {data_chunk}"
-        analysis_structure = """
-    1. **Özet Duygu:** SADECE BU 50 satırda hissedilen en baskın duygu.
-    2. **Duygu Gerekçesi:** Neden bu duygu? Metinlerin içinden **spesifik örnekler** vererek açıkla. (Örn: 'X kullanıcısı Y olayına kızdığı için' gibi).
-    3. **Özet Konu:** Bu grupta insanlar tam olarak neyden bahsediyor? (Genel 'hayat' deme. 'Zam gelen süt fiyatı' de, 'X dizisindeki karakter' de).
-    4. **Konu Gerekçesi:** Bu konuyu kanıtlayan **anahtar kelimeleri** yaz.
-    5. ÇIKTI sadece ve sadece tek bir JSON nesnesi olmalıdır.
-        """
-        json_output_template = """
-      "ozet_duygu": "BURAYA_BU_VERİDEKİ_BASKIN_DUYGUYU_YAZ ve detaylı acıklama yap",
-      "duygu_gerekcesi": "BURAYA_METİNLERDEN_KANIT_VE_ALINTI_İÇEREN_GEREKÇEYİ_YAZ ve acıklama yap",
-      "ozet_konu": "BURAYA_BU_VERİDEKİ_SPESİFİK_KONUYU_YAZ ve acıklama yap",
-      "konu_gerekcesi": "BURAYA_KONUYU_DESTEKLEYEN_ANAHTAR_KELİMELERİ_YAZ ve acıklama yap"
-        """
+    # Rol Tanımı
+    role = "**Sen, verilerin derinliklerindeki hikayeyi okuyan kıdemli bir Toplum Bilimci ve Veri Analistisin.**"
 
+    if is_final_analysis:
+        # ============================================================
+        # FİNAL ANALİZ (STRATEJİK SKORLAR EKLENDİ)
+        # ============================================================
+        prompt_goal = """
+        GÖREVİN: Sana verilen 'Saha Raporlarını' (Batch Summaries) birleştirerek, uygulamanın beklediği EXACT JSON formatında ama ÇOK DETAYLI bir analiz raporu oluşturmaktır.
+        
+        KURALLAR:
+        1. Asla kısa kesme. "Gerekçe", "Köken" ve "Neden" alanlarını doldururken **spesifik örnekler, marka isimleri ve olay detayları** ver.
+        2. Genellemelerden kaçın. "Ekonomi kötü" deme; "Süt fiyatlarındaki %30 artış ve X marketindeki etiketler" de.
+        3. Duygu skorlarını (0-100) verilerin yoğunluğuna göre gerçekçi ata.
+        
+        ÖNEMLİ - STRATEJİK SKORLAMA MANTIĞI:
+        - **pazar_sagligi (0-100):** Toplumda öfke ve stres yüksekse düşür, umut ve memnuniyet varsa yükselt.VERİLERDEN YOLA ÇIKARAK ANALİZ ET.
+        - **satin_alma_istahi (0-100):** İnsanlar "alamıyoruz" diyorsa düşük, "indirim, alışveriş" konuşuyorsa yüksek ver.VERİLERDEN YOLA ÇIKARAK ANALİZ ET.
+        - **viral_etki (0-100):** Konuşulan konular ne kadar yankı uyandırmış? Herkes aynı şeyi konuşuyorsa 90+ ver.VERİLERDEN YOLA ÇIKARAK ANALİZ ET.
+        - **firsat_skoru (0-100):** Bu kriz ortamında markalar için boşluk var mı? (Örn: Ucuz ürün ihtiyacı = Yüksek Fırsat).VERİLERDEN YOLA ÇIKARAK ANALİZ ET.
+        """
+        
+        data_header = "VERİ (Toplanan Tüm Parçalı Analizler):"
+        
+        # --- JSON FORMATI GÜNCELLENDİ: SKORLAR EKLENDİ ---
+        json_output_template = f"""
+        "analiz_tarihi": "{current_time}",
+        "analiz_kaynağı": "social_media.csv",
+        
+        "stratejik_skorlar": {{
+            "pazar_sagligi": 0, 
+            "satin_alma_istahi": 0,
+            "viral_etki": 0,
+            "firsat_skoru": 0
+        }},
+
+        "genel_değerlendirme": "BURAYA_DETAYLI_PARAGRAF_GELMELİ (En az 3-4 cümle. Toplumun genel psikolojisini, çelişkileri ve ana motivasyonları edebi ve analitik bir dille özetle).",
+        "ana_duygular": [
+            {{
+                "duygu": "Duygu Adı (Örn: Öfke)",
+                "skor": 0-100,
+                "gerekçe": "Bu duygunun kaynağı nedir? Hangi olaylar tetikledi? (Detaylı yaz)"
+            }},
+            {{
+                "duygu": "Duygu Adı (Örn: Çaresizlik)",
+                "skor": 0-100,
+                "gerekçe": "Bu duygunun kaynağı nedir? Hangi olaylar tetikledi? (Detaylı yaz)"
+            }},
+            {{
+                "duygu": "Duygu Adı (Örn: Alaycılık)",
+                "skor": 0-100,
+                "gerekçe": "Bu duygunun kaynağı nedir? Hangi olaylar tetikledi? (Detaylı yaz)"
+            }}
+        ],
+        "baskin_gundemler": [
+            {{
+                "konu": "Konu Başlığı 1 (Örn: Kira Zamları)",
+                "köken": "Bu konunun tartışılma sebebi, verilen örnekler ve şikayetlerin odak noktası. (Detaylı)"
+            }},
+            {{
+                "konu": "Konu Başlığı 2",
+                "köken": "Bu konunun tartışılma sebebi, verilen örnekler ve şikayetlerin odak noktası. (Detaylı)"
+            }},
+             {{
+                "konu": "Konu Başlığı 3",
+                "köken": "Bu konunun tartışılma sebebi, verilen örnekler ve şikayetlerin odak noktası. (Detaylı)"
+            }}
+        ],
+        "harcama_egilimi_analizi": {{
+            "egilim": "Tüketicinin harcama davranışı (Örn: Lüksten kaçış, stoka yönelim)",
+            "sektor_etkisi": "Hangi sektörler nasıl etkileniyor? (Örn: Cafe/Restoran boykotu, Market alışverişi değişimi)"
+        }},
+        "gelecek_tahminleri": [
+            {{
+                "tahmin": "Gelecek öngörüsü 1",
+                "risk_seviyesi": "Yüksek/Orta/Düşük",
+                "neden": "Veriye dayalı dayanak noktası."
+            }},
+            {{
+                "tahmin": "Gelecek öngörüsü 2",
+                "risk_seviyesi": "Yüksek/Orta/Düşük",
+                "neden": "Veriye dayalı dayanak noktası."
+            }}
+        ]
+        """
+        
+        analysis_structure = "ÇIKTI FORMATI KESİNLİKLE AŞAĞIDAKİ JSON OLMALIDIR. BAŞKA KEY EKLEME VEYA ÇIKARMA."
+
+    else:
+        # ============================================================
+        # BATCH (ARA) ANALİZ - Veri Madenciliği
+        # ============================================================
+        prompt_goal = "Görevin bu 50 satırlık verideki 'Altın Değerindeki' detayları çıkarmaktır. Genelleme yapma, İSİM, MARKA, OLAY ve DUYGU yakala."
+        data_header = f"VERİ PARÇASI: {data_chunk}"
+        
+        analysis_structure = "Sadece aşağıdaki basit yapıyı kullan:"
+        
+        json_output_template = """
+        "ozet_duygu": "Baskın his",
+        "tespit_edilen_detaylar": "Metinde geçen Markalar, Kişiler, Yerler, Fiyatlar, Olaylar (Hepsini yaz)",
+        "ana_konu": "İnsanlar ne konuşuyor?",
+        "detayli_kanit": "Neden böyle düşünüyorlar? (Alıntı yap)"
+        """
 
     prompt = f"""
-    SEN KRİTİK BİR ROLÜ ÜSTLENİYORSUN. SADECE İSTENEN JSON ÇIKTISINI ÜRET. BAŞKA HİÇBİR AÇIKLAMA VEYA GİRİŞ METNİ KULLANMA.
+    SADECE JSON ÇIKTISI ÜRET.
     
-    Sen, {role}
-    {prompt_goal}
-    
-    AMACIN: Verideki gürültüyü değil, sinyali yakalamaktır.Halkın nabzını tutarak bir toplum bilimci gibi derinlemesine analiz yap.
-    
-    GÖREV: Aşağıdaki sosyal medya verilerini **{ 'BÜTÜNSEL' if is_final_analysis else 'ARA (BATCH)' }** olarak analiz et.
-    Kolon İsimleri (Sırayla): [{column_names}]
+    Rol: {role}
+    Görev: {prompt_goal}
     
     {analysis_structure}
     
     {data_header}
     
-    ÇIKTI: {{
+    İstenen JSON Şeması:
+    {{
       {json_output_template}
     }}
     """
     
     try:
         if retry == 0:
-            print(f"    💬 AI Analizi Başlatılıyor... ({'Nihai ÇOK DETAYLI Rapor' if is_final_analysis else 'Batch - Kapsamlı Gerekçeli Özet'})")
+            print(f"    💬 AI Çalışıyor... ({'FİNAL RAPORLAMA' if is_final_analysis else 'VERİ MADENCİLİĞİ'})")
         
         completion = client.chat.completions.create(
-            extra_headers={"HTTP-Referer": "http://localhost", "X-Title": "SentimentAnalyzer"},
+            extra_headers={"HTTP-Referer": "http://localhost", "X-Title": "TrendAI"},
             model=MODEL_NAME,
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.5, # Maksimum detay ve açıklama için sıcaklık 0.5'e yükseltildi
+            temperature=0.5 if not is_final_analysis else 0.7, 
         )
         
         resp = completion.choices[0].message.content
         
         if "```" in resp:
             match = re.search(r"```json\s*(.*?)\s*```", resp, re.DOTALL)
-            if match:
-                resp = match.group(1).strip()
-            else:
-                resp = resp.replace("```", "").strip()
+            resp = match.group(1).strip() if match else resp.replace("```", "").strip()
         
-        resp = re.sub(r'//.*', '', resp) 
+        resp = re.sub(r'//.*', '', resp)
         
         return json.loads(resp)
     
     except Exception as e:
-        err = str(e)
-        if "402" in err or "insufficient_quota" in err:
-            print("\n❌ HATA: Yetersiz Bakiye! Lütfen OpenRouter'a kredi yükleyin.")
-            sys.exit(1)
-            
         if retry < 2:
-            print(f"      ⚠️ Geçici Hata ({e.__class__.__name__}). Tekrar deneniyor... ({retry+1})")
-            time.sleep(5)
+            time.sleep(3)
             return analyze_data_with_ai(data_chunk, df_columns, is_final_analysis, retry + 1)
-            
-        print(f"\n❌ Kritik Hata. AI'dan analiz alınamadı. Hata: {err}")
+        print(f"❌ Hata: {e}")
         return None
 
 def process_social_media_analysis():
     raw_data_dir = BASE_DIR.parent / "ai_filter" / "Raw_data"
-    
-    output_dir = BASE_DIR / "data"
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
     filename = "social_media.csv"
     
-    print(f"📂 Okunacak: {raw_data_dir / filename}")
-    print(f"💎 Model: {MODEL_NAME} (HAZIR)")
-    print("------------------------------------------------")
-
-    if not (raw_data_dir / filename).exists():
-        print(f"❌ HATA: {filename} dosyası bulunamadı. Lütfen yolu kontrol edin:")
-        print(f"   Aranan Yer: {raw_data_dir / filename}")
-        return
-
-    print(f"\n🚀 {filename} TOPLUMSAL NABIZ ANALİZİ BAŞLIYOR...")
+    debug_file_path = BASE_DIR / "data" / "batch_summaries_debug.txt"
+    
+    print(f"🚀 {filename} ANALİZ SÜRECİ BAŞLATILIYOR...")
     
     try:
         df = pd.read_csv(raw_data_dir / filename, dtype=str, low_memory=False).fillna("")
-    except Exception as e:
-        print(f"❌ Dosya okuma hatası: {e}")
+    except:
+        print("❌ Dosya okunamadı.")
         return
     
     df_clean = clean_data(df)
     total_rows = len(df_clean)
     
-    if total_rows == 0:
-        print("❌ Temizlenecek veri bulunamadı. Analiz yapılamıyor.")
-        return
-    
-    
+    if total_rows == 0: return
+
     num_batches = math.ceil(total_rows / BATCH_SIZE)
     intermediate_summaries = []
-    df_columns = df_clean.columns.tolist()
+    
+    with open(debug_file_path, "w", encoding="utf-8") as f: f.write("")
 
-    print(f"  📝 Toplam {total_rows} satır, {num_batches} toplu iş (batch) halinde işlenecek.")
+    print(f" 📝 {total_rows} satır veri, {num_batches} aşamada işlenecek.")
     
     for i in range(num_batches):
-        start_index = i * BATCH_SIZE
-        end_index = min((i + 1) * BATCH_SIZE, total_rows)
+        start = i * BATCH_SIZE
+        end = min((i + 1) * BATCH_SIZE, total_rows)
+        batch_df = df_clean.iloc[start:end]
         
-        batch_df = df_clean.iloc[start_index:end_index]
-        batch_data_chunk = batch_df.to_string(header=False, index=False)
+        batch_res = analyze_data_with_ai(batch_df.to_string(index=False), [], is_final_analysis=False)
         
-        print(f"\n--- Batch {i+1}/{num_batches} (Satır {start_index} - {end_index-1}) ---")
-        
-        batch_analysis = analyze_data_with_ai(batch_data_chunk, df_columns, is_final_analysis=False)
-        
-        if batch_analysis:
-            summary = (
-                f"Batch {i+1} Özeti: Ana Duygu: {batch_analysis.get('ozet_duygu', 'Bilinmiyor')} "
-                f"(Gerekçe: {batch_analysis.get('duygu_gerekcesi', 'Yok')}), "
-                f"Ana Konu: {batch_analysis.get('ozet_konu', 'Bilinmiyor')} "
-                f"(Gerekçe: {batch_analysis.get('konu_gerekcesi', 'Yok')})"
+        if batch_res:
+            summary_text = (
+                f"RAPOR {i+1}:\n"
+                f"Konu: {batch_res.get('ana_konu')}\n"
+                f"Tespit Edilen Varlıklar/Markalar: {batch_res.get('tespit_edilen_detaylar')}\n"
+                f"Duygu: {batch_res.get('ozet_duygu')}\n"
+                f"Kanıt/Detay: {batch_res.get('detayli_kanit')}\n"
             )
-            intermediate_summaries.append(summary)
-            print(f"  ✔️ Batch {i+1} Tamamlandı. Özet: {summary}")
-        else:
-            print(f"  ❌ Batch {i+1} Analizi başarısız. Atlanıyor.")
-
+            intermediate_summaries.append(summary_text)
+            print(f"  ✔️ Batch {i+1} Tamam: {batch_res.get('ana_konu')}")
+            
+            with open(debug_file_path, "a", encoding="utf-8") as f:
+                f.write(summary_text + "\n---\n")
+        
         time.sleep(WAIT_TIME)
 
     if not intermediate_summaries:
-        print("\n❌ Hiçbir batch analiz edilemedi. Nihai analiz yapılamıyor.")
         return
 
-    final_input_data = "\n".join(intermediate_summaries)
-    print("\n================================================")
-    print("🧠 ARA ANALİZLER BİRLEŞTİRİLİYOR: NIHAI ÇOK DETAYLI ANALİZ BAŞLIYOR...")
-    print("================================================")
+    print("\n🧠 TÜM VERİLER TOPLANDI. FİNAL FORMATI OLUŞTURULUYOR...")
     
-    final_analysis_result = analyze_data_with_ai(
-        data_chunk=final_input_data, 
-        df_columns=["ozet_duygu", "duygu_gerekcesi", "ozet_konu", "konu_gerekcesi"], 
-        is_final_analysis=True
-    )
+    final_input = "\n".join(intermediate_summaries)
     
-    if final_analysis_result:
-        save_analysis_json(final_analysis_result, filename.split('.')[0] + "_ultra_detailed_sentiment")
-        print("\n🎉 TOPLUMSAL NABIZ ANALİZİ BAŞARIYLA TAMAMLANDI!")
+    final_res = analyze_data_with_ai(final_input, [], is_final_analysis=True)
+    
+    if final_res:
+        save_analysis_json(final_res, "social_media_ultra_detailed_sentiment")
+        print("\n🎉 ANALİZ TAMAMLANDI! Çıktı formatı uygulamanızla uyumludur.")
     else:
-        print("\n❌ Nihai Bütünsel Analiz başarısız oldu.")
-
+        print("❌ Final rapor oluşturulamadı.")
 
 if __name__ == "__main__":
     process_social_media_analysis()

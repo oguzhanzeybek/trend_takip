@@ -137,10 +137,8 @@ def scrape_amazon():
                 with open(file_path, "w", newline="", encoding="utf-8-sig") as file:
                     writer = csv.writer(file)
                     
-                    # --- Header Güncellendi: Başa 'Rank' eklendi ---
                     writer.writerow(["Rank", "Kategori", "Site Sırası", "Ürün Adı", "Fiyat", "Link"])
                     
-                    # --- Veriler 1'den başlayarak numaralandırılıyor ---
                     for i, row in enumerate(all_products, 1):
                         writer.writerow([i] + row)
 
@@ -152,9 +150,6 @@ def scrape_amazon():
         else:
             print("\n⚠️ Hiçbir ürün çekilemedi.")
 
-# ==========================================
-# OTO-İNDEKSLEME FONKSİYONU
-# ==========================================
 def auto_add_index_to_csvs():
     import os
     import csv
